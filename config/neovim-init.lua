@@ -28,6 +28,13 @@ vim.api.nvim_set_hl(0, "SpellBad", { ctermbg = 238 })
 
 vim.cmd([[colorscheme desert]])
 
+-- vim.lsp.start({
+--	name = "nil",
+--	cmd = { "nil" },
+-- })
+
+-- require("lspconfig").nil_ls.setup({})
+
 -- Plugins
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -52,7 +59,7 @@ require("lazy").setup({
 		branch = "release",
 	},
 	{
-		-- LSP
+		-- Parser
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
 	},
@@ -87,34 +94,10 @@ require("lazy").setup({
 		opts = {},
 	},
 	{
-		-- Linter
-		"mfussenegger/nvim-lint",
-		event = { "BufWritePre", "BufReadPost", "InsertLeave", "BufReadPre" },
+		-- LSP
+		"neovim/nvim-lspconfig",
 		config = function()
-			local lint = require("lint")
-
-			lint.linters_by_ft = {
-				nix = { "nix" },
-				javascript = { "eslint_d" },
-				typescript = { "eslint_d" },
-				svelte = { "eslint_d" },
-				python = { "pylint" },
-			}
-		end,
-	},
-	{
-		-- Mason
-		"williamboman/mason.nvim",
-		config = function()
-			require("mason").setup({
-				ui = {
-					icons = {
-						package_installed = "✓",
-						package_pending = "➜",
-						package_uninstalled = "✗",
-					},
-				},
-			})
+			require("lspconfig").nil_ls.setup({})
 		end,
 	},
 })
@@ -164,18 +147,18 @@ require("nvim-treesitter.configs").setup({
 	},
 })
 
-vim.api.nvim_create_autocmd({ "BufWritePost" }, {
-	callback = function()
-		require("lint").try_lint()
-	end,
-})
+--vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+--	callback = function()
+--		require("lint").try_lint()
+--	end,
+--})
 
 -- mappings
 vim.keymap.set("i", "<C-Right>", "<Plug>(copilot-accept-word)")
 vim.keymap.set(
 	"i",
-	"<CR>",
-	"coc#pum#visible() ? coc#pum#next(1): '<CR>'",
+	"<S-CR>",
+	"coc#pum#visible() ? coc#pum#confirm(): '<S-CR>'",
 	{ noremap = true, silent = true, expr = true }
 )
 

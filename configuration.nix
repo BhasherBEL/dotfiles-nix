@@ -104,19 +104,23 @@ in {
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    kitty
-    wget
-    vim
-    vimPlugins.lazy-nvim
-    pulseaudio
-    tofi
-    pavucontrol
-    networkmanager
-    font-awesome
-    xdg-desktop-portal-hyprland
-    xdg-desktop-portal-gtk
-  ];
+  environment = {
+    systemPackages = with pkgs; [
+      kitty
+      wget
+      vim
+      vimPlugins.lazy-nvim
+      pulseaudio
+      tofi
+      pavucontrol
+      networkmanager
+      font-awesome
+      xdg-desktop-portal-hyprland
+      xdg-desktop-portal-gtk
+    ];
+
+    sessionVariables = { NIXOS_OZONE_WL = "1"; };
+  };
 
   programs = {
     hyprland.enable = true;
@@ -133,8 +137,6 @@ in {
   #   enable = true;
   #   enableSSHSupport = true;
   # };
-
-  environment.sessionVariables = { NIXOS_OZONE_WL = "1"; };
 
   nixpkgs.config.packageOverrides = pkgs: {
     nur = import (builtins.fetchTarball
