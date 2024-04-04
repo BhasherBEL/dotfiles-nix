@@ -19,8 +19,28 @@ in {
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  networking.hostName = "nixos";
-  networking.networkmanager.enable = true;
+  networking = {
+    hostName = "nixos";
+    networkmanager.enable = true;
+    # firewall.allowedUDPPorts = [ 51820 ];
+
+    wg-quick.interfaces.bxl-shp = {
+      address = [ "10.15.14.3/32" ];
+      # listenPort = 51820;
+      privateKeyFile = "/etc/wireguard/bxl-shp.key";
+      dns = [ "10.15.14.1" ];
+      autostart = true;
+      peers = [{
+        publicKey = "Ft1qUCCs9GkpUfiotZU9Ueq1e9ncXr0PwWEyfLoc6Vs=";
+        presharedKeyFile = "/etc/wireguard/bxl-shp.psk";
+        #allowedIPs = [ "10.15.14.0/24" "192.168.1.0/24" "91.182.226.236/32" ];
+        #allowedIPs = [ "10.15.14.0/24" "192.168.1.0/24" ];
+        allowedIPs = [ "0.0.0.0/0" ];
+        endpoint = "vpn.bhasher.com:51822";
+        persistentKeepalive = 25;
+      }];
+    };
+  };
 
   time.timeZone = "Europe/Paris";
 
@@ -40,7 +60,7 @@ in {
   xdg.portal = {
     enable = true;
     wlr.enable = true;
-    extraPortals = with pkgs; [ pkgs.xdg-desktop-portal-gtk ];
+    extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
   };
 
   services.xserver = {
@@ -117,6 +137,7 @@ in {
       font-awesome
       xdg-desktop-portal-hyprland
       xdg-desktop-portal-gtk
+      wl-clipboard
     ];
 
     sessionVariables = { NIXOS_OZONE_WL = "1"; };
@@ -130,14 +151,6 @@ in {
     zsh.enable = true;
   };
 
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
-
   nixpkgs.config.packageOverrides = pkgs: {
     nur = import (builtins.fetchTarball
       "https://github.com/nix-community/NUR/archive/master.tar.gz") {
@@ -145,38 +158,12 @@ in {
       };
   };
 
-  # List services that you want to enable:
+  virtualisation.virtualbox.host = {
+    enable = true;
+    # enableKvm = true;
+    addNetworkInterface = true;
+  };
 
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
-
-  # Copy the NixOS configuration file and link it from the resulting system
-  # (/run/current-system/configuration.nix). This is useful in case you
-  # accidentally delete configuration.nix.
-  # system.copySystemConfiguration = true;
-
-  # This option defines the first version of NixOS you have installed on this particular machine,
-  # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
-  #
-  # Most users should NEVER change this value after the initial install, for any reason,
-  # even if you've upgraded your system to a new NixOS release.
-  #
-  # This value does NOT affect the Nixpkgs version your packages and OS are pulled from,
-  # so changing it will NOT upgrade your system.
-  #
-  # This value being lower than the current NixOS release does NOT mean your system is
-  # out of date, out of support, or vulnerable.
-  #
-  # Do NOT change this value unless you have manually inspected all the changes it would make to your configuration,
-  # and migrated your data accordingly.
-  #
-  # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
   system.stateVersion = "23.11"; # Did you read the comment?
 
 }

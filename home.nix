@@ -17,6 +17,8 @@
     prettierd
     ferdium
     nil
+    thunderbird
+    dnsutils
   ];
 
   home.file = {
@@ -92,6 +94,25 @@
           };
         }
       ];
+      initExtra = ''
+        				cat() {
+        					for arg in "$@"; do
+        						if [[ $arg == *.md ]]; then
+        							mdcat "$arg"
+        						else
+        							command cat "$arg"
+        						fi
+        					done
+        				}
+
+                shutdown() {
+        					if [ "$#" -eq 0 ]; then
+        						command shutdown -P now
+        					else
+        						command shutdown "$@"
+        					fi
+                }
+        			'';
     };
 
     waybar = { enable = true; };
@@ -167,5 +188,6 @@
         ];
       };
     };
+
   };
 }

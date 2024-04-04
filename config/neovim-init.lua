@@ -28,12 +28,12 @@ vim.api.nvim_set_hl(0, "SpellBad", { ctermbg = 238 })
 
 vim.cmd([[colorscheme desert]])
 
--- vim.lsp.start({
---	name = "nil",
---	cmd = { "nil" },
--- })
-
--- require("lspconfig").nil_ls.setup({})
+vim.g.clipboard = {
+	name = "wl-clipboard",
+	copy = { ["+"] = "wl-copy --trim-newline", ["*"] = "wl-copy --trim-newline" },
+	paste = { ["+"] = "wl-paste", ["*"] = "wl-paste" },
+	cache_enabled = 0,
+}
 
 -- Plugins
 
@@ -100,6 +100,11 @@ require("lazy").setup({
 			require("lspconfig").nil_ls.setup({})
 		end,
 	},
+	{
+		-- Fuzzy finder
+		"nvim-telescope/telescope.nvim",
+		dependencies = { "nvim-lua/plenary.nvim" },
+	},
 })
 
 require("conform").setup({
@@ -161,6 +166,9 @@ vim.keymap.set(
 	"coc#pum#visible() ? coc#pum#confirm(): '<S-CR>'",
 	{ noremap = true, silent = true, expr = true }
 )
+vim.keymap.set("v", "<C-A-c>", '"+y', { noremap = true, silent = true })
+
+vim.keymap.set("n", "ff", require("telescope.builtin").find_files, {})
 
 -- commands
 vim.api.nvim_create_user_command("Day", function(opts)
@@ -171,4 +179,4 @@ vim.api.nvim_create_user_command("Night", function(opts)
 	vim.cmd([[colorscheme desert]])
 end, { nargs = 0 })
 
--- Abc
+--
