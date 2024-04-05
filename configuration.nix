@@ -2,11 +2,7 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ pkgs, config, lib, ... }:
-let
-  home-manager = builtins.fetchTarball
-    "https://github.com/nix-community/home-manager/archive/release-23.11.tar.gz";
-in {
+{ pkgs, inputs, ... }: {
   imports = [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
     # (import "${home-manager}/nixos")
@@ -93,28 +89,31 @@ in {
   users.users.bhasher = {
     isNormalUser = true;
     initialPassword = "azerty";
-    extraGroups = [ "wheel" "audio" ];
+    extraGroups = [ "wheel" "audio" "docker" ];
     packages = with pkgs; [ tree ];
   };
 
-  security.sudo = {
-    enable = true;
-    extraRules = [{
-      commands = [
-        {
-          command = "${pkgs.systemd}/bin/systemctl suspend";
-          options = [ "NOPASSWD" ];
-        }
-        {
-          command = "${pkgs.systemd}/bin/reboot";
-          options = [ "NOPASSWD" ];
-        }
-        {
-          command = "${pkgs.systemd}/bin/poweroff";
-          options = [ "NOPASSWD" ];
-        }
-      ];
-    }];
+  security = {
+    pam.services.swaylock = { };
+    sudo = {
+      enable = true;
+      extraRules = [{
+        commands = [
+          {
+            command = "${pkgs.systemd}/bin/systemctl suspend";
+            options = [ "NOPASSWD" ];
+          }
+          {
+            command = "${pkgs.systemd}/bin/reboot";
+            options = [ "NOPASSWD" ];
+          }
+          {
+            command = "${pkgs.systemd}/bin/poweroff";
+            options = [ "NOPASSWD" ];
+          }
+        ];
+      }];
+    };
   };
 
   home-manager = {
@@ -138,6 +137,12 @@ in {
       xdg-desktop-portal-hyprland
       xdg-desktop-portal-gtk
       wl-clipboard
+      hyprshot
+      swaynotificationcenter
+      python3
+      swayidle
+      swaylock-effects
+      inputs.hyprsome.packages.x86_64-linux.default
     ];
 
     sessionVariables = { NIXOS_OZONE_WL = "1"; };
@@ -149,6 +154,7 @@ in {
     dconf.enable = true;
     firefox.enable = true;
     zsh.enable = true;
+    openvpn3.enable = true;
   };
 
   nixpkgs.config.packageOverrides = pkgs: {
@@ -158,10 +164,16 @@ in {
       };
   };
 
-  virtualisation.virtualbox.host = {
-    enable = true;
-    # enableKvm = true;
-    addNetworkInterface = true;
+  virtualisation = {
+    docker = {
+      enable = true;
+      rootless.enable = true;
+    };
+    virtualbox.host = {
+      enable = true;
+      # enableKvm = true;
+      addNetworkInterface = true;
+    };
   };
 
   system.stateVersion = "23.11"; # Did you read the comment?
