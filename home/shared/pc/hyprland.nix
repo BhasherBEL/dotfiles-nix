@@ -1,0 +1,1 @@
+{ ... }: { programs = { waybar = { enable = true; }; }; }
