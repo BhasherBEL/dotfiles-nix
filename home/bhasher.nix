@@ -69,7 +69,7 @@
         ip = "ip --color";
         nv = "nvim";
         nb =
-          "sudo nixos-rebuild switch --flake /home/bhasher/sync/nixos#default";
+          "sudo nixos-rebuild switch --flake /home/bhasher/sync/nixos#desktop";
         sl = "sl -adew5F";
       };
       plugins = [

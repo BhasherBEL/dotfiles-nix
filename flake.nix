@@ -1,5 +1,5 @@
 {
-  description = "Nixos config flake";
+  description = "My NixOS configuration";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -11,9 +11,11 @@
   };
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs: {
-    nixosConfigurations.default = nixpkgs.lib.nixosSystem {
-      specialArgs = { inherit inputs; };
-      modules = [ ./configuration.nix home-manager.nixosModules.default ];
+    nixosConfigurations = {
+      desktop = nixpkgs.lib.nixosSystem {
+        modules = [ ./hosts/desktop ];
+        specialArgs = { inherit inputs; };
+      };
     };
   };
 }
