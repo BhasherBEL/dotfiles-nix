@@ -81,11 +81,12 @@
             };
           };
         };
-        #extensions = with pkgs.nur.rycee.firefox-addons;
-        #  [
-        #     darkreader
-        #     sidebery
-        #  ];
+        extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+          darkreader
+          sidebery
+          wappalyzer
+          cookie-quick-manager
+        ];
         bookmarks = [
           {
             name = "Nix sites";
@@ -112,6 +113,10 @@
           {
             name = "Gitlab KAP";
             url = "https://gitlab.com/louvainlinux";
+          }
+          {
+            name = "NUR";
+            url = "https://nur.nix-community.org";
           }
         ];
       };

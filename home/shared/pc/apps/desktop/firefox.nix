@@ -32,12 +32,13 @@
           "signon.management.page.breach-alerts.enabled" = false;
           "signon.rememberSignons" = false;
         };
-        #extensions = with pkgs.inputs.firefox-addons; [
-        #  ublock-origin
-        #  bitwarden-password-manager
-        #  facebook-container
-        #  "français-language-pack"
-        #];
+        extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+          ublock-origin
+          bitwarden
+          facebook-container
+          istilldontcareaboutcookies
+          french-language-pack
+        ];
       };
     };
   };
