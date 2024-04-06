@@ -1,0 +1,12 @@
+#!/usr/bin/env sh
+
+# Check if wireguard VPN is active
+if nmcli c show --active | grep -q wireguard; then
+  echo '{"text": "VPN", "class": "up"}'
+# If not, check if the connection named "YapiBiche" is active
+elif nmcli c show --active | grep -q "YapiBiche"; then
+  echo '{"text": "LAN", "class": "up"}'
+# If neither is active, return "NO"
+else
+  echo '{"text": "OFF", "class": "down"}'
+fi

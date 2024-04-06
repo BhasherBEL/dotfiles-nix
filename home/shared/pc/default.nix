@@ -1,1 +1,1 @@
-{ ... }: { imports = [ ./hyprland.nix ./apps/desktop/firefox.nix ]; }
+{ ... }: { imports = [ ./hyprland ./apps/desktop/firefox.nix ]; }

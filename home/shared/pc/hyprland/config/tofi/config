@@ -1,0 +1,95 @@
+font = "/usr/share/fonts/noto/NotoSansMono-Regular.ttf"
+font-size = 24
+
+# Comma separated list of OpenType font feature settings to apply,
+font-features = ""
+
+# Comma separated list of OpenType font variation settings to apply
+font-variations = ""
+
+hint-font = true
+text-color = #FFFFFF
+
+prompt-background = #00000000
+prompt-background-padding = 0
+prompt-background-corner-radius = 0
+
+placeholder-color = #FFFFFFA8
+placeholder-background = #00000000
+placeholder-background-padding = 0
+placeholder-background-corner-radius = 0
+
+input-background = #00000000
+input-background-padding = 0
+input-background-corner-radius = 0
+
+default-result-background = #00000000
+default-result-background-padding = 0
+default-result-background-corner-radius = 0
+
+selection-color = #F92672
+selection-background = #00000000
+selection-background-padding = 0
+selection-background-corner-radius = 0
+
+selection-match-color = #00000000
+
+text-cursor-style = bar
+
+# text-cursor-color = #FFFFFF
+# text-cursor-background = #000000
+text-cursor-corner-radius = 0
+
+# text-cursor-style = underscore
+# text-cursor-thickness = 2
+
+prompt-text = "app: "
+prompt-padding = 0
+placeholder-text = ""
+num-results = 0
+result-spacing = 0
+horizontal = false
+min-input-width = 0
+width = 1280
+height = 720
+background-color = #1B1D1E
+outline-width = 0
+outline-color = #080800
+border-width = 12
+border-color = #aaa
+corner-radius = 10
+
+padding-top = 8
+padding-bottom = 8
+padding-left = 8
+padding-right = 8
+
+clip-to-padding = true
+scale = true
+
+output = ""
+
+anchor = center
+exclusive-zone = -1
+
+margin-top = 0
+margin-bottom = 0
+margin-left = 0
+margin-right = 0
+
+hide-cursor = false
+text-cursor = false
+history = true
+# history-file = /path/to/histfile
+matching-algorithm = normal
+require-match = true
+auto-accept-single = false
+hide-input = false
+hidden-character = "*"
+physical-keybindings = true
+print-index = false
+drun-launch = false
+# terminal = foot
+late-keyboard-init = false
+multi-instance = false
+ascii-input = true

@@ -1,0 +1,11 @@
+#!/usr/bin/env sh
+
+env SUDO_ASKPASS=/usr/bin/lxqt-openssh-askpass
+
+if nmcli c show --active | grep -q wireguard; then
+  sudo -A wg-quick down bxl-shp
+  notify-send "VPN bxl-shp DOWN"
+else
+  sudo -A wg-quick up bxl-shp
+  notify-send "VPN bxl-shp UP"
+fi

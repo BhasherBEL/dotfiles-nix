@@ -11,7 +11,19 @@
   home = {
     sessionVariables.EDITOR = "nvim";
 
-    file."${config.xdg.configHome}/nvim/init.lua".text =
-      builtins.readFile ./init.lua;
+    file = {
+      "${config.xdg.configHome}/nvim" = {
+        source = ./config/nvim;
+        recursive = true;
+      };
+      "${config.xdg.configHome}/ranger	" = {
+        source = ./config/ranger;
+        recursive = true;
+      };
+      "${config.xdg.configHome}/coc	" = {
+        source = ./config/coc;
+        recursive = true;
+      };
+    };
   };
 }
