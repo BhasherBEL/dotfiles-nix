@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, inputs, ... }: {
   imports = [ ./shared/global ./shared/pc ];
 
   home.username = "bhasher";
@@ -81,11 +81,11 @@
             };
           };
         };
-        #extensions = with pkgs.inputs.firefox-addons; [
-        #  darkreader
-        #  sidebery
-        #  terms-of-service-didnt-read
-        #];
+        #extensions = with pkgs.nur.rycee.firefox-addons;
+        #  [
+        #     darkreader
+        #     sidebery
+        #  ];
         bookmarks = [
           {
             name = "Nix sites";

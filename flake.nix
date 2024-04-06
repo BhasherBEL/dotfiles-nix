@@ -11,13 +11,10 @@
 
     hyprsome.url = "github:sopa0/hyprsome";
 
-    #firefox-addons = {
-    #  url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
-    #  inputs.nixpkgs.follows = "nixpkgs";
-    #};
+    nur.url = "github:nix-community/NUR";
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, nur, ... }@inputs:
     let
       inherit (self) outputs;
       lib = nixpkgs.lib // home-manager.lib;
@@ -26,15 +23,8 @@
 
       nixosConfigurations = {
         desktop = nixpkgs.lib.nixosSystem {
-          modules = [ ./hosts/desktop ];
+          modules = [ { nixpkgs.overlays = [ nur.overlay ]; } ./hosts/desktop ];
           specialArgs = { inherit inputs outputs; };
-        };
-      };
-
-      homeConfigurations = {
-        "bhasher@desktop" = lib.homeManagerConfiguration {
-          modules = [ ./home/bhasher.nix ];
-          extraSpecialArgs = { inherit inputs outputs; };
         };
       };
     };

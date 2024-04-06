@@ -12,6 +12,11 @@
 
   users.defaultUserShell = pkgs.zsh;
 
+  home-manager = {
+    useGlobalPkgs = true;
+    useUserPackages = true;
+  };
+
   security.sudo = {
     enable = true;
     extraRules = [{

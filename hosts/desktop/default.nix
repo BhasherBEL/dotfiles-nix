@@ -10,7 +10,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking = {
-    hostName = "nixos";
+    hostName = "desktop";
 
     wg-quick.interfaces.bxl-shp = {
       address = [ "10.15.14.3/32" ];
