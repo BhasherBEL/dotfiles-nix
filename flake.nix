@@ -26,6 +26,11 @@
           modules = [ { nixpkgs.overlays = [ nur.overlay ]; } ./hosts/desktop ];
           specialArgs = { inherit inputs outputs; };
         };
+        media-center = nixpkgs.lib.nixosSystem {
+          modules =
+            [ { nixpkgs.overlays = [ nur.overlay ]; } ./hosts/media-center ];
+          specialArgs = { inherit inputs outputs; };
+        };
       };
     };
 }

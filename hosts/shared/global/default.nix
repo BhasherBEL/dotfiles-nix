@@ -47,10 +47,12 @@
     nixfmt
     prettierd
     nil
+    gcc
   ];
 
   programs = {
     git.enable = true;
     zsh.enable = true;
+    dconf.enable = true;
   };
 }

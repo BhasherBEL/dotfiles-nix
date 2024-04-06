@@ -29,7 +29,4 @@
 
     systemPackages = with pkgs; [ pulseaudio kitty pavucontrol ];
   };
-
-  programs.dconf.enable = true;
-
 }

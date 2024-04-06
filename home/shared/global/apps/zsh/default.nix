@@ -21,8 +21,8 @@
           src = pkgs.fetchFromGitHub {
             owner = "ohmyzsh";
             repo = "ohmyzsh";
-            rev = "master";
-            sha256 = "YjYajT3TjxEcWWZD4k8EXZxed3vZ3mz6gr6hnbnr+dk=";
+            rev = "bf713e2c112ee1f0daf10deffa1215c982513f9b";
+            sha256 = "jeHhYK6mSZiLWSnElYSo/8YLcLm478/u9AP8RKZ0BWw=";
           };
         }
         {
@@ -30,8 +30,8 @@
           src = pkgs.fetchFromGitHub {
             owner = "ohmyzsh";
             repo = "ohmyzsh";
-            rev = "master";
-            sha256 = "YjYajT3TjxEcWWZD4k8EXZxed3vZ3mz6gr6hnbnr+dk=";
+            rev = "bf713e2c112ee1f0daf10deffa1215c982513f9b";
+            sha256 = "jeHhYK6mSZiLWSnElYSo/8YLcLm478/u9AP8RKZ0BWw=";
           };
         }
         {
@@ -39,7 +39,7 @@
           src = pkgs.fetchFromGitHub {
             owner = "zsh-users";
             repo = "zsh-syntax-highlighting";
-            rev = "master";
+            rev = "e0165eaa730dd0fa321a6a6de74f092fe87630b0";
             sha256 = "4rW2N+ankAH4sA6Sa5mr9IKsdAg7WTgrmyqJ2V1vygQ=";
           };
         }
@@ -48,7 +48,7 @@
           src = pkgs.fetchFromGitHub {
             owner = "zsh-users";
             repo = "zsh-autosuggestions";
-            rev = "master";
+            rev = "c3d4e576c9c86eac62884bd47c01f6faed043fc5";
             sha256 = "B+Kz3B7d97CM/3ztpQyVkE6EfMipVF8Y4HJNfSRXHtU=";
           };
         }
@@ -57,7 +57,7 @@
           src = pkgs.fetchFromGitHub {
             owner = "zsh-users";
             repo = "zsh-history-substring-search";
-            rev = "master";
+            rev = "8dd05bfcc12b0cd1ee9ea64be725b3d9f713cf64";
             sha256 = "houujb1CrRTjhCc+dp3PRHALvres1YylgxXwjjK6VZA=";
           };
         }
