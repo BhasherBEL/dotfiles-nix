@@ -38,6 +38,10 @@
     vimPlugins.lazy-nvim
     networkmanager
     font-awesome
+    stylua
+    nixfmt
+    prettierd
+    nil
   ];
 
   programs = {

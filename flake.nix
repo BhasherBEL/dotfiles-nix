@@ -31,11 +31,11 @@
         };
       };
 
-      #homeConfigurations = {
-      #  "bhasher@desktop" = lib.homeManagerConfiguration {
-      #    modules = [ ./home/bhasher.nix ];
-      #    extraSpecialArgs = { inherit inputs outputs; };
-      #  };
-      #};
+      homeConfigurations = {
+        "bhasher@desktop" = lib.homeManagerConfiguration {
+          modules = [ ./home/bhasher.nix ];
+          extraSpecialArgs = { inherit inputs outputs; };
+        };
+      };
     };
 }

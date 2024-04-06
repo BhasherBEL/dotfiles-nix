@@ -7,6 +7,8 @@ in {
     ../../optional/python.nix
     ../../optional/languagelab.nix
     ../../optional/docker.nix
+    ../../optional/virtualbox.nix
+    ../../optional/js.nix
   ];
 
   home-manager.users.bhasher = import ../../../../home/bhasher.nix;
@@ -24,15 +26,13 @@ in {
     signal-desktop
     font-awesome
     xorg.xlsclients
-    stylua
-    nixfmt
-    prettierd
     ferdium
-    nil
     thunderbird
     dnsutils
     asciinema
     onlyoffice-bin
     mdcat
+    sl
+    ranger
   ];
 }
