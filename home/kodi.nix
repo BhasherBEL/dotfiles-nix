@@ -8,9 +8,6 @@
   home.stateVersion = "23.11";
 
   programs = {
-    zsh.shellAliases = {
-      nb = "sudo nixos-rebuild switch --flake /etc/nixos#media-center";
-    };
     kodi = {
       enable = true;
       package = pkgs.kodi.withPackages (
