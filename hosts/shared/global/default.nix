@@ -58,7 +58,12 @@
 
   programs = {
     git.enable = true;
-    zsh.enable = true;
+    zsh = {
+      enable = true;
+      shellAliases = {
+        nb = "echo \"sudo nixos-rebuild switch --flake /home/bhasher/sync/nixos#$(hostname)\" && sudo nixos-rebuild switch --flake /home/bhasher/sync/nixos#$(hostname)";
+      };
+    };
     dconf.enable = true;
   };
 }

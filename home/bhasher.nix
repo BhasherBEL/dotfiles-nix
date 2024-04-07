@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }:
+{ pkgs, ... }:
 {
   imports = [
     ./shared/global
@@ -13,10 +13,6 @@
   services.syncthing.enable = true;
 
   programs = {
-    zsh.shellAliases = {
-      nb = "sudo nixos-rebuild switch --flake /home/bhasher/sync/nixos#desktop";
-    };
-
     firefox = {
       enable = true;
       profiles.default = {
