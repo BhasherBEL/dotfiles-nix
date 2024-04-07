@@ -70,16 +70,16 @@ in
       enable = true;
       desktopManager.kodi = {
         enable = true;
-        package = pkgs.kodi.withPackages (
-          p: with p; [
-            jellyfin
-            netflix
-            youtube
-            arteplussept
-            sponsorblock
-            inputstreamhelper
-          ]
-        );
+        #  package = pkgs.kodi.withPackages (
+        #    p: with p; [
+        #      jellyfin
+        #      netflix
+        #      youtube
+        #      arteplussept
+        #      sponsorblock
+        #      inputstreamhelper
+        #    ]
+        #  );
       };
       displayManager = {
         autoLogin = {
