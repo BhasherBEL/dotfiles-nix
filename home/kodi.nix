@@ -8,7 +8,7 @@
 
   programs = {
     zsh.shellAliases = {
-      nb = "sudo nixos-rebuild switch --flake /mnt/repo/nixos#media-center";
+      nb = "sudo nixos-rebuild switch --flake /etc/nixos#media-center";
     };
   };
 }

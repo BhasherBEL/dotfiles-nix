@@ -1,4 +1,9 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+let
+  cifsOptions = [
+    "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s,credentials=/etc/nixos/secrets/.smb,uid=1002,gid=100"
+  ];
+in {
   imports =
     [ ./hardware-configuration.nix ../shared/global ../shared/users/kodi.nix ];
 
@@ -77,6 +82,17 @@
         };
       };
     };
+  };
+
+  fileSystems."/mnt/movies" = {
+    device = "//192.168.1.201/movies";
+    fsType = "cifs";
+    options = cifsOptions;
+  };
+  fileSystems."/mnt/music" = {
+    device = "//192.168.1.201/brieuc/SyncDocuments/music";
+    fsType = "cifs";
+    options = cifsOptions;
   };
 
   system.stateVersion = "23.11";
