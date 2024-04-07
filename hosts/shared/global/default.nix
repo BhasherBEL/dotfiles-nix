@@ -1,7 +1,11 @@
-{ pkgs, inputs, ... }: {
+{ pkgs, inputs, ... }:
+{
   imports = [ inputs.home-manager.nixosModules.home-manager ];
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
   time.timeZone = "Europe/Paris";
 
   # Internationalisation settings
@@ -19,22 +23,24 @@
 
   security.sudo = {
     enable = true;
-    extraRules = [{
-      commands = [
-        {
-          command = "${pkgs.systemd}/bin/systemctl suspend";
-          options = [ "NOPASSWD" ];
-        }
-        {
-          command = "${pkgs.systemd}/bin/reboot";
-          options = [ "NOPASSWD" ];
-        }
-        {
-          command = "${pkgs.systemd}/bin/poweroff";
-          options = [ "NOPASSWD" ];
-        }
-      ];
-    }];
+    extraRules = [
+      {
+        commands = [
+          {
+            command = "${pkgs.systemd}/bin/systemctl suspend";
+            options = [ "NOPASSWD" ];
+          }
+          {
+            command = "${pkgs.systemd}/bin/reboot";
+            options = [ "NOPASSWD" ];
+          }
+          {
+            command = "${pkgs.systemd}/bin/poweroff";
+            options = [ "NOPASSWD" ];
+          }
+        ];
+      }
+    ];
   };
 
   environment.systemPackages = with pkgs; [
@@ -44,7 +50,7 @@
     networkmanager
     font-awesome
     stylua
-    nixfmt
+    nixfmt-rfc-style
     prettierd
     nil
     gcc

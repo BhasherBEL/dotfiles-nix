@@ -1,5 +1,9 @@
-{ pkgs, inputs, ... }: {
-  imports = [ ./shared/global ./shared/pc ];
+{ pkgs, inputs, ... }:
+{
+  imports = [
+    ./shared/global
+    ./shared/pc
+  ];
 
   home.username = "bhasher";
   home.homeDirectory = "/home/bhasher";
@@ -27,8 +31,7 @@
           "privacy.clearOnShutdown.sessions" = true;
           "privacy.clearOnShutdown.siteSettings" = true;
           "privacy.history.custom" = true;
-          "privacy.sanitize.pending" = ''
-            [{\"id\":\"newtab-container\",\"itemsToClear\":[],\"options\":{}},{\"id\":\"shutdown\",\"itemsToClear\":[\"cache\",\"cookies\",\"offlineApps\",\"history\",\"formdata\",\"downloads\",\"sessions\",\"siteSettings\"],\"options\":{}}]'';
+          "privacy.sanitize.pending" = ''[{\"id\":\"newtab-container\",\"itemsToClear\":[],\"options\":{}},{\"id\":\"shutdown\",\"itemsToClear\":[\"cache\",\"cookies\",\"offlineApps\",\"history\",\"formdata\",\"downloads\",\"sessions\",\"siteSettings\"],\"options\":{}}]'';
           "privacy.sanitize.sanitizeOnShutdown" = true;
           "signon.autofillForms" = false;
         };
@@ -41,50 +44,60 @@
             eBay.metaData.hidden = true;
             GitHub = {
               name = "GitHub";
-              urls = [{
-                template = "https://github.com/search";
-                params = { q = "{searchTerms}"; };
-              }];
-              iconUpdateURL =
-                "https://github.githubassets.com/favicons/favicon.png";
+              urls = [
+                {
+                  template = "https://github.com/search";
+                  params = {
+                    q = "{searchTerms}";
+                  };
+                }
+              ];
+              iconUpdateURL = "https://github.githubassets.com/favicons/favicon.png";
               definedAliases = [ "@gh" ];
             };
             "Nix Packages" = {
-              urls = [{
-                template = "https://search.nixos.org/packages";
-                params = [
-                  {
-                    name = "type";
-                    value = "packages";
-                  }
-                  {
-                    name = "query";
-                    value = "{searchTerms}";
-                  }
-                ];
-              }];
-              icon =
-                "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+              urls = [
+                {
+                  template = "https://search.nixos.org/packages";
+                  params = [
+                    {
+                      name = "type";
+                      value = "packages";
+                    }
+                    {
+                      name = "query";
+                      value = "{searchTerms}";
+                    }
+                  ];
+                }
+              ];
+              icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
               definedAliases = [ "@np" ];
             };
             "Nix Home Manager" = {
-              urls = [{
-                template = "https://home-manager-options.extranix.com/";
-                params = [{
-                  name = "query";
-                  value = "{searchTerms}";
-                }];
-              }];
-              icon =
-                "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-              definedAliases = [ "@hm" "@nh" ];
+              urls = [
+                {
+                  template = "https://home-manager-options.extranix.com/";
+                  params = [
+                    {
+                      name = "query";
+                      value = "{searchTerms}";
+                    }
+                  ];
+                }
+              ];
+              icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+              definedAliases = [
+                "@hm"
+                "@nh"
+              ];
             };
           };
         };
         extensions = with pkgs.nur.repos.rycee.firefox-addons; [
           darkreader
           sidebery
-          wappalyzer
+          #wappalyzer
           cookie-quick-manager
         ];
         bookmarks = [
@@ -121,6 +134,5 @@
         ];
       };
     };
-
   };
 }

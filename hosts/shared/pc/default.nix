@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   imports = [ ./hyprland.nix ];
 
   # Enable CUPS to print documents.
@@ -16,17 +17,21 @@
   };
 
   # Enable sound.
-  sound.enable = true;
-  nixpkgs.config.pulseaudio = true;
-  hardware.pulseaudio.enable = true;
-  hardware.pulseaudio.support32Bit = true;
-  nixpkgs.config.allowUnfree = true;
-  hardware.enableAllFirmware = true;
+  #sound.enable = true;
+  #nixpkgs.config.pulseaudio = true;
+  #hardware.pulseaudio.enable = true;
+  #hardware.pulseaudio.support32Bit = true;
 
   environment = {
     # Tell electron apps to use wayland
-    sessionVariables = { NIXOS_OZONE_WL = "1"; };
+    sessionVariables = {
+      NIXOS_OZONE_WL = "1";
+    };
 
-    systemPackages = with pkgs; [ pulseaudio kitty pavucontrol ];
+    systemPackages = with pkgs; [
+      pulseaudio
+      kitty
+      pavucontrol
+    ];
   };
 }
