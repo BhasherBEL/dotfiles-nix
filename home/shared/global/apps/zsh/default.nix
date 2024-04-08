@@ -1,5 +1,11 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 {
+
+  #home.file."${config.xdg.configHome}/zsh/custom" = {
+  #  source = ./custom;
+  #  recursive = true;
+  #};
+
   programs = {
     zsh = {
       enable = true;
@@ -53,6 +59,10 @@
             sha256 = "B+Kz3B7d97CM/3ztpQyVkE6EfMipVF8Y4HJNfSRXHtU=";
           };
         }
+        #{
+        #  name = "zsh-custom";
+        #  src = "${config.xdg.configHome}/zsh/custom";
+        #}
       ];
       initExtra = ''
         unset ZSH_AUTOSUGGEST_USE_ASYNC
