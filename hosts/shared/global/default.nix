@@ -54,6 +54,7 @@
     prettierd
     nil
     gcc
+    ltex-ls
   ];
 
   programs = {

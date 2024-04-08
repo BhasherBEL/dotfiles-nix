@@ -14,27 +14,47 @@
     nur.url = "github:nix-community/NUR";
 
     nixos-hardware.url = "github:NixOS/nixos-hardware";
+
+    nixvim = {
+      url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, home-manager, nur, nixos-hardware, ... }@inputs:
+  outputs =
+    {
+      self,
+      nixpkgs,
+      home-manager,
+      ...
+    }@inputs:
     let
       inherit (self) outputs;
       lib = nixpkgs.lib // home-manager.lib;
-    in {
+    in
+    {
       inherit lib;
 
       nixosConfigurations = {
         desktop = nixpkgs.lib.nixosSystem {
-          modules = [ { nixpkgs.overlays = [ nur.overlay ]; } ./hosts/desktop ];
-          specialArgs = { inherit inputs outputs; };
+          modules = [
+            { nixpkgs.overlays = [ inputs.nur.overlay ]; }
+            ./hosts/desktop
+            inputs.nixvim.nixosModules.nixvim
+          ];
+          specialArgs = {
+            inherit inputs outputs;
+          };
         };
         media-center = nixpkgs.lib.nixosSystem {
           modules = [
-            { nixpkgs.overlays = [ nur.overlay ]; }
+            { nixpkgs.overlays = [ inputs.nur.overlay ]; }
             ./hosts/media-center
-            nixos-hardware.nixosModules.raspberry-pi-4
+            inputs.nixos-hardware.nixosModules.raspberry-pi-4
           ];
-          specialArgs = { inherit inputs outputs; };
+          specialArgs = {
+            inherit inputs outputs;
+          };
         };
       };
     };

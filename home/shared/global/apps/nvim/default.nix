@@ -1,5 +1,12 @@
-{ pkgs, config, ... }:
 {
+  pkgs,
+  config,
+  inputs,
+  ...
+}:
+{
+  #imports = [ inputs.nixvim.homeManagerModules.nixvim ];
+
   programs = {
     neovim = {
       enable = true;
@@ -17,14 +24,19 @@
         source = ./config/nvim;
         recursive = true;
       };
-      "${config.xdg.configHome}/ranger	" = {
+      "${config.xdg.configHome}/ranger" = {
         source = ./config/ranger;
         recursive = true;
       };
-      "${config.xdg.configHome}/coc	" = {
+      "${config.xdg.configHome}/coc" = {
         source = ./config/coc;
         recursive = true;
       };
+      #"${config.xdg.configHome}/ngrams" = {
+      #	source = fetchzip {
+      #		
+      #	};
+      #};
     };
   };
 }

@@ -1,8 +1,9 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 {
   imports = [
     ./shared/global
     ./shared/pc
+    #inputs.nixvim.homeManagerModules.nixvim
   ];
 
   home.username = "bhasher";

@@ -22,6 +22,8 @@ vim.opt.ttyfast = true
 vim.opt.swapfile = false
 vim.opt.mouse = "a"
 
+vim.opt.termguicolors = true
+
 vim.opt.spell = true
 vim.opt.spelllang = "en" -- ,fr'
 vim.api.nvim_set_hl(0, "SpellBad", { ctermbg = 238 })
@@ -98,6 +100,19 @@ require("lazy").setup({
 		"neovim/nvim-lspconfig",
 		config = function()
 			require("lspconfig").nil_ls.setup({})
+			require("lspconfig").svelte.setup({})
+			require("lspconfig").tailwindcss.setup({})
+			require("lspconfig").ltex.setup({
+				settings = {
+					filetypes = { "*" },
+					ltex = {
+						language = "en-GB",
+						additionalRules = {
+							languageModel = "~/models/ngrams/",
+						},
+					},
+				},
+			})
 		end,
 	},
 	{
@@ -105,23 +120,44 @@ require("lazy").setup({
 		"nvim-telescope/telescope.nvim",
 		dependencies = { "nvim-lua/plenary.nvim" },
 	},
+	{
+		-- Autotag
+		"windwp/nvim-ts-autotag",
+		config = function()
+			require("nvim-ts-autotag").setup()
+		end,
+	},
+	{
+		-- Colorize tailwindcss menu
+		"roobert/tailwindcss-colorizer-cmp.nvim",
+		config = function()
+			require("tailwindcss-colorizer-cmp").setup({})
+		end,
+	},
+	{
+		-- Colorizer
+		"norcalli/nvim-colorizer.lua",
+		config = function()
+			require("colorizer").setup({})
+		end,
+	},
 })
 
 require("conform").setup({
 	formatters_by_ft = {
 		lua = { "stylua" },
 		python = { "black" },
-		javascript = { "prettier" },
-		typescript = { "prettier" },
-		svelte = { "prettier" },
-		html = { "prettier" },
-		css = { "prettier" },
-		md = { "prettier" },
-		less = { "prettier" },
-		scss = { "prettier" },
-		json = { "prettier" },
-		yaml = { "prettier" },
-		toml = { "prettier" },
+		javascript = { { "prettierd", "prettier" } },
+		typescript = { { "prettierd", "prettier" } },
+		svelte = { { "prettierd", "prettier" } },
+		html = { { "prettierd", "prettier" } },
+		css = { { "prettierd", "prettier" } },
+		md = { { "prettierd", "prettier" } },
+		less = { { "prettierd", "prettier" } },
+		scss = { { "prettierd", "prettier" } },
+		json = { { "prettierd", "prettier" } },
+		yaml = { { "prettierd", "prettier" } },
+		toml = { { "prettierd", "prettier" } },
 		java = { "google-java-format" },
 		nix = { "nixfmt" },
 	},

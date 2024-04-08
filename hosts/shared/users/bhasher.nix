@@ -12,10 +12,14 @@ in
     ../optional/docker.nix
     ../optional/virtualbox.nix
     ../optional/js.nix
-    #../optional/rustdesk.nix  # Not working, probably related to https://github.com/rustdesk/rustdesk/issues/3565
+    # Not working, probably related to https://github.com/rustdesk/rustdesk/issues/3565
+    #../optional/rustdesk.nix  
+    ../optional/media.nix
   ];
 
   home-manager.users.bhasher = import ../../../home/bhasher.nix;
+
+  media.jellyfin = true;
 
   users.users.bhasher = {
     isNormalUser = true;

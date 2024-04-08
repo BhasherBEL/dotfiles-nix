@@ -1,3 +1,8 @@
-{ pkgs, ... }: {
-  environment.systemPackages = with pkgs; [ python3 virtualenv ];
+{ pkgs, ... }:
+{
+  environment.systemPackages = with pkgs; [
+    python3
+    virtualenv
+    black
+  ];
 }
