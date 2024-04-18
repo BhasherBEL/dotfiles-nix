@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 let
   cifsOptions = [
     "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s,credentials=/etc/nixos/secrets/.smb,uid=1002,gid=100"
@@ -70,16 +70,16 @@ in
       enable = true;
       desktopManager.kodi = {
         enable = true;
-        #  package = pkgs.kodi.withPackages (
-        #    p: with p; [
-        #      jellyfin
-        #      netflix
-        #      youtube
-        #      arteplussept
-        #      sponsorblock
-        #      inputstreamhelper
-        #    ]
-        #  );
+        package = pkgs.kodi.withPackages (
+          p: with p; [
+            jellyfin
+            netflix
+            invidious
+            arteplussept
+            sponsorblock
+            inputstreamhelper
+          ]
+        );
       };
       displayManager = {
         autoLogin = {
@@ -88,7 +88,7 @@ in
         };
         lightdm = {
           enable = true;
-          autoLogin.timeout = 3;
+          #autoLogin.timeout = 3;
         };
       };
     };
