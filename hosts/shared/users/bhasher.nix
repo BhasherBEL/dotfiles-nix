@@ -12,9 +12,11 @@ in
     ../optional/docker.nix
     ../optional/virtualbox.nix
     ../optional/js.nix
+    ../optional/java.nix
     # Not working, probably related to https://github.com/rustdesk/rustdesk/issues/3565
-    #../optional/rustdesk.nix  
+    ../optional/rustdesk.nix
     ../optional/media.nix
+    ../optional/vscodium.nix
   ];
 
   home-manager.users.bhasher = import ../../../home/bhasher.nix;
@@ -72,5 +74,8 @@ in
     sl
     ranger
     obs-studio
+    yt-dlp
   ];
+
+  programs.kdeconnect.enable = true;
 }

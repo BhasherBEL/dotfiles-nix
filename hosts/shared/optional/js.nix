@@ -9,5 +9,6 @@
     prettierd
     # As long as prettierd is not working
     nodePackages.prettier
+    nodePackages.typescript-language-server
   ];
 }

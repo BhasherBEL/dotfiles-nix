@@ -1,15 +1,19 @@
-{ pkgs, ... }: {
-  imports = [ ./apps/nvim ./apps/zsh ];
+{ pkgs, ... }:
+{
+  imports = [
+    ./apps/nvim
+    ./apps/zsh
+  ];
 
   fonts.fontconfig.enable = true;
 
-  home.sessionVariables.GTK_THEME = "Adwaita-dark";
+  home.sessionVariables.GTK_THEME = "Breeze-Dark";
 
   gtk = {
     enable = true;
     theme = {
-      name = "Adwaita-dark";
-      package = pkgs.gnome.gnome-themes-extra;
+      name = "Breeze-Dark";
+      package = pkgs.libsForQt5.breeze-gtk;
     };
   };
 
@@ -21,5 +25,4 @@
       settings.confirm_os_window_close = -1;
     };
   };
-
 }

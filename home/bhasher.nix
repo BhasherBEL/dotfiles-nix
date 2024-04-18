@@ -121,12 +121,155 @@
             url = "https://github.com/BhasherBEL";
           }
           {
-            name = "Gitlab KAP";
-            url = "https://gitlab.com/louvainlinux";
-          }
-          {
             name = "NUR";
             url = "https://nur.nix-community.org";
+          }
+          {
+            name = "Discourse NixOS";
+            url = "https://discourse.nixos.org";
+          }
+          {
+            name = "DeepL";
+            url = "https://deepl.com/translator#en/fr/";
+          }
+          {
+            name = "Homelab";
+            bookmarks = [
+              {
+                name = "Hub";
+                url = "https://hub.bhasher.com";
+              }
+              {
+                name = "Grafana";
+                url = "https://grafana.bhasher.com";
+              }
+              {
+                name = "Jellyfin";
+                url = "https://jellyfin.bhasher.com";
+              }
+              {
+                name = "Radarr";
+                url = "https://radarr.bhasher.com";
+              }
+              {
+                name = "Sonarr";
+                url = "https://sonarr.bhasher.com";
+              }
+              {
+                name = "Lidarr";
+                url = "https://lidarr.bhasher.com";
+              }
+              {
+                name = "Bazarr";
+                url = "https://bazarr.bhasher.com";
+              }
+              {
+                name = "Transmission";
+                url = "https://transmission.bhasher.com";
+              }
+              {
+                name = "Accounts";
+                url = "https://accounts.bhasher.com";
+              }
+              {
+                name = "Vaultwarden";
+                url = "https://vault.bhasher.com";
+              }
+              {
+                name = "Element";
+                url = "https://element.bhasher.com";
+              }
+              {
+                name = "Gitea";
+                url = "https://git.bhasher.com";
+              }
+              {
+                name = "Syncthing";
+                url = "https://syncthing.bhasher.com";
+              }
+              {
+                name = "Board";
+                url = "https://board.bhasher.com";
+              }
+              {
+                name = "Home Assistant";
+                url = "https://hass.bhasher.com";
+              }
+              {
+                name = "Invoiceplace";
+                url = "https://invoice.bhasher.com";
+              }
+            ];
+          }
+          {
+            name = "Louvain-li-Nux";
+            bookmarks = [
+              {
+                name = "Hub";
+                url = "https://hub.louvainlinux.org";
+              }
+              {
+                name = "Portainer";
+                url = "https://portainer.louvainlinux.org";
+              }
+              {
+                name = "Compta";
+                url = "https://compta.louvainlinux.org";
+              }
+              {
+                name = "Board";
+                url = "https://board.louvainlinux.org";
+              }
+              {
+                name = "Gitlab";
+                url = "https://gitlab.com/louvainlinux";
+              }
+              {
+                name = "Nextcloud";
+                url = "https://cloud.louvainlinux.org";
+              }
+              {
+                name = "Vaultwarden";
+                url = "https://vault.louvainlinux.org";
+              }
+              {
+                name = "Uptime";
+                url = "https://uptime.louvainlinux.org";
+              }
+              {
+                name = "Accounts";
+                url = "https://accounts.louvainlinux.org";
+              }
+              {
+                name = "Grafana";
+                url = "https://grafana.louvainlinux.org";
+              }
+              {
+                name = "Router";
+                url = "http://10.0.0.1:8443";
+              }
+              {
+                name = "Wiki";
+                url = "https://wiki.louvainlinux.org";
+              }
+              {
+                name = "Piwigo";
+                url = "https://piwigo.kapucl.be";
+              }
+            ];
+          }
+          {
+            name = "LanguageLab";
+            bookmarks = [
+              {
+                name = "Release SIPR";
+                url = "http://languagelab.sipr.ucl.ac.be/";
+              }
+              {
+                name = "Gitlab";
+                url = "https://forge.uclouvain.be/sbibauw/languagelab";
+              }
+            ];
           }
         ];
       };

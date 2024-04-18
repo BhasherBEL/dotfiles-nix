@@ -4,5 +4,6 @@
     python3
     virtualenv
     black
+    nodePackages.pyright
   ];
 }

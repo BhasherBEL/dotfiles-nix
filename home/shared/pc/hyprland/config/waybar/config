@@ -6,7 +6,7 @@
     // Choose the order of the modules
     "modules-left": ["hyprland/workspaces"],
     "modules-center": ["hyprland/window"],
-    "modules-right": ["pulseaudio", "custom/VPN", "network", "custom/bandwidth", "cpu", "memory", "battery", "tray", "custom/notifications", "clock"],
+    "modules-right": ["pulseaudio", "custom/kde-connect", "custom/VPN", "network", "custom/bandwidth", "cpu", "memory", "battery", "tray", "custom/notifications", "clock"],
     "hyprland/workspaces": {
         "disable-scroll": true,
         "all-outputs": false,
@@ -101,6 +101,12 @@
         },
         "on-click": "pavucontrol"
     },
+		"custom/kde-connect": {
+			"format": "{}",
+			"interval": 10,
+			"return-type": "json",
+			"exec": "$HOME/.config/waybar/scripts/kde-connect"
+		},
     "custom/notification": {
         "tooltip": false,
         "format": "{icon}",

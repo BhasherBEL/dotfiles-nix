@@ -1,0 +1,11 @@
+#!/usr/bin/env sh
+
+connected_devices=$(kdeconnect-cli -a | wc -l)
+
+if [ "$connected_devices" -gt 0 ]; then
+    class="up"
+else
+    class="down"
+fi
+
+echo "{\"text\": \"$connected_devices\", \"class\": \"$class\"}"
