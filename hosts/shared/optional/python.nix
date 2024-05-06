@@ -1,9 +1,16 @@
 { pkgs, ... }:
 {
   environment.systemPackages = with pkgs; [
-    python3
-    virtualenv
     black
     nodePackages.pyright
+    (python311.withPackages (
+      ps: with ps; [
+        numpy
+        pandas
+        matplotlib
+        jupyter
+        scapy
+      ]
+    ))
   ];
 }

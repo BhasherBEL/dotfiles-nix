@@ -42,6 +42,9 @@
     swayidle
     swaylock-effects
     inputs.hyprsome.packages.x86_64-linux.default
+    swww
+    udiskie
+    networkmanagerapplet
   ];
 
   fonts.packages = with pkgs; [ font-awesome ];

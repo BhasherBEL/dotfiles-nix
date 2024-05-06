@@ -7,11 +7,15 @@
       #vimPlugins.nvim-jdtls
       jdt-language-server
       jdk
+      # temp
+      jetbrains.idea-community
     ];
 
     sessionVariables = {
       _JAVA_OPTIONS = "-Dawt.useSystemAAFontSettings=lcd";
-      JAVA_HOME = "${pkgs.jdk.home}/lib/openjdk";
+      #JAVA_HOME = "${pkgs.jdk.home}";
     };
   };
+
+  programs.java.enable = true;
 }

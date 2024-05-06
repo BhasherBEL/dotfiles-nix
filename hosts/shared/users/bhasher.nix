@@ -34,6 +34,7 @@ in
       ++ ifTheyExist [
         "docker"
         "wireshark"
+        "uucpd"
       ];
   };
 
@@ -60,21 +61,18 @@ in
 
   environment.systemPackages = with pkgs; [
     tree
-    zsh-powerlevel10k
     freetube
     signal-desktop
-    font-awesome
-    xorg.xlsclients
     ferdium
     thunderbird
-    dnsutils
     asciinema
     onlyoffice-bin
-    mdcat
     sl
     ranger
     obs-studio
     yt-dlp
+    spotdl
+    joplin
   ];
 
   programs.kdeconnect.enable = true;

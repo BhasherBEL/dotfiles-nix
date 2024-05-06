@@ -55,6 +55,13 @@
     nil
     gcc
     ltex-ls
+    zip
+    mdcat
+    dnsutils
+    clang-tools_17
+    xorg.xlsclients
+    font-awesome
+    zsh-powerlevel10k
   ];
 
   programs = {
@@ -63,6 +70,8 @@
       enable = true;
       shellAliases = {
         nb = "echo \"sudo nixos-rebuild switch --flake /etc/nixos#$(hostname)\" && sudo nixos-rebuild switch --flake /etc/nixos#$(hostname)";
+        #nb = "echo \"sudo nixos-rebuild switch --flake /home/bhasher/sync/nixos#$(hostname)\" && sudo nixos-rebuild switch --flake /home/bhasher/sync/nixos#$(hostname)";
+        ncg = "echo \"nix-collect-garbage -d\"nix-collect-garbage -d";
       };
     };
     dconf.enable = true;

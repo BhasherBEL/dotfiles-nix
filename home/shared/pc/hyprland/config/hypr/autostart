@@ -1,20 +1,20 @@
 swaync &
 
-swww init
-swww img /usr/share/endeavouros/backgrounds/hyprland.png
+swww init 2>&1 
+swww img /usr/share/endeavouros/backgrounds/hyprland.png 2>&1
 
 waybar 2>&1 &
 
-nm-applet --indicator &
+nm-applet --indicator 2>&1 &
 
-wl-paste --type text --watch cliphist store
-wl-paste --type image --watch cliphist store
+wl-paste --type text --watch cliphist store 2>&1 &
+wl-paste --type image --watch cliphist store 2>&1 &
 
-udiskie &
+udiskie 2>&1 &
 
 LOCK="swaylock --screenshots --effect-blur 7x5 --indicator --clock | xargs hyprctl dispatch exec"
 
-swayidle -w timeout 600 "$LOCK" before-sleep "$LOCK" &
-swayidle -w timeout 1200 "systemctl hibernate" &
+swayidle -w timeout 600 "$LOCK" before-sleep "$LOCK" 2>&1 &
+swayidle -w timeout 1200 "systemctl hibernate" 2>&1 &
 
-/usr/lib/polkit-kde-authentication-agent-1 &
+/usr/lib/polkit-kde-authentication-agent-1 2>&1 &

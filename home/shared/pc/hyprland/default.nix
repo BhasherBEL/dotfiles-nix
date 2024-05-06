@@ -1,4 +1,5 @@
-{ config, ... }: {
+{ config, ... }:
+{
   programs.waybar.enable = true;
 
   home.file = {

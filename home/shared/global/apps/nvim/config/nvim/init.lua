@@ -107,6 +107,7 @@ require("lazy").setup({
 			require("lspconfig").svelte.setup({})
 			require("lspconfig").tsserver.setup({})
 			require("lspconfig").tailwindcss.setup({})
+			require("lspconfig").clangd.setup({})
 			require("lspconfig").pyright.setup({
 				venvPath = "venv",
 			})
@@ -230,6 +231,7 @@ require("conform").setup({
 		toml = { { "prettierd", "prettier" } },
 		java = { "google-java-format" },
 		nix = { "nixfmt" },
+		c = { "clang-format" },
 	},
 	format_on_save = {},
 })
@@ -249,6 +251,8 @@ require("nvim-treesitter.configs").setup({
 		"java",
 		"markdown",
 		"nix",
+		"c",
+		"cpp",
 	},
 	highlight = {
 		enable = true,
@@ -276,6 +280,12 @@ vim.keymap.set("v", "<C-A-c>", '"+y', { noremap = true, silent = true })
 
 vim.keymap.set("n", "ff", require("telescope.builtin").find_files, {})
 
+vim.keymap.set("n", "gd", vim.lsp.buf.definition)
+vim.keymap.set("n", "gD", vim.lsp.buf.declaration)
+-- vim.keymap.set("n", "gf", )
+
+vim.keymap.set("n", "gf", vim.diagnostic.open_float, { noremap = true, silent = true })
+
 -- commands
 vim.api.nvim_create_user_command("Day", function(opts)
 	vim.cmd([[colorscheme delek]])
@@ -291,5 +301,3 @@ vim.api.nvim_create_autocmd({ "VimResized" }, {
 		vim.cmd([[wincmd =]])
 	end,
 })
-
---

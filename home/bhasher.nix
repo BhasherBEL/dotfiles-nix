@@ -94,8 +94,10 @@
         extensions = with pkgs.nur.repos.rycee.firefox-addons; [
           darkreader
           sidebery
-          #wappalyzer
+          #wappalyzer  # UNFREE
           cookie-quick-manager
+          clearurls
+          #keepa  # UNFREE
         ];
         bookmarks = [
           {
@@ -131,6 +133,10 @@
           {
             name = "DeepL";
             url = "https://deepl.com/translator#en/fr/";
+          }
+          {
+            name = "OpenStreetMap";
+            url = "https://www.openstreetmap.org";
           }
           {
             name = "Homelab";
@@ -268,6 +274,19 @@
               {
                 name = "Gitlab";
                 url = "https://forge.uclouvain.be/sbibauw/languagelab";
+              }
+            ];
+          }
+          {
+            name = "UCLouvain";
+            bookmarks = [
+              {
+                name = "INGInious";
+                url = "https://inginious.info.ucl.ac.be/mycourses";
+              }
+              {
+                name = "Moodle";
+                url = "https://moodle.uclouvain.be";
               }
             ];
           }
