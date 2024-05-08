@@ -51,6 +51,11 @@
           identitiesOnly = true;
           identityFile = "/run/secrets/ssh/snodes";
         };
+        "github.com" = {
+          user = "shp";
+          identitiesOnly = true;
+          identityFile = "/run/secrets/ssh/gitkey";
+        };
       };
     };
     firefox = {

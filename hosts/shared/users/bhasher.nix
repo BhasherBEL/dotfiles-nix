@@ -30,6 +30,9 @@ in
       "ssh/snodes" = {
         owner = config.users.users.bhasher.name;
       };
+      "ssh/gitkey" = {
+        owner = config.users.users.bhasher.name;
+      };
     };
   };
 
