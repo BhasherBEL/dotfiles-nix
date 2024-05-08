@@ -46,6 +46,16 @@
             inherit inputs outputs;
           };
         };
+        laptop = nixpkgs.lib.nixosSystem {
+          modules = [
+            { nixpkgs.overlays = [ inputs.nur.overlay ]; }
+            ./hosts/laptop
+            inputs.nixvim.nixosModules.nixvim
+          ];
+          specialArgs = {
+            inherit inputs outputs;
+          };
+        };
         media-center = nixpkgs.lib.nixosSystem {
           modules = [
             { nixpkgs.overlays = [ inputs.nur.overlay ]; }
