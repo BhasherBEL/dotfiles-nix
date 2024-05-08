@@ -9,6 +9,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # By-screen workspaces
     hyprsome.url = "github:sopa0/hyprsome";
 
     nur.url = "github:nix-community/NUR";
@@ -19,6 +20,9 @@
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # Secret management
+    sops-nix.url = "github:Mic92/sops-nix";
   };
 
   outputs =
@@ -40,7 +44,6 @@
           modules = [
             { nixpkgs.overlays = [ inputs.nur.overlay ]; }
             ./hosts/desktop
-            inputs.nixvim.nixosModules.nixvim
           ];
           specialArgs = {
             inherit inputs outputs;
@@ -50,7 +53,6 @@
           modules = [
             { nixpkgs.overlays = [ inputs.nur.overlay ]; }
             ./hosts/laptop
-            inputs.nixvim.nixosModules.nixvim
           ];
           specialArgs = {
             inherit inputs outputs;

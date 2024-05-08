@@ -1,5 +1,6 @@
-- calendars
-- git
-- nvim
-- ssh
-- secrets
+- [ ] calendars
+- [~] git
+- [ ] nvim
+- [~] ssh
+- [x] secrets
+- [x] Fix command not found

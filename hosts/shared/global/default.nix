@@ -1,11 +1,15 @@
 { pkgs, inputs, ... }:
 {
-  imports = [ inputs.home-manager.nixosModules.home-manager ];
+  imports = [
+    inputs.home-manager.nixosModules.home-manager
+    inputs.sops-nix.nixosModules.sops
+  ];
 
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"
   ];
+
   time.timeZone = "Europe/Paris";
 
   # Internationalisation settings
@@ -62,6 +66,8 @@
     xorg.xlsclients
     font-awesome
     zsh-powerlevel10k
+    sops
+    openssl
   ];
 
   programs = {
@@ -72,6 +78,7 @@
         nb = "echo \"sudo nixos-rebuild switch --flake /etc/nixos#$(hostname)\" && sudo nixos-rebuild switch --flake /etc/nixos#$(hostname)";
         #nb = "echo \"sudo nixos-rebuild switch --flake /home/bhasher/sync/nixos#$(hostname)\" && sudo nixos-rebuild switch --flake /home/bhasher/sync/nixos#$(hostname)";
         ncg = "echo \"nix-collect-garbage -d\"nix-collect-garbage -d";
+        ns = "SOPS_AGE_KEY_FILE=/etc/nixos/keys/$USER.txt sops";
       };
     };
     dconf.enable = true;

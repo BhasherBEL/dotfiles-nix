@@ -1,0 +1,7 @@
+keys:
+  - &bhasher age1u4nafs2kpf9uq3pm9fcr2z04vvrp5jdjvfxwsddtscx4dea86ses3ewem3
+creation_rules:
+  - path_regex: secrets/.*$
+    key_groups:
+      - age:
+          - *bhasher

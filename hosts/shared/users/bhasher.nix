@@ -2,7 +2,7 @@
 let
   ifTheyExist = groups: builtins.filter (group: builtins.hasAttr group config.users.groups) groups;
   cifsOptions = [
-    "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s,credentials=/etc/nixos/secrets/.smb,uid=1000,gid=100"
+    "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s,credentials=/run/secrets/smb/truenas,uid=1000,gid=100"
   ];
 in
 {
@@ -18,6 +18,20 @@ in
     ../optional/media.nix
     ../optional/vscodium.nix
   ];
+
+  sops = {
+    defaultSopsFile = ../../../secrets/bhasher.yaml;
+    defaultSopsFormat = "yaml";
+    age.keyFile = "/etc/nixos/keys/bhasher.txt";
+    secrets = {
+      "smb/truenas" = {
+        owner = config.users.users.bhasher.name;
+      };
+      "ssh/snodes" = {
+        owner = config.users.users.bhasher.name;
+      };
+    };
+  };
 
   home-manager.users.bhasher = import ../../../home/bhasher.nix;
 

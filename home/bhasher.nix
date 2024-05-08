@@ -44,13 +44,14 @@
     };
     ssh = {
       enable = true;
-      #matchBlocks = {
-      #	"shp" = {
-      #		host = "192.168.1.221"
-      #		user = "shp";
-      #
-      #	};
-      #};
+      matchBlocks = {
+        "shp 192.168.1.221" = {
+          hostname = "192.168.1.221";
+          user = "shp";
+          identitiesOnly = true;
+          identityFile = "/run/secrets/ssh/snodes";
+        };
+      };
     };
     firefox = {
       enable = true;
