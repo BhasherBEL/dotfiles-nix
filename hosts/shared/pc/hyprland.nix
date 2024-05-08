@@ -23,7 +23,7 @@
       jack.enable = true;
     };
 
-    xserver.displayManager = {
+    displayManager = {
       defaultSession = "hyprland";
       sddm.wayland.enable = true;
     };

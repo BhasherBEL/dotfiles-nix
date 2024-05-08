@@ -5,14 +5,16 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
-  services.xserver = {
-    enable = true;
-    xkb.layout = "fr";
+  services = {
     displayManager = {
       sddm = {
         enable = true;
         autoNumlock = true;
       };
+    };
+    xserver = {
+      enable = true;
+      xkb.layout = "fr";
     };
   };
 
