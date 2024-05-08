@@ -1,7 +1,7 @@
 { pkgs, ... }:
 {
   environment.systemPackages = with pkgs; [
-    #nodejs_21
+    nodejs_22
     #nodePackages.rollup
     tailwindcss-language-server
     nodePackages.svelte-language-server
