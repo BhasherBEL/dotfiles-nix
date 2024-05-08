@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }:
+{ pkgs, ... }:
 {
   imports = [
     ./shared/global
@@ -14,6 +14,11 @@
   services.syncthing.enable = true;
 
   programs = {
+    git = {
+      enable = true;
+      userName = "Brieuc Dubois";
+      userEmail = "git@bhasher.com";
+    };
     firefox = {
       enable = true;
       profiles.default = {
