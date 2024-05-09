@@ -18,6 +18,7 @@ in
     ../optional/media.nix
     ../optional/vscodium.nix
   ];
+  home-manager.users.bhasher.imports = [ ../../../home/bhasher.nix ];
 
   sops = {
     defaultSopsFile = ../../../secrets/bhasher.yaml;
@@ -35,8 +36,6 @@ in
       };
     };
   };
-
-  home-manager.users.bhasher = import ../../../home/bhasher.nix;
 
   media.jellyfin = true;
 

@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 {
   imports = [
     ./shared/global
@@ -6,10 +6,14 @@
     #inputs.nixvim.homeManagerModules.nixvim
   ];
 
-  home.username = "bhasher";
-  home.homeDirectory = "/home/bhasher";
-
-  home.stateVersion = "23.11";
+  home = {
+    username = "bhasher";
+    homeDirectory = "/home/bhasher";
+    stateVersion = "23.11";
+    file."/home/bhasher/Downloads/TEST" = {
+      text = "Test: ${builtins.getEnv "HOST"}, ${config.networking.hostName}";
+    };
+  };
 
   services.syncthing.enable = true;
 
