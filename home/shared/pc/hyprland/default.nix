@@ -12,10 +12,10 @@
     };
     "${config.xdg.configHome}/hypr/hyprland.conf" = {
       source =
-        if (builtins.getEnv "HOST" == "desktop") then
-          ./config/hypr/hyprland-desktop.conf
+        if (builtins.getEnv "HOST" == "laptop") then
+          ./config/hypr/hyprland-laptop.conf
         else
-          ./config/hypr/hyprland-laptop.conf;
+          ./config/hypr/hyprland-desktop.conf;
     };
     "${config.xdg.configHome}/swaync" = {
       source = ./config/swaync;
