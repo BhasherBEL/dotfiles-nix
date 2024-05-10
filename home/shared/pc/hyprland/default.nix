@@ -17,10 +17,10 @@
         else if (osConfig.networking.hostName == "laptop") then
           ./config/hypr/hyprland-laptop.conf
         else
-          ./config.hypr/hyprland-generic.conf;
+          ./config/hypr/hyprland-generic.conf;
     };
     "${config.xdg.configHome}/hypr/hyprland-generic.conf" = {
-      source = ./config.hypr/hyprland-generic.conf;
+      source = ./config/hypr/hyprland-generic.conf;
     };
     "${config.xdg.configHome}/swaync" = {
       source = ./config/swaync;
