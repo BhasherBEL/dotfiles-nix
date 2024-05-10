@@ -1,4 +1,4 @@
-{ pkgs, config, ... }:
+{ pkgs, osConfig, ... }:
 {
   imports = [
     ./shared/global
@@ -10,9 +10,6 @@
     username = "bhasher";
     homeDirectory = "/home/bhasher";
     stateVersion = "23.11";
-    file."/home/bhasher/Downloads/TEST" = {
-      text = "Test: ${builtins.getEnv "HOST"}, ${config.networking.hostName}";
-    };
   };
 
   services.syncthing.enable = true;

@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, osConfig, ... }:
 {
   programs.waybar.enable = true;
 
@@ -12,10 +12,15 @@
     };
     "${config.xdg.configHome}/hypr/hyprland.conf" = {
       source =
-        if (builtins.getEnv "HOST" == "laptop") then
+        if (osConfig.networking.hostName == "desktop") then
+          ./config/hypr/hyprland-desktop.conf
+        else if (osConfig.networking.hostName == "laptop") then
           ./config/hypr/hyprland-laptop.conf
         else
-          ./config/hypr/hyprland-desktop.conf;
+          ./config.hypr/hyprland-generic.conf;
+    };
+    "${config.xdg.configHome}/hypr/hyprland-generic.conf" = {
+      source = ./config.hypr/hyprland-generic.conf;
     };
     "${config.xdg.configHome}/swaync" = {
       source = ./config/swaync;
