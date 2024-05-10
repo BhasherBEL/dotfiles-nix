@@ -68,6 +68,7 @@
     zsh-powerlevel10k
     sops
     openssl
+    brightnessctl
   ];
 
   programs = {
