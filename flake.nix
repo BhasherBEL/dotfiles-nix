@@ -53,6 +53,7 @@
           modules = [
             { nixpkgs.overlays = [ inputs.nur.overlay ]; }
             ./hosts/laptop
+            ./users/bhasher/laptop.nix
           ];
           specialArgs = {
             inherit inputs outputs;

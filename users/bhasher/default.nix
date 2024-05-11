@@ -9,20 +9,13 @@ in
   imports = [
     ../optional/python.nix
     ../optional/languagelab.nix
-    ../optional/docker.nix
-    ../optional/virtualbox.nix
     ../optional/js.nix
-    #../optional/java.nix
-    ../optional/go.nix
-    # Not working, probably related to https://github.com/rustdesk/rustdesk/issues/3565
-    ../optional/rustdesk.nix
     ../optional/media.nix
-    ../optional/vscodium.nix
   ];
-  home-manager.users.bhasher.imports = [ ../../../home/bhasher.nix ];
+  home-manager.users.bhasher.imports = [ ../../home/bhasher.nix ];
 
   sops = {
-    defaultSopsFile = ../../../secrets/bhasher.yaml;
+    defaultSopsFile = ../../secrets/bhasher.yaml;
     defaultSopsFormat = "yaml";
     age.keyFile = "/etc/nixos/keys/bhasher.txt";
     secrets = {
