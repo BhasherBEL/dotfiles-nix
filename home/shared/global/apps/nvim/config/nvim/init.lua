@@ -104,6 +104,7 @@ require("lazy").setup({
 		"neovim/nvim-lspconfig",
 		config = function()
 			require("lspconfig").nil_ls.setup({})
+			require("lspconfig").gopls.setup({})
 			require("lspconfig").svelte.setup({})
 			require("lspconfig").tsserver.setup({})
 			require("lspconfig").tailwindcss.setup({})
@@ -232,6 +233,7 @@ require("conform").setup({
 		java = { "google-java-format" },
 		nix = { "nixfmt" },
 		c = { "clang-format" },
+		go = { "gofmt" },
 	},
 	format_on_save = {},
 })
