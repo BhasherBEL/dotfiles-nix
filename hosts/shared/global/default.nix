@@ -68,7 +68,7 @@
     zsh-powerlevel10k
     sops
     openssl
-    brightnessctl
+    unzip
   ];
 
   programs = {
@@ -80,6 +80,7 @@
         #nb = "echo \"sudo nixos-rebuild switch --flake /home/bhasher/sync/nixos#$(hostname)\" && sudo nixos-rebuild switch --flake /home/bhasher/sync/nixos#$(hostname)";
         ncg = "echo \"nix-collect-garbage -d\"nix-collect-garbage -d";
         ns = "SOPS_AGE_KEY_FILE=/etc/nixos/keys/$USER.txt sops";
+        nu = "nix flake update /etc/nixos";
       };
     };
     dconf.enable = true;
