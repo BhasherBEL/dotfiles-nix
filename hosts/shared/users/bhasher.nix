@@ -12,7 +12,7 @@ in
     ../optional/docker.nix
     ../optional/virtualbox.nix
     ../optional/js.nix
-    ../optional/java.nix
+    #../optional/java.nix
     ../optional/go.nix
     # Not working, probably related to https://github.com/rustdesk/rustdesk/issues/3565
     ../optional/rustdesk.nix
@@ -33,6 +33,15 @@ in
         owner = config.users.users.bhasher.name;
       };
       "ssh/gitkey" = {
+        owner = config.users.users.bhasher.name;
+      };
+      "ssh/languagelab" = {
+        owner = config.users.users.bhasher.name;
+      };
+      "ssh/gitea" = {
+        owner = config.users.users.bhasher.name;
+      };
+      "ssh/llnux" = {
         owner = config.users.users.bhasher.name;
       };
     };

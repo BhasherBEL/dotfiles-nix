@@ -124,6 +124,12 @@
           identitiesOnly = true;
           identityFile = "/run/secrets/ssh/aur";
         };
+        "languagelab ll languagelab.sipr.ucl.ac.be" = {
+          user = "bridubois";
+          hostname = "130.104.12.159";
+          identitiesOnly = true;
+          identityFile = "/run/secrets/ssh/languagelab";
+        };
       };
     };
     firefox = {
