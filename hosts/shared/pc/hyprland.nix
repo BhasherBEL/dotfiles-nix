@@ -45,6 +45,8 @@
     swww
     udiskie
     networkmanagerapplet
+    playerctl
+    brightnessctl
   ];
 
   fonts.packages = with pkgs; [ font-awesome ];
