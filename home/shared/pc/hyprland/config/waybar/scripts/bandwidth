@@ -2,6 +2,7 @@
 
 import subprocess
 from time import sleep
+import logging
 
 
 def default_interface():
@@ -28,9 +29,9 @@ def get_rx_tx_bytes(iface):
 
 def format_size(size):
     power_labels = {0: "B", 1: "K", 2: "M", 3: "G", 4: "T"}
-    #kilo = 2**10
-    #power = 0
-    #while size > kilo:
+    # kilo = 2**10
+    # power = 0
+    # while size > kilo:
     #    size /= kilo
     #    power += 1
     power = 1
@@ -48,18 +49,25 @@ def main():
         f"{tx_icon}{num_left}{{tx}}{{unit_suffix}}{num_right}"
     )
     unit_suffix = ""
-    iface = default_interface()
-
-    rx_bytes, tx_bytes = get_rx_tx_bytes(iface)
-
     while True:
-        prev_rx_bytes, prev_tx_bytes = rx_bytes, tx_bytes
-        rx_bytes, tx_bytes = get_rx_tx_bytes(iface)
-        drx = format_size((rx_bytes - prev_rx_bytes) / refresh_interval)
-        dtx = format_size((tx_bytes - prev_tx_bytes) / refresh_interval)
-        line = fmt_str.format(rx=drx, tx=dtx, unit_suffix=unit_suffix)
-        print(line, flush=True)
-        sleep(refresh_interval)
+        try:
+            iface = default_interface()
+            if not iface:
+                continue
+
+            rx_bytes, tx_bytes = get_rx_tx_bytes(iface)
+
+            while True:
+                prev_rx_bytes, prev_tx_bytes = rx_bytes, tx_bytes
+                rx_bytes, tx_bytes = get_rx_tx_bytes(iface)
+                drx = format_size((rx_bytes - prev_rx_bytes) / refresh_interval)
+                dtx = format_size((tx_bytes - prev_tx_bytes) / refresh_interval)
+                line = fmt_str.format(rx=drx, tx=dtx, unit_suffix=unit_suffix)
+                print(line, flush=True)
+                sleep(refresh_interval)
+        except RuntimeError as e:
+            logging.error(e)
+            sleep(refresh_interval)
 
 
 if __name__ == "__main__":

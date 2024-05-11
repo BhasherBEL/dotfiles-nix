@@ -78,7 +78,7 @@
       shellAliases = {
         nb = "echo \"sudo nixos-rebuild switch --flake /etc/nixos#$(hostname)\" && sudo nixos-rebuild switch --flake /etc/nixos#$(hostname)";
         #nb = "echo \"sudo nixos-rebuild switch --flake /home/bhasher/sync/nixos#$(hostname)\" && sudo nixos-rebuild switch --flake /home/bhasher/sync/nixos#$(hostname)";
-        ncg = "echo \"nix-collect-garbage -d\"nix-collect-garbage -d";
+        ncc = "echo \"nix-collect-garbage -d\" && nix-collect-garbage -d";
         ns = "SOPS_AGE_KEY_FILE=/etc/nixos/keys/$USER.txt sops";
         nu = "nix flake update /etc/nixos";
       };
