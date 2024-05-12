@@ -69,6 +69,7 @@
     sops
     openssl
     unzip
+    lua-language-server
   ];
 
   programs = {

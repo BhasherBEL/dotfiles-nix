@@ -55,11 +55,11 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-	{
-		-- Auto completion
-		"neoclide/coc.nvim",
-		branch = "release",
-	},
+	--{
+	-- Auto completion
+	--	"neoclide/coc.nvim",
+	--	branch = "release",
+	--},
 	{
 		-- Parser
 		"nvim-treesitter/nvim-treesitter",
@@ -102,15 +102,33 @@ require("lazy").setup({
 	{
 		-- LSP
 		"neovim/nvim-lspconfig",
+		event = { "BufReadPre", "BufNewFile" },
+		lazy = true,
+		dependencies = {
+			{
+				"hrsh7th/nvim-cmp",
+				dependencies = {
+					"hrsh7th/cmp-nvim-lsp",
+					"hrsh7th/cmp-buffer",
+					"hrsh7th/cmp-path",
+				},
+			},
+		},
 		config = function()
-			require("lspconfig").nil_ls.setup({})
-			require("lspconfig").gopls.setup({})
-			require("lspconfig").svelte.setup({})
-			require("lspconfig").tsserver.setup({})
-			require("lspconfig").tailwindcss.setup({})
-			require("lspconfig").clangd.setup({})
+			local capabilities =
+				require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+			local servers = { "nil_ls", "lua_ls", "gopls", "svelte", "tsserver", "tailwindcss", "clangd" }
+			for _, server in ipairs(servers) do
+				require("lspconfig")[server].setup({
+					capabilities = capabilities,
+					autoformat = true,
+				})
+			end
+
 			require("lspconfig").pyright.setup({
 				venvPath = "venv",
+				capabilities = capabilities,
+				autoformat = true,
 			})
 			require("lspconfig").jdtls.setup({
 				--root_dir = require("jdtls.setup").find_root({
@@ -120,6 +138,8 @@ require("lazy").setup({
 				--	"mvnw",
 				--	".git",
 				--}),
+				capabilities = capabilities,
+				autoformat = true,
 				settings = {
 					java = {
 						signatureHelp = { enabled = true },
@@ -175,6 +195,8 @@ require("lazy").setup({
 				},
 			})
 			require("lspconfig").ltex.setup({
+				capabilities = capabilities,
+				autoformat = true,
 				settings = {
 					filetypes = { "." },
 					ltex = {
@@ -204,6 +226,44 @@ require("lazy").setup({
 		"roobert/tailwindcss-colorizer-cmp.nvim",
 		config = function()
 			require("tailwindcss-colorizer-cmp").setup({})
+		end,
+	},
+	{
+
+		-- Autocompletion
+		"hrsh7th/nvim-cmp",
+		event = {
+			"InsertEnter",
+			"CmdlineEnter",
+		},
+		dependencies = {
+			"hrsh7th/cmp-nvim-lsp",
+			"hrsh7th/cmp-buffer",
+			"hrsh7th/cmp-path",
+			{ "roobert/tailwindcss-colorizer-cmp.nvim", config = true },
+		},
+		config = function(_, opts)
+			require("cmp").setup(opts)
+		end,
+		opts = function()
+			local cmp = require("cmp")
+
+			local options = {
+				sources = {
+					{ name = "nvim_lsp" },
+					{ name = "buffer" },
+					{ name = "path" },
+					-- { name = "tailwindcss-colorizer-cmp" },
+				},
+				mapping = {
+					["<C-Space>"] = cmp.mapping.complete(),
+					["<C-e>"] = cmp.mapping.close(),
+					["<C-j>"] = cmp.mapping.select_next_item(),
+					["<C-k>"] = cmp.mapping.select_prev_item(),
+					["<CR>"] = cmp.mapping.confirm({ select = true }),
+				},
+			}
+			return options
 		end,
 	},
 	{
@@ -272,12 +332,6 @@ require("nvim-treesitter.configs").setup({
 
 -- mappings
 vim.keymap.set("i", "<C-Right>", "<Plug>(copilot-accept-word)")
-vim.keymap.set(
-	"i",
-	"<S-CR>",
-	"coc#pum#visible() ? coc#pum#confirm(): '<S-CR>'",
-	{ noremap = true, silent = true, expr = true }
-)
 vim.keymap.set("v", "<C-A-c>", '"+y', { noremap = true, silent = true })
 
 vim.keymap.set("n", "ff", require("telescope.builtin").find_files, {})
