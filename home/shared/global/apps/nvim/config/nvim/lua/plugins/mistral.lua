@@ -4,7 +4,7 @@ return {
 		--event = "VeryLazy",
 		config = function()
 			require("chatgpt").setup({
-				api_key_cmd = "echo 'G5aUAKGcxklpCShv0b1c1zoJjiYgYPj2'",
+				api_key_cmd = "echo ''",
 			})
 		end,
 		dependencies = {
