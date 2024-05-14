@@ -37,6 +37,9 @@ in
       "ssh/llnux" = {
         owner = config.users.users.bhasher.name;
       };
+      "api/mistral" = {
+        owner = config.users.users.bhasher.name;
+      };
     };
   };
 
@@ -92,7 +95,32 @@ in
     yt-dlp
     spotdl
     joplin
+    marksman
   ];
 
   programs.kdeconnect.enable = true;
+  services = {
+    printing.enable = true;
+    avahi = {
+      enable = true;
+      nssmdns4 = true;
+      openFirewall = true;
+    };
+  };
+
+  #hardware.printers = {
+  #  ensurePrinters = [
+  #    {
+  #      name = "Lexmark-N&B-kot";
+  #      location = "kot";
+  #      deviceUri = "ipp://10.0.0.40";
+  #      model = "drv:///sample.drv/generic.ppd";
+  #      ppdOptions = {
+  #        PageSize = "A4";
+  #        sides = "two-sided-long-edge";
+  #      };
+  #    }
+  #  ];
+  #  ensureDefaultPrinter = "Lexmark-N&B-kot";
+  #};
 }
