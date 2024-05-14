@@ -70,6 +70,7 @@
     openssl
     unzip
     lua-language-server
+    ripgrep
   ];
 
   programs = {

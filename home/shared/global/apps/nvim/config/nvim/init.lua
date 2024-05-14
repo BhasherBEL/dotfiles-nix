@@ -67,6 +67,8 @@ vim.keymap.set("i", "<C-Right>", "<Plug>(copilot-accept-word)")
 vim.keymap.set("v", "<C-A-c>", '"+y', { noremap = true, silent = true })
 
 vim.keymap.set("n", "ff", require("telescope.builtin").find_files, {})
+vim.keymap.set("n", "fg", require("telescope.builtin").live_grep, {})
+vim.keymap.set("n", "fb", require("telescope.builtin").buffers, {})
 
 vim.keymap.set("n", "gd", vim.lsp.buf.definition)
 vim.keymap.set("n", "gD", vim.lsp.buf.declaration)
