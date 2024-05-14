@@ -1,6 +1,9 @@
 { ... }:
 {
-  imports = [ ./default.nix ];
+  imports = [
+    ./default.nix
+    ../optional/classes/linfo2172.nix
+  ];
 
   sops.secrets = {
     "wg/bxl-shp/laptop/key" = { };
