@@ -4,8 +4,6 @@
     ./hardware-configuration.nix
     ../shared/global
     ../shared/pc
-    ../shared/users/bhasher.nix
-    ../shared/optional/bluetooth.nix
   ];
 
   boot.loader.systemd-boot.enable = true;

@@ -11,6 +11,7 @@ in
     ../optional/languagelab.nix
     ../optional/js.nix
     ../optional/media.nix
+    ../optional/bluetooth.nix
   ];
   home-manager.users.bhasher.imports = [ ../../home/bhasher.nix ];
 

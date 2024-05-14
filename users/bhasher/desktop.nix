@@ -9,5 +9,6 @@
     # Not working, probably related to https://github.com/rustdesk/rustdesk/issues/3565
     #../optional/rustdesk.nix
     ../optional/vscodium.nix
+    ../optional/classes/linfo2172.nix
   ];
 }
