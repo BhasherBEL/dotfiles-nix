@@ -3,6 +3,7 @@
   imports = [
     ./default.nix
     ../optional/classes/linfo2172.nix
+    ../optional/classes/linfo2132.nix
   ];
 
   sops.secrets = {

@@ -74,7 +74,7 @@ vim.keymap.set("n", "gd", vim.lsp.buf.definition)
 vim.keymap.set("n", "gD", vim.lsp.buf.declaration)
 -- vim.keymap.set("n", "gf", )
 
-vim.keymap.set("n", "gf", vim.diagnostic.open_float, { noremap = true, silent = true })
+vim.keymap.set("n", "gl", vim.diagnostic.open_float, { noremap = true, silent = true })
 
 -- commands
 vim.api.nvim_create_user_command("Day", function(opts)
