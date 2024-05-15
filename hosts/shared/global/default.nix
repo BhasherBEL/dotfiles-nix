@@ -1,9 +1,16 @@
-{ pkgs, inputs, ... }:
+{
+  pkgs,
+  inputs,
+  lib,
+  ...
+}:
 {
   imports = [
     inputs.home-manager.nixosModules.home-manager
     inputs.sops-nix.nixosModules.sops
   ];
+
+  boot.tmp.cleanOnBoot = lib.mkDefault true;
 
   nix.settings.experimental-features = [
     "nix-command"
