@@ -207,6 +207,11 @@
                 "@nh"
               ];
             };
+            "Meteo" = {
+              urls = [ { template = "https://www.meteo.be/fr/{searchTerms}"; } ];
+              iconUpdateURL = "https://www.meteo.be/favicon-192x192.png";
+              definedAliases = [ "@meteo" ];
+            };
           };
         };
         extensions = with pkgs.nur.repos.rycee.firefox-addons; [
@@ -255,6 +260,14 @@
           {
             name = "OpenStreetMap";
             url = "https://www.openstreetmap.org";
+          }
+          {
+            name = "Meteo Louvain-la-Neuve";
+            url = "https://www.meteo.be/fr/ottignies-louvain-la-neuve";
+          }
+          {
+            name = "Meteo Bruxelles";
+            url = "https://www.meteo.be/fr/bruxelles";
           }
           {
             name = "Homelab";
