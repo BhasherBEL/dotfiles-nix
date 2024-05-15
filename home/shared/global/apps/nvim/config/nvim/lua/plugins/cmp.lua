@@ -11,8 +11,11 @@ return {
 			"hrsh7th/cmp-nvim-lsp",
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-path",
+			"L3MON4D3/LuaSnip",
+			"saadparwaiz1/cmp_luasnip",
 			{ "roobert/tailwindcss-colorizer-cmp.nvim", config = true },
 		},
+
 		config = function(_, opts)
 			require("cmp").setup(opts)
 		end,
@@ -28,6 +31,7 @@ return {
 					{ name = "nvim_lsp" },
 					{ name = "buffer" },
 					{ name = "path" },
+					{ name = "luasnip" },
 					{ name = "tailwindcss-colorizer-cmp" },
 				},
 				mapping = {
@@ -36,6 +40,11 @@ return {
 					["<C-j>"] = cmp.mapping.select_next_item(),
 					["<C-k>"] = cmp.mapping.select_prev_item(),
 					["<S-CR>"] = cmp.mapping.confirm({ select = true }),
+				},
+				snippet = {
+					expand = function(args)
+						require("luasnip").lsp_expand(args.body)
+					end,
 				},
 			}
 			return options
