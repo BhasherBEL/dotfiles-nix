@@ -41,6 +41,7 @@
           c = "commit";
         };
         push.default = "simple";
+        pull.rebase = "true";
       };
     };
     ssh = {
