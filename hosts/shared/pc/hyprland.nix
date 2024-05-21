@@ -51,5 +51,7 @@
 
   fonts.packages = with pkgs; [ font-awesome ];
 
-  programs.hyprland.enable = true;
+  programs = {
+    hyprland.enable = true;
+  };
 }

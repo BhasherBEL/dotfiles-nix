@@ -1,6 +1,30 @@
-{ config, osConfig, ... }:
 {
-  programs.waybar.enable = true;
+  pkgs,
+  config,
+  osConfig,
+  ...
+}:
+{
+  programs = {
+    waybar.enable = true;
+    rofi = {
+      enable = true;
+      package = pkgs.rofi-wayland.override {
+        plugins = [
+          (pkgs.rofi-calc.override { rofi-unwrapped = pkgs.rofi-wayland-unwrapped; })
+          #pkgs.rofi-emoji
+        ];
+      };
+      terminal = "kitty";
+      extraConfig = {
+        modi = "window,drun,ssh,filebrowser,calc";
+        filebrowser = {
+          sorting-method = "mtime";
+          directories-first = true;
+        };
+      };
+    };
+  };
 
   home.file = {
     "${config.xdg.configHome}/hypr/src" = {
