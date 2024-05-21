@@ -18,10 +18,10 @@
       terminal = "kitty";
       extraConfig = {
         modi = "window,drun,ssh,filebrowser,calc";
-        filebrowser = {
-          sorting-method = "mtime";
-          directories-first = true;
-        };
+        #filebrowser = {
+        #  sorting-method = "mtime";
+        #  directories-first = true;
+        #};
       };
     };
   };
