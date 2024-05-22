@@ -2,9 +2,9 @@
 {
   imports = [
     ./default.nix
-    ../optional/classes/linfo2172.nix
-    ../optional/classes/linfo2132.nix
-    ../optional/classes/linfo2247.nix
+    #../optional/classes/linfo2172.nix
+    #../optional/classes/linfo2132.nix
+    #../optional/classes/linfo2247.nix
     ../optional/go.nix
   ];
 
