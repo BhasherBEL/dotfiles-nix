@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ ... }:
 {
   imports = [
     ./apps/nvim
@@ -6,16 +6,6 @@
   ];
 
   fonts.fontconfig.enable = true;
-
-  home.sessionVariables.GTK_THEME = "Breeze-Dark";
-
-  gtk = {
-    enable = true;
-    theme = {
-      name = "Breeze-Dark";
-      package = pkgs.libsForQt5.breeze-gtk;
-    };
-  };
 
   programs = {
     home-manager.enable = true;
