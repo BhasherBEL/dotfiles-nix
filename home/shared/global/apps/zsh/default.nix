@@ -78,16 +78,12 @@
         unset ZSH_AUTOSUGGEST_USE_ASYNC
         bindkey '^[[1;5C' forward-word
         bindkey '^[[1;5D' backward-word 
-        bindkey '^[0A' up-line-or-search
-        bindkey '^[0B' down-line-or-search
-        bindkey '^[[A' up-line-or-search
-        bindkey '^[[B' down-line-or-search
+        bindkey '^[[1;5A' up-line-or-search
+        bindkey '^[[1;5B' down-line-or-search
         bindkey -M emacs '^[[1;5C' forward-word
         bindkey -M emacs '^[[1;5D' backward-word 
-        bindkey -M emacs '^[0A' up-line-or-search
-        bindkey -M emacs '^[0B' down-line-or-search
-        bindkey -M emacs '^[[A' up-line-or-search
-        bindkey -M emacs '^[[B' down-line-or-search
+        bindkey -M emacs '^[[1;5A' up-line-or-search
+        bindkey -M emacs '^[[1;5B' down-line-or-search
 
         unsetopt BEEP
         cat() {
