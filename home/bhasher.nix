@@ -153,7 +153,7 @@
         };
         search = {
           force = true;
-          default = "DuckDuckGo";
+          default = "Kagi";
           engines = {
             Google.metaData.hidden = true;
             Bing.metaData.hidden = true;
@@ -213,6 +213,22 @@
               iconUpdateURL = "https://www.meteo.be/favicon-192x192.png";
               definedAliases = [ "@meteo" ];
             };
+            Kagi = {
+              name = "Kagi";
+              urls = [
+                {
+                  template = "https://kagi.com/search";
+                  params = {
+                    q = "{searchTerms}";
+                  };
+                }
+              ];
+              iconUpdateURL = "https://kagi.com/favicon.ico";
+              definedAliases = [
+                "@k"
+                "@kagi"
+              ];
+            };
           };
         };
         extensions = with pkgs.nur.repos.rycee.firefox-addons; [
@@ -269,6 +285,14 @@
           {
             name = "Meteo Bruxelles";
             url = "https://www.meteo.be/fr/bruxelles";
+          }
+          {
+            name = "Kagi";
+            url = "https://kagi.com";
+          }
+          {
+            name = "CUPS";
+            url = "http://localhost:631/";
           }
           {
             name = "Homelab";

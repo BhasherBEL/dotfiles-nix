@@ -98,6 +98,7 @@ in
     spotdl
     joplin
     marksman
+    nmap
   ];
 
   programs.kdeconnect.enable = true;

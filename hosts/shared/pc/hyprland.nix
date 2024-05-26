@@ -47,6 +47,7 @@
     networkmanagerapplet
     playerctl
     brightnessctl
+    wlr-randr
   ];
 
   fonts.packages = with pkgs; [ font-awesome ];
