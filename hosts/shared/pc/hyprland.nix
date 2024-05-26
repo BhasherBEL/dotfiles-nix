@@ -48,6 +48,7 @@
     playerctl
     brightnessctl
     wlr-randr
+    bc
   ];
 
   fonts.packages = with pkgs; [ font-awesome ];

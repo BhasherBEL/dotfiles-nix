@@ -215,14 +215,7 @@
             };
             Kagi = {
               name = "Kagi";
-              urls = [
-                {
-                  template = "https://kagi.com/search";
-                  params = {
-                    q = "{searchTerms}";
-                  };
-                }
-              ];
+              urls = [ { template = "https://kagi.com/search?q={searchTerms}"; } ];
               iconUpdateURL = "https://kagi.com/favicon.ico";
               definedAliases = [
                 "@k"

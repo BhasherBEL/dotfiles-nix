@@ -31,6 +31,11 @@
       source = ./config/hypr/src;
       recursive = true;
     };
+    "${config.xdg.configHome}/hypr/scripts" = {
+      source = ./config/hypr/scripts;
+      recursive = true;
+      executable = true;
+    };
     "${config.xdg.configHome}/hypr/autostart" = {
       source = ./config/hypr/autostart;
     };
