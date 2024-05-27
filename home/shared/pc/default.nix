@@ -6,7 +6,10 @@
   ];
 
   home = {
-    sessionVariables.GTK_THEME = "Breeze-Dark";
+    sessionVariables = {
+      GTK_THEME = "Breeze-Dark";
+      MOZ_ENABLE_WAYLAND = "1";
+    };
 
     pointerCursor = {
       gtk.enable = true;
