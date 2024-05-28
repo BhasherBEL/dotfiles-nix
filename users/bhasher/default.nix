@@ -101,28 +101,20 @@ in
   ];
 
   programs.kdeconnect.enable = true;
-  services = {
-    printing.enable = true;
-    avahi = {
-      enable = true;
-      nssmdns4 = true;
-      openFirewall = true;
-    };
-  };
 
-  #hardware.printers = {
-  #  ensurePrinters = [
-  #    {
-  #      name = "Lexmark-N&B-kot";
-  #      location = "kot";
-  #      deviceUri = "ipp://10.0.0.40";
-  #      model = "drv:///sample.drv/generic.ppd";
-  #      ppdOptions = {
-  #        PageSize = "A4";
-  #        sides = "two-sided-long-edge";
-  #      };
-  #    }
-  #  ];
-  #  ensureDefaultPrinter = "Lexmark-N&B-kot";
-  #};
+  hardware.printers = {
+    ensurePrinters = [
+      {
+        name = "Lexmark-N&B-kot";
+        location = "kot";
+        deviceUri = "dnssd://Lexmark%20MS510dn%20(3)._ipp._tcp.local/?uuid=bb9f86e6-3117-4c3c-9297-a5923efbc4e1";
+        model = "drv:///sample.drv/generic.ppd";
+        ppdOptions = {
+          PageSize = "A4";
+          sides = "two-sided-long-edge";
+        };
+      }
+    ];
+    ensureDefaultPrinter = "Lexmark-N&B-kot";
+  };
 }
