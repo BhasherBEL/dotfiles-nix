@@ -93,7 +93,6 @@ in
     onlyoffice-bin
     sl
     ranger
-    obs-studio
     yt-dlp
     spotdl
     joplin

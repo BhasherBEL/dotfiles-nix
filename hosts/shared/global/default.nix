@@ -69,7 +69,7 @@
     zip
     mdcat
     dnsutils
-    clang-tools_17
+    #clang-tools_17
     xorg.xlsclients
     font-awesome
     zsh-powerlevel10k
