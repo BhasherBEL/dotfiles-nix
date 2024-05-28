@@ -271,6 +271,27 @@
             url = "https://www.openstreetmap.org";
           }
           {
+            name = "Weather";
+            bookmarks = [
+              {
+                name = "Meteo Louvain-la-Neuve";
+                url = "https://www.meteo.be/fr/ottignies-louvain-la-neuve";
+              }
+              {
+                name = "Meteo Bruxelles";
+                url = "https://www.meteo.be/fr/bruxelles";
+              }
+              {
+                name = "Pluie Louvain-la-Neuve";
+                url = "https://www.accuweather.com/en/be/louvain-la-neuve/959043/minute-weather-forecast/959043";
+              }
+              {
+                name = "Pluie Bruxelles";
+                url = "https://www.accuweather.com/en/be/watermael-boitsfort/27577/weather-forecast/27577";
+              }
+            ];
+          }
+          {
             name = "Meteo Louvain-la-Neuve";
             url = "https://www.meteo.be/fr/ottignies-louvain-la-neuve";
           }
