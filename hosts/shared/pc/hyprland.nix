@@ -5,10 +5,7 @@
   xdg.portal = {
     enable = true;
     wlr.enable = true;
-    extraPortals = with pkgs; [
-      xdg-desktop-portal-gtk
-      xdg-desktop-portal-hyprland
-    ];
+    extraPortals = with pkgs; [ xdg-desktop-portal-hyprland ];
   };
 
   # Pipewire sound
@@ -34,8 +31,6 @@
 
   environment.systemPackages = with pkgs; [
     tofi
-    xdg-desktop-portal-hyprland
-    xdg-desktop-portal-gtk
     wl-clipboard
     hyprshot
     swaynotificationcenter
