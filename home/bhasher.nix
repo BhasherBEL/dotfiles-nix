@@ -145,9 +145,8 @@
           "privacy.clearOnShutdown.history" = true;
           "privacy.clearOnShutdown.offlineApps" = true;
           "privacy.clearOnShutdown.sessions" = true;
-          "privacy.clearOnShutdown.siteSettings" = true;
           "privacy.history.custom" = true;
-          "privacy.sanitize.pending" = ''[{\"id\":\"newtab-container\",\"itemsToClear\":[],\"options\":{}},{\"id\":\"shutdown\",\"itemsToClear\":[\"cache\",\"cookies\",\"offlineApps\",\"history\",\"formdata\",\"downloads\",\"sessions\",\"siteSettings\"],\"options\":{}}]'';
+          "privacy.sanitize.pending" = ''[{\"id\":\"newtab-container\",\"itemsToClear\":[],\"options\":{}},{\"id\":\"shutdown\",\"itemsToClear\":[\"cache\",\"cookies\",\"offlineApps\",\"history\",\"formdata\",\"downloads\",\"sessions\"],\"options\":{}}]'';
           "privacy.sanitize.sanitizeOnShutdown" = true;
           "signon.autofillForms" = false;
         };
