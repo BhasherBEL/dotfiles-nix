@@ -1,4 +1,4 @@
-{ pkgs, osConfig, ... }:
+{ pkgs, ... }:
 {
   imports = [
     ./shared/global
@@ -229,6 +229,8 @@
           #wappalyzer  # UNFREE
           cookie-quick-manager
           clearurls
+          gaoptout
+          privacy-badger
           #keepa  # UNFREE
         ];
         bookmarks = [

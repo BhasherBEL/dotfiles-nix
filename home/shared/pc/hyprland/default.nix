@@ -16,13 +16,7 @@
         ];
       };
       terminal = "kitty";
-      extraConfig = {
-        modi = "window,drun,ssh,filebrowser,calc";
-        #filebrowser = {
-        #  sorting-method = "mtime";
-        #  directories-first = true;
-        #};
-      };
+      theme = "~/.config/rofi/themes/type1-style8.rasi";
     };
   };
 
@@ -55,8 +49,8 @@
       source = ./config/swaync;
       recursive = true;
     };
-    "${config.xdg.configHome}/tofi" = {
-      source = ./config/tofi;
+    "${config.xdg.configHome}/rofi" = {
+      source = ./config/rofi;
       recursive = true;
     };
     "${config.xdg.configHome}/waybar" = {
