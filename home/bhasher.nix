@@ -137,8 +137,6 @@
       enable = true;
       profiles.default = {
         settings = {
-          "browser.search.defaultenginename" = "DuckDuckGo";
-          "browser.search.order.1" = "DuckDuckGo";
           "intl.locale.requested" = "en-GB,en-US";
           "privacy.clearOnShutdown.downloads" = true;
           "privacy.clearOnShutdown.formdata" = true;
@@ -233,7 +231,17 @@
             };
             Kagi = {
               name = "Kagi";
-              urls = [ { template = "https://kagi.com/search?q={searchTerms}"; } ];
+              urls = [
+                {
+                  template = "https://kagi.com/search";
+                  params = [
+                    {
+                      name = "q";
+                      value = "{searchTerms}";
+                    }
+                  ];
+                }
+              ];
               iconUpdateURL = "https://kagi.com/favicon.ico";
               definedAliases = [
                 "@k"
