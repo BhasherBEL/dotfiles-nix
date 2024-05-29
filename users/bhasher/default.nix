@@ -117,4 +117,58 @@ in
     ];
     ensureDefaultPrinter = "Lexmark-N&B-kot";
   };
+
+  # TODO: TEMPORARY
+  networking.firewall = {
+    enable = false;
+    allowedTCPPorts = [
+      10001
+      10002
+    ];
+    allowedUDPPorts = [
+      10001
+      10002
+    ];
+  };
+
+  services.pipewire.extraConfig.pipewire = {
+    "99-roc-source" = {
+      context = {
+        modules = {
+          name = "libpipewire-module-roc-source";
+          args = {
+            fec.code = "rs8m";
+            source = {
+              name = "ROC source";
+              props.node.name = "ROC source";
+            };
+            local = {
+              ip = "0.0.0.0";
+              source.port = 10001;
+              repair.port = 10002;
+            };
+          };
+        };
+      };
+    };
+    "99-roc-sink" = {
+      context = {
+        modules = {
+          name = "libpipewire-module-roc-sink";
+          args = {
+            fec.code = "rs8m";
+            sink = {
+              name = "ROC sink";
+              props.node.name = "ROC sink";
+            };
+            remote = {
+              ip = "10.0.1.6";
+              source.port = 10001;
+              repair.port = 10002;
+            };
+          };
+        };
+      };
+    };
+  };
 }
