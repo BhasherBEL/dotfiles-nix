@@ -76,14 +76,22 @@
       ];
       initExtra = ''
         unset ZSH_AUTOSUGGEST_USE_ASYNC
+
+        autoload -U up-line-or-beginning-search
+        autoload -U down-line-or-beginning-search
+        zle -N up-line-or-beginning-search
+        zle -N down-line-or-beginning-search
+
         bindkey '^[[1;5C' forward-word
         bindkey '^[[1;5D' backward-word 
-        bindkey '^[[1;5A' up-line-or-search
-        bindkey '^[[1;5B' down-line-or-search
         bindkey -M emacs '^[[1;5C' forward-word
         bindkey -M emacs '^[[1;5D' backward-word 
-        bindkey -M emacs '^[[1;5A' up-line-or-search
-        bindkey -M emacs '^[[1;5B' down-line-or-search
+
+        bindkey "$key[Up]" up-line-or-beginning-search
+        bindkey "$key[Down]" down-line-or-beginning-search
+
+        setopt AUTO_PUSHD
+        setopt PUSHD_MINUS
 
         unsetopt BEEP
         cat() {
