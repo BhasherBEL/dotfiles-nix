@@ -3,6 +3,7 @@
   imports = [
     ./hyprland
     ./apps/desktop/firefox.nix
+    ./apps/desktop/activitywatch.nix
   ];
 
   home = {

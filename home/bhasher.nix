@@ -258,6 +258,7 @@
           clearurls
           gaoptout
           privacy-badger
+          aw-watcher-web
           #keepa  # UNFREE
         ];
         bookmarks = [
