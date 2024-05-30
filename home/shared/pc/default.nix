@@ -27,4 +27,9 @@
       package = pkgs.libsForQt5.breeze-gtk;
     };
   };
+
+  xdg.mimeApps.defaultApplications = {
+    "application/pdf" = "firefox.desktop";
+    "inode/directory" = "ranger.desktop";
+  };
 }
