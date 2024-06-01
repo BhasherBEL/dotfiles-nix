@@ -11,23 +11,62 @@
 {
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
-  boot.initrd.availableKernelModules = [
-    "xhci_pci"
-    "nvme"
-    "usb_storage"
-    "sd_mod"
-    "sdhci_pci"
-  ];
-  boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ "kvm-intel" ];
-  boot.extraModulePackages = [ ];
-
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/7190d659-6ad5-40cc-9f7a-e54789cfa84a";
     fsType = "ext4";
   };
 
-  boot.initrd.luks.devices."luks-e8379322-1fa5-4b8b-b1b5-4c0f2e4fae08".device = "/dev/disk/by-uuid/e8379322-1fa5-4b8b-b1b5-4c0f2e4fae08";
+  boot = {
+    kernelModules = [ "kvm-intel" ];
+    extraModulePackages = [ ];
+
+    initrd = {
+      availableKernelModules = [
+        "xhci_pci"
+        "nvme"
+        "usb_storage"
+        "sd_mod"
+        "sdhci_pci"
+      ];
+      kernelModules = [
+        "vfat"
+        "nls_cp437"
+        "nls_iso8859-1"
+        "usbhid"
+      ];
+
+      systemd.enable = true;
+
+      luks = {
+        #fido2Support = true;
+        # DON'T WORK. Required to be set manually
+        # https://0pointer.net/blog/unlocking-luks2-volumes-with-tpm2-fido2-pkcs11-security-hardware-on-systemd-248.html
+        # > systemd-cryptenroll /dev/<device> --fido2-device=auto --fido2-with-client-pin=no
+        # MUST BE REDONE ON EVERY ENCRYPTED DEVICE
+        reusePassphrases = true;
+        devices = {
+          # ROOT
+          "luks-e8379322-1fa5-4b8b-b1b5-4c0f2e4fae08" = {
+            device = "/dev/disk/by-uuid/e8379322-1fa5-4b8b-b1b5-4c0f2e4fae08";
+            fido2 = {
+              passwordLess = true;
+              gracePeriod = 10;
+            };
+            crypttabExtraOpts = [ "fido2-device=auto" ];
+          };
+          # SWAP
+          "luks-bf6108ec-6c51-44c7-b5cd-88101ee16aa0" = {
+            device = "/dev/disk/by-uuid/bf6108ec-6c51-44c7-b5cd-88101ee16aa0";
+            fido2 = {
+              passwordLess = true;
+              gracePeriod = 10;
+            };
+            crypttabExtraOpts = [ "fido2-device=auto" ];
+          };
+        };
+      };
+    };
+  };
 
   fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/DDA8-7E36";

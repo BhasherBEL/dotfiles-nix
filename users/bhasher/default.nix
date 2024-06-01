@@ -103,6 +103,8 @@ in
     joplin
     marksman
     nmap
+    yubikey-manager
+    pam_u2f
   ];
 
   programs.kdeconnect.enable = true;
