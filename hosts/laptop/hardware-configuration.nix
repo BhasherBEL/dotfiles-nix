@@ -43,7 +43,6 @@
         # https://0pointer.net/blog/unlocking-luks2-volumes-with-tpm2-fido2-pkcs11-security-hardware-on-systemd-248.html
         # > systemd-cryptenroll /dev/<device> --fido2-device=auto --fido2-with-client-pin=no
         # MUST BE REDONE ON EVERY ENCRYPTED DEVICE
-        reusePassphrases = true;
         devices = {
           # ROOT
           "luks-e8379322-1fa5-4b8b-b1b5-4c0f2e4fae08" = {
