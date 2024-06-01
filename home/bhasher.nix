@@ -341,6 +341,10 @@
             url = "http://localhost:631/";
           }
           {
+            name = "ActivityWatch";
+            url = "http://localhost:5600";
+          }
+          {
             name = "Homelab";
             bookmarks = [
               {
