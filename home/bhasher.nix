@@ -40,7 +40,10 @@
           d = "diff";
           c = "commit";
         };
-        push.default = "simple";
+        push = {
+          default = "simple";
+          autoSetupRemote = true;
+        };
         pull.rebase = "true";
       };
     };
