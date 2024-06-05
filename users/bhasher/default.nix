@@ -116,10 +116,11 @@ in
         location = "kot";
         deviceUri = "dnssd://Lexmark%20MS510dn%20(3)._ipp._tcp.local/?uuid=bb9f86e6-3117-4c3c-9297-a5923efbc4e1";
         model = "drv:///sample.drv/generic.ppd";
-        ppdOptions = {
-          PageSize = "A4";
-          sides = "two-sided-long-edge";
-        };
+        # TODO: fix
+        #ppdOptions = {
+        #  PageSize = "A4";
+        #  sides = "two-sided-long-edge";
+        #};
       }
     ];
     ensureDefaultPrinter = "Lexmark-N&B-kot";
