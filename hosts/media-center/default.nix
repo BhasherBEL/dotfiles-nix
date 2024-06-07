@@ -1,15 +1,9 @@
 { pkgs, ... }:
-let
-  cifsOptions = [
-    "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s,credentials=/etc/nixos/secrets/.smb,uid=1002,gid=100"
-  ];
-in
 {
   imports = [
     ./hardware-configuration.nix
     ../shared/global
-    ../shared/users/kodi.nix
-    ../shared/optional/bluetooth.nix
+    ../../users/kodi
   ];
 
   boot.loader.grub.enable = false;
@@ -54,11 +48,15 @@ in
   hardware = {
     raspberry-pi."4" = {
       apply-overlays-dtmerge.enable = true;
-      fkms-3d.enable = true;
+      #fkms-3d.enable = true;
       #audio.enable = true;
     };
     deviceTree.enable = true;
+    pulseaudio.enable = true;
+    bluetooth.enable = true;
   };
+
+  programs.dconf.enable = true;
 
   services = {
     openssh = {
@@ -92,17 +90,6 @@ in
         };
       };
     };
-  };
-
-  fileSystems."/mnt/movies" = {
-    device = "//192.168.1.201/movies";
-    fsType = "cifs";
-    options = cifsOptions;
-  };
-  fileSystems."/mnt/music" = {
-    device = "//192.168.1.201/brieuc/SyncDocuments/music";
-    fsType = "cifs";
-    options = cifsOptions;
   };
 
   system.stateVersion = "23.11";
