@@ -107,7 +107,17 @@ in
     pam_u2f
   ];
 
-  programs.kdeconnect.enable = true;
+  # TODO: fix
+  # error activating kdeconnectd: QDBusError("org.freedesktop.DBus.Error.Spawn.ChildSignaled", "Process org.kde.kdeconnect received signal 6")
+  # error: Process org.kde.kdeconnect received signal 6
+  programs.kdeconnect = {
+    enable = true;
+    package = pkgs.libsForQt5.kdeconnect-kde.overrideAttrs (old: {
+      buildFromSource = true;
+      buildInputs = old.buildInputs ++ [ pkgs.qt5.qttools ];
+      NIX_CFLAGS_COMPILE = "-DCMAKE_VERBOSE_MAKEFILE=ON";
+    });
+  };
 
   hardware.printers = {
     ensurePrinters = [
