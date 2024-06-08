@@ -100,7 +100,6 @@ in
     ranger
     yt-dlp
     spotdl
-    joplin
     marksman
     nmap
     yubikey-manager

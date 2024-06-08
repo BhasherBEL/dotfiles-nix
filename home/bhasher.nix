@@ -499,5 +499,16 @@
         ];
       };
     };
+    joplin-desktop = {
+      enable = true;
+      sync = {
+        interval = "10m";
+        target = "joplin-server";
+      };
+      extraConfig = {
+        "sync.9.path" = "https://joplin.bhasher.com";
+        "sync.9.username" = "joplin.lan@bhasher.com";
+      };
+    };
   };
 }
