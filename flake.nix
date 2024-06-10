@@ -16,10 +16,10 @@
 
     nixos-hardware.url = "github:NixOS/nixos-hardware";
 
-    #nixvim = {
-    #  url = "github:nix-community/nixvim";
-    #  inputs.nixpkgs.follows = "nixpkgs";
-    #};
+    nixvim = {
+      url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # Secret management
     sops-nix.url = "github:Mic92/sops-nix";

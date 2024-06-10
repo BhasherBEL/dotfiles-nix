@@ -1,11 +1,5 @@
+{ pkgs, config, ... }:
 {
-  pkgs,
-  config,
-  inputs,
-  ...
-}:
-{
-  #imports = [ inputs.nixvim.homeManagerModules.nixvim ];
 
   programs = {
     neovim = {
