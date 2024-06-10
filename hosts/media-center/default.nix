@@ -1,8 +1,9 @@
-{ pkgs, lib, ... }:
+{ pkgs, ... }:
 {
   imports = [
     ./hardware-configuration.nix
     ../shared/global
+    ./fix-bluetooh.nix
   ];
 
   boot.loader.grub.enable = false;
@@ -52,6 +53,7 @@
       apply-overlays-dtmerge.enable = true;
       fkms-3d.enable = true;
       #audio.enable = true;
+      bluetooth.enable = true;
     };
     deviceTree.enable = true;
     pulseaudio.enable = true;
