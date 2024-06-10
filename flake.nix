@@ -64,6 +64,7 @@
           modules = [
             { nixpkgs.overlays = [ inputs.nur.overlay ]; }
             ./hosts/media-center
+            ./users/kodi
             inputs.nixos-hardware.nixosModules.raspberry-pi-4
           ];
           specialArgs = {

@@ -1,9 +1,8 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 {
   imports = [
     ./hardware-configuration.nix
     ../shared/global
-    ../../users/kodi
   ];
 
   boot.loader.grub.enable = false;
@@ -51,7 +50,7 @@
   hardware = {
     raspberry-pi."4" = {
       apply-overlays-dtmerge.enable = true;
-      #fkms-3d.enable = true;
+      fkms-3d.enable = true;
       #audio.enable = true;
     };
     deviceTree.enable = true;
@@ -82,15 +81,14 @@
           ]
         );
       };
-      displayManager = {
-        autoLogin = {
-          enable = true;
-          user = "kodi";
-        };
-        lightdm = {
-          enable = true;
-          #autoLogin.timeout = 3;
-        };
+
+      displayManager.lightdm.enable = true;
+    };
+
+    displayManager = {
+      autoLogin = {
+        enable = true;
+        user = "kodi";
       };
     };
   };
