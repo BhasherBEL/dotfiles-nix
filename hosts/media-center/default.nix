@@ -19,7 +19,10 @@
           prefixLength = 23;
         }
       ];
-      wakeOnLan.enable = true;
+      wakeOnLan = {
+        enable = true;
+        policy = [ "magic" ];
+      };
     };
     defaultGateway = "10.0.0.1";
     nameservers = [ "10.0.0.1" ];
