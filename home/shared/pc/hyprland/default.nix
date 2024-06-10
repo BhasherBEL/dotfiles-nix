@@ -10,13 +10,18 @@
     rofi = {
       enable = true;
       package = pkgs.rofi-wayland.override {
+        rofi-unwrapped = pkgs.nur.repos.bhasherbel.rofi-wayland;
         plugins = [
-          (pkgs.rofi-calc.override { rofi-unwrapped = pkgs.rofi-wayland-unwrapped; })
+          (pkgs.rofi-calc.override { rofi-unwrapped = pkgs.nur.repos.bhasherbel.rofi-wayland; })
           #pkgs.rofi-emoji
         ];
       };
       terminal = "kitty";
       theme = "~/.config/rofi/themes/type1-style8.rasi";
+      extraConfig = {
+        sorting-method = "alnum";
+        sort = true;
+      };
     };
   };
 
