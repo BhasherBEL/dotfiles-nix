@@ -2,7 +2,7 @@
 {
   environment.systemPackages = with pkgs; [
     black
-    nodePackages.pyright
+    pyright
     (python311.withPackages (
       ps: with ps; [
         numpy

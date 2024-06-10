@@ -125,67 +125,13 @@ in
         location = "kot";
         deviceUri = "dnssd://Lexmark%20MS510dn%20(3)._ipp._tcp.local/?uuid=bb9f86e6-3117-4c3c-9297-a5923efbc4e1";
         model = "drv:///sample.drv/generic.ppd";
-        # TODO: fix
-        #ppdOptions = {
-        #  PageSize = "A4";
-        #  sides = "two-sided-long-edge";
-        #};
+        ppdOptions = {
+          PageSize = "A4";
+          Duplex = "DuplexNoTumble";
+          Option1 = "True";
+        };
       }
     ];
     ensureDefaultPrinter = "Lexmark-N&B-kot";
-  };
-
-  # TODO: TEMPORARY
-  networking.firewall = {
-    enable = false;
-    allowedTCPPorts = [
-      10001
-      10002
-    ];
-    allowedUDPPorts = [
-      10001
-      10002
-    ];
-  };
-
-  services.pipewire.extraConfig.pipewire = {
-    "99-roc-source" = {
-      context = {
-        modules = {
-          name = "libpipewire-module-roc-source";
-          args = {
-            fec.code = "rs8m";
-            source = {
-              name = "ROC source";
-              props.node.name = "ROC source";
-            };
-            local = {
-              ip = "0.0.0.0";
-              source.port = 10001;
-              repair.port = 10002;
-            };
-          };
-        };
-      };
-    };
-    "99-roc-sink" = {
-      context = {
-        modules = {
-          name = "libpipewire-module-roc-sink";
-          args = {
-            fec.code = "rs8m";
-            sink = {
-              name = "ROC sink";
-              props.node.name = "ROC sink";
-            };
-            remote = {
-              ip = "10.0.1.6";
-              source.port = 10001;
-              repair.port = 10002;
-            };
-          };
-        };
-      };
-    };
   };
 }
