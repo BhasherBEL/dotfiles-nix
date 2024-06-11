@@ -138,6 +138,12 @@
     };
     firefox = {
       enable = true;
+      nativeMessagingHosts = [ pkgs.web-eid-app ];
+      package = pkgs.firefox.override {
+        pkcs11Modules = [ pkgs.eid-mw ];
+        nativeMessagingHosts = [ pkgs.web-eid-app ];
+      };
+      policies.SecurityDevices.p11-kit-proxy = "${pkgs.p11-kit}/lib/p11-kit-proxy.so";
       profiles.default = {
         settings = {
           "intl.locale.requested" = "en-GB,en-US";
@@ -263,6 +269,7 @@
           privacy-badger
           aw-watcher-web
           #keepa  # UNFREE
+          belgium-eid
         ];
         bookmarks = [
           {

@@ -6,6 +6,7 @@
     #../optional/classes/linfo2132.nix
     #../optional/classes/linfo2247.nix
     ../optional/go.nix
+    ../optional/eid.nix
   ];
 
   sops.secrets = {
