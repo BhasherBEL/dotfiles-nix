@@ -304,6 +304,10 @@
             url = "https://www.openstreetmap.org";
           }
           {
+            name = "Mistral";
+            url = "https://console.mistral.ai/";
+          }
+          {
             name = "Weather";
             bookmarks = [
               {
@@ -411,6 +415,14 @@
                 name = "Invoiceplace";
                 url = "https://invoice.bhasher.com";
               }
+              {
+                name = "Maubot";
+                url = "https://maubot.bhasher.com/_matrix/maubot";
+              }
+              {
+                name = "Recipes";
+                url = "https://recipes.bhasher.com";
+              }
             ];
           }
           {
@@ -467,6 +479,10 @@
               {
                 name = "Piwigo";
                 url = "https://piwigo.kapucl.be";
+              }
+              {
+                name = "Recipes";
+                url = "https://recipes.louvainlinux.org";
               }
             ];
           }
