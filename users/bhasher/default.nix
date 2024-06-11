@@ -18,7 +18,7 @@ in
     ../optional/media.nix
     ../optional/bluetooth.nix
     ../optional/yubikey.nix
-    inputs.nixvim.nixosModules.nixvim
+    #inputs.nixvim.nixosModules.nixvim
   ];
   home-manager.users.bhasher.imports = [ ../../home/bhasher.nix ];
 
@@ -116,9 +116,9 @@ in
   # error activating kdeconnectd: QDBusError("org.freedesktop.DBus.Error.Spawn.ChildSignaled", "Process org.kde.kdeconnect received signal 6")
   # error: Process org.kde.kdeconnect received signal 6
   programs = {
-    nixvim = {
-      enable = true;
-    };
+    #nixvim = {
+    #  enable = true;
+    #};
     kdeconnect = {
       enable = true;
       package = pkgs.libsForQt5.kdeconnect-kde.overrideAttrs (old: {

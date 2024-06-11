@@ -10,9 +10,9 @@
     rofi = {
       enable = true;
       package = pkgs.rofi-wayland.override {
-        rofi-unwrapped = pkgs.nur.repos.bhasherbel.rofi-wayland;
+        rofi-unwrapped = pkgs.nur.repos.bhasherbel.rofi-wayland-unwrapped;
         plugins = [
-          (pkgs.rofi-calc.override { rofi-unwrapped = pkgs.nur.repos.bhasherbel.rofi-wayland; })
+          (pkgs.rofi-calc.override { rofi-unwrapped = pkgs.nur.repos.bhasherbel.rofi-wayland-unwrapped; })
           #pkgs.rofi-emoji
         ];
       };
