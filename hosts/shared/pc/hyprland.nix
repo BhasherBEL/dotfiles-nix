@@ -32,7 +32,6 @@
     wl-clipboard
     hyprshot
     swaynotificationcenter
-    swayidle
     hyprlock
     inputs.hyprsome.packages.x86_64-linux.default
     swww

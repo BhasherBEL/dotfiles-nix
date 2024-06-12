@@ -26,6 +26,29 @@
     hyprlock.enable = true;
   };
 
+  services = {
+    hypridle = {
+      enable = true;
+      settings = {
+        general = {
+          lock_cmd = "hyprlock";
+          before_sleep_cmd = "playerctl pause ; hyprlock";
+          ignore_dbus_inhibit = false;
+        };
+        listener = [
+          {
+            timeout = 300;
+            on-timeout = "loginctl lock-session";
+          }
+          {
+            timeout = 600;
+            on-timeout = "systemctl suspend-then-hibernate";
+          }
+        ];
+      };
+    };
+  };
+
   home.file = {
     "${config.xdg.configHome}/hypr/src" = {
       source = ./config/hypr/src;
