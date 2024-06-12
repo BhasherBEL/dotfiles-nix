@@ -436,6 +436,10 @@
                 name = "Recipes";
                 url = "https://recipes.bhasher.com";
               }
+              {
+                name = "Baikal";
+                url = "https://baikal.bxl.bhasher.com";
+              }
             ];
           }
           {
