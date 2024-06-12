@@ -23,6 +23,7 @@
         sort = true;
       };
     };
+    hyprlock.enable = true;
   };
 
   home.file = {
@@ -30,10 +31,17 @@
       source = ./config/hypr/src;
       recursive = true;
     };
+    "${config.xdg.configHome}/hypr/themes" = {
+      source = ./config/hypr/themes;
+      recursive = true;
+    };
     "${config.xdg.configHome}/hypr/scripts" = {
       source = ./config/hypr/scripts;
       recursive = true;
       executable = true;
+    };
+    "${config.xdg.configHome}/hypr/hyprlock.conf" = {
+      source = ./config/hypr/hyprlock.conf;
     };
     "${config.xdg.configHome}/hypr/autostart" = {
       source = ./config/hypr/autostart;

@@ -13,9 +13,11 @@ wl-paste --type image --watch cliphist store 2>&1 &
 
 udiskie 2>&1 &
 
-LOCK="swaylock --screenshots --effect-blur 7x5 --indicator --clock | xargs hyprctl dispatch exec"
+LOCK="hyprlock | xargs hyprctl dispatch exec"
 
-swayidle -w timeout 600 "$LOCK" before-sleep "$LOCK" 2>&1 &
-swayidle -w timeout 1200 "systemctl hibernate" 2>&1 &
+swayidle -w timeout 600 "$LOCK" 2>&1 &
+
+# Already achieved by NixOS itself
+# swayidle -w timeout 1200 "systemctl hibernate" 2>&1 &
 
 # /usr/lib/polkit-kde-authentication-agent-1 2>&1 &

@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 {
   imports = [
     ./shared/global
@@ -13,6 +13,12 @@
   };
 
   services.syncthing.enable = true;
+
+  home.file = {
+    "${config.home.homeDirectory}/.face.png" = {
+      source = ./bhasher_face.png;
+    };
+  };
 
   programs = {
     git = {

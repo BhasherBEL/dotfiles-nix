@@ -25,8 +25,7 @@
     };
   };
 
-  # Allow swaylock to unlock the screen
-  security.pam.services.swaylock = { };
+  security.pam.services.hyprlock = { };
 
   environment.systemPackages = with pkgs; [
     tofi
@@ -34,7 +33,7 @@
     hyprshot
     swaynotificationcenter
     swayidle
-    swaylock-effects
+    hyprlock
     inputs.hyprsome.packages.x86_64-linux.default
     swww
     udiskie

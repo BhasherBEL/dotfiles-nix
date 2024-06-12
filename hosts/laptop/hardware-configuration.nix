@@ -20,6 +20,8 @@
     kernelModules = [ "kvm-intel" ];
     extraModulePackages = [ ];
 
+    kernelParams = [ "button.lid_init_state=open" ];
+
     initrd = {
       availableKernelModules = [
         "xhci_pci"
