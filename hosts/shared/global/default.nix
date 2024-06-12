@@ -13,7 +13,7 @@
   boot.tmp.cleanOnBoot = lib.mkDefault true;
 
   # Should fix the issue with the screen not turning on after suspend
-  systemd.sleep.extraConfig = "HibernateMode=shutdown";
+  systemd.sleep.extraConfig = "HibernateMode=shutdown\nHibernateDelaySec=20m";
 
   nix.settings.experimental-features = [
     "nix-command"
@@ -91,6 +91,7 @@
     unzip
     lua-language-server
     ripgrep
+    killall
   ];
 
   programs = {
