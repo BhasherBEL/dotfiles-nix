@@ -10,16 +10,9 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking = {
-    hostName = "laptop";
-  };
+  networking.hostName = "laptop";
 
-  environment.systemPackages = with pkgs; [
-    cryptsetup
-    gcc
-    openssl
-    yubikey-personalization
-  ];
+  environment.systemPackages = with pkgs; [ cryptsetup ];
 
   system.stateVersion = "23.11";
 }
