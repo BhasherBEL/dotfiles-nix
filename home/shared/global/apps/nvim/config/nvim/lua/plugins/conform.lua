@@ -24,7 +24,11 @@ return {
 					c = { "clang-format" },
 					go = { "gofmt" },
 				},
-				format_on_save = {},
+				format_on_save = {
+					lsp_fallback = true,
+					timeout_ms = 500,
+				},
+				notify_on_error = true,
 			})
 		end,
 	},

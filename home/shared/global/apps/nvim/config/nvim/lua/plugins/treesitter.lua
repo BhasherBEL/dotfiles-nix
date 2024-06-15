@@ -26,9 +26,6 @@ return {
 				highlight = {
 					enable = true,
 				},
-				autotag = {
-					enable = true,
-				},
 			})
 		end,
 	},
