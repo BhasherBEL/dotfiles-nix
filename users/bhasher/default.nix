@@ -120,7 +120,7 @@ in
     #  enable = true;
     #};
     kdeconnect = {
-      enable = true;
+      enable = false;
       package = pkgs.libsForQt5.kdeconnect-kde.overrideAttrs (old: {
         buildFromSource = true;
         buildInputs = old.buildInputs ++ [ pkgs.qt5.qttools ];
