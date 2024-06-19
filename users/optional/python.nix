@@ -10,6 +10,7 @@
         matplotlib
         jupyter
         scapy
+        virtualenv
       ]
     ))
   ];

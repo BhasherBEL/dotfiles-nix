@@ -29,6 +29,7 @@ return {
 					timeout_ms = 500,
 				},
 				notify_on_error = true,
+				log_level = vim.log.levels.DEBUG,
 			})
 		end,
 	},
