@@ -11,8 +11,8 @@
       enable = true;
       defaultKeymap = "emacs";
       shellAliases = {
-        ls = "ls --color";
-        ll = "ls -l";
+        ls = "ls -h --color";
+        ll = "ls -lh";
         ip = "ip --color";
         nv = "nvim";
         sl = "sl -adew5F";

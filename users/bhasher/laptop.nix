@@ -4,6 +4,7 @@
     ./default.nix
     ../optional/go.nix
     ../optional/eid.nix
+    ../optional/wifi-crack.nix
   ];
 
   sops.secrets = {
