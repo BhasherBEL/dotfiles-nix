@@ -7,5 +7,11 @@
   #  sha256 = "47c070a029bcdb4cbd0e02c69fed136ef46dce4048ddbadf177daa5e885b8172";
   #};
 
-  hardware.opengl.extraPackages = with pkgs; [ intel-compute-runtime ];
+  hardware.graphics = {
+    enable = true;
+    extraPackages = with pkgs; [
+      intel-compute-runtime
+      intel-media-driver
+    ];
+  };
 }

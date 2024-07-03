@@ -23,6 +23,8 @@
 
     # Secret management
     sops-nix.url = "github:Mic92/sops-nix";
+
+    mozilla.url = "github:mozilla/nixpkgs-mozilla";
   };
 
   outputs =
@@ -52,7 +54,12 @@
         };
         laptop = nixpkgs.lib.nixosSystem {
           modules = [
-            { nixpkgs.overlays = [ inputs.nur.overlay ]; }
+            {
+              nixpkgs.overlays = [
+                inputs.nur.overlay
+                inputs.mozilla.overlays.firefox
+              ];
+            }
             ./hosts/laptop
             ./users/bhasher/laptop.nix
           ];

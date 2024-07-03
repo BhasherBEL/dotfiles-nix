@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   programs = {
     firefox = {
       enable = true;
@@ -7,7 +8,7 @@
         name = "default";
         isDefault = true;
         settings = {
-          "browser.toolbars.bookmarks.visibility" = "always";
+          "browser.toolbars.bookmarks.visibility" = "newtab";
           "app.shield.optoutstudies.enabled" = false;
           "browser.contentblocking.category" = "custom";
           "browser.discovery.enabled" = false;
