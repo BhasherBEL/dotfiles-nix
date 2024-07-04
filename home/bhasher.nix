@@ -1,9 +1,13 @@
-{ pkgs, config, ... }:
+{
+  pkgs,
+  config,
+  inputs,
+  ...
+}:
 {
   imports = [
     ./shared/global
     ./shared/pc
-    #inputs.nixvim.homeManagerModules.nixvim
   ];
 
   home = {
@@ -145,7 +149,7 @@
     firefox = {
       enable = true;
       nativeMessagingHosts = [ pkgs.web-eid-app ];
-      package = pkgs.latest.firefox-nightly-bin.override {
+      package = inputs.firefox.packages.${pkgs.system}.firefox-nightly-bin.override {
         pkcs11Modules = [ pkgs.eid-mw ];
         nativeMessagingHosts = [ pkgs.web-eid-app ];
       };

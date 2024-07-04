@@ -24,48 +24,41 @@
     # Secret management
     sops-nix.url = "github:Mic92/sops-nix";
 
-    mozilla.url = "github:mozilla/nixpkgs-mozilla";
+    firefox.url = "github:nix-community/flake-firefox-nightly";
   };
 
   outputs =
-    {
-      self,
-      nixpkgs,
-      home-manager,
-      ...
-    }@inputs:
+    { nixpkgs, home-manager, ... }@inputs:
     let
-      inherit (self) outputs;
       lib = nixpkgs.lib // home-manager.lib;
     in
     {
       inherit lib;
 
       nixosConfigurations = {
-        desktop = nixpkgs.lib.nixosSystem {
+        desktop = nixpkgs.lib.nixosSystem rec {
+          specialArgs = {
+            inherit inputs;
+          };
           modules = [
             { nixpkgs.overlays = [ inputs.nur.overlay ]; }
             ./hosts/desktop
             ./users/bhasher/desktop.nix
+            home-manager.nixosModules.default
+            { home-manager.extraSpecialArgs = specialArgs; }
           ];
-          specialArgs = {
-            inherit inputs outputs;
-          };
         };
-        laptop = nixpkgs.lib.nixosSystem {
+        laptop = nixpkgs.lib.nixosSystem rec {
+          specialArgs = {
+            inherit inputs;
+          };
           modules = [
-            {
-              nixpkgs.overlays = [
-                inputs.nur.overlay
-                inputs.mozilla.overlays.firefox
-              ];
-            }
+            { nixpkgs.overlays = [ inputs.nur.overlay ]; }
             ./hosts/laptop
             ./users/bhasher/laptop.nix
+            home-manager.nixosModules.default
+            { home-manager.extraSpecialArgs = specialArgs; }
           ];
-          specialArgs = {
-            inherit inputs outputs;
-          };
         };
         media-center = nixpkgs.lib.nixosSystem {
           modules = [
@@ -75,7 +68,7 @@
             inputs.nixos-hardware.nixosModules.raspberry-pi-4
           ];
           specialArgs = {
-            inherit inputs outputs;
+            inherit inputs;
           };
         };
       };
