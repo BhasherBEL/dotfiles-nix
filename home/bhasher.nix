@@ -166,6 +166,8 @@
           "privacy.sanitize.pending" = ''[{\"id\":\"newtab-container\",\"itemsToClear\":[],\"options\":{}},{\"id\":\"shutdown\",\"itemsToClear\":[\"cache\",\"cookies\",\"offlineApps\",\"history\",\"formdata\",\"downloads\",\"sessions\"],\"options\":{}}]'';
           "privacy.sanitize.sanitizeOnShutdown" = true;
           "signon.autofillForms" = false;
+          "sidebar.revamp" = true;
+          "sidebar.verticalTabs" = true;
         };
         search = {
           force = true;
