@@ -3,7 +3,7 @@
   environment.systemPackages = with pkgs; [
     black
     pyright
-    (python311.withPackages (
+    (python312.withPackages (
       ps: with ps; [
         numpy
         pandas

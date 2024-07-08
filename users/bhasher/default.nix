@@ -95,12 +95,12 @@ in
     signal-desktop
     ferdium
     thunderbird
-    asciinema
+    #asciinema
     onlyoffice-bin
     sl
     ranger
     yt-dlp
-    spotdl
+    #spotdl
     marksman
     nmap
     yubikey-manager

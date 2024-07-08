@@ -13,7 +13,7 @@
   security.pam = {
     u2f = {
       enable = true;
-      cue = true;
+      settings.cue = true;
     };
     # https://github.com/swaywm/swaylock/issues/61
     services.swaylock = {
