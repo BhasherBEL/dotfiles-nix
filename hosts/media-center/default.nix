@@ -3,7 +3,6 @@
   imports = [
     ./hardware-configuration.nix
     ../shared/global
-    ./fix-bluetooh.nix
   ];
 
   boot.loader.grub.enable = false;
