@@ -28,8 +28,23 @@
     };
   };
 
-  xdg.mimeApps.defaultApplications = {
-    "application/pdf" = "firefox.desktop";
-    "inode/directory" = "ranger.desktop";
+  xdg = {
+    mimeApps = {
+      enable = true;
+      defaultApplications = {
+        "application/pdf" = "firefox.desktop";
+        "inode/directory" = "kitty-ranger.desktop";
+      };
+    };
+    # Thanks to @megaaa13
+    desktopEntries = {
+      ranger-open = {
+        name = "Open with Ranger";
+        exec = "kitty ranger";
+        terminal = false;
+        mimeType = [ "inode/directory" ];
+        noDisplay = true;
+      };
+    };
   };
 }
