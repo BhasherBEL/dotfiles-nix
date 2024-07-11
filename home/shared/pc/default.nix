@@ -38,7 +38,7 @@
     };
     # Thanks to @megaaa13
     desktopEntries = {
-      ranger-open = {
+      kitty-ranger = {
         name = "Open with Ranger";
         exec = "kitty ranger";
         terminal = false;
