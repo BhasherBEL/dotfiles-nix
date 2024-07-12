@@ -7,6 +7,13 @@
     ../shared/laptop
   ];
 
+  # Lanzaboote require some manual steps
+  # `subctl create-keys`
+  # `subctl verify` # Everything except the kernel should be signed
+  # Enable secure boot in the BIOS
+  # `subctl enroll`
+  # reboot
+  # `bootctl status`
   boot.loader.systemd-boot.enable = false;
   boot.lanzaboote = {
     enable = true;
