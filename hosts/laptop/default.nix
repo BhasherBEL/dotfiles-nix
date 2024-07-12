@@ -8,10 +8,10 @@
   ];
 
   # Lanzaboote require some manual steps
-  # `subctl create-keys`
-  # `subctl verify` # Everything except the kernel should be signed
+  # `sbctl create-keys`
+  # `sbctl verify` # Everything except the kernel should be signed
   # Enable secure boot in the BIOS
-  # `subctl enroll`
+  # `sbctl enroll`
   # reboot
   # `bootctl status`
   boot.loader.systemd-boot.enable = false;
