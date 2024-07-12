@@ -20,6 +20,10 @@
       url = "github:wamserma/flake-programs-sqlite";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    lanzaboote = {
+      url = "github:nix-community/lanzaboote/v0.4.1";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -38,6 +42,7 @@
             home-manager.nixosModules.default
             { home-manager.extraSpecialArgs = specialArgs; }
             inputs.flake-programs-sqlite.nixosModules.programs-sqlite
+            inputs.lanzaboote.nixosModules.lanzaboote
           ] ++ extraModules;
         };
     in
