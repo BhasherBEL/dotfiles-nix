@@ -94,6 +94,7 @@
         setopt PUSHD_MINUS
 
         unsetopt BEEP
+        unsetopt share_history
         cat() {
         for arg in "$@"; do
         if [[ $arg == *.md ]]; then
