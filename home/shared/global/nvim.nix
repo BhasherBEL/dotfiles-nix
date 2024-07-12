@@ -1,9 +1,4 @@
-{
-  pkgs,
-  config,
-  inputs,
-  ...
-}:
+{ pkgs, inputs, ... }:
 let
   dayScheme = "delek";
   nightScheme = "desert";
@@ -48,31 +43,31 @@ in
         {
           mode = [ "n" ];
           key = "ff";
-          action = "require('telescope.builtin').find_files()";
+          action = "lua require('telescope.builtin').find_files()";
           options = { };
         }
         {
           mode = [ "n" ];
           key = "fg";
-          action = "require('telescope.builtin').live_grep()";
+          action = "lua require('telescope.builtin').live_grep()";
           options = { };
         }
         {
           mode = [ "n" ];
           key = "fb";
-          action = "require('telescope.builtin').buffers()";
+          action = "lua require('telescope.builtin').buffers()";
           options = { };
         }
         {
           mode = [ "n" ];
           key = "gd";
-          action = "vim.lsp.buf.definition()";
+          action = "lua vim.lsp.buf.definition()";
           options = { };
         }
         {
           mode = [ "n" ];
           key = "gD";
-          action = "vim.lsp.buf.declaration()";
+          action = "lua vim.lsp.buf.declaration()";
           options = { };
         }
         {
@@ -87,7 +82,7 @@ in
         {
           mode = [ "n" ];
           key = "gl";
-          action = "vim.diagnostic.open_float()";
+          action = "lua vim.diagnostic.open_float()";
           options = {
             noremap = true;
             silent = true;
@@ -165,7 +160,6 @@ in
                 venvPath = "env";
               };
             };
-            #jdtls.enable = true;
             ltex = {
               enable = true;
               settings = {
@@ -369,20 +363,9 @@ in
           enable = true;
           disableNetrw = true;
           openOnSetup = true;
+          openOnSetupFile = true;
+          autoClose = true;
         };
-      };
-    };
-  };
-
-  home = {
-    file = {
-      "${config.xdg.configHome}/ranger" = {
-        source = ./config/ranger;
-        recursive = true;
-      };
-      "${config.xdg.configHome}/coc" = {
-        source = ./config/coc;
-        recursive = true;
       };
     };
   };

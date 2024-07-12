@@ -13,7 +13,6 @@ in
     ../optional/media.nix
     ../optional/bluetooth.nix
     ../optional/yubikey.nix
-    #inputs.nixvim.nixosModules.nixvim
   ];
   home-manager.users.bhasher.imports = [ ../../home/bhasher.nix ];
 
@@ -98,7 +97,6 @@ in
     #asciinema
     onlyoffice-bin
     sl
-    ranger
     yt-dlp
     #spotdl
     marksman

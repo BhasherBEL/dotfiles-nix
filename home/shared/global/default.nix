@@ -1,7 +1,7 @@
 { ... }:
 {
   imports = [
-    ./apps/nvim
+    ./nvim.nix
     ./apps/zsh
   ];
 
@@ -9,6 +9,7 @@
 
   programs = {
     home-manager.enable = true;
+    ranger.enable = true;
 
     kitty = {
       shellIntegration.enableZshIntegration = true;

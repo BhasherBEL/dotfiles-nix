@@ -1,11 +1,5 @@
-{ pkgs, config, ... }:
+{ pkgs, ... }:
 {
-
-  #home.file."${config.xdg.configHome}/zsh/custom" = {
-  #  source = ./custom;
-  #  recursive = true;
-  #};
-
   programs = {
     zsh = {
       enable = true;
@@ -16,6 +10,7 @@
         ip = "ip --color";
         nv = "nvim";
         sl = "sl -adew5F";
+        firefox = "exec firefox | firefox-nightly";
       };
       plugins = [
         {
@@ -69,10 +64,6 @@
             sha256 = "1lzrn0n4fxfcgg65v0qhnj7wnybybqzs4adz7xsrkgmcsr0ii8b7";
           };
         }
-        #{
-        #  name = "zsh-custom";
-        #  src = "${config.xdg.configHome}/zsh/custom";
-        #}
       ];
       initExtra = ''
         unset ZSH_AUTOSUGGEST_USE_ASYNC
