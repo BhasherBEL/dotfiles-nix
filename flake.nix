@@ -16,6 +16,10 @@
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    flake-programs-sqlite = {
+      url = "github:wamserma/flake-programs-sqlite";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -33,6 +37,7 @@
             { nixpkgs.overlays = [ inputs.nur.overlay ]; }
             home-manager.nixosModules.default
             { home-manager.extraSpecialArgs = specialArgs; }
+            inputs.flake-programs-sqlite.nixosModules.programs-sqlite
           ] ++ extraModules;
         };
     in
