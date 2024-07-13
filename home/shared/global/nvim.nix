@@ -322,6 +322,7 @@ in
         treesitter = {
           enable = true;
           nixGrammars = true;
+          folding = false;
           grammarPackages = with pkgs.vimPlugins.nvim-treesitter.builtGrammars; [
             go
             lua
