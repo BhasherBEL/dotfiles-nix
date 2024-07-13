@@ -26,24 +26,27 @@
     hyprlock.enable = true;
   };
 
-  services.swayidle = {
-    enable = true;
-    events = [
-      {
-        event = "before-sleep";
-        command = "${pkgs.hyprlock}/bin/hyprlock";
-      }
-    ];
-    timeouts = [
-      {
-        timeout = 600;
-        command = "${pkgs.hyprlock}/bin/hyprlock";
-      }
-      {
-        timeout = 1200;
-        command = "${pkgs.systemd}/bin/systemctl suspend";
-      }
-    ];
+  services = {
+    swayosd.enable = true;
+    swayidle = {
+      enable = true;
+      events = [
+        {
+          event = "before-sleep";
+          command = "${pkgs.hyprlock}/bin/hyprlock";
+        }
+      ];
+      timeouts = [
+        {
+          timeout = 600;
+          command = "${pkgs.hyprlock}/bin/hyprlock";
+        }
+        {
+          timeout = 1200;
+          command = "${pkgs.systemd}/bin/systemctl suspend";
+        }
+      ];
+    };
   };
 
   home.file = {
