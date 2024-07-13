@@ -24,6 +24,10 @@
       url = "github:nix-community/lanzaboote/v0.4.1";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -42,7 +46,6 @@
             home-manager.nixosModules.default
             { home-manager.extraSpecialArgs = specialArgs; }
             inputs.flake-programs-sqlite.nixosModules.programs-sqlite
-            inputs.lanzaboote.nixosModules.lanzaboote
           ] ++ extraModules;
         };
     in
@@ -53,11 +56,20 @@
         desktop = makeNixosSystem "desktop" [
           ./hosts/desktop
           ./users/bhasher/desktop.nix
+          inputs.lanzaboote.nixosModules.lanzaboote
         ];
 
         laptop = makeNixosSystem "laptop" [
           ./hosts/laptop
           ./users/bhasher/laptop.nix
+          inputs.lanzaboote.nixosModules.lanzaboote
+        ];
+
+        laptop-home = makeNixosSystem "laptop-home" [
+          ./hosts/laptop-home
+          ./users/bhasher/laptop.nix
+          inputs.lanzaboote.nixosModules.lanzaboote
+          inputs.disko.nixosModules.disko
         ];
 
         media-center = makeNixosSystem "media-center" [
