@@ -83,6 +83,26 @@
         "type": "github"
       }
     },
+    "disko": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1720661479,
+        "narHash": "sha256-nsGgA14vVn0GGiqEfomtVgviRJCuSR3UEopfP8ixW1I=",
+        "owner": "nix-community",
+        "repo": "disko",
+        "rev": "786965e1b1ed3fd2018d78399984f461e2a44689",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "disko",
+        "type": "github"
+      }
+    },
     "firefox": {
       "inputs": {
         "cachix": "cachix",
@@ -734,6 +754,7 @@
     },
     "root": {
       "inputs": {
+        "disko": "disko",
         "firefox": "firefox",
         "flake-programs-sqlite": "flake-programs-sqlite",
         "home-manager": "home-manager",
