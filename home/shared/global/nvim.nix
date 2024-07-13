@@ -43,37 +43,37 @@ in
         {
           mode = [ "n" ];
           key = "ff";
-          action = "lua require('telescope.builtin').find_files()";
+          action.__raw = "function() require('telescope.builtin').find_files() end";
           options = { };
         }
         {
           mode = [ "n" ];
           key = "fg";
-          action = "lua require('telescope.builtin').live_grep()";
+          action.__raw = "function() require('telescope.builtin').live_grep() end";
           options = { };
         }
         {
           mode = [ "n" ];
           key = "fb";
-          action = "lua require('telescope.builtin').buffers()";
+          action.__raw = "function() require('telescope.builtin').buffers() end";
           options = { };
         }
         {
           mode = [ "n" ];
           key = "gd";
-          action = "lua vim.lsp.buf.definition()";
+          action.__raw = "function() vim.lsp.buf.definition() end";
           options = { };
         }
         {
           mode = [ "n" ];
           key = "gD";
-          action = "lua vim.lsp.buf.declaration()";
+          action.__raw = "function() vim.lsp.buf.declaration() end";
           options = { };
         }
         {
           mode = [ "n" ];
           key = "gv";
-          action = "function() vim.cmd('vsplit'); vim.lsp.buf.definition() end";
+          action.__raw = "function() vim.cmd('vsplit'); vim.lsp.buf.definition() end";
           options = {
             noremap = true;
             silent = true;
@@ -82,7 +82,7 @@ in
         {
           mode = [ "n" ];
           key = "gl";
-          action = "lua vim.diagnostic.open_float()";
+          action.__raw = "function() vim.diagnostic.open_float() end";
           options = {
             noremap = true;
             silent = true;
@@ -253,7 +253,7 @@ in
           };
           formatOnSave = {
             lspFallback = true;
-            timeoutMs = 500;
+            timeoutMs = 1000;
           };
           notifyOnError = true;
           logLevel = "info";
@@ -366,6 +366,10 @@ in
           openOnSetup = true;
           openOnSetupFile = true;
           autoClose = true;
+          diagnostics = {
+            enable = true;
+            showOnDirs = true;
+          };
         };
       };
     };

@@ -10,10 +10,5 @@
   programs = {
     home-manager.enable = true;
     ranger.enable = true;
-
-    kitty = {
-      shellIntegration.enableZshIntegration = true;
-      settings.confirm_os_window_close = -1;
-    };
   };
 }
