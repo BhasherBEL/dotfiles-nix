@@ -62,7 +62,7 @@
               passwordLess = true;
               gracePeriod = 10;
             };
-            crypttabExtraOpts = [ "fido2-device=auto" ];
+            crypttabExtraOpts = [ "tpm2-device=auto" ];
           };
         };
       };
