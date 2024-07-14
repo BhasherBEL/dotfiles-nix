@@ -40,7 +40,6 @@
 
     systemPackages = with pkgs; [
       pulseaudio
-      kitty
       pavucontrol
     ];
   };

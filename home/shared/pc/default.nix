@@ -57,6 +57,7 @@
         name = "Hack Nerd Font Mono";
         package = pkgs.nerdfonts;
       };
+      theme = "Catppuccin-Mocha";
     };
   };
 }
