@@ -1,7 +1,12 @@
-{ pkgs, inputs, ... }:
+{
+  pkgs,
+  inputs,
+  lib,
+  ...
+}:
 let
-  dayScheme = "delek";
-  nightScheme = "desert";
+  dayScheme = "catppuccin-latte";
+  nightScheme = "catppuccin-macchiato";
 in
 {
   imports = [ inputs.nixvim.homeManagerModules.nixvim ];
@@ -10,7 +15,10 @@ in
     nixvim = {
       enable = true;
       defaultEditor = true;
-      colorscheme = nightScheme;
+      colorschemes.catppuccin = {
+        enable = true;
+        settings.flavour = lib.mkDefault "macchiato";
+      };
       withNodeJs = true;
       extraPackages = with pkgs; [ nodejs-slim ];
       highlightOverride.SpellBad.bg = "#444444";

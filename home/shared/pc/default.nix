@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 {
   imports = [
     ./hyprland
@@ -22,9 +22,6 @@
 
   gtk = {
     enable = true;
-    theme = {
-      package = pkgs.libsForQt5.adwaita;
-    };
   };
 
   xdg = {
@@ -56,7 +53,7 @@
         name = "Hack Nerd Font Mono";
         package = pkgs.nerdfonts;
       };
-      theme = "Catppuccin-Mocha";
+      theme = lib.mkDefault "Catppuccin-Macchiato";
     };
   };
 }
