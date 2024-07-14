@@ -13,6 +13,7 @@ in
     ../optional/media.nix
     ../optional/bluetooth.nix
     ../optional/yubikey.nix
+    ../optional/obs.nix
   ];
   home-manager.users.bhasher.imports = [ ../../home/bhasher.nix ];
 
