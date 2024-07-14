@@ -28,6 +28,18 @@
 
   services = {
     swayosd.enable = true;
+    swaync = {
+      enable = true;
+      settings = {
+        positionX = "right";
+        positionY = "bottom";
+      };
+    };
+    udiskie = {
+      enable = true;
+      notify = true;
+      automount = true;
+    };
     swayidle = {
       enable = true;
       events = [
@@ -46,6 +58,15 @@
           command = "${pkgs.systemd}/bin/systemctl suspend";
         }
       ];
+    };
+  };
+
+  # Required for udiskie to works on Wayland
+  # https://github.com/nix-community/home-manager/issues/2064
+  systemd.user.targets.tray = {
+    Unit = {
+      Description = "Home Manager System Tray";
+      Requires = [ "graphical-session-pre.target" ];
     };
   };
 

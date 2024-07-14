@@ -23,6 +23,10 @@
       defaultSession = "hyprland";
       sddm.wayland.enable = true;
     };
+
+    # Required for udiskie to works
+    # https://discourse.nixos.org/t/udiskie-no-longer-runs/23768
+    udisks2.enable = true;
   };
 
   security.pam.services.hyprlock = { };
