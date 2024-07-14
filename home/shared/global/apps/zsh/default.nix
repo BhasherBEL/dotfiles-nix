@@ -4,6 +4,7 @@
     zsh = {
       enable = true;
       defaultKeymap = "emacs";
+      history.share = false;
       shellAliases = {
         ls = "ls -h --color";
         ll = "ls -lh";
@@ -19,50 +20,26 @@
           file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
         }
         {
-          name = "plugins/sudo/sudo";
-          src = pkgs.fetchFromGitHub {
-            owner = "ohmyzsh";
-            repo = "ohmyzsh";
-            rev = "bf713e2c112ee1f0daf10deffa1215c982513f9b";
-            sha256 = "jeHhYK6mSZiLWSnElYSo/8YLcLm478/u9AP8RKZ0BWw=";
-          };
+          name = "sudo";
+          src = "${pkgs.oh-my-zsh}/share/oh-my-zsh/plugins/sudo";
         }
         {
-          name = "plugins/git/git";
-          src = pkgs.fetchFromGitHub {
-            owner = "ohmyzsh";
-            repo = "ohmyzsh";
-            rev = "bf713e2c112ee1f0daf10deffa1215c982513f9b";
-            sha256 = "jeHhYK6mSZiLWSnElYSo/8YLcLm478/u9AP8RKZ0BWw=";
-          };
+          name = "git";
+          src = "${pkgs.oh-my-zsh}/share/oh-my-zsh/plugins/git";
         }
         {
           name = "zsh-syntax-highlighting";
-          src = pkgs.fetchFromGitHub {
-            owner = "zsh-users";
-            repo = "zsh-syntax-highlighting";
-            rev = "e0165eaa730dd0fa321a6a6de74f092fe87630b0";
-            sha256 = "4rW2N+ankAH4sA6Sa5mr9IKsdAg7WTgrmyqJ2V1vygQ=";
-          };
+          src = "${pkgs.zsh-syntax-highlighting}/share/zsh-syntax-highlighting";
+          file = "zsh-syntax-highlighting.zsh";
         }
         {
           name = "zsh-autosuggestions";
-          src = pkgs.fetchFromGitHub {
-            owner = "zsh-users";
-            repo = "zsh-autosuggestions";
-            rev = "c3d4e576c9c86eac62884bd47c01f6faed043fc5";
-            sha256 = "B+Kz3B7d97CM/3ztpQyVkE6EfMipVF8Y4HJNfSRXHtU=";
-          };
+          src = "${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions";
+          file = "zsh-autosuggestions.zsh";
         }
         {
-          name = "zsh-nix-shell";
-          file = "nix-shell.plugin.zsh";
-          src = pkgs.fetchFromGitHub {
-            owner = "chisui";
-            repo = "zsh-nix-shell";
-            rev = "v0.8.0";
-            sha256 = "1lzrn0n4fxfcgg65v0qhnj7wnybybqzs4adz7xsrkgmcsr0ii8b7";
-          };
+          name = "nix-shell";
+          src = "${pkgs.zsh-nix-shell}/share/zsh-nix-shell";
         }
       ];
       initExtra = ''
@@ -85,7 +62,6 @@
         setopt PUSHD_MINUS
 
         unsetopt BEEP
-        unsetopt share_history
         cat() {
         for arg in "$@"; do
         if [[ $arg == *.md ]]; then
