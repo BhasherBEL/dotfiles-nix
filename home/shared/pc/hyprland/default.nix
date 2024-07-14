@@ -289,24 +289,30 @@
       notify = true;
       automount = true;
     };
-    swayidle = {
+    hypridle = {
       enable = true;
-      events = [
-        {
-          event = "before-sleep";
-          command = "${pkgs.hyprlock}/bin/hyprlock";
-        }
-      ];
-      timeouts = [
-        {
-          timeout = 600;
-          command = "${pkgs.hyprlock}/bin/hyprlock";
-        }
-        {
-          timeout = 1200;
-          command = "${pkgs.systemd}/bin/systemctl suspend";
-        }
-      ];
+      settings = {
+        general = {
+          lock_cmd = "pidof hyprlock || ${pkgs.hyprlock}/bin/hyprlock";
+          before_sleep_cmd = "loginctl lock-session";
+          after_sleep_cmd = "${pkgs.hyprland}/bin/hyprctl dispatch dpms on";
+        };
+        listener = [
+          {
+            timeout = 600;
+            on-timeout = "loginctl lock-session";
+          }
+          {
+            timeout = 700;
+            on-timeout = "${pkgs.hyprland}/bin/hyprctl dispatch dpms off";
+            on-resume = "${pkgs.hyprland}/bin/hyprctl dispatch dpms on";
+          }
+          {
+            timeout = 1200;
+            on-timeout = "${pkgs.systemd}/bin/systemctl suspend";
+          }
+        ];
+      };
     };
   };
 
