@@ -1,9 +1,0 @@
-waybar 2>&1 &
-
-swww-daemon 2>&1 &
-swww img /usr/share/endeavouros/backgrounds/hyprland.png 2>&1
-
-nm-applet --indicator 2>&1 &
-
-wl-paste --type text --watch cliphist store 2>&1 &
-wl-paste --type image --watch cliphist store 2>&1 &
