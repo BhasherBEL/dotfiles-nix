@@ -24,8 +24,8 @@
         if (osConfig.networking.hostName == "desktop") then
           [
             "HDMI-A-1,preferred,-1080x-650,1,transform,1"
-            "DP-1,preferred,auto,1"
-            "DVI-D-1,preferred,auto,1"
+            "DP-1,preferred,0x0,1"
+            "DVI-D-1,preferred,1080x0,1"
           ]
         else if (osConfig.networking.hostName == "laptop") then
           [ "eDP-1,preferred,auto,1" ]
