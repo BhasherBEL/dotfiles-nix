@@ -16,7 +16,13 @@
     stateVersion = "23.11";
   };
 
-  services.syncthing.enable = true;
+  services = {
+    syncthing.enable = true;
+    kdeconnect = {
+      enable = true;
+      indicator = true;
+    };
+  };
 
   home.file = {
     "${config.home.homeDirectory}/.face.png" = {
