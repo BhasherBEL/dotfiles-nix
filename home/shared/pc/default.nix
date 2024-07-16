@@ -9,6 +9,7 @@
 
   home = {
     sessionVariables = {
+      GTK_THEME = lib.mkDefault "Adwaita:dark";
       MOZ_ENABLE_WAYLAND = "1";
     };
 

@@ -15,7 +15,7 @@
       exec-once = [
         "${pkgs.waybar}/bin/waybar"
         "${pkgs.swww}/bin/swww-daemon"
-        "${pkgs.swww}/bin/swww img /usr/share/endeavouros/backgrounds/hyprland.png"
+        "${pkgs.swww}/bin/swww img ${config.xdg.configHome}/assets/backgrounds/mountains_dark.jpg"
         "${pkgs.networkmanagerapplet}/bin/nm-applet --indicator"
         "${pkgs.wl-clipboard}/bin/wl-paste --type text --watch cliphlist store"
         "${pkgs.wl-clipboard}/bin/wl-paste --type image --watch cliphlist store"
@@ -25,7 +25,7 @@
           [
             "HDMI-A-1,preferred,-1080x-650,1,transform,1"
             "DP-1,preferred,0x0,1"
-            "DVI-D-1,preferred,1080x0,1"
+            "DVI-D-1,preferred,1920x0,1"
           ]
         else if (osConfig.networking.hostName == "laptop") then
           [ "eDP-1,preferred,auto,1" ]
@@ -157,8 +157,8 @@
       ];
       # Allow volume and brightness when locked
       bindle = [
-        ", XF86AudioRaiseVolume, exec, swayosd-client --output-volume +5"
-        ", XF86AudioLowerVolume, exec, swayosd-client --output-volume -5"
+        ", XF86AudioRaiseVolume, exec, swayosd-client --output-volume raise --max-volume 120"
+        ", XF86AudioLowerVolume, exec, swayosd-client --output-volume lower --max-volume 120"
         ", XF86MonBrightnessUp, exec, swayosd-client --brightness +10"
         ", XF86MonBrightnessDown, exec, swayosd-client --brightness -10"
       ];
@@ -326,6 +326,10 @@
   };
 
   home.file = {
+    "${config.xdg.configHome}/assets" = {
+      source = ./assets;
+      recursive = true;
+    };
     "${config.xdg.configHome}/hypr/themes" = {
       source = ./config/hypr/themes;
       recursive = true;

@@ -1,4 +1,9 @@
-{ pkgs, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
 {
   programs = {
     zsh = {
@@ -72,16 +77,44 @@
         done
         }
 
-         shutdown() {
+        shutdown() {
         	if [ "$#" -eq 0 ]; then
         		command shutdown -P now
         	else
-        			command shutdown "$@"
-        		fi
-        	}
+        		command shutdown "$@"
+        	fi
+        }
       '';
     };
   };
 
-  home.file.".p10k.zsh".source = ./.p10k.zsh;
+  home = {
+    file.".p10k.zsh".source = ./.p10k.zsh;
+    packages = [
+      (lib.lowPrio (
+        (pkgs.writeShellApplication {
+          name = "hm-specialisation";
+          runtimeInputs = with pkgs; [
+            home-manager
+            swww
+          ];
+          text = ''
+            set +o errexit
+            set +o nounset
+            set +o pipefail
+
+            if [ -z "$1" ]; then
+            	echo "Usage: hsp <name>"
+            else
+            	echo "Activating specialisation $1..."
+            	gen=$(home-manager generations | head -1 | awk '{ print $NF }')
+            	echo "hm generation found: $gen"
+            	"$gen/specialisation/$1/activate"
+            	"${pkgs.swww} img ${config.xdg.configHome}/assets/backgrounds/mountains_$1.jpg --transition-type center"
+            fi
+          '';
+        })
+      ))
+    ];
+  };
 }
