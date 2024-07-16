@@ -28,6 +28,7 @@
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    impermanence.url = "github:nix-community/impermanence";
   };
 
   outputs =
@@ -76,6 +77,7 @@
           ./hosts/media-center
           ./users/kodi
           inputs.nixos-hardware.nixosModules.raspberry-pi-4
+          inputs.impermanence.nixosModules.impermanence
         ];
       };
     };

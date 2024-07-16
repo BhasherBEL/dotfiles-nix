@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 {
   imports = [
     ./nvim.nix
@@ -13,5 +13,15 @@
   programs = {
     home-manager.enable = true;
     ranger.enable = true;
+    kitty = {
+      enable = true;
+      shellIntegration.enableZshIntegration = true;
+      settings.confirm_os_window_close = -1;
+      font = {
+        name = "Hack Nerd Font Mono";
+        package = pkgs.nerdfonts;
+      };
+      theme = lib.mkDefault "Catppuccin-Macchiato";
+    };
   };
 }

@@ -17,6 +17,9 @@ in
       "smb/truenas" = {
         owner = config.users.users.kodi.name;
       };
+      "ssh/gitkey" = {
+        owner = config.users.users.kodi.name;
+      };
     };
   };
 

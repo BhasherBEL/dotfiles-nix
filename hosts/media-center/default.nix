@@ -94,5 +94,28 @@
     };
   };
 
+  environment.persistence."/persistent" = {
+    enable = true;
+    hideMounts = true;
+    directories = [
+      "/etc/nixos"
+      #TODO: Move to sops
+      "/etc/wireguard/"
+      #TODO: Find a nix way?
+      "/etc/NetworkManager/system-connections"
+      {
+        directory = "/etc/ssh/";
+        mode = "0700";
+      }
+      "/tmp"
+      "/var/tmp"
+    ];
+    files = [ "/var/lib/alsa/asound.state" ];
+    users.kodi = {
+      directories = [ ".kodi" ];
+    };
+
+  };
+
   system.stateVersion = "23.11";
 }

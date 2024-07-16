@@ -44,17 +44,4 @@
       };
     };
   };
-
-  programs = {
-    kitty = {
-      enable = true;
-      shellIntegration.enableZshIntegration = true;
-      settings.confirm_os_window_close = -1;
-      font = {
-        name = "Hack Nerd Font Mono";
-        package = pkgs.nerdfonts;
-      };
-      theme = lib.mkDefault "Catppuccin-Macchiato";
-    };
-  };
 }
