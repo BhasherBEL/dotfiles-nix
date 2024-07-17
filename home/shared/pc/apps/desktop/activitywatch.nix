@@ -5,8 +5,8 @@
     enable = true;
     package = pkgs.aw-server-rust;
     watchers = {
-      aw-awatcher = {
-        package = pkgs.nur.repos.bhasherbel.aw-awatcher;
+      awatcher = {
+        package = pkgs.awatcher;
         executable = "awatcher";
       };
     };
