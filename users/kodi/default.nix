@@ -20,6 +20,11 @@ in
       "ssh/gitkey" = {
         owner = config.users.users.kodi.name;
       };
+      "security/u2f_keys" = {
+        owner = config.users.users.kodi.name;
+        mode = "0400";
+        path = "${config.users.users.kodi.home}/.config/Yubico/u2f_keys";
+      };
     };
   };
 
@@ -33,6 +38,11 @@ in
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOGsCS7XysWiFuLVmN01cJAAZN2ZhWVB4V6R6F5DLsuM"
     ];
+  };
+
+  networking.firewall = {
+    allowedTCPPorts = [ 8080 ];
+    allowedUDPPorts = [ 8080 ];
   };
 
   environment.systemPackages = with pkgs; [ zsh-powerlevel10k ];

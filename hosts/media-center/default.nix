@@ -25,26 +25,7 @@
     };
     defaultGateway = "10.0.0.1";
     nameservers = [ "10.0.0.1" ];
-    firewall = {
-      allowedTCPPorts = [ 8080 ];
-      allowedUDPPorts = [ 8080 ];
-    };
 
-    wg-quick.interfaces.bxl-shp = {
-      address = [ "10.15.14.5/32" ];
-      privateKeyFile = "/etc/wireguard/bxl-shp.key";
-      dns = [ "10.15.14.1" ];
-      autostart = true;
-      peers = [
-        {
-          publicKey = "Ft1qUCCs9GkpUfiotZU9Ueq1e9ncXr0PwWEyfLoc6Vs=";
-          presharedKeyFile = "/etc/wireguard/bxl-shp.psk";
-          allowedIPs = [ "0.0.0.0/0" ];
-          endpoint = "vpn.bhasher.com:51822";
-          persistentKeepalive = 25;
-        }
-      ];
-    };
   };
 
   hardware = {
@@ -99,16 +80,15 @@
     hideMounts = true;
     directories = [
       "/etc/nixos"
-      #TODO: Move to sops
-      "/etc/wireguard/"
+      #To prevent builds to fill all remaining space
+      "/tmp"
+      "/var/tmp"
       #TODO: Find a nix way?
       "/etc/NetworkManager/system-connections"
       {
         directory = "/etc/ssh/";
         mode = "0700";
       }
-      "/tmp"
-      "/var/tmp"
     ];
     files = [ "/var/lib/alsa/asound.state" ];
     users.kodi = {
