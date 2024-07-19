@@ -274,8 +274,14 @@
     };
     hyprlock = {
       enable = true;
+      sourceFirst = true;
       settings = {
-        source = "$HOME/.config/hypr/themes/mocha.conf";
+        source = ''${
+          pkgs.catppuccin.override {
+            variant = "macchiato";
+            themeList = [ "hyprland" ];
+          }
+        }/hyprland/macchiato.conf'';
 
         "$accent" = "$mauve";
         "$accentAlpha" = "$mauveAlpha";
@@ -417,13 +423,22 @@
       source = ./assets;
       recursive = true;
     };
-    "${config.xdg.configHome}/hypr/themes" = {
-      source = ./config/hypr/themes;
-      recursive = true;
+    "${config.xdg.configHome}/hypr/scripts/decrease_scale.sh" = {
+      text = ''
+        current=$(wlr-randr --output eDP-1 | grep 'Scale:' | awk '{print $2}')
+        new=$(echo "$current - 0.25" | bc)
+
+        wlr-randr --output eDP-1 --scale $new
+      '';
+      executable = true;
     };
-    "${config.xdg.configHome}/hypr/scripts" = {
-      source = ./config/hypr/scripts;
-      recursive = true;
+    "${config.xdg.configHome}/hypr/scripts/increase_scale.sh" = {
+      text = ''
+        current=$(wlr-randr --output eDP-1 | grep 'Scale:' | awk '{print $2}')
+        new=$(echo "$current - 0.25" | bc)
+
+        wlr-randr --output eDP-1 --scale $new
+      '';
       executable = true;
     };
     "${config.xdg.configHome}/swaync" = {
