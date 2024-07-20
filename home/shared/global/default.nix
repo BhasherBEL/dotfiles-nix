@@ -19,7 +19,13 @@
       settings.confirm_os_window_close = -1;
       font = {
         name = "Hack Nerd Font Mono";
-        package = pkgs.nerdfonts;
+        package = pkgs.nerdfonts.override {
+          fonts = [
+            "FiraCode"
+            "DroidSansMono"
+            "Hack"
+          ];
+        };
       };
       theme = lib.mkDefault "Catppuccin-Macchiato";
     };
