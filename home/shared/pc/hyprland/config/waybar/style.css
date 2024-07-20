@@ -1,82 +1,91 @@
+@import "catppuccin.css";
+
 * {
-  border: none;
-  border-radius: 0;
-  font-family: "Ubuntu Nerd Font";
-  font-size: 13px;
+  font-family: FantasqueSansMono Nerd Font;
+  font-size: 15px;
   min-height: 0;
+  margin-bottom: 0px;
 }
 
-window#waybar {
+#waybar {
   background: transparent;
-  color: white;
+  color: @text;
+  margin: 10px;
 }
 
-#window {
-  font-weight: bold;
-  font-family: "Ubuntu";
-}
-/*
 #workspaces {
-    padding: 0 5px;
+  border-radius: 1rem;
+  margin: 5px;
+  background-color: @surface0;
+  margin-left: 1rem;
 }
-*/
 
 #workspaces button {
-  padding: 0 5px;
-  background: transparent;
-  color: white;
-  border-top: 2px solid transparent;
+  color: @lavender;
+  padding: 0.75rem;
+}
+
+#workspaces button:first-child {
+  border-top-left-radius: 1rem;
+  border-bottom-left-radius: 1rem;
+}
+
+#workspaces button:last-child {
+  border-top-right-radius: 1rem;
+  border-bottom-right-radius: 1rem;
 }
 
 #workspaces button.active {
-  color: #f88;
-  border: 1px solid #f88;
-  border-radius: 5px;
+  color: @sky;
+  border: 1px solid @sky;
 }
 
-#mode {
-  background: #64727d;
-  border-bottom: 3px solid white;
+#workspaces button:hover {
+  color: @sapphire;
 }
 
+#custom-music,
+#tray,
+#backlight,
 #clock,
 #battery,
+#pulseaudio,
 #cpu,
 #memory,
 #network,
-#pulseaudio,
+#temperature,
 #custom-spotify,
-#tray,
 #mode,
 #custom-VPN,
 #custom-bandwidth,
-#custom-kde-connect {
-  padding: 0 3px;
-  margin: 0 2px;
-  border-left: 1px solid #777;
+#custom-lock,
+#custom-kde-connect,
+#custom-power {
+  background-color: @surface0;
+  padding: 0.5rem 1rem;
+  margin: 5px 0;
 }
 
 #clock {
-  font-weight: bold;
+  border-radius: 0px 1rem 1rem 0px;
+  margin-right: 1rem;
 }
 
-#battery icon {
-  color: red;
+#battery:not(.warning).charging {
+  color: @green;
 }
 
-#battery.charging {
-  color: orange;
+#battery.warning.charging {
+  color: @orange;
 }
 
 @keyframes blink {
   to {
-    background-color: #ffffff;
-    color: black;
+    color: @red;
   }
 }
 
 #battery.warning:not(.charging) {
-  color: white;
   animation-name: blink;
   animation-duration: 0.5s;
   animation-timing-function: linear;
@@ -84,16 +93,46 @@ window#waybar {
   animation-direction: alternate;
 }
 
-#custom-VPN {
-  /*padding: 5px 10px;*/
+#temperature.critical {
+  color: @red;
+  animation-name: blink;
+  animation-duration: 0.5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+#backlight,
+#battery {
+  border-radius: 0;
+}
+
+#pulseaudio {
+  border-radius: 1rem 0px 0px 1rem;
+  margin-left: 1rem;
+}
+
+#custom-music {
+  border-radius: 1rem;
+}
+
+#custom-lock {
+  border-radius: 1rem 0px 0px 1rem;
+  color: @lavender;
+}
+
+#custom-power {
+  margin-right: 1rem;
+  border-radius: 0px 1rem 1rem 0px;
+  color: @red;
 }
 
 #custom-VPN.down,
 #network.disconnected {
-  border-radius: 5px;
-  background-color: #f33;
+  color: @red;
 }
 
-#custom-kde-connect.down {
-  color: darkred;
+#tray {
+  margin-right: 1rem;
+  border-radius: 1rem;
 }

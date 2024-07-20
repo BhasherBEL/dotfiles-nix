@@ -29,6 +29,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     impermanence.url = "github:nix-community/impermanence";
+    catppuccin.url = "github:catppuccin/nix";
   };
 
   outputs =
@@ -47,6 +48,7 @@
             home-manager.nixosModules.default
             { home-manager.extraSpecialArgs = specialArgs; }
             inputs.flake-programs-sqlite.nixosModules.programs-sqlite
+            inputs.catppuccin.nixosModules.catppuccin
           ] ++ extraModules;
         };
     in

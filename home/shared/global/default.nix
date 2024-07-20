@@ -1,9 +1,20 @@
-{ pkgs, lib, ... }:
+{
+  inputs,
+  pkgs,
+  lib,
+  ...
+}:
 {
   imports = [
     ./nvim.nix
     ./apps/zsh
+    inputs.catppuccin.homeManagerModules.catppuccin
   ];
+
+  catppuccin = {
+    flavor = "macchiato";
+    accent = "green";
+  };
 
   # TODO prevent unexpected use
   home.packages = with pkgs; [ home-manager ];
