@@ -105,6 +105,13 @@
           wakeonaccess = "true";
         };
       };
+      addonSettings = {
+        "plugin.video.invidious" = {
+          auto_instance = "false";
+          instance_url = "https://invidious.fdn.fr";
+          disable_dash = "false";
+        };
+      };
     };
   };
 }
