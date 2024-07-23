@@ -24,6 +24,7 @@
           "cpu"
           "memory"
           "temperature"
+          "disk"
           "battery"
           "clock"
           "tray"
@@ -33,6 +34,11 @@
           disable-scroll = true;
           all-outputs = false;
           on-click = "activate";
+          window-rewrite = {
+            "class<firefox>" = "";
+            "class<freetube>" = "";
+            "class<kitteh>" = "";
+          };
           format = "{icon}";
           format-icons =
             if (osConfig.networking.hostName == "desktop") then
@@ -98,6 +104,9 @@
         };
         memory = {
           format = "{}% ";
+        };
+        disk = {
+          format = "{percentage_used}% ";
         };
         battery = {
           states = {

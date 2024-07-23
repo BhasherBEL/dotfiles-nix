@@ -11,6 +11,7 @@
   background: transparent;
   color: @text;
   margin: 10px;
+  opacity: 0.8;
 }
 
 #workspaces {
@@ -54,6 +55,7 @@
 #memory,
 #network,
 #temperature,
+#disk,
 #custom-spotify,
 #mode,
 #custom-VPN,

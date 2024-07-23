@@ -270,6 +270,7 @@
         "idleinhibit fullscreen, fullscreen:1"
         "tile, class:^(ONLYOFFICE Desktop Editors|DesktopEditors)$"
         "tile, class:^(ghidra)(.*)$"
+        "opacity 0.9, class:(kitty)"
       ];
     };
   };
