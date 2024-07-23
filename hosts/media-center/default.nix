@@ -3,30 +3,13 @@
   imports = [
     ./hardware-configuration.nix
     ../shared/global
+    #../shared/optional/ap.nix
   ];
 
   boot.loader.grub.enable = false;
   boot.loader.generic-extlinux-compatible.enable = true;
 
-  networking = {
-    hostName = "media-center";
-    dhcpcd.enable = true;
-    interfaces.end0 = {
-      ipv4.addresses = [
-        {
-          address = "10.0.0.10";
-          prefixLength = 23;
-        }
-      ];
-      wakeOnLan = {
-        enable = true;
-        policy = [ "magic" ];
-      };
-    };
-    defaultGateway = "10.0.0.1";
-    nameservers = [ "10.0.0.1" ];
-
-  };
+  networking.hostName = "media-center";
 
   hardware = {
     raspberry-pi."4" = {
@@ -89,6 +72,7 @@
         directory = "/etc/ssh/";
         mode = "0700";
       }
+      "/run/secrets.d"
     ];
     files = [ "/var/lib/alsa/asound.state" ];
     users.kodi = {

@@ -12,7 +12,7 @@ in
   sops = {
     defaultSopsFile = ../../secrets/bhasher.yaml;
     defaultSopsFormat = "yaml";
-    age.keyFile = "/etc/nixos/keys/bhasher.txt";
+    age.keyFile = "/persistent/etc/nixos/keys/bhasher.txt";
     secrets = {
       "smb/truenas" = {
         owner = config.users.users.kodi.name;
