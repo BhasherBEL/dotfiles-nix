@@ -1,76 +1,39 @@
 @import "catppuccin.css";
 
 * {
-  font-family: FantasqueSansMono Nerd Font;
-  font-size: 15px;
-  min-height: 0;
-  margin-bottom: 0px;
+  border: none;
+  border-radius: 0;
 }
 
 #waybar {
-  background: transparent;
-  color: @text;
-  margin: 10px;
-  opacity: 0.8;
+  background-color: alpha(@surface1, 0.7);
+  color: white;
+  border-bottom: solid alpha(@overlay1, 0.7) 2px;
 }
 
-#workspaces {
-  border-radius: 1rem;
-  margin: 5px;
-  background-color: @surface0;
-  margin-left: 1rem;
+.modules-right {
+  margin-right: 1rem;
 }
 
 #workspaces button {
-  color: @lavender;
-  padding: 0.75rem;
+  color: white;
+  font-weight: bold;
+  border-bottom: solid transparent 2px;
 }
 
-#workspaces button:first-child {
-  border-top-left-radius: 1rem;
-  border-bottom-left-radius: 1rem;
-}
-
-#workspaces button:last-child {
-  border-top-right-radius: 1rem;
-  border-bottom-right-radius: 1rem;
+#workspaces button.empty {
+  color: @text;
+  font-weight: normal;
 }
 
 #workspaces button.active {
-  color: @sky;
-  border: 1px solid @sky;
-}
-
-#workspaces button:hover {
-  color: @sapphire;
-}
-
-#custom-music,
-#tray,
-#backlight,
-#clock,
-#battery,
-#pulseaudio,
-#cpu,
-#memory,
-#network,
-#temperature,
-#disk,
-#custom-spotify,
-#mode,
-#custom-VPN,
-#custom-bandwidth,
-#custom-lock,
-#custom-kde-connect,
-#custom-power {
-  background-color: @surface0;
-  padding: 0.5rem 1rem;
-  margin: 5px 0;
+  color: @teal;
+  border-bottom: solid @teal 2px;
 }
 
 #clock {
-  border-radius: 0px 1rem 1rem 0px;
-  margin-right: 1rem;
+  font-weight: bold;
+  color: @teal;
 }
 
 #battery:not(.warning).charging {
@@ -104,37 +67,32 @@
   animation-direction: alternate;
 }
 
-#backlight,
-#battery {
-  border-radius: 0;
-}
-
-#pulseaudio {
-  border-radius: 1rem 0px 0px 1rem;
-  margin-left: 1rem;
-}
-
-#custom-music {
-  border-radius: 1rem;
-}
-
 #custom-lock {
-  border-radius: 1rem 0px 0px 1rem;
   color: @lavender;
 }
 
-#custom-power {
-  margin-right: 1rem;
-  border-radius: 0px 1rem 1rem 0px;
-  color: @red;
-}
-
+#custom-power,
 #custom-VPN.down,
 #network.disconnected {
   color: @red;
 }
 
-#tray {
-  margin-right: 1rem;
-  border-radius: 1rem;
+#custom-music,
+#tray,
+#backlight,
+#battery,
+#pulseaudio,
+#cpu,
+#memory,
+#network,
+#temperature,
+#disk,
+#custom-spotify,
+#mode,
+#custom-VPN,
+#custom-bandwidth,
+#custom-lock,
+#custom-kde-connect,
+#custom-power {
+  padding: 0 0.75rem;
 }
