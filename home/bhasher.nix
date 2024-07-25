@@ -74,7 +74,7 @@
         };
         "kodi media-center" = {
           user = "kodi";
-          hostname = "10.0.0.10";
+          hostname = "10.15.14.5";
           identitiesOnly = true;
           identityFile = "/run/secrets/ssh/snodes";
         };
