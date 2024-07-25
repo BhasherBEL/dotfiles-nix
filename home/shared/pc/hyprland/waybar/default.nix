@@ -64,6 +64,7 @@ let
             "7" = "7";
             "8" = "8";
             "9" = "9";
+            "10" = "0";
             urgent = "";
             focused = "";
             default = "";
@@ -102,9 +103,13 @@ let
       ];
     };
     network = {
-      format-wifi = "{essid} ({signalStrength}%) ";
-      format-ethernet = "{ifname}: {ipaddr}/{cidr} ";
-      format-disconnected = "Disconnected ⚠";
+      format-wifi = "{bandwidthUpOctets}/{bandwidthDownOctets}  ";
+      format-ethernet = "{bandwidthUpOctets}/{bandwidthDownOctets}  ";
+      format-disconnected = "⚠";
+      tooltip-format-wifi = "{essid} ({frequency}, {signalStrength}%)";
+      tooltip-format-ethernet = "{ifname}: {ipaddr}/{cidr}";
+      tooltip-format-disconnected = "Disconnected";
+      interval = 1;
     };
     temperature = {
       format = "{temperatureC}°C ";
@@ -168,40 +173,62 @@ in
       enable = true;
       mode = "createLink";
     };
-    settings = {
-      mainBar = defaultBar // {
-        output = [ "DP-1" ];
-        modules-left = [ "hyprland/workspaces" ];
-        modules-center = [ "clock" ];
-        modules-right = [
-          #"custom/kde-connect"
-          "custom/VPN"
-          "network"
-          "custom/bandwidth"
-          "tray"
-          "custom/notifications"
-        ];
-      };
-      rightBar = defaultBar // {
-        output = [ "DVI-D-1" ];
-        modules-left = [ "hyprland/workspaces" ];
-        modules-right = [
-          "pulseaudio"
-          "privacy"
-        ];
-      };
-      leftBar = defaultBar // {
-        output = [ "HDMI-A-1" ];
-        modules-left = [ "hyprland/workspaces" ];
-        modules-right = [
-          "cpu"
-          "memory"
-          "temperature"
-          "disk"
-          "battery"
-        ];
-      };
-    };
+    settings =
+      if (osConfig.networking.hostName == "desktop") then
+        {
+          mainBar = defaultBar // {
+            output = [ "DP-1" ];
+            modules-left = [ "hyprland/workspaces" ];
+            modules-center = [ "clock" ];
+            modules-right = [
+              #"custom/kde-connect"
+              "custom/VPN"
+              "network"
+              "custom/bandwidth"
+              "tray"
+              "custom/notifications"
+            ];
+          };
+          rightBar = defaultBar // {
+            output = [ "DVI-D-1" ];
+            modules-left = [ "hyprland/workspaces" ];
+            modules-right = [
+              "pulseaudio"
+              "privacy"
+            ];
+          };
+          leftBar = defaultBar // {
+            output = [ "HDMI-A-1" ];
+            modules-left = [ "hyprland/workspaces" ];
+            modules-right = [
+              "cpu"
+              "memory"
+              "temperature"
+              "disk"
+              "battery"
+            ];
+          };
+        }
+      else
+        {
+          uniqueBar = defaultBar // {
+            modules-left = [ "hyprland/workspaces" ];
+            modules-center = [ "clock" ];
+            modules-right = [
+              "network"
+              "custom/VPN"
+              "privacy"
+              "cpu"
+              "memory"
+              "temperature"
+              "disk"
+              "pulseaudio"
+              "battery"
+              "tray"
+              "custom/notifications"
+            ];
+          };
+        };
   };
 
   home.file = {
