@@ -97,6 +97,7 @@ in
     thunderbird
     #asciinema
     onlyoffice-bin
+    libreoffice
     sl
     yt-dlp
     #spotdl
