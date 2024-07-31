@@ -103,8 +103,8 @@ let
       ];
     };
     network = {
-      format-wifi = "{bandwidthUpOctets}/{bandwidthDownOctets}  ";
-      format-ethernet = "{bandwidthUpOctets}/{bandwidthDownOctets}  ";
+      format-wifi = "{bandwidthUpOctets} - {bandwidthDownOctets}  ";
+      format-ethernet = "{bandwidthUpOctets} - {bandwidthDownOctets}  ";
       format-disconnected = "⚠";
       tooltip-format-wifi = "{essid} ({frequency}, {signalStrength}%)";
       tooltip-format-ethernet = "{ifname}: {ipaddr}/{cidr}";
