@@ -456,6 +456,14 @@
                 name = "Baikal";
                 url = "https://baikal.bxl.bhasher.com";
               }
+              {
+                name = "Paperless";
+                url = "https://paperless.bhasher.com";
+              }
+              {
+                name = "PhotoStructure";
+                url = "photos.bhasher.com";
+              }
             ];
           }
           {
