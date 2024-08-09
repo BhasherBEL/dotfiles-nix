@@ -60,6 +60,7 @@
           arteplussept
           sponsorblock
           inputstreamhelper
+          youtube
         ]
       );
       sources = [
