@@ -174,6 +174,17 @@
           "signon.autofillForms" = false;
           "sidebar.revamp" = true;
           "sidebar.verticalTabs" = true;
+          "privacy.trackingprotection.enable" = true;
+          "privacy.trackingprotection.emailtracking.enable" = true;
+          "privacy.trackingprotection.socialtracking.enable" = true;
+          "privacy.fingerprintingProtection" = true;
+          "browser.download.viewableInternally.typeWasRegistered.jxl" = true;
+          "browser.ml.chat.enabled" = true;
+          "browser.ml.chat.provider" = "https://chat.mistral.ai/chat";
+          "browser.ml.chat.shortcuts" = false;
+          "devtools.debugger.features.windowless-service-workers" = true;
+          "image.jxl.enabled" = true;
+          "privacy.webrtc.globalMuteToggles" = true;
         };
         search = {
           force = true;
