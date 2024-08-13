@@ -14,16 +14,11 @@
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [ "gaoptout" ];
 
   services = {
-    displayManager = {
-      sddm = {
-        enable = true;
-        autoNumlock = true;
-      };
-    };
     xserver = {
       enable = true;
       xkb.layout = "fr";
     };
+    greetd.enable = true;
   };
 
   # Enable sound.

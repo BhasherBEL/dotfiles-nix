@@ -35,8 +35,5 @@
     };
   };
 
-  services.displayManager.autoLogin = {
-    enable = true;
-    user = "bhasher";
-  };
+  services.greetd.settings.default_session.user = "bhasher";
 }

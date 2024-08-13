@@ -19,9 +19,11 @@
       jack.enable = true;
     };
 
-    displayManager = {
-      defaultSession = "hyprland";
-      sddm.wayland.enable = true;
+    displayManager.defaultSession = "hyprland";
+
+    greetd = {
+      enable = true;
+      settings.default_session.command = "${pkgs.hyprland}/bin/hyprland";
     };
 
     # Required for udiskie to works
