@@ -12,156 +12,17 @@
     stateVersion = "23.11";
   };
 
-  services = {
-    syncthing.enable = true;
-    kdeconnect = {
-      enable = true;
-      indicator = true;
-    };
-  };
-
   home.file = {
     "${config.home.homeDirectory}/.face.png" = {
       source = ./bhasher_face.png;
     };
   };
 
-  programs = {
-    git = {
-      enable = true;
-      diff-so-fancy.enable = true;
-      extraConfig = {
-        user = {
-          name = "Brieuc Dubois";
-          email = "git@bhasher.com";
-        };
-        # TODO
-        commit.gpgSign = false;
-        init.defaultBranch = "master";
-        gpg.program = "gpg";
-        color = {
-          ui = "auto";
-          diff = "auto";
-          status = "auto";
-          branch = "auto";
-        };
-        help.autocorrect = 30;
-        alias = {
-          graph = "log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(bold blue)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all";
-          s = "status";
-          d = "diff";
-          c = "commit";
-        };
-        push = {
-          default = "simple";
-          autoSetupRemote = true;
-        };
-        pull.rebase = "true";
-      };
-    };
-    ssh = {
-      enable = true;
-      matchBlocks = {
-        "shp 192.168.1.221" = {
-          hostname = "192.168.1.221";
-          user = "shp";
-          identitiesOnly = true;
-          identityFile = "/run/secrets/ssh/snodes";
-        };
-        "kodi media-center" = {
-          user = "kodi";
-          hostname = "10.15.14.5";
-          identitiesOnly = true;
-          identityFile = "/run/secrets/ssh/snodes";
-        };
-        "truenas snas 192.168.1.201" = {
-          user = "bhasher";
-          hostname = "192.168.1.201";
-          identitiesOnly = true;
-          identityFile = "/run/secrets/ssh/snodes";
-        };
-        "vps bdubois.io" = {
-          user = "debian";
-          hostname = "bdubois.io";
-          identitiesOnly = true;
-          identityFile = "/run/secrets/ssh/ovh_vps";
-        };
-        "llnux" = {
-          user = "docker";
-          hostname = "10.0.0.1";
-          port = 1234;
-          identitiesOnly = true;
-          identityFile = "/run/secrets/ssh/llnux";
-        };
-        "llnux-vpn" = {
-          user = "docker";
-          hostname = "192.168.30.2";
-          port = 22;
-          identitiesOnly = true;
-          identityFile = "/run/secrets/ssh/llnux";
-        };
-        "llnux-ingi" = {
-          user = "root";
-          hostname = "kot-li-nux.info.ucl.ac.be";
-          identitiesOnly = true;
-          identityFile = "/run/secrets/ssh/llnux_ingi";
-          proxyCommand = "ssh -q -W %h:%p ingi";
-        };
-        "ingi" = {
-          user = "bridubois";
-          hostname = "studssh.info.ucl.ac.be";
-          identitiesOnly = true;
-          identityFile = "/run/secrets/ssh/ingi";
-        };
-        "github.com" = {
-          user = "shp";
-          identitiesOnly = true;
-          identityFile = "/run/secrets/ssh/gitkey";
-        };
-        "forge.uclouvain.be" = {
-          user = "git";
-          identitiesOnly = true;
-          identityFile = "/run/secrets/ssh/gitkey";
-        };
-        "gitlab.com" = {
-          user = "git";
-          identitiesOnly = true;
-          identityFile = "/run/secrets/ssh/gitlab";
-        };
-        "git.bhasher.com" = {
-          user = "git";
-          port = 2222;
-          hostname = "192.168.1.221";
-          identitiesOnly = true;
-          identityFile = "/run/secrets/ssh/gitea";
-        };
-        "aur.archlinux.org" = {
-          user = "aur";
-          identitiesOnly = true;
-          identityFile = "/run/secrets/ssh/aur";
-        };
-        "languagelab ll languagelab.sipr.ucl.ac.be" = {
-          user = "bridubois";
-          hostname = "130.104.12.159";
-          identitiesOnly = true;
-          identityFile = "/run/secrets/ssh/languagelab";
-        };
-      };
-    };
-    joplin-desktop = {
-      enable = true;
-      sync = {
-        interval = "10m";
-        target = "joplin-server";
-      };
-      extraConfig = {
-        "sync.9.path" = "https://joplin.bhasher.com";
-        "sync.9.username" = "joplin.lan@bhasher.com";
-      };
-    };
-  };
-
   modules = {
+    git.enable = true;
+    ssh.enable = true;
+    joplin-desktop.enable = true;
+    syncthing.enable = true;
     firefox = {
       enable = true;
       strictPrivacy = true;
