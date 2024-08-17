@@ -2,6 +2,7 @@
   pkgs,
   inputs,
   lib,
+  homeModules,
   ...
 }:
 {
@@ -43,6 +44,9 @@
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
+    extraSpecialArgs = {
+      inherit homeModules;
+    };
   };
 
   security.sudo = {

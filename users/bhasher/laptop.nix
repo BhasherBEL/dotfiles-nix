@@ -1,4 +1,4 @@
-{ ... }:
+{ lib, ... }:
 {
   imports = [
     ./default.nix
@@ -36,4 +36,6 @@
   };
 
   services.greetd.settings.default_session.user = "bhasher";
+
+  time.timeZone = lib.mkForce "Europe/Helsinki";
 }

@@ -2,88 +2,68 @@
   config,
   lib,
   pkgs,
+  inputs,
+  ...
 }:
-with lib;
 let
-  ffcgf = config.programs.custom.firefox;
+  ffcfg = config.modules.firefox;
 in
 {
   options = {
-    services.custom.firefox = {
-      enable = mkOption {
-        type = types.bool;
+    modules.firefox = {
+      enable = lib.mkOption {
+        type = lib.types.bool;
         default = false;
       };
-      search = {
-        disableUnwanted = mkOption {
-          type = types.bool;
-          default = true;
-        };
-        kagi = mkOption {
-          type = types.bool;
-          default = false;
-        };
-        developer = mkOption {
-          type = types.bool;
-          default = false;
-        };
-      };
-      privacy = {
-        enable = mkOption {
-          type = types.bool;
-          default = true;
-        };
-        strict = mkOption {
-          type = types.bool;
-          default = false;
-        };
-      };
-      eid = mkOption {
-        type = types.bool;
-        default = true;
-      };
-      nightly = mkOption {
-        type = types.bool;
+      strictPrivacy = lib.mkOption {
+        type = lib.types.bool;
         default = false;
       };
-      defaultExtensions = mkOption {
-        type = types.bool;
-        default = true;
+      kagiSearch = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
+      };
+      nightly = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
+      };
+      bookmarks = lib.mkOption {
+        type = lib.types.listOf lib.types.attrs;
+        default = { };
       };
     };
   };
 
-  config = mkIf ffcgf.enable {
-    programs.firefox = rec {
+  config = lib.mkIf ffcfg.enable {
+    programs.firefox = {
       enable = true;
 
-      nativeMessagingHosts = optionals ffcgf.eid [ pkgs.web-eid-app ];
-      version_ =
-        if ffcfg.nightly then inputs.firefox.package.${pkgs.system}.firefox-nightly-bin else pkgs.firefox;
+      nativeMessagingHosts = [ pkgs.web-eid-app ];
       package =
-        if !ffcgf.eid then
-          version_
+        if ffcfg.nightly then
+          inputs.firefox.packages.${pkgs.system}.firefox-nightly-bin.override {
+            pkcs11Modules = [ pkgs.eid-mw ];
+            nativeMessagingHosts = [ pkgs.web-eid-app ];
+          }
         else
-          version_.override {
+          pkgs.firefox.override {
             pkcs11Modules = [ pkgs.eid-mw ];
             nativeMessagingHosts = [ pkgs.web-eid-app ];
           };
 
-      policies.SecurityDevices.p11-kit-proxy = mkIf ffcgf.eid "${pkgs.p11-kit}/lib/p11-kit-proxy.so";
+      policies.SecurityDevices.p11-kit-proxy = "${pkgs.p11-kit}/lib/p11-kit-proxy.so";
 
       profiles.default = {
         settings =
           {
             "signon.autofillForms" = false;
             "intl.locale.requested" = "en-GB,en-US";
-          }
-          // mkIf ffcgf.privacy.enable {
             "privacy.trackingprotection.enable" = true;
             "privacy.trackingprotection.emailtracking.enable" = true;
             "privacy.trackingprotection.socialtracking.enable" = true;
             "privacy.fingerprintingProtection" = true;
           }
-          // mkIf ffcgf.privacy.strict {
+          // lib.mkIf ffcfg.strictPrivacy {
             "privacy.sanitize.pending" = ''[{\"id\":\"newtab-container\",\"itemsToClear\":[],\"options\":{}},{\"id\":\"shutdown\",\"itemsToClear\":[\"cache\",\"cookies\",\"offlineApps\",\"history\",\"formdata\",\"downloads\",\"sessions\"],\"options\":{}}]'';
             "privacy.clearOnShutdown.downloads" = true;
             "privacy.clearOnShutdown.formdata" = true;
@@ -93,7 +73,7 @@ in
             "privacy.history.custom" = true;
             "privacy.sanitize.sanitizeOnShutdown" = true;
           }
-          // mkIf ffcgf.nightly {
+          // lib.mkIf ffcfg.nightly {
             "sidebar.revamp" = true;
             "sidebar.verticalTabs" = true;
             "browser.download.viewableInternally.typeWasRegistered.jxl" = true;
@@ -107,36 +87,12 @@ in
 
         search = {
           force = true;
-          default = if ffcgf.search.kagi then "Kagi" else "DuckDuckGo";
-          engines =
-            { }
-            // mkIf ffcgf.search.disableUnwanted {
+          default = if ffcfg.kagiSearch then "Kagi" else "DuckDuckGo";
+          engines = lib.mkMerge [
+            ({
               Google.metaData.hidden = true;
               Bing.metaData.hidden = true;
               eBay.metaData.hidden = true;
-            }
-            // mkIf ffcgf.search.kagi {
-              Kagi = {
-                name = "Kagi";
-                urls = [
-                  {
-                    template = "https://kagi.com/search";
-                    params = [
-                      {
-                        name = "q";
-                        value = "{searchTerms}";
-                      }
-                    ];
-                  }
-                ];
-                iconUpdateURL = "https://kagi.com/favicon.ico";
-                definedAliases = [
-                  "@k"
-                  "@kagi"
-                ];
-              };
-            }
-            // mkIf ffcgf.search.developer {
               GitHub = {
                 name = "GitHub";
                 urls = [
@@ -210,17 +166,45 @@ in
                   "@nh"
                 ];
               };
-            };
-          extensions =
-            with pkgs.nur.repos.rycee.frefox-addons;
-            [ darkreader ]
-            ++ mkIf ffcgf.privacy.enable [
-              clearurls
-              gaoptout
-              privacy-badger
-            ]
-            ++ mkIf ffcgf.eid [ belgium-eid ];
+            })
+            (lib.mkIf ffcfg.kagiSearch {
+              Kagi = {
+                name = "Kagi";
+                urls = [
+                  {
+                    template = "https://kagi.com/search";
+                    params = [
+                      {
+                        name = "q";
+                        value = "{searchTerms}";
+                      }
+                    ];
+                  }
+                ];
+                iconUpdateURL = "https://kagi.com/favicon.ico";
+                definedAliases = [
+                  "@k"
+                  "@kagi"
+                ];
+              };
+            })
+          ];
         };
+        extensions =
+          with pkgs.nur.repos.rycee.firefox-addons;
+          [
+            darkreader
+            belgium-eid
+            sidebery
+            gaoptout
+            cookie-quick-manager
+          ]
+          ++ lib.optionals ffcfg.strictPrivacy [
+            clearurls
+            privacy-badger
+          ]
+          ++ lib.optionals ffcfg.nightly [ aw-watcher-web ];
+        bookmarks = ffcfg.bookmarks;
       };
     };
   };

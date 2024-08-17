@@ -33,9 +33,15 @@
   };
 
   outputs =
-    { nixpkgs, home-manager, ... }@inputs:
+    {
+      self,
+      nixpkgs,
+      home-manager,
+      ...
+    }@inputs:
     let
       lib = nixpkgs.lib // home-manager.lib;
+      libx = import ./lib { inherit self inputs nixpkgs; };
 
       makeNixosSystem =
         name: extraModules:
@@ -62,7 +68,7 @@
           inputs.lanzaboote.nixosModules.lanzaboote
         ];
 
-        laptop = makeNixosSystem "laptop" [
+        laptop = libx.makeNixosSystem "laptop" [
           ./hosts/laptop
           ./users/bhasher/laptop.nix
           inputs.lanzaboote.nixosModules.lanzaboote

@@ -1,13 +1,9 @@
-{
-  pkgs,
-  config,
-  inputs,
-  ...
-}:
+{ config, homeModules, ... }:
 {
   imports = [
     ./shared/global
     ./shared/pc
+    "${homeModules}"
   ];
 
   home = {
@@ -152,421 +148,6 @@
         };
       };
     };
-    firefox = {
-      enable = true;
-      nativeMessagingHosts = [ pkgs.web-eid-app ];
-      package = inputs.firefox.packages.${pkgs.system}.firefox-nightly-bin.override {
-        pkcs11Modules = [ pkgs.eid-mw ];
-        nativeMessagingHosts = [ pkgs.web-eid-app ];
-      };
-      policies.SecurityDevices.p11-kit-proxy = "${pkgs.p11-kit}/lib/p11-kit-proxy.so";
-      profiles.default = {
-        settings = {
-          "intl.locale.requested" = "en-GB,en-US";
-          "privacy.clearOnShutdown.downloads" = true;
-          "privacy.clearOnShutdown.formdata" = true;
-          "privacy.clearOnShutdown.history" = true;
-          "privacy.clearOnShutdown.offlineApps" = true;
-          "privacy.clearOnShutdown.sessions" = true;
-          "privacy.history.custom" = true;
-          "privacy.sanitize.pending" = ''[{\"id\":\"newtab-container\",\"itemsToClear\":[],\"options\":{}},{\"id\":\"shutdown\",\"itemsToClear\":[\"cache\",\"cookies\",\"offlineApps\",\"history\",\"formdata\",\"downloads\",\"sessions\"],\"options\":{}}]'';
-          "privacy.sanitize.sanitizeOnShutdown" = true;
-          "signon.autofillForms" = false;
-          "sidebar.revamp" = true;
-          "sidebar.verticalTabs" = true;
-          "privacy.trackingprotection.enable" = true;
-          "privacy.trackingprotection.emailtracking.enable" = true;
-          "privacy.trackingprotection.socialtracking.enable" = true;
-          "privacy.fingerprintingProtection" = true;
-          "browser.download.viewableInternally.typeWasRegistered.jxl" = true;
-          "browser.ml.chat.enabled" = true;
-          "browser.ml.chat.provider" = "https://chat.mistral.ai/chat";
-          "browser.ml.chat.shortcuts" = false;
-          "devtools.debugger.features.windowless-service-workers" = true;
-          "image.jxl.enabled" = true;
-          "privacy.webrtc.globalMuteToggles" = true;
-        };
-        search = {
-          force = true;
-          default = "Kagi";
-          engines = {
-            Google.metaData.hidden = true;
-            Bing.metaData.hidden = true;
-            eBay.metaData.hidden = true;
-            GitHub = {
-              name = "GitHub";
-              urls = [
-                {
-                  template = "https://github.com/search";
-                  params = {
-                    q = "{searchTerms}";
-                  };
-                }
-              ];
-              iconUpdateURL = "https://github.githubassets.com/favicons/favicon.png";
-              definedAliases = [ "@gh" ];
-            };
-            "Nix Config" = {
-              urls = [
-                {
-                  template = "https://search.nixos.org/options";
-                  params = [
-                    {
-                      name = "type";
-                      value = "packages";
-                    }
-                    {
-                      name = "query";
-                      value = "{searchTerms}";
-                    }
-                  ];
-                }
-              ];
-              icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-              definedAliases = [ "@nc" ];
-            };
-            "Nix Packages" = {
-              urls = [
-                {
-                  template = "https://search.nixos.org/packages";
-                  params = [
-                    {
-                      name = "type";
-                      value = "packages";
-                    }
-                    {
-                      name = "channel";
-                      value = "unstable";
-                    }
-                    {
-                      name = "query";
-                      value = "{searchTerms}";
-                    }
-                  ];
-                }
-              ];
-              icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-              definedAliases = [ "@np" ];
-            };
-            "Nix Home Manager" = {
-              urls = [
-                {
-                  template = "https://home-manager-options.extranix.com/";
-                  params = [
-                    {
-                      name = "query";
-                      value = "{searchTerms}";
-                    }
-                  ];
-                }
-              ];
-              icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-              definedAliases = [
-                "@hm"
-                "@nh"
-              ];
-            };
-            "Meteo" = {
-              urls = [ { template = "https://www.meteo.be/fr/{searchTerms}"; } ];
-              iconUpdateURL = "https://www.meteo.be/favicon-192x192.png";
-              definedAliases = [ "@meteo" ];
-            };
-            Kagi = {
-              name = "Kagi";
-              urls = [
-                {
-                  template = "https://kagi.com/search";
-                  params = [
-                    {
-                      name = "q";
-                      value = "{searchTerms}";
-                    }
-                  ];
-                }
-              ];
-              iconUpdateURL = "https://kagi.com/favicon.ico";
-              definedAliases = [
-                "@k"
-                "@kagi"
-              ];
-            };
-          };
-        };
-        extensions = with pkgs.nur.repos.rycee.firefox-addons; [
-          darkreader
-          sidebery
-          #wappalyzer  # UNFREE
-          cookie-quick-manager
-          clearurls
-          gaoptout
-          privacy-badger
-          aw-watcher-web
-          #keepa  # UNFREE
-          belgium-eid
-        ];
-        bookmarks = [
-          {
-            name = "Nix sites";
-            toolbar = true;
-            bookmarks = [
-              {
-                name = "HM Search";
-                url = "https://home-manager-options.extranix.com/";
-              }
-              {
-                name = "NixOS Search";
-                url = "https://search.nixos.org/packages";
-              }
-            ];
-          }
-          {
-            name = "syncthing";
-            url = "https://127.0.0.1:8384";
-          }
-          {
-            name = "Github";
-            url = "https://github.com/BhasherBEL";
-          }
-          {
-            name = "NUR";
-            url = "https://nur.nix-community.org";
-          }
-          {
-            name = "Discourse NixOS";
-            url = "https://discourse.nixos.org";
-          }
-          {
-            name = "DeepL";
-            url = "https://deepl.com/translator#en/fr/";
-          }
-          {
-            name = "OpenStreetMap";
-            url = "https://www.openstreetmap.org";
-          }
-          {
-            name = "Mistral";
-            url = "https://console.mistral.ai/";
-          }
-          {
-            name = "Weather";
-            bookmarks = [
-              {
-                name = "Meteo Louvain-la-Neuve";
-                url = "https://www.meteo.be/fr/ottignies-louvain-la-neuve";
-              }
-              {
-                name = "Meteo Bruxelles";
-                url = "https://www.meteo.be/fr/bruxelles";
-              }
-              {
-                name = "Pluie Louvain-la-Neuve";
-                url = "https://www.accuweather.com/en/be/louvain-la-neuve/959043/minute-weather-forecast/959043";
-              }
-              {
-                name = "Pluie Bruxelles";
-                url = "https://www.accuweather.com/en/be/watermael-boitsfort/27577/weather-forecast/27577";
-              }
-            ];
-          }
-          {
-            name = "Meteo Louvain-la-Neuve";
-            url = "https://www.meteo.be/fr/ottignies-louvain-la-neuve";
-          }
-          {
-            name = "Meteo Bruxelles";
-            url = "https://www.meteo.be/fr/bruxelles";
-          }
-          {
-            name = "Kagi";
-            url = "https://kagi.com";
-          }
-          {
-            name = "CUPS";
-            url = "http://localhost:631/";
-          }
-          {
-            name = "ActivityWatch";
-            url = "http://localhost:5600";
-          }
-          {
-            name = "Homelab";
-            bookmarks = [
-              {
-                name = "Hub";
-                url = "https://hub.bhasher.com";
-              }
-              {
-                name = "Grafana";
-                url = "https://grafana.bhasher.com";
-              }
-              {
-                name = "Jellyfin";
-                url = "https://jellyfin.bhasher.com";
-              }
-              {
-                name = "Radarr";
-                url = "https://radarr.bhasher.com";
-              }
-              {
-                name = "Sonarr";
-                url = "https://sonarr.bhasher.com";
-              }
-              {
-                name = "Lidarr";
-                url = "https://lidarr.bhasher.com";
-              }
-              {
-                name = "Bazarr";
-                url = "https://bazarr.bhasher.com";
-              }
-              {
-                name = "Transmission";
-                url = "https://transmission.bhasher.com";
-              }
-              {
-                name = "Accounts";
-                url = "https://accounts.bhasher.com";
-              }
-              {
-                name = "Vaultwarden";
-                url = "https://vault.bhasher.com";
-              }
-              {
-                name = "Element";
-                url = "https://element.bhasher.com";
-              }
-              {
-                name = "Gitea";
-                url = "https://git.bhasher.com";
-              }
-              {
-                name = "Syncthing";
-                url = "https://syncthing.bhasher.com";
-              }
-              {
-                name = "Board";
-                url = "https://board.bhasher.com";
-              }
-              {
-                name = "Home Assistant";
-                url = "https://hass.bhasher.com";
-              }
-              {
-                name = "Invoiceplace";
-                url = "https://invoice.bhasher.com";
-              }
-              {
-                name = "Maubot";
-                url = "https://maubot.bhasher.com/_matrix/maubot";
-              }
-              {
-                name = "Recipes";
-                url = "https://recipes.bhasher.com";
-              }
-              {
-                name = "Baikal";
-                url = "https://baikal.bxl.bhasher.com";
-              }
-              {
-                name = "Paperless";
-                url = "https://paperless.bhasher.com";
-              }
-              {
-                name = "PhotoStructure";
-                url = "photos.bhasher.com";
-              }
-            ];
-          }
-          {
-            name = "Louvain-li-Nux";
-            bookmarks = [
-              {
-                name = "Hub";
-                url = "https://hub.louvainlinux.org";
-              }
-              {
-                name = "Portainer";
-                url = "https://portainer.louvainlinux.org";
-              }
-              {
-                name = "Compta";
-                url = "https://compta.louvainlinux.org";
-              }
-              {
-                name = "Board";
-                url = "https://board.louvainlinux.org";
-              }
-              {
-                name = "Gitlab";
-                url = "https://gitlab.com/louvainlinux";
-              }
-              {
-                name = "Nextcloud";
-                url = "https://cloud.louvainlinux.org";
-              }
-              {
-                name = "Vaultwarden";
-                url = "https://vault.louvainlinux.org";
-              }
-              {
-                name = "Uptime";
-                url = "https://uptime.louvainlinux.org";
-              }
-              {
-                name = "Accounts";
-                url = "https://accounts.louvainlinux.org";
-              }
-              {
-                name = "Grafana";
-                url = "https://grafana.louvainlinux.org";
-              }
-              {
-                name = "Router";
-                url = "http://10.0.0.1:8443";
-              }
-              {
-                name = "Wiki";
-                url = "https://wiki.louvainlinux.org";
-              }
-              {
-                name = "Piwigo";
-                url = "https://piwigo.kapucl.be";
-              }
-              {
-                name = "Recipes";
-                url = "https://recipes.louvainlinux.org";
-              }
-            ];
-          }
-          {
-            name = "LanguageLab";
-            bookmarks = [
-              {
-                name = "Release SIPR";
-                url = "http://languagelab.sipr.ucl.ac.be/";
-              }
-              {
-                name = "Gitlab";
-                url = "https://forge.uclouvain.be/sbibauw/languagelab";
-              }
-            ];
-          }
-          {
-            name = "UCLouvain";
-            bookmarks = [
-              {
-                name = "INGInious";
-                url = "https://inginious.info.ucl.ac.be/mycourses";
-              }
-              {
-                name = "Moodle";
-                url = "https://moodle.uclouvain.be";
-              }
-            ];
-          }
-        ];
-      };
-    };
     joplin-desktop = {
       enable = true;
       sync = {
@@ -577,6 +158,276 @@
         "sync.9.path" = "https://joplin.bhasher.com";
         "sync.9.username" = "joplin.lan@bhasher.com";
       };
+    };
+  };
+
+  modules = {
+    firefox = {
+      enable = true;
+      strictPrivacy = true;
+      kagiSearch = true;
+      nightly = true;
+      bookmarks = [
+        {
+          name = "Nix sites";
+          toolbar = true;
+          bookmarks = [
+            {
+              name = "HM Search";
+              url = "https://home-manager-options.extranix.com/";
+            }
+            {
+              name = "NixOS Search";
+              url = "https://search.nixos.org/packages";
+            }
+          ];
+        }
+        {
+          name = "syncthing";
+          url = "https://127.0.0.1:8384";
+        }
+        {
+          name = "Github";
+          url = "https://github.com/BhasherBEL";
+        }
+        {
+          name = "NUR";
+          url = "https://nur.nix-community.org";
+        }
+        {
+          name = "Discourse NixOS";
+          url = "https://discourse.nixos.org";
+        }
+        {
+          name = "DeepL";
+          url = "https://deepl.com/translator#en/fr/";
+        }
+        {
+          name = "OpenStreetMap";
+          url = "https://www.openstreetmap.org";
+        }
+        {
+          name = "Mistral";
+          url = "https://console.mistral.ai/";
+        }
+        {
+          name = "Weather";
+          bookmarks = [
+            {
+              name = "Meteo Louvain-la-Neuve";
+              url = "https://www.meteo.be/fr/ottignies-louvain-la-neuve";
+            }
+            {
+              name = "Meteo Bruxelles";
+              url = "https://www.meteo.be/fr/bruxelles";
+            }
+            {
+              name = "Pluie Louvain-la-Neuve";
+              url = "https://www.accuweather.com/en/be/louvain-la-neuve/959043/minute-weather-forecast/959043";
+            }
+            {
+              name = "Pluie Bruxelles";
+              url = "https://www.accuweather.com/en/be/watermael-boitsfort/27577/weather-forecast/27577";
+            }
+          ];
+        }
+        {
+          name = "Meteo Louvain-la-Neuve";
+          url = "https://www.meteo.be/fr/ottignies-louvain-la-neuve";
+        }
+        {
+          name = "Meteo Bruxelles";
+          url = "https://www.meteo.be/fr/bruxelles";
+        }
+        {
+          name = "Kagi";
+          url = "https://kagi.com";
+        }
+        {
+          name = "CUPS";
+          url = "http://localhost:631/";
+        }
+        {
+          name = "ActivityWatch";
+          url = "http://localhost:5600";
+        }
+        {
+          name = "Homelab";
+          bookmarks = [
+            {
+              name = "Hub";
+              url = "https://hub.bhasher.com";
+            }
+            {
+              name = "Grafana";
+              url = "https://grafana.bhasher.com";
+            }
+            {
+              name = "Jellyfin";
+              url = "https://jellyfin.bhasher.com";
+            }
+            {
+              name = "Radarr";
+              url = "https://radarr.bhasher.com";
+            }
+            {
+              name = "Sonarr";
+              url = "https://sonarr.bhasher.com";
+            }
+            {
+              name = "Lidarr";
+              url = "https://lidarr.bhasher.com";
+            }
+            {
+              name = "Bazarr";
+              url = "https://bazarr.bhasher.com";
+            }
+            {
+              name = "Transmission";
+              url = "https://transmission.bhasher.com";
+            }
+            {
+              name = "Accounts";
+              url = "https://accounts.bhasher.com";
+            }
+            {
+              name = "Vaultwarden";
+              url = "https://vault.bhasher.com";
+            }
+            {
+              name = "Element";
+              url = "https://element.bhasher.com";
+            }
+            {
+              name = "Gitea";
+              url = "https://git.bhasher.com";
+            }
+            {
+              name = "Syncthing";
+              url = "https://syncthing.bhasher.com";
+            }
+            {
+              name = "Board";
+              url = "https://board.bhasher.com";
+            }
+            {
+              name = "Home Assistant";
+              url = "https://hass.bhasher.com";
+            }
+            {
+              name = "Invoiceplace";
+              url = "https://invoice.bhasher.com";
+            }
+            {
+              name = "Maubot";
+              url = "https://maubot.bhasher.com/_matrix/maubot";
+            }
+            {
+              name = "Recipes";
+              url = "https://recipes.bhasher.com";
+            }
+            {
+              name = "Baikal";
+              url = "https://baikal.bxl.bhasher.com";
+            }
+            {
+              name = "Paperless";
+              url = "https://paperless.bhasher.com";
+            }
+            {
+              name = "PhotoStructure";
+              url = "photos.bhasher.com";
+            }
+          ];
+        }
+        {
+          name = "Louvain-li-Nux";
+          bookmarks = [
+            {
+              name = "Hub";
+              url = "https://hub.louvainlinux.org";
+            }
+            {
+              name = "Portainer";
+              url = "https://portainer.louvainlinux.org";
+            }
+            {
+              name = "Compta";
+              url = "https://compta.louvainlinux.org";
+            }
+            {
+              name = "Board";
+              url = "https://board.louvainlinux.org";
+            }
+            {
+              name = "Gitlab";
+              url = "https://gitlab.com/louvainlinux";
+            }
+            {
+              name = "Nextcloud";
+              url = "https://cloud.louvainlinux.org";
+            }
+            {
+              name = "Vaultwarden";
+              url = "https://vault.louvainlinux.org";
+            }
+            {
+              name = "Uptime";
+              url = "https://uptime.louvainlinux.org";
+            }
+            {
+              name = "Accounts";
+              url = "https://accounts.louvainlinux.org";
+            }
+            {
+              name = "Grafana";
+              url = "https://grafana.louvainlinux.org";
+            }
+            {
+              name = "Router";
+              url = "http://10.0.0.1:8443";
+            }
+            {
+              name = "Wiki";
+              url = "https://wiki.louvainlinux.org";
+            }
+            {
+              name = "Piwigo";
+              url = "https://piwigo.kapucl.be";
+            }
+            {
+              name = "Recipes";
+              url = "https://recipes.louvainlinux.org";
+            }
+          ];
+        }
+        {
+          name = "LanguageLab";
+          bookmarks = [
+            {
+              name = "Release SIPR";
+              url = "http://languagelab.sipr.ucl.ac.be/";
+            }
+            {
+              name = "Gitlab";
+              url = "https://forge.uclouvain.be/sbibauw/languagelab";
+            }
+          ];
+        }
+        {
+          name = "UCLouvain";
+          bookmarks = [
+            {
+              name = "INGInious";
+              url = "https://inginious.info.ucl.ac.be/mycourses";
+            }
+            {
+              name = "Moodle";
+              url = "https://moodle.uclouvain.be";
+            }
+          ];
+        }
+      ];
     };
   };
 }
