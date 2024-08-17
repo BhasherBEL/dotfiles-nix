@@ -15,7 +15,7 @@ in
     ../optional/yubikey.nix
     ../optional/obs.nix
   ];
-  home-manager.users.bhasher.imports = [ ../../home/bhasher.nix ];
+  home-manager.users.bhasher.imports = [ ../../home/bhasher ];
 
   sops = {
     defaultSopsFile = ../../secrets/bhasher.yaml;

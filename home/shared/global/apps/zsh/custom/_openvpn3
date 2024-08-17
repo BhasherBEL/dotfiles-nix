@@ -1,8 +1,0 @@
-#compdef openvpn3
-
-_openvpn3() {
-	local subcommands="help shell-completion version config-import config-manage config-acl config-dump config-remove configs-list session-start session-manage session-auth session-acl session-stats sessions-list log"
-	_describe -t commands 'openvpn3' subcommands
-}
-
-_openvpn3

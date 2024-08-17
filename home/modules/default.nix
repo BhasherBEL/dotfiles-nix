@@ -1,13 +1,44 @@
-{ homeModules, ... }:
+{ ... }:
 {
   # TODO: Find a way to avoid to list them here
 
   imports = [
-    "${homeModules}/firefox.nix"
-    "${homeModules}/git.nix"
-    "${homeModules}/ssh.nix"
-    "${homeModules}/syncthing.nix"
-    "${homeModules}/joplin-desktop.nix"
-    "${homeModules}/kdeconnect.nix"
+    ./pc.nix
+
+    ./firefox
+    ./git
+    ./ssh
+    ./syncthing
+    ./joplin-desktop
+    ./kdeconnect
+    ./zsh
+    ./catppuccin
+    ./ranger
+    ./hyprland
+    ./hyprlock
+    ./hypridle
+    ./rofi
+    ./activitywatch
+    ./swaync
+    ./udiskie
+    ./nvim
+    ./waybar
+    ./kitty
   ];
+
+  fonts.fontconfig.enable = true;
+
+  programs.home-manager.enable = true;
+
+  home.sessionVariables = {
+    MOZ_ENABLE_WAYLAND = "1";
+  };
+
+  modules = {
+    zsh.enable = true;
+    ranger.enable = true;
+    git.enable = true;
+    ssh.enable = true;
+    nvim.enable = true;
+  };
 }
