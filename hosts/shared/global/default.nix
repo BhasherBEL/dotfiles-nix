@@ -16,10 +16,18 @@
   # Should fix the issue with the screen not turning on after suspend
   systemd.sleep.extraConfig = "HibernateMode=shutdown\nHibernateDelaySec=20m";
 
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
+  nix = {
+    settings.experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
+    optimise.automatic = true;
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 14d";
+    };
+  };
 
   time.timeZone = "Europe/Paris";
 
