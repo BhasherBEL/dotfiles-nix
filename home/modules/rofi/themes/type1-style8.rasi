@@ -9,13 +9,12 @@
 
 /*****----- Configuration -----*****/
 configuration {
-	modi:                       "drun,ssh,calc,filebrowser,run";
+	modi:                       "drun,calc,emoji,run";
     show-icons:                 true;
     display-drun:               " Apps";
     display-run:                " Run";
-    display-filebrowser:        " Files";
+    display-emoji:              " Emoji";
     display-window:             " Windows";
-		display-ssh:                " SSH";
 		display-calc:               " Calc";
 		drun-display-format:        "{name}";
 		window-format:              "{w} · {c} · {t}";

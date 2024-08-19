@@ -28,6 +28,7 @@ in
         inputs.catppuccin.nixosModules.catppuccin
         inputs.home-manager.nixosModules.default
         { home-manager.extraSpecialArgs = specialArgs; }
+        ../overlays
         #"${hostConfiguration}"
         #"${homeConfiguration}"
       ] ++ extraModules;

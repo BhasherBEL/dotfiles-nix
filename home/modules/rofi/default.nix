@@ -15,14 +15,11 @@ in
   config = lib.mkIf roficfg.enable {
     programs.rofi = {
       enable = true;
-      # TODO: Overlays
-      package = pkgs.rofi-wayland.override {
-        rofi-unwrapped = pkgs.nur.repos.bhasherbel.rofi-wayland-unwrapped;
-        plugins = [
-          (pkgs.rofi-calc.override { rofi-unwrapped = pkgs.nur.repos.bhasherbel.rofi-wayland-unwrapped; })
-          #pkgs.rofi-emoji
-        ];
-      };
+      package = pkgs.rofi-wayland;
+      plugins = [
+        pkgs.rofi-calc
+        pkgs.rofi-emoji-wayland
+      ];
       terminal = "kitty";
       theme = "${config.xdg.configHome}/rofi/themes/type1-style8.rasi";
       extraConfig = {
