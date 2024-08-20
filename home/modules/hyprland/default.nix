@@ -56,7 +56,6 @@ in
       settings = {
         exec-once = [
           "${pkgs.swww}/bin/swww-daemon"
-          "${pkgs.swww}/bin/swww img ${config.xdg.configHome}/assets/backgrounds/mountains_dark.jpg"
           "${pkgs.networkmanagerapplet}/bin/nm-applet --indicator"
           "${pkgs.wl-clipboard}/bin/wl-paste --type text --watch cliphlist store"
           "${pkgs.wl-clipboard}/bin/wl-paste --type image --watch cliphlist store"
@@ -200,8 +199,8 @@ in
         bindle = [
           ", XF86AudioRaiseVolume, exec, swayosd-client --output-volume raise --max-volume 120"
           ", XF86AudioLowerVolume, exec, swayosd-client --output-volume lower --max-volume 120"
-          ", XF86MonBrightnessUp, exec, swayosd-client --brightness +10"
-          ", XF86MonBrightnessDown, exec, swayosd-client --brightness -10"
+          ", XF86MonBrightnessUp, exec, swayosd-client --brightness +5"
+          ", XF86MonBrightnessDown, exec, swayosd-client --brightness -5"
         ];
         bindl = [
           ", XF86AudioMute, exec, swayosd-client --output-volume mute-toggle"
