@@ -140,4 +140,8 @@ in
     ];
     ensureDefaultPrinter = "Lexmark-N&B-kot";
   };
+
+  modules = {
+    theming.enable = true;
+  };
 }

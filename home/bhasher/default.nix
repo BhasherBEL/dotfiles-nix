@@ -26,12 +26,13 @@
       GTK_THEME = lib.mkDefault "Adwaita:dark";
     };
 
-    pointerCursor = {
-      gtk.enable = true;
-      package = pkgs.bibata-cursors;
-      name = "Bibata-Modern-Classic";
-      size = 16;
-    };
+    # Conflict with stylix
+    #pointerCursor = {
+    #  gtk.enable = true;
+    #  package = pkgs.bibata-cursors;
+    #  name = "Bibata-Modern-Classic";
+    #  size = 16;
+    #};
   };
 
   gtk = {

@@ -17,17 +17,16 @@ in
       enable = true;
       shellIntegration.enableZshIntegration = true;
       settings.confirm_os_window_close = -1;
-      font = {
-        name = "Hack Nerd Font Mono";
-        package = pkgs.nerdfonts.override {
-          fonts = [
-            "FiraCode"
-            "DroidSansMono"
-            "Hack"
-          ];
-        };
-      };
-      theme = lib.mkDefault "Catppuccin-Macchiato";
+      #font = {
+      #  name = "Hack Nerd Font Mono";
+      #  package = pkgs.nerdfonts.override {
+      #    fonts = [
+      #      "FiraCode"
+      #      "DroidSansMono"
+      #      "Hack"
+      #    ];
+      #  };
+      #};
     };
   };
 }

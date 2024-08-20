@@ -227,8 +227,8 @@ in
           gaps_in = 5;
           gaps_out = 10;
           border_size = 2;
-          "col.active_border" = "rgba(33ccffee) rgba(00ff99ee) 45deg";
-          "col.inactive_border" = "rgba(595959aa)";
+          #"col.active_border" = "rgba(33ccffee) rgba(00ff99ee) 45deg";
+          #"col.inactive_border" = "rgba(595959aa)";
           layout = "dwindle";
           allow_tearing = false;
         };
@@ -245,7 +245,7 @@ in
           drop_shadow = "yes";
           shadow_range = 4;
           shadow_render_power = 3;
-          "col.shadow" = "rgba(1a1a1aee)";
+          #"col.shadow" = "rgba(1a1a1aee)";
         };
 
         animations = {

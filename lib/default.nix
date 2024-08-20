@@ -6,9 +6,11 @@
 }:
 let
   homeConfiguration = "${self}/home";
-  hostConfiguration = "${self}/hosts";
+  usersConfiguration = "${self}/users";
+  hostsConfiguration = "${self}/hosts";
   homeModules = "${homeConfiguration}/modules";
-  hostModules = "${hostConfiguration}/modules";
+  usersModules = "${usersConfiguration}/modules";
+  hostsModules = "${hostsConfiguration}/modules";
 in
 {
   makeNixosSystem =
@@ -18,7 +20,8 @@ in
         inherit
           inputs
           homeModules
-          hostModules
+          usersModules
+          hostsModules
           hostname
           ;
       };
@@ -26,11 +29,13 @@ in
         { nixpkgs.overlays = [ inputs.nur.overlay ]; }
         inputs.flake-programs-sqlite.nixosModules.programs-sqlite
         inputs.catppuccin.nixosModules.catppuccin
+        inputs.stylix.nixosModules.stylix
         inputs.home-manager.nixosModules.default
         { home-manager.extraSpecialArgs = specialArgs; }
         ../overlays
         #"${hostConfiguration}"
         #"${homeConfiguration}"
+        "${usersModules}"
       ] ++ extraModules;
     };
 }
