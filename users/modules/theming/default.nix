@@ -25,9 +25,18 @@ in
         stylix.targets = {
           waybar.enable = false;
           rofi.enable = false;
+          # Seems to be mandatory for GTK
           gnome.enable = true;
         };
       }
     ];
+
+    specialisation.day.configuration = {
+      stylix = {
+        image = lib.mkForce ./assets/mountains_light.jpg;
+        polarity = lib.mkForce "light";
+        base16Scheme = lib.mkForce "${pkgs.base16-schemes}/share/themes/catppuccin-latte.yaml";
+      };
+    };
   };
 }
