@@ -19,6 +19,8 @@ in
   };
 
   config = lib.mkIf nvimcfg.enable {
+    #home.packages = with pkgs; [ nerdfonts ];
+
     programs.nixvim = {
       enable = true;
       defaultEditor = true;
@@ -292,21 +294,33 @@ in
               "menu"
             ];
             sources = [
-              { name = "nvim_lsp"; }
-              { name = "emoji"; }
+              {
+                name = "nvim_lsp";
+                priority = 6;
+              }
+              {
+                name = "emoji";
+                priority = 5;
+              }
               {
                 name = "buffer"; # text within current buffer
                 option.get_bufnrs.__raw = "vim.api.nvim_list_bufs";
                 keywordLength = 3;
+                priority = 10;
               }
-              { name = "copilot"; }
+              {
+                name = "copilot";
+                priority = 2;
+              }
               {
                 name = "path"; # file system paths
                 keywordLength = 3;
+                priority = 9;
               }
               {
                 name = "luasnip"; # snippets
                 keywordLength = 3;
+                priority = 9;
               }
             ];
             mapping = {
@@ -320,12 +334,22 @@ in
             };
           };
         };
+        lspkind = {
+          enable = true;
+          symbolMap = {
+            Copilot = "";
+            Text = "󰉿";
+          };
+        };
         cmp-nvim-lsp.enable = true;
         cmp-buffer.enable = true;
         cmp-path.enable = true;
         cmp_luasnip.enable = true;
         cmp-emoji.enable = true;
-        copilot-cmp.enable = true;
+        copilot-cmp = {
+          enable = true;
+          fixPairs = true;
+        };
         copilot-lua = {
           enable = true;
           suggestion.enabled = false;
