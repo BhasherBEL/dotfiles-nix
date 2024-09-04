@@ -194,82 +194,84 @@ in
         };
         conform-nvim = {
           enable = true;
-          formatters_by_ft = {
-            lua = [ "stylua" ];
-            python = [ "black" ];
-            javascript = [
-              [
-                "prettierd"
-                "prettier"
-              ]
-            ];
-            typescript = [
-              [
-                "prettierd"
-                "prettier"
-              ]
-            ];
-            svelte = [
-              [
-                "prettierd"
-                "prettier"
-              ]
-            ];
-            html = [
-              [
-                "prettierd"
-                "prettier"
-              ]
-            ];
-            css = [
-              [
-                "prettierd"
-                "prettier"
-              ]
-            ];
-            md = [
-              [
-                "prettierd"
-                "prettier"
-              ]
-            ];
-            less = [
-              [
-                "prettierd"
-                "prettier"
-              ]
-            ];
-            scss = [
-              [
-                "prettierd"
-                "prettier"
-              ]
-            ];
-            json = [
-              [
-                "prettierd"
-                "prettier"
-              ]
-            ];
-            yaml = [
-              [
-                "prettierd"
-                "prettier"
-              ]
-            ];
-            toml = [
-              [
-                "prettierd"
-                "prettier"
-              ]
-            ];
-            java = [ "google-java-format" ];
-            nix = [ "nixfmt" ];
-            c = [ "clang-format" ];
-            go = [ "gofmt" ];
-          };
-          notify_on_error = true;
-          log_level = "info";
+					settings = {
+						formatters_by_ft = {
+							lua = [ "stylua" ];
+							python = [ "black" ];
+							javascript = [
+								[
+									"prettierd"
+									"prettier"
+								]
+							];
+							typescript = [
+								[
+									"prettierd"
+									"prettier"
+								]
+							];
+							svelte = [
+								[
+									"prettierd"
+									"prettier"
+								]
+							];
+							html = [
+								[
+									"prettierd"
+									"prettier"
+								]
+							];
+							css = [
+								[
+									"prettierd"
+									"prettier"
+								]
+							];
+							md = [
+								[
+									"prettierd"
+									"prettier"
+								]
+							];
+							less = [
+								[
+									"prettierd"
+									"prettier"
+								]
+							];
+							scss = [
+								[
+									"prettierd"
+									"prettier"
+								]
+							];
+							json = [
+								[
+									"prettierd"
+									"prettier"
+								]
+							];
+							yaml = [
+								[
+									"prettierd"
+									"prettier"
+								]
+							];
+							toml = [
+								[
+									"prettierd"
+									"prettier"
+								]
+							];
+							java = [ "google-java-format" ];
+							nix = [ "nixfmt" ];
+							c = [ "clang-format" ];
+							go = [ "gofmt" ];
+						};
+						notify_on_error = true;
+						log_level = "info";
+					};
         };
         cmp = {
           enable = true;
