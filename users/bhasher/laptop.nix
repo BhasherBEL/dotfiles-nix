@@ -14,6 +14,7 @@
   };
 
   networking = {
+    nameservers = [ "1.1.1.1" ];
     wg-quick.interfaces.bxl-shp = {
       address = [ "10.15.14.6/32" ];
       privateKeyFile = "/run/secrets/wg/bxl-shp/laptop/key";
@@ -29,7 +30,12 @@
         }
       ];
     };
+    nftables.enable = true;
     firewall = {
+      trustedInterfaces = [
+        "wlp0s20f3"
+        "enp0s31f6"
+      ];
       allowedTCPPorts = [ 8080 ];
       allowedUDPPorts = [ 8080 ];
     };
@@ -38,4 +44,9 @@
   services.greetd.settings.default_session.user = "bhasher";
 
   time.timeZone = lib.mkForce "Europe/Helsinki";
+
+  modules = {
+    cs-c3170-web-software-development.enable = true;
+    router.enable = true;
+  };
 }
