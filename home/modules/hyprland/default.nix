@@ -197,8 +197,8 @@ in
         ];
         # Allow volume and brightness when locked
         bindle = [
-          ", XF86AudioRaiseVolume, exec, swayosd-client --output-volume raise --max-volume 120"
-          ", XF86AudioLowerVolume, exec, swayosd-client --output-volume lower --max-volume 120"
+          ", XF86AudioRaiseVolume, exec, swayosd-client --output-volume raise --max-volume 150"
+          ", XF86AudioLowerVolume, exec, swayosd-client --output-volume lower --max-volume 150"
           ", XF86MonBrightnessUp, exec, swayosd-client --brightness +5"
           ", XF86MonBrightnessDown, exec, swayosd-client --brightness -5"
         ];
