@@ -19,7 +19,7 @@
       address = [ "10.15.14.6/32" ];
       privateKeyFile = "/run/secrets/wg/bxl-shp/laptop/key";
       dns = [ "10.15.14.1" ];
-      autostart = true;
+      autostart = false;
       peers = [
         {
           publicKey = "Ft1qUCCs9GkpUfiotZU9Ueq1e9ncXr0PwWEyfLoc6Vs=";
