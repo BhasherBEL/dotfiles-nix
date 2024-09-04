@@ -13,6 +13,7 @@ in
   };
 
   config = lib.mkIf zshcfg.enable {
+    home.packages = with pkgs; [ fzf ];
 
     programs.zsh = {
       enable = true;
@@ -53,6 +54,10 @@ in
         {
           name = "nix-shell";
           src = "${pkgs.zsh-nix-shell}/share/zsh-nix-shell";
+        }
+        {
+          name = "fzf";
+          src = "${pkgs.oh-my-zsh}/share/oh-my-zsh/plugins/fzf";
         }
       ];
       # TODO: Find a nix way to do this
