@@ -194,7 +194,7 @@ in
         };
         conform-nvim = {
           enable = true;
-          formattersByFt = {
+          formatters_by_ft = {
             lua = [ "stylua" ];
             python = [ "black" ];
             javascript = [
@@ -268,12 +268,8 @@ in
             c = [ "clang-format" ];
             go = [ "gofmt" ];
           };
-          formatOnSave = {
-            lspFallback = true;
-            timeoutMs = 1000;
-          };
-          notifyOnError = true;
-          logLevel = "info";
+          notify_on_error = true;
+          log_level = "info";
         };
         cmp = {
           enable = true;
