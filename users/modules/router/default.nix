@@ -105,6 +105,7 @@ in
 
     services.dnsmasq = {
       enable = true;
+			resolveLocalQueries = false;
       settings = {
         server = [ "1.1.1.1" ];
         dhcp-range = [ "10.0.200.50,10.0.200.254" ];
