@@ -46,6 +46,5 @@
 
   modules = {
     cs-c3170-web-software-development.enable = true;
-    router.enable = true;
   };
 }

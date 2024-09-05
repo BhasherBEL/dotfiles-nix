@@ -26,5 +26,9 @@
 
   environment.systemPackages = with pkgs; [ cryptsetup ];
 
+	hostModules = {
+		router.enable = true;
+	};
+
   system.stateVersion = "23.11";
 }

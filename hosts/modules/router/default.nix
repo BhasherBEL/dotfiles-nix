@@ -5,11 +5,11 @@
   ...
 }:
 let
-  routercfg = config.modules.router;
+  routercfg = config.hostModules.router;
 in
 {
   options = {
-    modules.router = {
+    hostModules.router = {
       enable = lib.mkEnableOption "Enable router";
       interface = lib.mkOption {
         type = lib.types.str;

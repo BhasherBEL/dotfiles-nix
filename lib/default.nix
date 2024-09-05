@@ -33,9 +33,9 @@ in
         inputs.home-manager.nixosModules.default
         { home-manager.extraSpecialArgs = specialArgs; }
         ../overlays
-        #"${hostConfiguration}"
-        #"${homeConfiguration}"
+        "${hostsModules}"
         "${usersModules}"
+        #"${homeConfiguration}"
       ] ++ extraModules;
     };
 }
