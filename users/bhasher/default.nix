@@ -43,6 +43,9 @@ in
       "api/mistral" = {
         owner = config.users.users.bhasher.name;
       };
+      "api/chatgpt" = {
+        owner = config.users.users.bhasher.name;
+      };
       "security/u2f_keys" = {
         owner = config.users.users.bhasher.name;
         mode = "0400";

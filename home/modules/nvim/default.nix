@@ -194,88 +194,88 @@ in
         };
         conform-nvim = {
           enable = true;
-					settings = {
-						 format_on_save = {
-							lspFallback = true;
-							timeoutMs = 1000;
-						};
-						formatters_by_ft = {
-							lua = [ "stylua" ];
-							python = [ "black" ];
-							javascript = [
-								[
-									"prettierd"
-									"prettier"
-								]
-							];
-							typescript = [
-								[
-									"prettierd"
-									"prettier"
-								]
-							];
-							svelte = [
-								[
-									"prettierd"
-									"prettier"
-								]
-							];
-							html = [
-								[
-									"prettierd"
-									"prettier"
-								]
-							];
-							css = [
-								[
-									"prettierd"
-									"prettier"
-								]
-							];
-							md = [
-								[
-									"prettierd"
-									"prettier"
-								]
-							];
-							less = [
-								[
-									"prettierd"
-									"prettier"
-								]
-							];
-							scss = [
-								[
-									"prettierd"
-									"prettier"
-								]
-							];
-							json = [
-								[
-									"prettierd"
-									"prettier"
-								]
-							];
-							yaml = [
-								[
-									"prettierd"
-									"prettier"
-								]
-							];
-							toml = [
-								[
-									"prettierd"
-									"prettier"
-								]
-							];
-							java = [ "google-java-format" ];
-							nix = [ "nixfmt" ];
-							c = [ "clang-format" ];
-							go = [ "gofmt" ];
-						};
-						notify_on_error = true;
-						log_level = "info";
-					};
+          settings = {
+            format_on_save = {
+              lspFallback = true;
+              timeoutMs = 1000;
+            };
+            formatters_by_ft = {
+              lua = [ "stylua" ];
+              python = [ "black" ];
+              javascript = [
+                [
+                  "prettierd"
+                  "prettier"
+                ]
+              ];
+              typescript = [
+                [
+                  "prettierd"
+                  "prettier"
+                ]
+              ];
+              svelte = [
+                [
+                  "prettierd"
+                  "prettier"
+                ]
+              ];
+              html = [
+                [
+                  "prettierd"
+                  "prettier"
+                ]
+              ];
+              css = [
+                [
+                  "prettierd"
+                  "prettier"
+                ]
+              ];
+              md = [
+                [
+                  "prettierd"
+                  "prettier"
+                ]
+              ];
+              less = [
+                [
+                  "prettierd"
+                  "prettier"
+                ]
+              ];
+              scss = [
+                [
+                  "prettierd"
+                  "prettier"
+                ]
+              ];
+              json = [
+                [
+                  "prettierd"
+                  "prettier"
+                ]
+              ];
+              yaml = [
+                [
+                  "prettierd"
+                  "prettier"
+                ]
+              ];
+              toml = [
+                [
+                  "prettierd"
+                  "prettier"
+                ]
+              ];
+              java = [ "google-java-format" ];
+              nix = [ "nixfmt" ];
+              c = [ "clang-format" ];
+              go = [ "gofmt" ];
+            };
+            notify_on_error = true;
+            log_level = "info";
+          };
         };
         cmp = {
           enable = true;
@@ -410,6 +410,22 @@ in
           diagnostics = {
             enable = true;
             showOnDirs = true;
+          };
+        };
+        chatgpt = {
+          enable = true;
+          settings = {
+            api_key_cmd = "cat /run/secrets/api/chatgpt";
+            openai_params = {
+              model = "gpt-4o-mini";
+              temperature = 0.5;
+              top_p = 0.5;
+              presence_penalty = 0.7;
+              frequency_penalty = 0.7;
+            };
+            openai_edit_params = {
+              model = "gpt-4o-mini";
+            };
           };
         };
       };
