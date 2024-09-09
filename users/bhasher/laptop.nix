@@ -29,15 +29,6 @@
         }
       ];
     };
-    nftables.enable = true;
-    firewall = {
-      trustedInterfaces = [
-        "wlp0s20f3"
-        "enp0s31f6"
-      ];
-      allowedTCPPorts = [ 8080 ];
-      allowedUDPPorts = [ 8080 ];
-    };
   };
 
   services.greetd.settings.default_session.user = "bhasher";
