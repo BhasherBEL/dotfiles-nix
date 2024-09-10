@@ -3,6 +3,8 @@
 {
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
+  boot.kernelParams = [ "snd_bcm2835.enable_hdmi=1" ];
+
   fileSystems."/" = {
     device = "none";
     fsType = "tmpfs";

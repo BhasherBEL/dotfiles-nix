@@ -82,7 +82,7 @@
           inputs.disko.nixosModules.disko
         ];
 
-        media-center = makeNixosSystem "media-center" [
+        media-center = libx.makeNixosSystem "media-center" [
           ./hosts/media-center
           ./users/kodi/media-center.nix
           inputs.nixos-hardware.nixosModules.raspberry-pi-4

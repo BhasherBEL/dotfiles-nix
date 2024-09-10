@@ -1,11 +1,11 @@
 { pkgs, ... }:
 {
-  imports = [ ./shared/global ];
-
   home.username = "kodi";
   home.homeDirectory = "/home/kodi";
 
   home.stateVersion = "23.11";
+
+  imports = [ ./modules ];
 
   programs = {
     git = {
@@ -42,13 +42,6 @@
     };
     ssh = {
       enable = true;
-      matchBlocks = {
-        "github.com" = {
-          user = "git";
-          identitiesOnly = true;
-          identityFile = "/run/secrets/ssh/gitkey";
-        };
-      };
     };
     kodi = {
       enable = true;

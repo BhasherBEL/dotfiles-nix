@@ -380,11 +380,11 @@
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1725956205,
-        "narHash": "sha256-c8RIOsIerpGN0CQzgYZnTPxT3PJtdn7qUK8ed42wCLM=",
+        "lastModified": 1725997348,
+        "narHash": "sha256-VNQY7bo5fvOObkGcYPEpg6q8ALI1VVOhy1A7heIBeuQ=",
         "owner": "wamserma",
         "repo": "flake-programs-sqlite",
-        "rev": "a306eab023624f8dc40c427d6e5a605338ea9106",
+        "rev": "0223adbc1ad5f4eafe68f39cc1ad2e0c0bd2f60b",
         "type": "github"
       },
       "original": {
@@ -948,11 +948,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1725956241,
-        "narHash": "sha256-UL8WJvT+67ZNNc0GmfhygDzggq/lidyRRSN1jPXzr+0=",
+        "lastModified": 1726000537,
+        "narHash": "sha256-Y1dEuf2wZkg2rhE8sf73x9K0zknUald4Ia6zXnGEfjg=",
         "owner": "nix-community",
         "repo": "nixvim",
-        "rev": "faa2e6306c0a1ae8e67dfdb0d75cd5ecd427ca5d",
+        "rev": "fc7e9b29271a03459191955f78d4128451b7cd81",
         "type": "github"
       },
       "original": {
@@ -963,11 +963,11 @@
     },
     "nur": {
       "locked": {
-        "lastModified": 1725967373,
-        "narHash": "sha256-vjXRa5xLPunrcDuDAGSSGwfjo7xdLr23mZOtk5hfCDs=",
+        "lastModified": 1726000380,
+        "narHash": "sha256-m6WODrbd1y3ojnVOB+6iKr9xz/MHBpchjEDyro2wK0k=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "f7dea7740554876cc8034963a4e001f1ba4758c6",
+        "rev": "d732fda01f77594f411c0d71127d8402e2d7d516",
         "type": "github"
       },
       "original": {

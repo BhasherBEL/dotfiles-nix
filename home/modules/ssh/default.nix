@@ -63,7 +63,7 @@ in
           identityFile = "/run/secrets/ssh/ingi";
         };
         "github.com" = {
-          user = "shp";
+          user = "git";
           identitiesOnly = true;
           identityFile = "/run/secrets/ssh/gitkey";
         };

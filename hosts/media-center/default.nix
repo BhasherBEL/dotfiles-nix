@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 {
   imports = [
     ./hardware-configuration.nix
@@ -19,7 +19,7 @@
       bluetooth.enable = true;
     };
     deviceTree.enable = true;
-    pulseaudio.enable = true;
+    #pulseaudio.enable = true;
     bluetooth.enable = true;
   };
 
@@ -63,12 +63,15 @@
     enable = true;
     hideMounts = true;
     directories = [
+      #Mandatory https://github.com/NixOS/nixpkgs/pull/273384
+      "/var/lib/nixos"
       "/etc/nixos"
       #To prevent builds to fill all remaining space
       "/tmp"
       "/var/tmp"
       #TODO: Find a nix way?
       "/etc/NetworkManager/system-connections"
+      "/var/lib/iwd"
       {
         directory = "/etc/ssh/";
         mode = "0700";
