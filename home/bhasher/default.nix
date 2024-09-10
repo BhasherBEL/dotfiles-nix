@@ -309,6 +309,19 @@
             }
           ];
         }
+        {
+          name = "Aalto";
+          bookmarks = [
+            {
+              name = "MyCourses";
+              url = "https://mycourses.aalto.fi/";
+            }
+            {
+              name = "Aalto";
+              url = "htts://aalto.fi";
+            }
+          ];
+        }
       ];
     };
   };
