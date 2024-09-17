@@ -155,7 +155,28 @@ in
             };
             gopls.enable = true;
             svelte.enable = true;
-            tsserver.enable = true;
+            tsserver = {
+              enable = true;
+              extraOptions = {
+                codeActionsOnSave = {
+                  "source.organizeImports" = true;
+                };
+                commands = {
+                  OrganizeImports.__raw = ''
+                    {
+                      function()
+                        vim.lsp.buf.execute_command {
+                          title = "",
+                          command = "_typescript.organizeImports",
+                          arguments = { vim.api.nvim_buf_get_name(0) },
+                        }
+                      end,
+                      description = "Organize Imports",
+                    }
+                  '';
+                };
+              };
+            };
             tailwindcss.enable = true;
             clangd.enable = true;
             lua-ls = {
@@ -199,80 +220,33 @@ in
               lspFallback = true;
               timeoutMs = 1000;
             };
-            formatters_by_ft = {
-              lua = [ "stylua" ];
-              python = [ "black" ];
-              javascript = [
-                [
-                  "prettierd"
-                  "prettier"
-                ]
-              ];
-              typescript = [
-                [
-                  "prettierd"
-                  "prettier"
-                ]
-              ];
-              svelte = [
-                [
-                  "prettierd"
-                  "prettier"
-                ]
-              ];
-              html = [
-                [
-                  "prettierd"
-                  "prettier"
-                ]
-              ];
-              css = [
-                [
-                  "prettierd"
-                  "prettier"
-                ]
-              ];
-              md = [
-                [
-                  "prettierd"
-                  "prettier"
-                ]
-              ];
-              less = [
-                [
-                  "prettierd"
-                  "prettier"
-                ]
-              ];
-              scss = [
-                [
-                  "prettierd"
-                  "prettier"
-                ]
-              ];
-              json = [
-                [
-                  "prettierd"
-                  "prettier"
-                ]
-              ];
-              yaml = [
-                [
-                  "prettierd"
-                  "prettier"
-                ]
-              ];
-              toml = [
-                [
-                  "prettierd"
-                  "prettier"
-                ]
-              ];
-              java = [ "google-java-format" ];
-              nix = [ "nixfmt" ];
-              c = [ "clang-format" ];
-              go = [ "gofmt" ];
-            };
+            formatters_by_ft =
+              let
+                prettier = {
+                  __unkeyed-1 = "prettierd";
+                  __unkeyed-2 = "prettier";
+                  stop_after_first = true;
+                };
+              in
+              {
+                lua = [ "stylua" ];
+                python = [ "black" ];
+                javascript = prettier;
+                typescript = prettier;
+                svelte = prettier;
+                html = prettier;
+                css = prettier;
+                md = prettier;
+                less = prettier;
+                scss = prettier;
+                json = prettier;
+                yaml = prettier;
+                toml = prettier;
+                java = [ "google-java-format" ];
+                nix = [ "nixfmt" ];
+                c = [ "clang-format" ];
+                go = [ "gofmt" ];
+              };
             notify_on_error = true;
             log_level = "info";
           };
