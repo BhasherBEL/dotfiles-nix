@@ -111,6 +111,14 @@
               name = "Pluie Bruxelles";
               url = "https://www.accuweather.com/en/be/watermael-boitsfort/27577/weather-forecast/27577";
             }
+            {
+              name = "Meteo Helsinki";
+              url = "https://en.ilmatieteenlaitos.fi/local-weather";
+            }
+            {
+              name = "Pluie Helsinki";
+              url = "https://www.accuweather.com/en/fi/helsinki/133328/minute-weather-forecast/133328";
+            }
           ];
         }
         {
