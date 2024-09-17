@@ -318,7 +318,11 @@
             }
             {
               name = "Aalto";
-              url = "htts://aalto.fi";
+              url = "https://aalto.fi";
+            }
+            {
+              name = "Kanttiinit";
+              url = "https://kanttiinit.fi";
             }
           ];
         }
