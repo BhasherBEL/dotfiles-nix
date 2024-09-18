@@ -62,6 +62,10 @@
               name = "NixOS Search";
               url = "https://search.nixos.org/packages";
             }
+            {
+              name = "NixVim";
+              url = "https://nix-community.github.io/nixvim/NeovimOptions/index.html";
+            }
           ];
         }
         {

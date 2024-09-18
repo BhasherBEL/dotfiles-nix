@@ -381,6 +381,7 @@ in
           openOnSetup = true;
           openOnSetupFile = true;
           autoClose = true;
+          updateFocusedFile.enable = true;
           diagnostics = {
             enable = true;
             showOnDirs = true;
