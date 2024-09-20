@@ -3,6 +3,7 @@
   lib,
   pkgs,
   inputs,
+  osConfig,
   ...
 }:
 let
@@ -234,7 +235,10 @@ in
             privacy-badger
             facebook-container
           ]
-          ++ lib.optionals ffcfg.nightly [ aw-watcher-web ];
+          ++ lib.optionals ffcfg.nightly [ aw-watcher-web ]
+          ++ lib.optionals osConfig.modules.classes.master-thesis.enable [
+            zotero-connector
+          ];
         bookmarks = ffcfg.bookmarks;
       };
     };
