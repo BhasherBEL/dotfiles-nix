@@ -155,7 +155,7 @@ in
             };
             gopls.enable = true;
             svelte.enable = true;
-            tsserver = {
+            ts-ls = {
               enable = true;
               extraOptions = {
                 codeActionsOnSave = {
@@ -409,6 +409,7 @@ in
             auto_close = 1;
           };
         };
+        web-devicons.enable = true;
       };
     };
   };
