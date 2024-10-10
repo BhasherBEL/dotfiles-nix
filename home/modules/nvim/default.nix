@@ -230,7 +230,10 @@ in
               in
               {
                 lua = [ "stylua" ];
-                python = [ "black" ];
+                python = {
+                  __unkeyed-1 = "black";
+                  timeout_ms = 10000;
+                };
                 javascript = prettier;
                 typescript = prettier;
                 svelte = prettier;
