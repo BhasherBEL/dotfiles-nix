@@ -49,6 +49,15 @@
 
   users.defaultUserShell = pkgs.zsh;
 
+  nixpkgs.config.allowUnfreePredicate =
+    pkg:
+    builtins.elem (lib.getName pkg) [
+      "gaoptout"
+      "android-sdk-cmdline-tools"
+      "android-sdk-tools"
+      "android-studio-stable"
+    ];
+
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;

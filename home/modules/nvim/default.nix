@@ -149,13 +149,13 @@ in
         lsp = {
           enable = true;
           servers = {
-            nil-ls = {
+            nil_ls = {
               enable = true;
               settings.autoformat = true;
             };
             gopls.enable = true;
             svelte.enable = true;
-            ts-ls = {
+            ts_ls = {
               enable = true;
               extraOptions = {
                 codeActionsOnSave = {
@@ -179,7 +179,7 @@ in
             };
             tailwindcss.enable = true;
             clangd.enable = true;
-            lua-ls = {
+            lua_ls = {
               enable = true;
               settings = {
                 diagnostics = {

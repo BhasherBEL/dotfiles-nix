@@ -34,6 +34,7 @@
   security.pam.services.hyprlock = { };
 
   environment.systemPackages = with pkgs; [
+    hyprland
     tofi
     wl-clipboard
     hyprshot

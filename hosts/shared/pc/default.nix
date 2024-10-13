@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs, ... }:
 {
   imports = [ ./hyprland.nix ];
 
@@ -10,8 +10,6 @@
       openFirewall = true;
     };
   };
-
-  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [ "gaoptout" ];
 
   services = {
     xserver = {

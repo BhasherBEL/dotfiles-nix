@@ -3,5 +3,6 @@
   imports = [
     ./theming
     ./classes
+    ./flutter
   ];
 }

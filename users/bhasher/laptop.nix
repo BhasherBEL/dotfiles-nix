@@ -45,5 +45,6 @@
       master-thesis.enable = true;
       cs-c3170-web-software-development.enable = true;
     };
+    #flutter.enable = true;
   };
 }
