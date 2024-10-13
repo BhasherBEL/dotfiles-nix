@@ -68,7 +68,11 @@ in
               "DVI-D-1,preferred,1920x0,1"
             ]
           else if metapccfg.monitors == 1 then
-            [ "eDP-1,preferred,auto,1" ]
+            [
+              "eDP-1,preferred,auto,1"
+              "DP-4,1920x1080,auto,1"
+              "DP-5,preferred,-1680x0,1"
+            ]
           else
             [ ];
         workspace =
