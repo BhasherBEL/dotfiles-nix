@@ -17,6 +17,8 @@ in
   ];
   home-manager.users.bhasher.imports = [ ../../home/bhasher ];
 
+  nix.settings.trusted-users = [ "bhasher" ];
+
   sops = {
     defaultSopsFile = ../../secrets/bhasher.yaml;
     defaultSopsFormat = "yaml";
@@ -68,6 +70,8 @@ in
         "docker"
         "wireshark"
         "uucpd"
+        "kvm"
+        "adbusers"
       ];
   };
 
@@ -146,5 +150,6 @@ in
 
   modules = {
     theming.enable = true;
+    devenv.enable = true;
   };
 }

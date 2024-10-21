@@ -4,5 +4,6 @@
     ./theming
     ./classes
     ./flutter
+    ./devenv
   ];
 }

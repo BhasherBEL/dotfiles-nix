@@ -33,16 +33,17 @@ in
 
     nixpkgs.config.android_sdk.accept_license = true;
 
-    environment.variables = {
-      ANDROID_SDK_ROOT = "${androidSdk}/libexec/android-sdk";
-    };
+    #environment.sessionVariables = {
+    #  ANDROID_SDK_ROOT = "${androidSdk}/libexec/android-sdk";
+    #};
 
     programs.adb.enable = true;
 
     environment.systemPackages = with pkgs; [
-      flutter
-      androidSdk
-      jdk17
+      #flutter
+      #androidSdk
+      #jdk17
+      android-studio
     ];
   };
 }

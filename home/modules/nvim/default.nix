@@ -395,14 +395,15 @@ in
           settings = {
             api_key_cmd = "cat /run/secrets/api/chatgpt";
             openai_params = {
-              model = "gpt-4o-mini";
-              temperature = 0.5;
-              top_p = 0.5;
-              presence_penalty = 0.7;
-              frequency_penalty = 0.7;
+              model = "chatgpt-4o-latest";
+              temperature = 0.7;
+              top_p = 0.8;
+              presence_penalty = 0.5;
+              frequency_penalty = 0.5;
+              max_tokens = 2048;
             };
             openai_edit_params = {
-              model = "gpt-4o-mini";
+              model = "chatgpt-4o-latest";
             };
           };
         };
