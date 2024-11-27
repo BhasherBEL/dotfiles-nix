@@ -31,12 +31,6 @@ in
       withNodeJs = true;
       extraPackages = with pkgs; [ nodejs-slim ];
       highlightOverride.SpellBad.bg = "#444444";
-      autoCmd = [
-        {
-          event = [ "VimResized" ];
-          callback = "function() vim.cmd([[wincmd =]]) end";
-        }
-      ];
       userCommands = {
         Day = {
           command = "lua vim.cmd([[colorscheme " + dayScheme + "]])";
@@ -71,8 +65,14 @@ in
         }
         {
           mode = [ "n" ];
-          key = "fb";
-          action.__raw = "function() require('telescope.builtin').buffers() end";
+          key = "fd";
+          action.__raw = "function() require('telescope.builtin').diagnostics() end";
+          options = { };
+        }
+        {
+          mode = [ "n" ];
+          key = "fh";
+          action.__raw = "function() require('telescope.builtin').oldfiles() end";
           options = { };
         }
         {
@@ -141,6 +141,8 @@ in
         termguicolors = true;
         spell = true;
         spelllang = "en"; # fr
+        foldlevel = 999;
+        foldmethod = "manual";
       };
       plugins = {
         lsp-format = {
@@ -340,7 +342,7 @@ in
         treesitter = {
           enable = true;
           nixGrammars = true;
-          folding = false;
+          folding = true;
           grammarPackages = with pkgs.vimPlugins.nvim-treesitter.builtGrammars; [
             go
             lua
