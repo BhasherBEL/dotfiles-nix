@@ -36,15 +36,6 @@ in
           grace = 15;
         };
 
-        # BACKGROUND
-        background = [
-          {
-            #path = ~/.config/background
-            blur_passes = 0;
-            color = "rgba(25, 20, 30, 1.0)";
-          }
-        ];
-
         # TIME
         label = [
           {
@@ -78,30 +69,6 @@ in
             border_color = "$accent";
 
             position = "0, 75";
-            halign = "center";
-            valign = "center";
-          }
-        ];
-
-        # INPUT FIELD
-        input-field = [
-          {
-            size = "300, 60";
-            outline_thickness = 4;
-            dots_size = 0.2;
-            dots_spacing = 0.2;
-            dots_center = true;
-            outer_color = "$accent";
-            inner_color = "$surface0";
-            font_color = "$text";
-            fade_on_empty = false;
-            placeholder_text = "<span foreground=\"##$textAlpha\"> <i>Logged in as</i> <span foreground=\"##$accentAlpha\">$USER</span></span>";
-            hide_input = false;
-            check_color = "$accent";
-            fail_color = "$red";
-            fail_text = "<i>$FAIL <b>($ATTEMPTS)</b></i>";
-            capslock_color = "$yellow";
-            position = "0, -35";
             halign = "center";
             valign = "center";
           }
