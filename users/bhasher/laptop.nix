@@ -44,6 +44,7 @@
     classes = {
       master-thesis.enable = true;
       cs-c3170-web-software-development.enable = true;
+      aalto.enable = true;
     };
     flutter.enable = false;
   };
