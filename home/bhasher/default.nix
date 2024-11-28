@@ -43,6 +43,7 @@
 
     joplin-desktop.enable = true;
     syncthing.enable = true;
+    tmux.enable = true;
     firefox = {
       enable = true;
       strictPrivacy = true;

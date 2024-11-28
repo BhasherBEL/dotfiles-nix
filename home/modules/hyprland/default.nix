@@ -7,6 +7,7 @@
 let
   hyprlandcfg = config.modules.hyprland;
   metapccfg = config.modules.metaPc;
+  tmuxcfg = config.modules.tmux;
 in
 {
   options = {
@@ -122,7 +123,12 @@ in
         "$mainMod" = "SUPER";
 
         bind = [
-          "$mainMod, RETURN, exec, ${pkgs.kitty}/bin/kitty"
+          (
+            if tmuxcfg.enable then
+              "$mainMod, RETURN, exec, ${pkgs.kitty}/bin/kitty -e tmux attach"
+            else
+              "$mainMod, RETURN, exec, ${pkgs.kitty}/bin/kitty"
+          )
           "$mainMod, C, killactive, "
           "$mainMod, V, togglefloating, "
           "$mainMod, D, exec, rofi -show drun"

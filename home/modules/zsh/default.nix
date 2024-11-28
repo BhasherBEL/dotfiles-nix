@@ -25,7 +25,6 @@ in
         ip = "ip --color";
         nv = "nvim";
         sl = "sl -adew5F";
-        firefox = "exec firefox | firefox-nightly";
       };
       plugins = [
         {

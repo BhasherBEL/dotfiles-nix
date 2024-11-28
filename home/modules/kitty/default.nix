@@ -16,7 +16,7 @@ in
     programs.kitty = {
       enable = true;
       shellIntegration.enableZshIntegration = true;
-      settings.confirm_os_window_close = -1;
+      settings.confirm_os_window_close = 0;
       #font = {
       #  name = "Hack Nerd Font Mono";
       #  package = pkgs.nerdfonts.override {

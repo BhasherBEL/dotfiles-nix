@@ -24,6 +24,7 @@
     ./nvim
     ./waybar
     ./kitty
+    ./tmux
   ];
 
   fonts.fontconfig.enable = true;

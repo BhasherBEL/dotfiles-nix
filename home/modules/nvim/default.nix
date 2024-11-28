@@ -416,6 +416,9 @@ in
           };
         };
         web-devicons.enable = true;
+        notify.enable = true;
+        comment.enable = true;
+        tmux-navigator.enable = true;
       };
     };
   };
