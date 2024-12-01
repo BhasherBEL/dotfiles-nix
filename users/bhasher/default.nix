@@ -72,6 +72,7 @@ in
         "uucpd"
         "kvm"
         "adbusers"
+        "dialout"
       ];
   };
 
