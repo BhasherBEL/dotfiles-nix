@@ -25,6 +25,8 @@ in
         ip = "ip --color";
         nv = "nvim";
         sl = "sl -adew5F";
+        tm = "tmux attach";
+        tn = "tmux new-session";
       };
       plugins = [
         {

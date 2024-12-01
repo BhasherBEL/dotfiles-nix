@@ -123,12 +123,7 @@ in
         "$mainMod" = "SUPER";
 
         bind = [
-          (
-            if tmuxcfg.enable then
-              "$mainMod, RETURN, exec, ${pkgs.kitty}/bin/kitty -e tmux attach"
-            else
-              "$mainMod, RETURN, exec, ${pkgs.kitty}/bin/kitty"
-          )
+          "$mainMod, RETURN, exec, ${pkgs.kitty}/bin/kitty"
           "$mainMod, C, killactive, "
           "$mainMod, V, togglefloating, "
           "$mainMod, D, exec, rofi -show drun"
@@ -303,6 +298,7 @@ in
           "tile, class:^(ONLYOFFICE Desktop Editors|DesktopEditors)$"
           "tile, class:^(ghidra)(.*)$"
           "opacity 0.9, class:(kitty)"
+          "float, class:(firefox), title:(Picture-in-Picture)"
         ];
       };
     };

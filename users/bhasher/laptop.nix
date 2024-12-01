@@ -29,7 +29,7 @@
             #"192.168.1.0/24"
             "0.0.0.0/0"
           ];
-          endpoint = "vpn.bhasher.com:51822";
+          endpoint = "91.182.226.236:51822";
           persistentKeepalive = 25;
         }
       ];
