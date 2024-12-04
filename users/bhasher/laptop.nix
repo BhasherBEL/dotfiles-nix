@@ -33,7 +33,6 @@
 
   modules = {
     bluetooth.enable = true;
-    eid.enable = true;
     docker.enable = true;
     classes = {
       master-thesis = {

@@ -45,11 +45,13 @@ in
           inputs.firefox.packages.${pkgs.system}.firefox-nightly-bin.override {
             pkcs11Modules = [ pkgs.eid-mw ];
             nativeMessagingHosts = [ pkgs.web-eid-app ];
+            extraPolicies.SecurityDevices.p11-kit-proxy = "${pkgs.p11-kit}/lib/p11-kit-proxy.so";
           }
         else
           pkgs.firefox.override {
             pkcs11Modules = [ pkgs.eid-mw ];
             nativeMessagingHosts = [ pkgs.web-eid-app ];
+            extraPolicies.SecurityDevices.p11-kit-proxy = "${pkgs.p11-kit}/lib/p11-kit-proxy.so";
           };
 
       policies.SecurityDevices.p11-kit-proxy = "${pkgs.p11-kit}/lib/p11-kit-proxy.so";

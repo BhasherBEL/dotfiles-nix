@@ -48,7 +48,7 @@
       enable = true;
       strictPrivacy = true;
       kagiSearch = true;
-      nightly = true;
+      nightly = false;
       bookmarks = [
         {
           name = "Nix sites";
