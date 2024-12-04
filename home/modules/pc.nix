@@ -1,7 +1,6 @@
 {
   lib,
   config,
-  osConfig,
   ...
 }:
 let
@@ -12,9 +11,9 @@ in
     modules.metaPc = {
       enable = lib.mkEnableOption "Enable meta module PC";
       monitors = lib.mkOption {
-        type = lib.types.int;
+        type = lib.types.listOf lib.types.str;
         description = "Amount of monitors";
-        default = if osConfig.networking.hostName == "desktop" then 3 else 1;
+        default = [ ];
       };
     };
   };

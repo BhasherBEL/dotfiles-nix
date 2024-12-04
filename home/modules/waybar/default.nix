@@ -20,58 +20,58 @@ let
       };
       format = "{icon}";
       format-icons =
-        if metapccfg.monitors == 3 then
-          {
-            "11" = "";
-            "12" = "2";
-            "13" = "3";
-            "14" = "4";
-            "15" = "5";
-            "16" = "6";
-            "17" = "7";
-            "18" = "8";
-            "19" = "9";
-            "20" = "0";
-            "1" = "";
-            "2" = "";
-            "3" = "3";
-            "4" = "4";
-            "5" = "5";
-            "6" = "6";
-            "7" = "7";
-            "8" = "8";
-            "9" = "9";
-            "10" = "0";
-            "21" = "";
-            "22" = "2";
-            "23" = "3";
-            "24" = "4";
-            "25" = "5";
-            "26" = "6";
-            "27" = "7";
-            "28" = "8";
-            "29" = "9";
-            "30" = "0";
-            urgent = "";
-            focused = "";
-            default = "";
-          }
-        else
-          {
-            "1" = "";
-            "2" = "";
-            "3" = "";
-            "4" = "";
-            "5" = "5";
-            "6" = "6";
-            "7" = "7";
-            "8" = "8";
-            "9" = "9";
-            "10" = "0";
-            urgent = "";
-            focused = "";
-            default = "";
-          };
+        # if (builtins.length metapccfg.monitors) == 3 then
+        #   {
+        #     "11" = "";
+        #     "12" = "2";
+        #     "13" = "3";
+        #     "14" = "4";
+        #     "15" = "5";
+        #     "16" = "6";
+        #     "17" = "7";
+        #     "18" = "8";
+        #     "19" = "9";
+        #     "20" = "0";
+        #     "1" = "";
+        #     "2" = "";
+        #     "3" = "3";
+        #     "4" = "4";
+        #     "5" = "5";
+        #     "6" = "6";
+        #     "7" = "7";
+        #     "8" = "8";
+        #     "9" = "9";
+        #     "10" = "0";
+        #     "21" = "";
+        #     "22" = "2";
+        #     "23" = "3";
+        #     "24" = "4";
+        #     "25" = "5";
+        #     "26" = "6";
+        #     "27" = "7";
+        #     "28" = "8";
+        #     "29" = "9";
+        #     "30" = "0";
+        #     urgent = "";
+        #     focused = "";
+        #     default = "";
+        #   }
+        # else
+        {
+          "1" = "";
+          "2" = "";
+          "3" = "";
+          "4" = "";
+          "5" = "5";
+          "6" = "6";
+          "7" = "7";
+          "8" = "8";
+          "9" = "9";
+          "10" = "0";
+          urgent = "";
+          focused = "";
+          default = "";
+        };
     };
     tray = {
       spacing = 10;
@@ -178,10 +178,6 @@ in
         assertion = metapccfg.enable;
         message = "Meta module PC is required";
       }
-      {
-        assertion = metapccfg.monitors == 1 || metapccfg.monitors == 3;
-        message = "Waybar only supports 1 or 3 monitors";
-      }
     ];
 
     programs.waybar = {
@@ -193,63 +189,61 @@ in
         mode = "createLink";
       };
       settings =
-        if metapccfg.monitors == 3 then
-          {
-            mainBar = defaultBar // {
-              output = [ "DP-1" ];
-              modules-left = [ "hyprland/workspaces" ];
-              modules-center = [ "clock" ];
-              modules-right = [
-                #"custom/kde-connect"
-                "custom/VPN"
-                "network"
-                "custom/bandwidth"
-                "tray"
-                "custom/notifications"
-              ];
-            };
-            rightBar = defaultBar // {
-              output = [ "DVI-D-1" ];
-              modules-left = [ "hyprland/workspaces" ];
-              modules-right = [
-                "pulseaudio"
-                "privacy"
-              ];
-            };
-            leftBar = defaultBar // {
-              output = [ "HDMI-A-1" ];
-              modules-left = [ "hyprland/workspaces" ];
-              modules-right = [
-                "cpu"
-                "memory"
-                "temperature"
-                "disk"
-                "battery"
-              ];
-            };
-          }
-        else if metapccfg.monitors == 1 then
-          {
-            uniqueBar = defaultBar // {
-              modules-left = [ "hyprland/workspaces" ];
-              modules-center = [ "clock" ];
-              modules-right = [
-                "network"
-                "custom/VPN"
-                "privacy"
-                "cpu"
-                "memory"
-                "temperature"
-                "disk"
-                "pulseaudio"
-                "battery"
-                "tray"
-                "custom/notifications"
-              ];
-            };
-          }
-        else
-          { };
+        # if (builtins.length metapccfg.monitors) == 3 then
+        #   {
+        #     mainBar = defaultBar // {
+        #       output = [ "DP-1" ];
+        #       modules-left = [ "hyprland/workspaces" ];
+        #       modules-center = [ "clock" ];
+        #       modules-right = [
+        #         #"custom/kde-connect"
+        #         "custom/VPN"
+        #         "network"
+        #         "custom/bandwidth"
+        #         "tray"
+        #         "custom/notifications"
+        #       ];
+        #     };
+        #     rightBar = defaultBar // {
+        #       output = [ "DVI-D-1" ];
+        #       modules-left = [ "hyprland/workspaces" ];
+        #       modules-right = [
+        #         "pulseaudio"
+        #         "privacy"
+        #       ];
+        #     };
+        #     leftBar = defaultBar // {
+        #       output = [ "HDMI-A-1" ];
+        #       modules-left = [ "hyprland/workspaces" ];
+        #       modules-right = [
+        #         "cpu"
+        #         "memory"
+        #         "temperature"
+        #         "disk"
+        #         "battery"
+        #       ];
+        #     };
+        #   }
+        # else
+        {
+          uniqueBar = defaultBar // {
+            modules-left = [ "hyprland/workspaces" ];
+            modules-center = [ "clock" ];
+            modules-right = [
+              "network"
+              "custom/VPN"
+              "privacy"
+              "cpu"
+              "memory"
+              "temperature"
+              "disk"
+              "pulseaudio"
+              "battery"
+              "tray"
+              "custom/notifications"
+            ];
+          };
+        };
     };
 
     home.file = {

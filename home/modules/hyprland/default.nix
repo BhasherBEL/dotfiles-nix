@@ -21,10 +21,6 @@ in
         assertion = metapccfg.enable;
         message = "Meta module PC is required";
       }
-      {
-        assertion = metapccfg.monitors == 1 || metapccfg.monitors == 3;
-        message = "Hyprland only supports 1 or 3 monitors";
-      }
     ];
 
     home.file = {
@@ -62,69 +58,22 @@ in
           "${pkgs.wl-clipboard}/bin/wl-paste --type text --watch cliphlist store"
           "${pkgs.wl-clipboard}/bin/wl-paste --type image --watch cliphlist store"
         ];
-        monitor =
-          if metapccfg.monitors == 3 then
-            [
-              "HDMI-A-1,preferred,-1080x-650,1,transform,1"
-              "DP-1,preferred,0x0,1"
-              "DVI-D-1,preferred,1920x0,1"
-            ]
-          else if metapccfg.monitors == 1 then
-            [
-              "eDP-1,preferred,auto,1"
-              "DP-4,1920x1080,auto,1"
-              "DP-5,preferred,-1680x0,1"
-            ]
-          else
-            [ ];
+        monitor = metapccfg.monitors;
         workspace =
-          if metapccfg.monitors == 3 then
-            [
-              "HDMI-A-1,11"
-              "DP-1,1"
-              "DVI-D-1,21"
+          let
+            workspacesPerMonitor = 10;
 
-              "11,monitor:HDMI-A-1"
-              "12,monitor:HDMI-A-1"
-              "13,monitor:HDMI-A-1"
-              "14,monitor:HDMI-A-1"
-              "15,monitor:HDMI-A-1"
-              "16,monitor:HDMI-A-1"
-              "17,monitor:HDMI-A-1"
-              "18,monitor:HDMI-A-1"
-              "19,monitor:HDMI-A-1"
-              "20,monitor:HDMI-A-1"
-
-              "1,monitor:DP-1"
-              "2,monitor:DP-1"
-              "3,monitor:DP-1"
-              "4,monitor:DP-1"
-              "5,monitor:DP-1"
-              "6,monitor:DP-1"
-              "7,monitor:DP-1"
-              "8,monitor:DP-1"
-              "9,monitor:DP-1"
-              "10,monitor:DP-1"
-
-              "21,monitor:DVD-D-1"
-              "22,monitor:DVD-D-1"
-              "23,monitor:DVD-D-1"
-              "24,monitor:DVD-D-1"
-              "25,monitor:DVD-D-1"
-              "26,monitor:DVD-D-1"
-              "27,monitor:DVD-D-1"
-              "28,monitor:DVD-D-1"
-              "29,monitor:DVD-D-1"
-              "30,monitor:DVD-D-1"
-            ]
-          else if metapccfg.monitors == 1 then
-            [
-              "eDP-1,1"
-              "DP-4,21"
-              "DP-5,11"
-            ]
-          else
-            [ ];
+            generateWorkspaces =
+              i: monitor:
+              let
+                monitorName = builtins.elemAt (lib.splitString "," monitor) 0;
+                start = i * workspacesPerMonitor + 1;
+                end = (i + 1) * workspacesPerMonitor;
+              in
+              [ "${monitorName},${toString (i + 1)}" ]
+              ++ map (workspace: "${toString workspace},monitor:${monitorName}") (lib.range start end);
+          in
+          lib.concatLists (lib.imap0 generateWorkspaces metapccfg.monitors);
 
         "$mainMod" = "SUPER";
 

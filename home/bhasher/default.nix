@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  osConfig,
   ...
 }:
 {
@@ -39,7 +40,24 @@
   };
 
   modules = {
-    metaPc.enable = true;
+    metaPc = {
+      enable = true;
+      monitors =
+        if osConfig.networking.hostName == "desktop" then
+          [
+            "DP-1,preferred,0x0,1"
+            "HDMI-A-1,preferred,-1080x-650,1,transform,1"
+            "DVI-D-1,preferred,1920x0,1"
+          ]
+        else if osConfig.networking.hostName == "laptop" then
+          [
+            "eDP-1,preferred,auto,1"
+            "DP-4,1920x1080,auto,1"
+            "DP-5,preferred,-1680x0,1"
+          ]
+        else
+          [ ];
+    };
 
     joplin-desktop.enable = true;
     syncthing.enable = true;
