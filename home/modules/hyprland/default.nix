@@ -7,7 +7,6 @@
 let
   hyprlandcfg = config.modules.hyprland;
   metapccfg = config.modules.metaPc;
-  tmuxcfg = config.modules.tmux;
 in
 {
   options = {
@@ -41,7 +40,7 @@ in
       "${config.xdg.configHome}/hypr/scripts/increase_scale.sh" = {
         text = ''
           current=$(wlr-randr --output eDP-1 | grep 'Scale:' | awk '{print $2}')
-          new=$(echo "$current - 0.25" | bc)
+          new=$(echo "$current + 0.25" | bc)
 
           wlr-randr --output eDP-1 --scale $new
         '';
@@ -116,6 +115,12 @@ in
               "28,monitor:DVD-D-1"
               "29,monitor:DVD-D-1"
               "30,monitor:DVD-D-1"
+            ]
+          else if metapccfg.monitors == 1 then
+            [
+              "eDP-1,1"
+              "DP-4,21"
+              "DP-5,11"
             ]
           else
             [ ];

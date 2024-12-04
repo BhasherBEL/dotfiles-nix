@@ -11,6 +11,7 @@
         jupyter
         scapy
         virtualenv
+        pyserial # arduino
       ]
     ))
   ];

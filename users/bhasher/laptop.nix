@@ -42,7 +42,10 @@
 
   modules = {
     classes = {
-      master-thesis.enable = true;
+      master-thesis = {
+        enable = true;
+        iface = "wlp0s20f3";
+      };
       cs-c3170-web-software-development.enable = true;
       aalto.enable = true;
     };

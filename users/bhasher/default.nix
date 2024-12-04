@@ -65,6 +65,7 @@ in
       [
         "wheel"
         "audio"
+        "networkmanager"
       ]
       ++ ifTheyExist [
         "docker"
@@ -73,6 +74,8 @@ in
         "kvm"
         "adbusers"
         "dialout"
+        "openvpn"
+        "plugdev"
       ];
   };
 

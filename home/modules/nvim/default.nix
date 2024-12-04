@@ -19,7 +19,7 @@ in
   };
 
   config = lib.mkIf nvimcfg.enable {
-    #home.packages = with pkgs; [ nerdfonts ];
+    home.packages = with pkgs; [ dart ];
 
     programs.nixvim = {
       enable = true;
@@ -213,6 +213,8 @@ in
               };
             };
             marksman.enable = true;
+            dartls.enable = true;
+            arduino_language_server.enable = true;
           };
         };
         conform-nvim = {
@@ -251,6 +253,10 @@ in
                 nix = [ "nixfmt" ];
                 c = [ "clang-format" ];
                 go = [ "gofmt" ];
+                dart = {
+                  __unkeyed-1 = "dart_format";
+                  timeout_ms = 5000;
+                };
               };
             notify_on_error = true;
             log_level = "info";
