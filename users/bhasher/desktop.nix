@@ -2,7 +2,6 @@
 {
   imports = [
     ./default.nix
-    ../optional/go.nix
   ];
 
   sops.secrets = {

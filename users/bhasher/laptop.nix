@@ -2,10 +2,6 @@
 {
   imports = [
     ./default.nix
-    ../optional/go.nix
-    ../optional/eid.nix
-    ../optional/wifi-crack.nix
-    ../optional/docker.nix
   ];
 
   sops.secrets = {
@@ -37,6 +33,8 @@
 
   modules = {
     bluetooth.enable = true;
+    eid.enable = true;
+    docker.enable = true;
     classes = {
       master-thesis = {
         enable = true;

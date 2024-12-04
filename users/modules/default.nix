@@ -11,6 +11,12 @@
     ./bluetooth
     ./js
     ./python
+    ./docker
+    ./eid
+    ./go
+    ./rustdesk
+    ./virtualbox
+    ./wificrack
   ];
 
 }

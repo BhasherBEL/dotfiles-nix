@@ -5,8 +5,6 @@ let
   ];
 in
 {
-  imports = [ ../optional/bluetooth.nix ];
-
   home-manager.users.kodi = import ../../home/kodi.nix;
 
   sops = {
@@ -56,5 +54,9 @@ in
     device = "//192.168.1.201/brieuc/SyncDocuments/music";
     fsType = "cifs";
     options = cifsOptions;
+  };
+
+  modules = {
+    bluetooth.enable = true;
   };
 }
