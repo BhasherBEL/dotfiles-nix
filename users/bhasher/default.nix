@@ -6,18 +6,11 @@ let
   ];
 in
 {
-  imports = [
-    ../optional/python.nix
-    ../optional/languagelab.nix
-    ../optional/js.nix
-    ../optional/media.nix
-    ../optional/bluetooth.nix
-    ../optional/yubikey.nix
-    ../optional/obs.nix
-  ];
   home-manager.users.bhasher.imports = [ ../../home/bhasher ];
 
   nix.settings.trusted-users = [ "bhasher" ];
+
+  services.greetd.settings.default_session.user = "bhasher";
 
   sops = {
     defaultSopsFile = ../../secrets/bhasher.yaml;
@@ -55,8 +48,6 @@ in
       };
     };
   };
-
-  media.jellyfin = true;
 
   users.users.bhasher = {
     isNormalUser = true;
@@ -106,25 +97,21 @@ in
     signal-desktop
     ferdium
     thunderbird
-    #asciinema
     onlyoffice-bin
     libreoffice
     sl
     yt-dlp
-    #spotdl
     marksman
     nmap
-    yubikey-manager
-    pam_u2f
+    vlc
+    jellyfin
+    obs-studio
   ];
 
   # TODO: fix
   # error activating kdeconnectd: QDBusError("org.freedesktop.DBus.Error.Spawn.ChildSignaled", "Process org.kde.kdeconnect received signal 6")
   # error: Process org.kde.kdeconnect received signal 6
   programs = {
-    #nixvim = {
-    #  enable = true;
-    #};
     kdeconnect = {
       enable = false;
       package = pkgs.libsForQt5.kdeconnect-kde.overrideAttrs (old: {
@@ -153,7 +140,10 @@ in
   };
 
   modules = {
-    theming.enable = true;
+    metaPc.enable = true;
     devenv.enable = true;
+    languagelab.enable = true;
+    js.enable = true;
+    python.enable = true;
   };
 }

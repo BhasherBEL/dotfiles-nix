@@ -47,6 +47,7 @@ in
         executable = true;
       };
     };
+
     wayland.windowManager.hyprland = {
       enable = true;
       package = pkgs.hyprland;
