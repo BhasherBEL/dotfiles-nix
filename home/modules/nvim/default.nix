@@ -425,6 +425,7 @@ in
         notify.enable = true;
         comment.enable = true;
         tmux-navigator.enable = true;
+        diffview.enable = true;
       };
     };
   };
