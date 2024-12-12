@@ -173,8 +173,8 @@ in
         ];
 
         input = {
-          kb_layout = "fr";
-          kb_options = "caps:swapescape";
+          kb_layout = "fr,be";
+          kb_options = "caps:swapescape,grp:win_space_toggle";
           numlock_by_default = true;
           follow_mouse = 1;
           touchpad = {

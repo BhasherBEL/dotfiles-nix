@@ -78,7 +78,8 @@ let
     };
     clock = {
       format = "{:%H:%M | %a • %h | %d-%m-%Y}";
-      format-alt = "{:%H:%M}";
+      format-alt = "{:%H:%M:%S}";
+      interval = 1;
       tooltip-format = "<tt><small>{calendar}</small></tt>";
     };
     cpu = {
@@ -144,6 +145,11 @@ let
         ];
       };
       on-click = "pavucontrol";
+    };
+    "hyprland/language" = {
+      format = "{}";
+      "format-fr" = "FR";
+      "format-be" = "BE";
     };
     "custom/notification" = {
       "tooltip" = false;
@@ -239,6 +245,7 @@ in
               "disk"
               "pulseaudio"
               "battery"
+              "hyprland/language"
               "tray"
               "custom/notifications"
             ];
