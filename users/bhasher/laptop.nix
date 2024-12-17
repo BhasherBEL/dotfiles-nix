@@ -29,7 +29,7 @@
     };
   };
 
-  time.timeZone = lib.mkForce "Europe/Helsinki";
+  time.timeZone = lib.mkForce "Europe/Paris";
 
   modules = {
     bluetooth.enable = true;
