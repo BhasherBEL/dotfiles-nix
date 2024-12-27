@@ -52,5 +52,11 @@ in
         tmuxPlugins.vim-tmux-navigator
       ];
     };
+
+    programs.zsh.shellAliases = lib.mkIf config.modules.zsh.enable {
+      tm = "tmux attach-session";
+      tn = "tmux new-session";
+    };
+
   };
 }

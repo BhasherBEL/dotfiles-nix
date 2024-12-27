@@ -21,6 +21,7 @@ in
           numpy
           pandas
           matplotlib
+          seaborn
           jupyter
           scapy
           virtualenv
