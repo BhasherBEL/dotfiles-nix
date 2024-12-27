@@ -52,8 +52,6 @@
         else if osConfig.networking.hostName == "laptop" then
           [
             "eDP-1,preferred,auto,1"
-            "DP-4,1920x1080,auto,1"
-            "DP-5,preferred,-1680x0,1"
           ]
         else
           [ ];
