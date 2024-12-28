@@ -19,7 +19,7 @@ in
       netcfg.settings.systemd_resolved = true;
     };
 
-    services.resolved.enable = true;
+    services.resolved.enable = false;
 
     environment.systemPackages = with pkgs; [
       python311Packages.uvicorn
