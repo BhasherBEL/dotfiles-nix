@@ -54,7 +54,7 @@
             inherit inputs;
           };
           modules = [
-            { nixpkgs.overlays = [ inputs.nur.overlay ]; }
+            { nixpkgs.overlays = [ inputs.nur.overlays.default ]; }
             home-manager.nixosModules.default
             { home-manager.extraSpecialArgs = specialArgs; }
             inputs.flake-programs-sqlite.nixosModules.programs-sqlite

@@ -26,7 +26,7 @@ in
           ;
       };
       modules = [
-        { nixpkgs.overlays = [ inputs.nur.overlay ]; }
+        { nixpkgs.overlays = [ inputs.nur.overlays.default ]; }
         inputs.flake-programs-sqlite.nixosModules.programs-sqlite
         inputs.catppuccin.nixosModules.catppuccin
         inputs.stylix.nixosModules.stylix

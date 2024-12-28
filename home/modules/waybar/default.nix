@@ -186,14 +186,17 @@ in
       }
     ];
 
+    catppuccin = {
+      waybar = {
+        enable = true;
+        mode = "createLink";
+      };
+    };
+
     programs.waybar = {
       enable = true;
       systemd.enable = true;
       style = ./style.css;
-      catppuccin = {
-        enable = true;
-        mode = "createLink";
-      };
       settings =
         # if (builtins.length metapccfg.monitors) == 3 then
         #   {

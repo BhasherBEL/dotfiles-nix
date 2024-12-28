@@ -335,14 +335,14 @@ in
         cmp-emoji.enable = true;
         copilot-cmp = {
           enable = true;
-          fixPairs = true;
+          settings.fix_pairs = true;
         };
         copilot-lua = {
           enable = true;
           suggestion.enabled = false;
           panel.enabled = false;
         };
-        nvim-colorizer.enable = true;
+        colorizer.enable = true;
         ts-autotag.enable = true;
         nvim-autopairs.enable = true;
         treesitter = {
