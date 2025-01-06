@@ -21,6 +21,7 @@
           presharedKeyFile = "/run/secrets/wg/bxl-shp/laptop/psk";
           allowedIPs = [
             "0.0.0.0/0"
+            "192.168.1.0/24"
           ];
           endpoint = "91.182.226.236:51822";
           persistentKeepalive = 25;
