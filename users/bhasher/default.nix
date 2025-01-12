@@ -41,6 +41,9 @@ in
       "api/chatgpt" = {
         owner = config.users.users.bhasher.name;
       };
+      "api/anthropic" = {
+        owner = config.users.users.bhasher.name;
+      };
       "security/u2f_keys" = {
         owner = config.users.users.bhasher.name;
         mode = "0400";
@@ -104,7 +107,7 @@ in
     marksman
     nmap
     vlc
-    jellyfin
+    jellyfin-media-player
     obs-studio
   ];
 
