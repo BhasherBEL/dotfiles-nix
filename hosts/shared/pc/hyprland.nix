@@ -7,10 +7,10 @@
     extraPortals = with pkgs; [ xdg-desktop-portal-hyprland ];
   };
 
-  # Pipewire sound
-  hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services = {
+    # Pipewire sound
+    pulseaudio.enable = false;
     pipewire = {
       enable = true;
       alsa.enable = true;
