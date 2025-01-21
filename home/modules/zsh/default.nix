@@ -18,7 +18,7 @@ in
     programs.zsh = {
       enable = true;
       defaultKeymap = "emacs";
-      history.share = false;
+      history.share = true;
       shellAliases = {
         ls = "ls -h --color";
         ll = "ls -lh";

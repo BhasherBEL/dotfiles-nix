@@ -315,8 +315,8 @@
           name = "LanguageLab";
           bookmarks = [
             {
-              name = "Release SIPR";
-              url = "http://languagelab.sipr.ucl.ac.be/";
+              name = "Production";
+              url = "https://languagelab.be";
             }
             {
               name = "Gitlab";

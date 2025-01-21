@@ -37,7 +37,7 @@
     docker.enable = true;
     classes = {
       master-thesis = {
-        enable = true;
+        enable = false;
         iface = "wlp0s20f3";
       };
       cs-c3170-web-software-development.enable = true;
