@@ -35,6 +35,9 @@ in
       "ssh/llnux" = {
         owner = config.users.users.bhasher.name;
       };
+      "ssh/ovh_vps" = {
+        owner = config.users.users.bhasher.name;
+      };
       "api/mistral" = {
         owner = config.users.users.bhasher.name;
       };
