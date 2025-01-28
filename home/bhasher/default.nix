@@ -246,7 +246,15 @@
             }
             {
               name = "PhotoStructure";
-              url = "photos.bhasher.com";
+              url = "https://photos.bhasher.com";
+            }
+            {
+              name = "OpenWebUI";
+              url = "https://ai.bhasher.com";
+            }
+            {
+              name = "Ollama";
+              url = "https://ollama.bhasher.com";
             }
           ];
         }

@@ -54,7 +54,32 @@ in
             extraPolicies.SecurityDevices.p11-kit-proxy = "${pkgs.p11-kit}/lib/p11-kit-proxy.so";
           };
 
-      policies.SecurityDevices.p11-kit-proxy = "${pkgs.p11-kit}/lib/p11-kit-proxy.so";
+      policies = {
+        DisableTelemetry = true;
+        DisableFirefoxStudies = true;
+        EnableTrackingProtection = {
+          Value = true;
+          Locked = true;
+          Cryptomining = true;
+          Fingerprinting = true;
+        };
+        Cookies = {
+          Locked = true;
+          Behavior = "reject-foreign";
+          BehaviorPrivateBrowsing = "reject-foreign";
+        };
+        DisablePocket = true;
+        DisableFirefoxAccounts = true;
+        DisableAccounts = true;
+        AppAutoUpdate = false;
+        AutofillAddressEnabled = false;
+        AutofillCreditCardEnabled = false;
+        BackgroundAppUpdate = false;
+        CaptivePortal = true;
+        SantizeOnShutdown = ffcfg.strictPrivacy;
+
+        SecurityDevices.p11-kit-proxy = "${pkgs.p11-kit}/lib/p11-kit-proxy.so";
+      };
 
       profiles.default = {
         id = 0;
@@ -63,7 +88,6 @@ in
         settings =
           {
             "browser.toolbars.bookmarks.visibility" = "newtab";
-            "app.shield.optoutstudies.enabled" = false;
             "browser.contentblocking.category" = "custom";
             "browser.discovery.enabled" = false;
             "browser.download.useDownloadDir" = false;
@@ -93,7 +117,8 @@ in
             "privacy.fingerprintingProtection" = true;
           }
           // lib.mkIf ffcfg.strictPrivacy {
-            "privacy.sanitize.pending" = ''[{\"id\":\"newtab-container\",\"itemsToClear\":[],\"options\":{}},{\"id\":\"shutdown\",\"itemsToClear\":[\"cache\",\"cookies\",\"offlineApps\",\"history\",\"formdata\",\"downloads\",\"sessions\"],\"options\":{}}]'';
+            "privacy.sanitize.pending" =
+              ''[{\"id\":\"newtab-container\",\"itemsToClear\":[],\"options\":{}},{\"id\":\"shutdown\",\"itemsToClear\":[\"cache\",\"cookies\",\"offlineApps\",\"history\",\"formdata\",\"downloads\",\"sessions\"],\"options\":{}}]'';
             "privacy.clearOnShutdown.downloads" = true;
             "privacy.clearOnShutdown.formdata" = true;
             "privacy.clearOnShutdown.history" = true;
@@ -110,7 +135,7 @@ in
             "image.jxl.enabled" = true;
             "privacy.webrtc.globalMuteToggles" = true;
             "browser.ml.chat.enabled" = true;
-            "browser.ml.chat.provider" = "https://chat.mistral.ai/chat";
+            "browser.ml.chat.provider" = "https://ai.bhasher.com";
             "browser.ml.chat.shortcuts" = false;
           };
 
