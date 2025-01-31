@@ -62,6 +62,7 @@ in
           Locked = true;
           Cryptomining = true;
           Fingerprinting = true;
+          EmailTracking = true;
         };
         Cookies = {
           Locked = true;
@@ -69,16 +70,123 @@ in
           BehaviorPrivateBrowsing = "reject-foreign";
         };
         DisablePocket = true;
-        DisableFirefoxAccounts = true;
         DisableAccounts = true;
+        # AllowedDomainsForApps = [ ]; # May prevent google login
         AppAutoUpdate = false;
-        AutofillAddressEnabled = false;
+        AutofillAddressEnabled = !ffcfg.strictPrivacy;
         AutofillCreditCardEnabled = false;
         BackgroundAppUpdate = false;
         CaptivePortal = true;
         SantizeOnShutdown = ffcfg.strictPrivacy;
-
-        SecurityDevices.p11-kit-proxy = "${pkgs.p11-kit}/lib/p11-kit-proxy.so";
+        OfferToSaveLogins = !ffcfg.strictPrivacy;
+        OfferToSaveLoginsDefault = false;
+        UserMessaging = {
+          WhatsNew = false;
+          ExtensionRecommendations = false;
+          FeatureRecommendations = false;
+          UrlbarInterventions = false;
+          SkipOnboarding = true;
+          MoreFromMozilla = false;
+          FirefoxLabs = true;
+          Locked = true;
+        };
+        DefaultDownloadDirectory = "\${home}/Downloads";
+        DisableAppUpdate = true;
+        DisableDefaultBrowserAgent = true;
+        DisableFirefoxAccounts = ffcfg.strictPrivacy;
+        DisableFormHistory = ffcfg.strictPrivacy;
+        DisableProfileRefresh = true;
+        DisableSetDesktopBackground = true;
+        DisableSystemAddonUpdate = true;
+        DisplayBookmarksToolbar = "newtab";
+        DisplayMenuBar = "never";
+        DNSOverHTTPS = {
+          Enabled = false;
+          Locked = true;
+        };
+        EncryptedMediaExtensions.Enabled = false;
+        EnterprisePoliciesEnabled = true;
+        ExtensionUpdate = false;
+        FirefoxHome = {
+          Search = true;
+          TopSites = true;
+          SponsoredTopSites = false;
+          Highlights = false;
+          Pocket = false;
+          SponsoredPocket = false;
+          Snippets = false;
+          Locked = true;
+        };
+        FirefoxSuggest = {
+          WebSuggestions = false;
+          SponsoredSuggestions = false;
+          ImpoveSuggest = false;
+          Locked = true;
+        };
+        # GoToIntranetSiteForSingleWordEntryInAddressBar = true;
+        HardwareAcceleration = true;
+        Homepage = {
+          StartPage = "homepage";
+          Locked = true;
+        };
+        HttpsOnlyMode = "force_enabled";
+        ManualAppUpdateOnly = true;
+        MicrosoftEntraSSO = false;
+        NetworkPrediction = true;
+        NoDefaultBookmarks = true;
+        OverrideFirstRunPage = "";
+        OverridePostUpdatePage = "";
+        PasswordManagerEnabled = !ffcfg.strictPrivacy;
+        PDFjs = {
+          Enable = true;
+          EnablePermissions = false;
+        };
+        PictureInPicture = {
+          Enable = true;
+          Locked = true;
+        };
+        PopupBlocking = {
+          Default = true;
+          Locked = true;
+        };
+        PostQuantumKeyAgreementEnabled = true;
+        PrintingEnabled = true;
+        PrivateBrowsingModeAvailability = 0;
+        PromptForDownloadLocation = false;
+        Proxy = {
+          Mode = "none";
+          Locked = true;
+        };
+        SearchEngines = {
+          Add = [
+            {
+              Name = "Kagi";
+              URLTemplate = "https://kagi.com/search?q={searchTerms}";
+              Method = "GET";
+              IconURL = "https://kagi.com/favicon.ico";
+              Alias = "@kagi";
+              Description = "Kagi private search engine";
+              SuggestURLTemplate = "https://kagi.com/api/autosuggest?q={searchTerms}";
+            }
+          ];
+          Default = if ffcfg.kagiSearch then "Kagi" else "DuckDuckGo";
+          PreventInstalls = true;
+          Remove = [
+            "Google"
+            "Bing"
+            "eBay"
+          ];
+        };
+        SearchSuggestEnabled = !ffcfg.strictPrivacy;
+        SecurityDevices.Add.p11-kit-proxy = "${pkgs.p11-kit}/lib/p11-kit-proxy.so";
+        ShowHomeButton = false;
+        SSLVersionMin = "tls1.2";
+        StartDownloadsInTempDirectory = true;
+        TranslateEnabled = true;
+        WindowsSSO = false;
+        Preferences = {
+          browser.translations.automaticallyPopup = false;
+        };
       };
 
       profiles.default = {
@@ -87,7 +195,6 @@ in
         isDefault = true;
         settings =
           {
-            "browser.toolbars.bookmarks.visibility" = "newtab";
             "browser.contentblocking.category" = "custom";
             "browser.discovery.enabled" = false;
             "browser.download.useDownloadDir" = false;
@@ -256,6 +363,8 @@ in
             bitwarden
             istilldontcareaboutcookies
             french-language-pack
+            castkodi
+            twitch-auto-points
           ]
           ++ lib.optionals ffcfg.strictPrivacy [
             clearurls
