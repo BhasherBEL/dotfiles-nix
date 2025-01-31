@@ -66,7 +66,7 @@
       inherit lib;
 
       nixosConfigurations = {
-        desktop = makeNixosSystem "desktop" [
+        desktop = libx.makeNixosSystem "desktop" [
           ./hosts/desktop
           ./users/bhasher/desktop.nix
           inputs.lanzaboote.nixosModules.lanzaboote
