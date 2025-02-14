@@ -11,6 +11,7 @@ in
     programs.git = {
       enable = true;
       diff-so-fancy.enable = true;
+      lfs.enable = true;
       extraConfig = {
         user = {
           name = "Brieuc Dubois";
