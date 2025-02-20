@@ -151,5 +151,6 @@ in
     languagelab.enable = true;
     js.enable = true;
     python.enable = true;
+    docker.enable = true;
   };
 }
