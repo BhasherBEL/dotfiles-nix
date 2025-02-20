@@ -112,6 +112,7 @@ in
     vlc
     jellyfin-media-player
     obs-studio
+    hugo
   ];
 
   # TODO: fix
