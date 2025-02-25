@@ -29,9 +29,9 @@ in
           identitiesOnly = true;
           identityFile = "/run/secrets/ssh/snodes";
         };
-        "vps bdubois.io" = {
+        "vps" = {
           user = "debian";
-          hostname = "bdubois.io";
+          hostname = "mail.bhasher.com";
           identitiesOnly = true;
           identityFile = "/run/secrets/ssh/ovh_vps";
         };

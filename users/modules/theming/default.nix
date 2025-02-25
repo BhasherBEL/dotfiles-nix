@@ -15,7 +15,7 @@ in
   config = lib.mkIf themingcfg.enable {
     stylix = {
       enable = true;
-      image = ./assets/mountains_dark.jpg;
+      #image = ./assets/mountains_dark.jpg;
       polarity = "dark";
       base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-macchiato.yaml";
     };
