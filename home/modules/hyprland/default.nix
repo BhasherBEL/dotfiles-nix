@@ -254,8 +254,8 @@ in
           "tile, class:^(ghidra)(.*)$"
           "opacity 0.9, class:(kitty)"
           "float, class:(firefox), title:(Picture-in-Picture)"
-          #"pin, class:(firefox), title:(Picture-in-Picture)"
-          "pin, title:(Picture-in-picture)"
+          "pin, class:(firefox), title:(Picture-in-Picture)"
+          "keepaspectratio, class:(firefox), title:(Picture-in-Picture)"
         ];
       };
     };
