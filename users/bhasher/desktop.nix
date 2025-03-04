@@ -12,7 +12,10 @@
   networking.wg-quick.interfaces.bxl-shp = {
     address = [ "10.15.14.3/32" ];
     privateKeyFile = "/run/secrets/wg/bxl-shp/desktop/key";
-    dns = [ "10.15.14.1" ];
+    dns = [
+      "10.15.14.1"
+      "1.1.1.1"
+    ];
     autostart = true;
     peers = [
       {
