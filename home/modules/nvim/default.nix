@@ -435,6 +435,7 @@ in
               api_key_name = "cmd:cat /run/secrets/api/anthropic";
               model = "claude-3-7-sonnet-20250219";
               disable_tools = true;
+              max_tokens = 8192;
             };
           };
         };

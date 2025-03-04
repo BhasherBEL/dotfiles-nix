@@ -30,4 +30,8 @@
       }
     ];
   };
+
+  modules = {
+    bluetooth.enable = true;
+  };
 }
