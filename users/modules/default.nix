@@ -16,6 +16,7 @@
     ./rustdesk
     ./virtualbox
     ./wificrack
+    ./ipv6
   ];
 
 }

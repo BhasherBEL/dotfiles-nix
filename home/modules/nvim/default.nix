@@ -429,7 +429,7 @@ in
         tmux-navigator.enable = true;
         diffview.enable = true;
         avante = {
-          enable = true;
+          enable = false;
           settings = {
             claude = {
               api_key_name = "cmd:cat /run/secrets/api/anthropic";

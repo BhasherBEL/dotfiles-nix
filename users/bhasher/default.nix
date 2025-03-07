@@ -153,5 +153,6 @@ in
     js.enable = true;
     python.enable = true;
     docker.enable = true;
+    ipv6.disable = true;
   };
 }
