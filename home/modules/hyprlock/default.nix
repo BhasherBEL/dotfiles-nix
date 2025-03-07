@@ -33,7 +33,19 @@ in
         general = {
           disable_loading_bar = true;
           hide_cursor = true;
-          grace = 15;
+          grace = 10;
+        };
+
+        # BACKGROUND
+        background = {
+          path = "${config.xdg.configHome}/assets/backgrounds/mountains_dark.jpg";
+          blur_passes = 2;
+          contrast = 1;
+          brightness = 0.5;
+        };
+
+        input-field = {
+          hide_input = false;
         };
 
         # TIME
@@ -48,7 +60,7 @@ in
             valign = "top";
           }
 
-          # DATE 
+          # DATE
           {
             text = "cmd[update:43200000] echo \"$(date +\"%A, %d %B %Y\")\"";
             color = "$text";
