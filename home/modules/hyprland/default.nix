@@ -52,6 +52,7 @@ in
         enableXdgAutostart = true;
       };
       settings = {
+        ecosystem.no_update_news = true;
         exec-once = [
           "${pkgs.swww}/bin/swww-daemon"
           "${pkgs.networkmanagerapplet}/bin/nm-applet --indicator"
