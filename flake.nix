@@ -59,6 +59,8 @@
             { home-manager.extraSpecialArgs = specialArgs; }
             inputs.flake-programs-sqlite.nixosModules.programs-sqlite
             inputs.catppuccin.nixosModules.catppuccin
+            "${self}/hosts/modules"
+            "${self}/users/modules"
           ] ++ extraModules;
         };
     in
@@ -76,13 +78,6 @@
           ./hosts/laptop
           ./users/bhasher/laptop.nix
           inputs.lanzaboote.nixosModules.lanzaboote
-        ];
-
-        laptop-home = makeNixosSystem "laptop-home" [
-          ./hosts/laptop-home
-          ./users/bhasher/laptop.nix
-          inputs.lanzaboote.nixosModules.lanzaboote
-          inputs.disko.nixosModules.disko
         ];
 
         media-center = libx.makeNixosSystem "media-center" [

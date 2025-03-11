@@ -7,6 +7,11 @@
 
   imports = [ ./modules ];
 
+  modules = {
+    kitty.enable = true;
+    git.enable = true;
+  };
+
   programs = {
     git = {
       enable = true;

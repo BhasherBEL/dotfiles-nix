@@ -11,7 +11,7 @@ in
   config = lib.mkIf metapccfg.enable {
     modules = {
       yubikey.enable = lib.mkDefault true;
-      theming.enable = lib.mkDefault true;
+      #theming.enable = lib.mkDefault true;
     };
   };
 }

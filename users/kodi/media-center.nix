@@ -23,4 +23,6 @@
       }
     ];
   };
+
+  #modules.theming.enable = false;
 }
