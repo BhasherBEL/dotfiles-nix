@@ -25,6 +25,7 @@ in
         ip = "ip --color";
         nv = "nvim";
         sl = "sl -adew5F";
+				nbu = "echo \"nix run home-manager -- switch --flake /etc/nixos#$USERNAME\" && nix run home-manager -- switch --flake /etc/nixos#$USERNAME";
       };
       plugins = [
         {
