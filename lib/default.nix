@@ -55,6 +55,7 @@ in
         { nixpkgs.overlays = [ inputs.nur.overlays.default ]; }
         inputs.catppuccin.homeManagerModules.catppuccin
         inputs.stylix.homeManagerModules.stylix
+				inputs.sops-nix.homeManagerModules.sops
 				{ targets.genericLinux.enable = true; }
       ] ++ extraModules;
     };

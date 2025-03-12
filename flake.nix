@@ -6,7 +6,10 @@
     hyprsome.url = "github:sopa0/hyprsome";
     nur.url = "github:nix-community/NUR";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
-    sops-nix.url = "github:Mic92/sops-nix";
+    sops-nix = {
+			url = "github:Mic92/sops-nix";
+			inputs.nixpkgs.follows = "nixpkgs";
+		};
     firefox.url = "github:nix-community/flake-firefox-nightly";
     home-manager = {
       url = "github:nix-community/home-manager";

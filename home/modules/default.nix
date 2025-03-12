@@ -41,5 +41,6 @@
     git.enable = lib.mkDefault true;
     ssh.enable = lib.mkDefault true;
     nvim.enable = lib.mkDefault true;
+		kitty.enable = lib.mkDefault true;
   };
 }
