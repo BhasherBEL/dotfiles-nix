@@ -1,4 +1,4 @@
-{ ... }:
+{ lib, ... }:
 {
   # TODO: Find a way to avoid to list them here
 
@@ -36,10 +36,10 @@
   };
 
   modules = {
-    zsh.enable = true;
-    ranger.enable = true;
-    git.enable = true;
-    ssh.enable = true;
-    nvim.enable = true;
+    zsh.enable = lib.mkDefault true;
+    ranger.enable = lib.mkDefault true;
+    git.enable = lib.mkDefault true;
+    ssh.enable = lib.mkDefault true;
+    nvim.enable = lib.mkDefault true;
   };
 }

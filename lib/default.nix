@@ -2,6 +2,7 @@
   self,
   nixpkgs,
   inputs,
+  system,
   ...
 }:
 let
@@ -36,6 +37,25 @@ in
         "${hostsModules}"
         "${usersModules}"
         #"${homeConfiguration}"
+      ] ++ extraModules;
+    };
+
+  makeHomeManager =
+    username: extraModules:
+    inputs.home-manager.lib.homeManagerConfiguration {
+      pkgs = inputs.nixpkgs.legacyPackages.${system};
+      extraSpecialArgs = {
+        inherit
+          inputs
+          homeModules
+          username
+          ;
+      };
+      modules = [
+        { nixpkgs.overlays = [ inputs.nur.overlays.default ]; }
+        inputs.catppuccin.homeManagerModules.catppuccin
+        inputs.stylix.homeManagerModules.stylix
+				{ targets.genericLinux.enable = true; }
       ] ++ extraModules;
     };
 }
