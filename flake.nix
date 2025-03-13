@@ -7,9 +7,9 @@
     nur.url = "github:nix-community/NUR";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
     sops-nix = {
-			url = "github:Mic92/sops-nix";
-			inputs.nixpkgs.follows = "nixpkgs";
-		};
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     firefox.url = "github:nix-community/flake-firefox-nightly";
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -46,39 +46,46 @@
       home-manager,
       ...
     }@inputs:
-      let 
-        lib = nixpkgs.lib // home-manager.lib;
-        libx = import ./lib { inherit self inputs nixpkgs system; };
-        system = "x86_64-linux";
-      in
-      {
-        inherit lib;
-
-        nixosConfigurations = {
-          desktop = libx.makeNixosSystem "desktop" [
-            ./hosts/desktop
-            ./users/bhasher/desktop.nix
-            inputs.lanzaboote.nixosModules.lanzaboote
-          ];
-
-          laptop = libx.makeNixosSystem "laptop" [
-            ./hosts/laptop
-            ./users/bhasher/laptop.nix
-            inputs.lanzaboote.nixosModules.lanzaboote
-          ];
-
-          media-center = libx.makeNixosSystem "media-center" [
-            ./hosts/media-center
-            ./users/kodi/media-center.nix
-            inputs.nixos-hardware.nixosModules.raspberry-pi-4
-            inputs.impermanence.nixosModules.impermanence
-          ];
-        };
-
-        homeConfigurations = {
-          shp = libx.makeHomeManager "shp" [
-            ./home/shp.nix
-          ];
-        };
+    let
+      lib = nixpkgs.lib // home-manager.lib;
+      libx = import ./lib {
+        inherit
+          self
+          inputs
+          nixpkgs
+          system
+          ;
       };
+      system = "x86_64-linux";
+    in
+    {
+      inherit lib;
+
+      nixosConfigurations = {
+        desktop = libx.makeNixosSystem "desktop" [
+          ./hosts/desktop
+          ./users/bhasher/desktop.nix
+          inputs.lanzaboote.nixosModules.lanzaboote
+        ];
+
+        laptop = libx.makeNixosSystem "laptop" [
+          ./hosts/laptop
+          ./users/bhasher/laptop.nix
+          inputs.lanzaboote.nixosModules.lanzaboote
+        ];
+
+        media-center = libx.makeNixosSystem "media-center" [
+          ./hosts/media-center
+          ./users/kodi/media-center.nix
+          inputs.nixos-hardware.nixosModules.raspberry-pi-4
+          inputs.impermanence.nixosModules.impermanence
+        ];
+      };
+
+      homeConfigurations = {
+        shp = libx.makeHomeManager "shp" [
+          ./home/shp.nix
+        ];
+      };
+    };
 }

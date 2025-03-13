@@ -96,7 +96,6 @@
     networkmanager
     font-awesome
     stylua
-    nixfmt-rfc-style
     prettierd
     nil
     gcc

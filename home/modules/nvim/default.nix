@@ -19,7 +19,10 @@ in
   };
 
   config = lib.mkIf nvimcfg.enable {
-    home.packages = with pkgs; [ dart ];
+    home.packages = with pkgs; [
+      dart
+      nixfmt-rfc-style
+    ];
 
     programs.nixvim = {
       enable = true;
