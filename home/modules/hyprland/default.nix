@@ -79,7 +79,7 @@ in
         "$mainMod" = "SUPER";
 
         bind = [
-          "$mainMod, RETURN, exec, ${pkgs.kitty}/bin/kitty"
+          "$mainMod, RETURN, exec, ${pkgs.alacritty}/bin/alacritty"
           "$mainMod, C, killactive, "
           "$mainMod, V, togglefloating, "
           "$mainMod, D, exec, rofi -show drun"
@@ -253,6 +253,7 @@ in
           "idleinhibit fullscreen, fullscreen:1"
           "tile, class:^(ONLYOFFICE Desktop Editors|DesktopEditors)$"
           "tile, class:^(ghidra)(.*)$"
+          "opacity 0.9, class:(alacritty)"
           "opacity 0.9, class:(kitty)"
           "float, class:(firefox), title:(Picture-in-Picture)"
           "pin, class:(firefox), title:(Picture-in-Picture)"

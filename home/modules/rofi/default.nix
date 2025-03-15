@@ -20,7 +20,7 @@ in
         pkgs.rofi-calc
         pkgs.rofi-emoji-wayland
       ];
-      terminal = "kitty";
+      terminal = "${pkgs.alacritty}/bin/alacritty";
       theme = "${config.xdg.configHome}/rofi/themes/type1-style8.rasi";
       extraConfig = {
         sorting-method = "alnum";

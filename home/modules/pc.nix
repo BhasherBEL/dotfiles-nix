@@ -24,17 +24,17 @@ in
     };
 
     modules = {
-      firefox.enable = true;
-      catppuccin.enable = true;
-      activitywatch.enable = true;
-      hyprland.enable = true;
-      hypridle.enable = true;
-      hyprlock.enable = true;
-      rofi.enable = true;
-      swaync.enable = true;
-      udiskie.enable = true;
-      waybar.enable = true;
-      kitty.enable = true;
+      firefox.enable = lib.mkDefault true;
+      catppuccin.enable = lib.mkDefault true;
+      activitywatch.enable = lib.mkDefault true;
+      hyprland.enable = lib.mkDefault true;
+      hypridle.enable = lib.mkDefault true;
+      hyprlock.enable = lib.mkDefault true;
+      rofi.enable = lib.mkDefault true;
+      swaync.enable = lib.mkDefault true;
+      udiskie.enable = lib.mkDefault true;
+      waybar.enable = lib.mkDefault true;
+      alacritty.enable = lib.mkDefault true;
     };
   };
 }

@@ -27,6 +27,7 @@ in
           rofi.enable = false;
           # Seems to be mandatory for GTK
           gnome.enable = true;
+          firefox.profileNames = [ "default" ];
         };
       }
     ];

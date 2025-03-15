@@ -101,7 +101,6 @@ in
     tree
     freetube
     signal-desktop
-    ferdium
     thunderbird
     onlyoffice-bin
     libreoffice
