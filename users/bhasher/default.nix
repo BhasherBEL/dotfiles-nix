@@ -153,5 +153,6 @@ in
     python.enable = true;
     docker.enable = true;
     ipv6.disable = true;
+    classes.master-thesis.enable = true;
   };
 }
