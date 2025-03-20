@@ -106,6 +106,10 @@
           instance_url = "https://invidious.fdn.fr";
           disable_dash = "false";
         };
+        "plugin.video.jellyfin" = {
+          server = "https://jellyfin.bhasher.com";
+          sslverify = "false";
+        };
       };
     };
   };

@@ -26,6 +26,10 @@ in
         mode = "0400";
         path = "${config.users.users.kodi.home}/.config/Yubico/u2f_keys";
       };
+      "api/youtube" = {
+        owner = config.users.users.kodi.name;
+        path = "${config.users.users.kodi.home}/.kodi/userdata/addon_data/plugin.video.youtube/api_keys.json";
+      };
     };
   };
 
