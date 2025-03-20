@@ -169,7 +169,7 @@ in
               SuggestURLTemplate = "https://kagi.com/api/autosuggest?q={searchTerms}";
             }
           ];
-          Default = if ffcfg.kagiSearch then "Kagi" else "DuckDuckGo";
+          Default = if ffcfg.kagiSearch then "Kagi" else "ddg";
           PreventInstalls = true;
           Remove = [
             "Google"
@@ -248,13 +248,14 @@ in
 
         search = {
           force = true;
-          default = if ffcfg.kagiSearch then "Kagi" else "DuckDuckGo";
+          default = if ffcfg.kagiSearch then "Kagi" else "ddg";
+          privateDefault = "ddg";
           engines = lib.mkMerge [
             ({
-              Google.metaData.hidden = true;
-              Bing.metaData.hidden = true;
-              eBay.metaData.hidden = true;
-              GitHub = {
+              google.metaData.hidden = true;
+              bing.metaData.hidden = true;
+              ebay.metaData.hidden = true;
+              github = {
                 name = "GitHub";
                 urls = [
                   {
@@ -264,10 +265,11 @@ in
                     };
                   }
                 ];
-                iconUpdateURL = "https://github.githubassets.com/favicons/favicon.png";
+                icon = "https://github.githubassets.com/favicons/favicon.png";
                 definedAliases = [ "@gh" ];
               };
-              "Nix Config" = {
+              nixConfig = {
+                name = "Nix Config";
                 urls = [
                   {
                     template = "https://search.nixos.org/options";
@@ -286,7 +288,8 @@ in
                 icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
                 definedAliases = [ "@nc" ];
               };
-              "Nix Packages" = {
+              nixPackages = {
+                name = "Nix Packages";
                 urls = [
                   {
                     template = "https://search.nixos.org/packages";
@@ -309,7 +312,8 @@ in
                 icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
                 definedAliases = [ "@np" ];
               };
-              "Nix Home Manager" = {
+              nixHomeManager = {
+                name = "Nix Home Manager";
                 urls = [
                   {
                     template = "https://home-manager-options.extranix.com/";
@@ -329,7 +333,7 @@ in
               };
             })
             (lib.mkIf ffcfg.kagiSearch {
-              Kagi = {
+              kagi = {
                 name = "Kagi";
                 urls = [
                   {
@@ -342,7 +346,7 @@ in
                     ];
                   }
                 ];
-                iconUpdateURL = "https://kagi.com/favicon.ico";
+                icon = "https://kagi.com/favicon.ico";
                 definedAliases = [
                   "@k"
                   "@kagi"
@@ -375,7 +379,10 @@ in
           ++ lib.optionals osConfig.modules.classes.master-thesis.enable [
             zotero-connector
           ];
-        bookmarks = ffcfg.bookmarks;
+        bookmarks = {
+          force = true;
+          settings = ffcfg.bookmarks;
+        };
       };
     };
 
