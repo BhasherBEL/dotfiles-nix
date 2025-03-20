@@ -11,6 +11,10 @@
 
   networking.hostName = "media-center";
 
+  environment.systemPackages = with pkgs; [
+    upower
+  ];
+
   hardware = {
     raspberry-pi."4" = {
       apply-overlays-dtmerge.enable = true;
@@ -37,7 +41,7 @@
         enable = true;
         package = pkgs.kodi.withPackages (
           p: with p; [
-            jellyfin
+            #jellyfin
             netflix
             invidious
             arteplussept

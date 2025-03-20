@@ -8,7 +8,6 @@
   imports = [ ./modules ];
 
   modules = {
-    kitty.enable = true;
     git.enable = true;
   };
 
@@ -50,17 +49,6 @@
     };
     kodi = {
       enable = true;
-      package = pkgs.kodi.withPackages (
-        p: with p; [
-          jellyfin
-          netflix
-          youtube
-          arteplussept
-          sponsorblock
-          inputstreamhelper
-          youtube
-        ]
-      );
       sources = [
         {
           name = "music";
@@ -93,7 +81,13 @@
           tv = "service.subtitles.opensubtitles";
           movie = "service.subtitles.opensubtitles";
         };
-        services.webserver = "true";
+        services = {
+          webserver = "true";
+          webserverport = "8080";
+          webserverusername = "kodi";
+          webserverpassword = "raspberry";
+          webserverssl = "false";
+        };
         smb.minprotocol = "2";
         audiooutput = {
           volumesteps = "20";
@@ -103,6 +97,8 @@
           displayoff = "20";
           wakeonaccess = "true";
         };
+        network.disablehttp2 = "true";
+        loglevel = "2";
       };
       addonSettings = {
         "plugin.video.invidious" = {
