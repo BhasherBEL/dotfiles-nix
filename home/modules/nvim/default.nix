@@ -22,6 +22,13 @@ in
     home.packages = with pkgs; [
       dart
       nixfmt-rfc-style
+      stylua
+      prettierd
+      nil
+      gcc
+      ltex-ls
+      zsh-powerlevel10k
+      lua-language-server
     ];
 
     programs.nixvim = {

@@ -95,22 +95,22 @@
     vimPlugins.lazy-nvim
     networkmanager
     font-awesome
-    stylua
-    prettierd
-    nil
-    gcc
-    ltex-ls
+    #stylua
+    #prettierd
+    #nil
+    #gcc
+    #ltex-ls
     zip
     mdcat
     dnsutils
     #clang-tools_17
     xorg.xlsclients
     font-awesome
-    zsh-powerlevel10k
+    #zsh-powerlevel10k
     sops
     openssl
     unzip
-    lua-language-server
+    #lua-language-server
     ripgrep
     killall
   ];
