@@ -1,8 +1,8 @@
 {
   self,
-  nixpkgs,
   inputs,
   system,
+  patches,
   ...
 }:
 let
@@ -12,11 +12,35 @@ let
   homeModules = "${homeConfiguration}/modules";
   usersModules = "${usersConfiguration}/modules";
   hostsModules = "${hostsConfiguration}/modules";
+
+  pre-nixpkgs = (import inputs.nixpkgs { inherit system; });
+
+  nixpkgs-patched = pre-nixpkgs.applyPatches {
+    name = "nixpkgs-patched";
+    src = inputs.nixpkgs;
+    patches = builtins.map (
+      patch:
+      (pre-nixpkgs.fetchpatch {
+        name = patch.name or "pr-${patch.id}";
+        url = "https://patch-diff.githubusercontent.com/raw/NixOS/nixpkgs/pull/${patch.id}.patch";
+        sha256 = patch.sha256 or "";
+      })
+    ) patches;
+  };
+
+  nixpkgs = nixpkgs-patched;
+
+  lib = nixpkgs.lib // inputs.home-manager.lib;
+
+  nixosSystem = (import (nixpkgs + "/nixos/lib/eval-config.nix"));
 in
 {
+  inherit lib;
+
   makeNixosSystem =
     hostname: extraModules:
-    nixpkgs.lib.nixosSystem rec {
+    nixosSystem rec {
+      inherit system;
       specialArgs = {
         inherit
           inputs
@@ -61,4 +85,5 @@ in
         }
       ] ++ extraModules;
     };
+
 }

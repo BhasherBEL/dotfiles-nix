@@ -42,24 +42,27 @@
   outputs =
     {
       self,
-      nixpkgs,
-      home-manager,
       ...
     }@inputs:
     let
-      lib = nixpkgs.lib // home-manager.lib;
       libx = import ./lib {
         inherit
           self
           inputs
-          nixpkgs
           system
           ;
+        patches = [
+          {
+            name = "auto-cpufreq";
+            id = "392666";
+            sha256 = "sha256-qm4OANl1xUu1kbL65J5wjopQIZF/eflrkpc/MOnLg84=";
+          }
+        ];
       };
       system = "x86_64-linux";
     in
     {
-      inherit lib;
+      inherit libx;
 
       nixosConfigurations = {
         desktop = libx.makeNixosSystem "desktop" [
