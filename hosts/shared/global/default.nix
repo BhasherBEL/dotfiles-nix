@@ -62,9 +62,9 @@
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
-    extraSpecialArgs = {
-      inherit homeModules;
-    };
+    #extraSpecialArgs = {
+    #  inherit homeModules;
+    #};
   };
 
   security.sudo = {

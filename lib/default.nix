@@ -33,13 +33,27 @@ let
   lib = nixpkgs.lib // inputs.home-manager.lib;
 
   nixosSystem = (import (nixpkgs + "/nixos/lib/eval-config.nix"));
+
+  stylix-patched = import (
+    pre-nixpkgs.applyPatches {
+      name = "stylix-patched";
+      src = inputs.stylix;
+      patches = [
+        (pre-nixpkgs.fetchpatch {
+          name = "Stylix overlay fixes";
+          url = "https://patch-diff.githubusercontent.com/raw/danth/stylix/pull/866.diff";
+          sha256 = "sha256-CYb6jn0ZQxOcjMrIB++6FFTLy67qPHmmd+ebvzyMc+k=";
+        })
+      ];
+    }
+  );
 in
 {
   inherit lib;
 
   makeNixosSystem =
     hostname: extraModules:
-    nixosSystem rec {
+    nixosSystem {
       inherit system;
       specialArgs = {
         inherit
@@ -54,9 +68,13 @@ in
         { nixpkgs.overlays = [ inputs.nur.overlays.default ]; }
         inputs.flake-programs-sqlite.nixosModules.programs-sqlite
         inputs.catppuccin.nixosModules.catppuccin
-        inputs.stylix.nixosModules.stylix
+        stylix-patched.nixosModules.stylix
         inputs.home-manager.nixosModules.default
-        { home-manager.extraSpecialArgs = specialArgs; }
+        {
+          home-manager.extraSpecialArgs = {
+            inherit inputs homeModules hostname;
+          };
+        }
         ../overlays
         "${hostsModules}"
         "${usersModules}"
@@ -78,7 +96,7 @@ in
       modules = [
         { nixpkgs.overlays = [ inputs.nur.overlays.default ]; }
         inputs.catppuccin.homeManagerModules.catppuccin
-        inputs.stylix.homeManagerModules.stylix
+        stylix-patched.homeManagerModules.stylix
         inputs.sops-nix.homeManagerModules.sops
         {
           targets.genericLinux.enable = true;
