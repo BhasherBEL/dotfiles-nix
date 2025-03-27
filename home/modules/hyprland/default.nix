@@ -243,6 +243,7 @@ in
         # TODO: move to HM directly
         env = [
           "XCURSOR_SIZE,18"
+          "XCURSOR_THEME,breeze"
           "QT_QPA_PLATFORM,wayland"
           "QT_QPA_PLATFORMTHEME,qt5ct"
           "QT_WAYLAND_DISABLE_WINDOWDECORATION,1"
