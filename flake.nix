@@ -57,6 +57,11 @@
             id = "392666";
             sha256 = "sha256-qm4OANl1xUu1kbL65J5wjopQIZF/eflrkpc/MOnLg84=";
           }
+          {
+            name = "freetube 0.23.3";
+            id = "394422";
+            sha256 = "sha256-AsjVbclYtOLmmFam/LwUym7jHYoFmLsfpsrQIagA/XQ=";
+          }
         ];
       };
       system = "x86_64-linux";
