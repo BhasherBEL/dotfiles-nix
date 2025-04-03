@@ -111,8 +111,16 @@ in
     vlc
     jellyfin-media-player
     obs-studio
+    pinentry-curses
     hugo
   ];
+
+  services.pcscd.enable = true;
+  programs.gnupg.agent = {
+    enable = true;
+    pinentryPackage = pkgs.pinentry-curses;
+    enableSSHSupport = true;
+  };
 
   # TODO: fix
   # error activating kdeconnectd: QDBusError("org.freedesktop.DBus.Error.Spawn.ChildSignaled", "Process org.kde.kdeconnect received signal 6")
