@@ -113,6 +113,7 @@ in
     obs-studio
     pinentry-curses
     hugo
+    qdirstat
   ];
 
   services.pcscd.enable = true;

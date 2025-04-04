@@ -8,7 +8,7 @@ let
   catppuccincfg = config.modules.catppuccin;
 in
 {
-  imports = [ inputs.catppuccin.homeManagerModules.catppuccin ];
+  imports = [ inputs.catppuccin.homeModules.catppuccin ];
 
   options = {
     modules.catppuccin.enable = lib.mkEnableOption "Enable catppuccin";
