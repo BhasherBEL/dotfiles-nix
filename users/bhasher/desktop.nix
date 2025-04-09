@@ -33,5 +33,8 @@
 
   modules = {
     bluetooth.enable = true;
+    classes = {
+      master-thesis.enable = true;
+    };
   };
 }
