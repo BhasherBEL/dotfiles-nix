@@ -459,9 +459,7 @@ in
             };
           };
         };
-        flutter-tools = {
-          enable = true;
-        };
+        flutter-tools.enable = osConfig.modules.languages.flutter.enable;
       };
     };
   };
