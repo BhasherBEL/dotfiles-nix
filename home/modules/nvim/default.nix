@@ -3,6 +3,7 @@
   config,
   pkgs,
   inputs,
+  osConfig,
   ...
 }:
 let
@@ -19,17 +20,21 @@ in
   };
 
   config = lib.mkIf nvimcfg.enable {
-    home.packages = with pkgs; [
-      dart
-      nixfmt-rfc-style
-      stylua
-      prettierd
-      nil
-      gcc
-      ltex-ls
-      zsh-powerlevel10k
-      lua-language-server
-    ];
+    home.packages =
+      with pkgs;
+      [
+        nixfmt-rfc-style
+        stylua
+        prettierd
+        nil
+        gcc
+        ltex-ls
+        zsh-powerlevel10k
+        lua-language-server
+      ]
+      ++ lib.optionals osConfig.modules.languages.flutter.enable [
+        dart
+      ];
 
     programs.nixvim = {
       enable = true;
@@ -114,6 +119,11 @@ in
             noremap = true;
             silent = true;
           };
+        }
+        {
+          mode = [ "n" ];
+          key = "ga";
+          action.__raw = "function() vim.lsp.buf.code_action() end";
         }
       ];
       globals = {
@@ -448,6 +458,9 @@ in
               max_tokens = 8192;
             };
           };
+        };
+        flutter-tools = {
+          enable = true;
         };
       };
     };

@@ -3,7 +3,7 @@
   imports = [
     ./theming
     ./classes
-    ./flutter
+    ./languages
     ./devenv
     ./yubikey
     ./pc.nix

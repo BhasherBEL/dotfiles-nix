@@ -28,6 +28,8 @@ in
       clang-tools
     ];
 
+    modules.languages.flutter.enable = true;
+
     services = {
       #create_ap = {
       #  enable = true;
