@@ -100,7 +100,7 @@ in
   environment.systemPackages = with pkgs; [
     tree
     freetube
-    signal-desktop
+    signal-desktop-bin
     thunderbird
     onlyoffice-bin
     libreoffice
