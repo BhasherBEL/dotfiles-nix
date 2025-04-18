@@ -449,7 +449,7 @@ in
         tmux-navigator.enable = true;
         diffview.enable = true;
         avante = {
-          enable = false;
+          enable = true;
           settings = {
             claude = {
               api_key_name = "cmd:cat /run/secrets/api/anthropic";
@@ -457,6 +457,12 @@ in
               disable_tools = true;
               max_tokens = 8192;
             };
+            openai = {
+              api_key_name = "cmd:cat /run/secrets/api/chatgpt";
+              model = "gpt-4.1";
+              max_tokens = 8192;
+            };
+            provider = "openai";
           };
         };
         flutter-tools.enable = osConfig.modules.languages.flutter.enable;
