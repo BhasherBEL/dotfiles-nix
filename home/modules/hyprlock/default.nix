@@ -33,7 +33,7 @@ in
         general = {
           disable_loading_bar = true;
           hide_cursor = true;
-          grace = 10;
+          grace = 5;
         };
 
         # BACKGROUND
