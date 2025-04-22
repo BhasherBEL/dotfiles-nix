@@ -15,9 +15,16 @@ in
   };
 
   config = lib.mkIf catppuccincfg.enable {
+
+    #qt.platformTheme.name = lib.mkForce "kvantum";
+    #qt.style.name = "kvantum";
+
     catppuccin = {
-      flavor = "macchiato";
+      enable = false;
+      flavor = "latte"; # "macchiato";
       accent = "green";
+
+      swaync.enable = false;
     };
   };
 }

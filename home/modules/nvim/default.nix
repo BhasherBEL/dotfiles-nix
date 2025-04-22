@@ -41,7 +41,9 @@ in
       defaultEditor = true;
       colorschemes.catppuccin = {
         enable = true;
-        settings.flavour = lib.mkDefault "macchiato";
+        settings.flavour = lib.mkDefault (
+          if config.modules.catppuccin.enable then config.catppuccin.flavor else "macchiato"
+        );
       };
       withNodeJs = true;
       extraPackages = with pkgs; [ nodejs-slim ];

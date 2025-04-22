@@ -21,7 +21,7 @@ in
         pkgs.rofi-emoji-wayland
       ];
       terminal = "${pkgs.alacritty}/bin/alacritty";
-      theme = "${config.xdg.configHome}/rofi/themes/type1-style8.rasi";
+      #theme = "${config.xdg.configHome}/rofi/themes/type1-style8.rasi";
       extraConfig = {
         sorting-method = "alnum";
         sort = true;

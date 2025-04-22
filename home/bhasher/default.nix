@@ -43,22 +43,27 @@
     metaPc = {
       enable = true;
       monitors =
-        if osConfig.networking.hostName == "desktop" then
-          [
-            #"DVI-D-1,preferred,-1080x-650,1,transform,1"
-            #"HDMI-A-1,preferred,auto,1"
-            #"DVI-D-1,preferred,auto-left,1"
-            #"DP-1,preferred,auto-left,1"
-            "DP-1,preferred,0x0,1"
-            "HDMI-A-1,preferred,1920x0,1"
-            "DVI-D-1,preferred,-1680x0,1"
-          ]
-        else if osConfig.networking.hostName == "laptop" then
-          [
-            "eDP-1,preferred,auto,1"
-          ]
-        else
-          [ ];
+        (
+          if osConfig.networking.hostName == "desktop" then
+            [
+              #"DVI-D-1,preferred,-1080x-650,1,transform,1"
+              #"HDMI-A-1,preferred,auto,1"
+              #"DVI-D-1,preferred,auto-left,1"
+              #"DP-1,preferred,auto-left,1"
+              "DP-1,preferred,0x0,1"
+              "HDMI-A-1,preferred,1920x0,1"
+              "DVI-D-1,preferred,-1680x0,1"
+            ]
+          else if osConfig.networking.hostName == "laptop" then
+            [
+              "eDP-1,preferred,auto,1"
+            ]
+          else
+            [ ]
+        )
+        ++ [
+          ", 1920x1080, auto, 1"
+        ];
     };
 
     joplin-desktop.enable = true;
