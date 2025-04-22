@@ -1,5 +1,7 @@
-{ ... }: {
-	imports = [
-		./router
-	];
+{ ... }:
+{
+  imports = [
+    ./router
+    ./mailserver
+  ];
 }

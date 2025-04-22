@@ -55,6 +55,7 @@ in
         inputs.flake-programs-sqlite.nixosModules.programs-sqlite
         inputs.catppuccin.nixosModules.catppuccin
         inputs.stylix.nixosModules.stylix
+        inputs.simple-nixos-mailserver.nixosModule
         inputs.home-manager.nixosModules.default
         {
           home-manager.extraSpecialArgs = {

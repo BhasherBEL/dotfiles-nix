@@ -37,6 +37,7 @@
       url = "github:danth/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    simple-nixos-mailserver.url = "gitlab:simple-nixos-mailserver/nixos-mailserver";
   };
 
   outputs =
@@ -80,6 +81,10 @@
 
         live = libx.makeNixosSystem "live" [
           ./hosts/live
+        ];
+
+        vps = libx.makeNixosSystem "vps" [
+          ./hosts/vps
         ];
       };
 

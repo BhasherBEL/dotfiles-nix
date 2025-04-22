@@ -114,6 +114,7 @@
 
   hostModules = {
     router.enable = false;
+    mailserver.enable = false;
   };
 
   system.stateVersion = "23.11";
