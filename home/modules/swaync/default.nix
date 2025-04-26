@@ -1,4 +1,9 @@
-{ lib, config, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 let
   swaynccfg = config.modules.swaync;
 in
@@ -8,6 +13,10 @@ in
   };
 
   config = lib.mkIf swaynccfg.enable {
+    home.packages = with pkgs; [
+      libnotify
+    ];
+
     services.swaync = {
       enable = true;
       settings = {
