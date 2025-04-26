@@ -1,97 +1,62 @@
 { lib, modulesPath, ... }:
 {
 
-  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
+  imports = [
+    (modulesPath + "/installer/scan/not-detected.nix")
+    ./disk-config.nix
+    ./hardware-configuration.nix
+  ];
 
-  disko.devices = {
-    disk = {
-      vda = {
-        type = "disk";
-        device = "/dev/vda";
-        content = {
-          type = "gpt";
-          partitions = {
-            ESP = {
-              priority = 1;
-              name = "ESP";
-              start = "1M";
-              end = "128M";
-              type = "EF00";
-              content = {
-                type = "filesystem";
-                format = "vfat";
-                mountpoint = "/boot";
-                mountOptions = [ "umask=0077" ];
-              };
-            };
-            root_vg = {
-              size = "100%";
-              content = {
-                type = "btrfs";
-                extraArgs = [ "-f" ];
-                subvolumes = {
-                  "/rootfs" = {
-                    mountpoint = "/";
-                  };
-                  "/nix" = {
-                    mountpoint = "/nix";
-                    mountOptions = [
-                      "compress=zstd"
-                      "noatime"
-                    ];
-                  };
-                  "/persistent" = {
-                    mountpoint = "/persistent";
-                    mountOptions = [
-                      "bind"
-                    ];
-                  };
-                  "/swap" = {
-                    mountpoint = "/.swapvol";
-                    swap = {
-                      swapfile.size = "20M";
-                    };
-                  };
-                };
-                swap = {
-                  swapfile = {
-                    size = "20M";
-                  };
-                };
-              };
-            };
-          };
-        };
-      };
+  boot.loader.grub = {
+    devices = [ "nodev" ];
+    efiSupport = true;
+    efiInstallAsRemovable = true;
+  };
+
+  users.users.nixos = {
+    isNormalUser = true;
+    initialPassword = "nixos";
+    extraGroups = [ "wheel" ];
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOGsCS7XysWiFuLVmN01cJAAZN2ZhWVB4V6R6F5DLsuM"
+    ];
+  };
+
+  services = {
+    openssh = {
+      enable = true;
+      settings.PasswordAuthentication = false;
     };
   };
 
-  fileSystems."/persistent".neededForBoot = true;
+  networking = {
+    useDHCP = lib.mkForce false;
+    nameservers = [
+      "1.1.1.1"
+      "1.0.0.1"
+    ];
+  };
 
-  boot.initrd.postResumeCommands = lib.mkAfter ''
-    mkdir /btrfs_tmp
-    mount /dev/root_vg/root /btrfs_tmp
-    if [[ -e /btrfs_tmp/root ]]; then
-        mkdir -p /btrfs_tmp/old_roots
-        timestamp=$(date --date="@$(stat -c %Y /btrfs_tmp/root)" "+%Y-%m-%-d_%H:%M:%S")
-        mv /btrfs_tmp/root "/btrfs_tmp/old_roots/$timestamp"
-    fi
+  services.cloud-init = {
+    enable = true;
+    network.enable = true;
+    settings = {
+      datasource_list = [ "ConfigDrive" ];
+      datasource.ConfigDrive = { };
+    };
+  };
 
-    delete_subvolume_recursively() {
-        IFS=$'\n'
-        for i in $(btrfs subvolume list -o "$1" | cut -f 9- -d ' '); do
-            delete_subvolume_recursively "/btrfs_tmp/$i"
-        done
-        btrfs subvolume delete "$1"
-    }
+  environment.persistence."/persistent" = {
+    enable = true;
+    hideMounts = true;
+    directories = [
+      #Mandatory https://github.com/NixOS/nixpkgs/pull/273384
+      "/var/lib/nixos"
+      "/etc/nixos"
 
-    for i in $(find /btrfs_tmp/old_roots/ -maxdepth 1 -mtime +30); do
-        delete_subvolume_recursively "$i"
-    done
+      "/var/mailserver"
+    ];
+  };
 
-    btrfs subvolume create /btrfs_tmp/root
-    umount /btrfs_tmp
-  '';
-
-  swapDevices = [ ];
+  system.stateVersion = "24.11";
 }

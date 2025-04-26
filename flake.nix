@@ -84,6 +84,8 @@
         ];
 
         vps = libx.makeNixosSystem "vps" [
+          inputs.disko.nixosModules.disko
+          inputs.impermanence.nixosModules.impermanence
           ./hosts/vps
         ];
       };
