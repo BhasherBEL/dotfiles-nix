@@ -30,8 +30,6 @@
     };
   };
 
-  time.timeZone = lib.mkForce "Europe/Paris";
-
   modules = {
     bluetooth.enable = true;
     docker.enable = true;
