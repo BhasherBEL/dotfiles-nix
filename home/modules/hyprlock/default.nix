@@ -38,7 +38,7 @@ in
 
         # BACKGROUND
         background = {
-          path = "${config.xdg.configHome}/assets/backgrounds/mountains_dark.jpg";
+          #path = "${config.xdg.configHome}/assets/backgrounds/mountains_dark.jpg";
           blur_passes = 2;
           contrast = 1;
           brightness = 0.5;

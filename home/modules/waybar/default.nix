@@ -39,11 +39,11 @@ let
         "7" = "7";
         "8" = "8";
         "9" = "9";
-        "10" = "";
-        "21" = "";
-        "22" = "";
-        "23" = "";
-        "24" = "4";
+        "10" = "0";
+        "21" = "";
+        "22" = "";
+        "23" = "";
+        "24" = "";
         "25" = "5";
         "26" = "6";
         "27" = "7";
@@ -147,7 +147,7 @@ let
       "format-be" = "BE";
     };
     "custom/notification" = {
-      "tooltip" = false;
+      "tooltip" = true;
       "format" = "{icon}";
       "format-icons" = {
         notification = "<span foreground='red'><sup></sup></span>";
@@ -183,7 +183,7 @@ in
 
     catppuccin = {
       waybar = {
-        enable = true;
+        enable = false;
         mode = "createLink";
       };
     };
@@ -191,7 +191,88 @@ in
     programs.waybar = {
       enable = true;
       systemd.enable = true;
-      style = ./style.css;
+      style = lib.mkAfter ''
+        .modules-right {
+          margin-right: 1rem;
+        }
+
+        #workspaces button {
+          font-weight: bold;
+          border-bottom: solid transparent 2px;
+        }
+
+        #workspaces button.empty {
+          /* color: @text; */
+          font-weight: normal;
+        }
+
+        #workspaces button.active {
+          color: teal;
+          border-bottom: solid teal 2px;
+        }
+
+        #clock {
+          font-weight: bold;
+          color: teal;
+        }
+
+        #battery:not(.warning).charging {
+          color: green;
+        }
+
+        #battery.warning.charging {
+          color: orange;
+        }
+
+        @keyframes blink {
+          to {
+            color: red;
+          }
+        }
+
+        #battery.warning:not(.charging) {
+          animation-name: blink;
+          animation-duration: 0.5s;
+          animation-timing-function: linear;
+          animation-iteration-count: infinite;
+          animation-direction: alternate;
+        }
+
+        #temperature.critical {
+          color: red;
+          animation-name: blink;
+          animation-duration: 0.5s;
+          animation-timing-function: linear;
+          animation-iteration-count: infinite;
+          animation-direction: alternate;
+        }
+
+        #custom-power,
+        #custom-VPN.down,
+        #network.disconnected {
+          color: red;
+        }
+
+        #custom-music,
+        #tray,
+        #backlight,
+        #battery,
+        #pulseaudio,
+        #cpu,
+        #memory,
+        #network,
+        #temperature,
+        #disk,
+        #custom-spotify,
+        #mode,
+        #custom-VPN,
+        #custom-bandwidth,
+        #custom-lock,
+        #custom-kde-connect,
+        #custom-power {
+          padding: 0 0.75rem;
+        }
+        			'';
       settings =
         # if (builtins.length metapccfg.monitors) == 3 then
         #   {
