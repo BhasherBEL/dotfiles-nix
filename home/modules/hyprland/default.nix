@@ -83,9 +83,10 @@ in
           "$mainMod, C, killactive, "
           "$mainMod, V, togglefloating, "
           "$mainMod, D, exec, rofi -show drun"
-          "$mainMod, P, pseudo,"
-          "$mainMod, J, togglesplit,"
+          "$mainMod, P, pin"
+          "$mainMod, J, togglesplit"
           "$mainMod, L, exec, ${pkgs.hyprlock}/bin/hyprlock"
+          "$mainMod, F, togglefloating"
 
           # Media keys
           ", PRINT, exec, ${pkgs.hyprshot}/bin/hyprshot -m region --clipboard-only"
