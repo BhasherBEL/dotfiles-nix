@@ -25,7 +25,7 @@ in
         ip = "ip --color";
         nv = "nvim";
         sl = "sl -adew5F";
-				nbu = "echo \"nix run home-manager -- switch --flake /etc/nixos#$USERNAME\" && nix run home-manager -- switch --flake /etc/nixos#$USERNAME";
+        nbu = "echo \"nix run home-manager -- switch --flake /etc/nixos#$USERNAME\" && nix run home-manager -- switch --flake /etc/nixos#$USERNAME";
       };
       plugins = [
         {
@@ -61,7 +61,7 @@ in
         }
       ];
       # TODO: Find a nix way to do this
-      initExtra = ''
+      initContent = ''
         autoload -U up-line-or-beginning-search
         autoload -U down-line-or-beginning-search
         zle -N up-line-or-beginning-search
