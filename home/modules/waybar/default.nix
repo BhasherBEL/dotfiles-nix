@@ -166,6 +166,11 @@ let
       on-click-right = "swaync-client -d -sw";
       escape = true;
     };
+    "custom/theme" = {
+      format = "🌙";
+      tooltip = "Swap theme between light and dark";
+      on-lick = "toggle-theme";
+    };
   };
 in
 {
@@ -324,6 +329,7 @@ in
               "disk"
               "pulseaudio"
               "battery"
+              "custom/theme"
               "hyprland/language"
               "tray"
               "custom/notifications"

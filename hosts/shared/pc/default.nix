@@ -25,6 +25,9 @@
   #hardware.pulseaudio.enable = true;
   #hardware.pulseaudio.support32Bit = true;
 
+  # Keep all build dependencies in the closure, allow to build offline
+  # system.includeBuildDependencies = true;
+
   environment = {
     # Tell electron apps to use wayland
     sessionVariables = {

@@ -41,26 +41,28 @@ in
       (pkgs.writeShellScriptBin "toggle-theme" ''
                 			#!/bin/sh
         							notify-send "Switching to Light"
-                			/nix/var/nix/profiles/system/specialisation/light/bin/switch-to-configuration switch
+                			sudo /nix/var/nix/profiles/system/specialisation/light/bin/switch-to-configuration switch
                 			'')
     ];
 
-    # security.sudo.extraRules = [
-    #   {
-    #     groups = [ "wheel" ];
-    #     runAs = "root";
-    #     commands = [
-    #       {
-    #         command = "/nix/var/nix/profiles/system/specialisation/light/bin/switch-to-configuration";
-    #         options = [ "NOPASSWD" ];
-    #       }
-    #       {
-    #         command = "/nix/var/nix/profiles/system/bin/switch-to-configuration";
-    #         options = [ "NOPASSWD" ];
-    #       }
-    #     ];
-    #   }
-    # ];
+    security.sudo = {
+      enable = true;
+      extraRules = [
+        {
+          groups = [ "wheel" ]; # <-- Replace with your actual username
+          commands = [
+            {
+              command = "/nix/var/nix/profiles/system/specialisation/light/bin/switch-to-configuration";
+              options = [ "NOPASSWD" ];
+            }
+            {
+              command = "/nix/var/nix/profiles/system/bin/switch-to-configuration";
+              options = [ "NOPASSWD" ];
+            }
+          ];
+        }
+      ];
+    };
 
     # Slow down system
     specialisation.light.configuration = {
@@ -73,7 +75,7 @@ in
         (pkgs.writeShellScriptBin "toggle-theme" ''
                     						#!/bin/sh
           											notify-send "Switching to Dark"
-                                /nix/var/nix/profiles/system/bin/switch-to-configuration switch
+                                sudo /nix/var/nix/profiles/system/bin/switch-to-configuration switch
         '')
       ];
     };
