@@ -26,6 +26,7 @@
     ./kitty
     ./tmux
     ./alacritty
+    ./yazi
   ];
 
   fonts.fontconfig.enable = true;
@@ -38,7 +39,7 @@
 
   modules = {
     zsh.enable = lib.mkDefault true;
-    ranger.enable = lib.mkDefault true;
+    yazi.enable = lib.mkDefault true;
     git.enable = lib.mkDefault true;
     ssh.enable = lib.mkDefault true;
     nvim.enable = lib.mkDefault true;
