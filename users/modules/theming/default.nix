@@ -77,6 +77,13 @@ in
         cursor.package = lib.mkForce pkgs.catppuccin-cursors.latteMauve;
       };
 
+      home-manager.sharedModules = [
+        {
+
+          programs.nixvim.highlightOverride.SpellBad.bg = lib.mkForce "#cccccc";
+        }
+      ];
+
       environment.systemPackages = [
         (pkgs.writeShellScriptBin "toggle-theme" ''
                     						#!/bin/sh
