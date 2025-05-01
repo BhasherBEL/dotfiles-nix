@@ -18,6 +18,11 @@ in
       autoEnable = true;
       image = ./assets/mountains_dark.jpg;
       base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-macchiato.yaml";
+      cursor = {
+        name = "catppuccin-cursors";
+        package = pkgs.catppuccin-cursors.macchiatoMauve;
+        size = 32;
+      };
     };
 
     home-manager.sharedModules = [
@@ -69,6 +74,7 @@ in
       stylix = {
         image = lib.mkForce ./assets/mountains_light.jpg;
         base16Scheme = lib.mkForce "${pkgs.base16-schemes}/share/themes/catppuccin-latte.yaml";
+        cursor.package = lib.mkForce pkgs.catppuccin-cursors.latteMauve;
       };
 
       environment.systemPackages = [
