@@ -1,11 +1,13 @@
-{ pkgs, lib, ... }:
+{ pkgs, ... }:
 {
   imports = [
     ./hardware-configuration.nix
+    ./disk-config.nix
   ];
 
   boot.loader.grub.enable = false;
   boot.loader.generic-extlinux-compatible.enable = true;
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
   networking.hostName = "media-center";
 
@@ -29,25 +31,25 @@
       settings.PasswordAuthentication = false;
     };
 
-    xserver = {
-      enable = true;
-      desktopManager.kodi = {
-        enable = true;
-        package = pkgs.kodi.withPackages (
-          p: with p; [
-            jellyfin
-            netflix
-            invidious
-            arteplussept
-            sponsorblock
-            inputstreamhelper
-            youtube
-          ]
-        );
-      };
-
-      displayManager.lightdm.enable = true;
-    };
+    # xserver = {
+    #   enable = true;
+    #   desktopManager.kodi = {
+    #     enable = true;
+    #     package = pkgs.kodi.withPackages (
+    #       p: with p; [
+    #         jellyfin
+    #         netflix
+    #         invidious
+    #         arteplussept
+    #         sponsorblock
+    #         inputstreamhelper
+    #         youtube
+    #       ]
+    #     );
+    #   };
+    #
+    #   displayManager.lightdm.enable = true;
+    # };
 
     displayManager = {
       autoLogin = {
@@ -78,10 +80,10 @@
     ];
     files = [ "/var/lib/alsa/asound.state" ];
     users.kodi = {
-      directories = [ ".kodi" ];
+      #directories = [ ".kodi" ];
     };
 
   };
 
-  system.stateVersion = "23.11";
+  system.stateVersion = "25.05";
 }

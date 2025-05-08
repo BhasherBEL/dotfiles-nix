@@ -5,7 +5,7 @@ let
   ];
 in
 {
-  home-manager.users.kodi = import ../../home/kodi.nix;
+  #home-manager.users.kodi = import ../../home/kodi.nix;
 
   sops = {
     defaultSopsFile = ../../secrets/bhasher.yaml;
@@ -43,20 +43,20 @@ in
     allowedUDPPorts = [ 8080 ];
   };
 
-  environment.systemPackages = with pkgs; [ zsh-powerlevel10k ];
+  # environment.systemPackages = with pkgs; [ zsh-powerlevel10k ];
 
-  fileSystems."/mnt/movies" = {
-    device = "//192.168.1.201/movies";
-    fsType = "cifs";
-    options = cifsOptions;
-  };
-  fileSystems."/mnt/music" = {
-    device = "//192.168.1.201/brieuc/SyncDocuments/music";
-    fsType = "cifs";
-    options = cifsOptions;
-  };
+  # fileSystems."/mnt/movies" = {
+  #   device = "//192.168.1.201/movies";
+  #   fsType = "cifs";
+  #   options = cifsOptions;
+  # };
+  # fileSystems."/mnt/music" = {
+  #   device = "//192.168.1.201/brieuc/SyncDocuments/music";
+  #   fsType = "cifs";
+  #   options = cifsOptions;
+  # };
 
-  modules = {
-    bluetooth.enable = true;
-  };
+  # modules = {
+  #   bluetooth.enable = true;
+  # };
 }
