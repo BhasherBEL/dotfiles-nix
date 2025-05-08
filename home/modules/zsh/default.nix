@@ -26,6 +26,11 @@ in
         nv = "nvim";
         sl = "sl -adew5F";
         nbu = "echo \"nix run home-manager -- switch --flake /etc/nixos#$USERNAME\" && nix run home-manager -- switch --flake /etc/nixos#$USERNAME";
+        nb = "echo \"nixos-rebuild switch --flake /etc/nixos#$(hostname) --use-remote-sudo\" && nixos-rebuild switch --flake /etc/nixos#$(hostname) --use-remote-sudo";
+        nbo = "echo \"Offline build\" && echo \"nixos-rebuild switch --flake /etc/nixos#$(hostname) --use-remote-sudo\" && nixos-rebuild switch --flake /etc/nixos#$(hostname) --use-remote-sudo --option substitute false";
+        ncc = "echo \"sudo nix profile wipe-history --profile /nix/var/nix/profiles/system --older-than 7d && nix-collect-garbage -d\" && sudo nix profile wipe-history --profile /nix/var/nix/profiles/system --older-than 7d && nix-collect-garbage -d";
+        ns = "SOPS_AGE_KEY_FILE=/etc/nixos/keys/bhasher.txt sops";
+        nu = "nix flake update --flake /etc/nixos";
       };
       plugins = [
         {

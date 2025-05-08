@@ -8,6 +8,10 @@ let
   mailservercfg = config.hostModules.mailserver;
 in
 {
+  imports = [
+    inputs.simple-nixos-mailserver.nixosModule
+  ];
+
   options = {
     hostModules.mailserver.enable = lib.mkEnableOption "Enable mailserver";
   };

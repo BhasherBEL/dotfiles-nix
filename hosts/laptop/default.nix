@@ -7,7 +7,6 @@
 }:
 {
   imports = [
-    ../shared/global
     ../shared/pc
     ../shared/laptop
     (modulesPath + "/installer/scan/not-detected.nix")

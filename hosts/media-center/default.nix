@@ -2,8 +2,6 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ../shared/global
-    #../shared/optional/ap.nix
   ];
 
   boot.loader.grub.enable = false;
