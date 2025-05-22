@@ -462,7 +462,7 @@ in
             openai = {
               api_key_name = "cmd:cat /run/secrets/api/chatgpt";
               model = "gpt-4.1";
-              max_tokens = 8192;
+              max_tokens = 16384;
             };
             provider = "openai";
           };
