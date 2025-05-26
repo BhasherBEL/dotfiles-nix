@@ -465,6 +465,18 @@ in
               max_tokens = 16384;
             };
             provider = "openai";
+            keys = [
+              {
+                key = "<leader>ac";
+                action.__raw = "function() require('avante').clear() end";
+                ft = "NvimTree";
+              }
+              {
+                key = "<leader>a+";
+                action.__raw = "function() require('avante.extensions.nvim_tree').add_file() end";
+                mode = [ "n" ];
+              }
+            ];
           };
         };
         flutter-tools.enable = osConfig.modules.languages.flutter.enable;

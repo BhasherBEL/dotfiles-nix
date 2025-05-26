@@ -141,14 +141,6 @@
               name = "Pluie Bruxelles";
               url = "https://www.accuweather.com/en/be/watermael-boitsfort/27577/weather-forecast/27577";
             }
-            {
-              name = "Meteo Helsinki";
-              url = "https://en.ilmatieteenlaitos.fi/local-weather";
-            }
-            {
-              name = "Pluie Helsinki";
-              url = "https://www.accuweather.com/en/fi/helsinki/133328/minute-weather-forecast/133328";
-            }
           ];
         }
         {
@@ -162,6 +154,10 @@
         {
           name = "Kagi";
           url = "https://kagi.com";
+        }
+        {
+          name = "Kagi Translate";
+          url = "https://translate.kagi.com";
         }
         {
           name = "CUPS";
@@ -266,6 +262,14 @@
               name = "Ollama";
               url = "https://ollama.bhasher.com";
             }
+            {
+              name = "Maps";
+              url = "https://maps.bhasher.com";
+            }
+            {
+              name = "FireflyIII";
+              url = "https://firefly.bhasher.com";
+            }
           ];
         }
         {
@@ -352,23 +356,6 @@
             {
               name = "Moodle";
               url = "https://moodle.uclouvain.be";
-            }
-          ];
-        }
-        {
-          name = "Aalto";
-          bookmarks = [
-            {
-              name = "MyCourses";
-              url = "https://mycourses.aalto.fi/";
-            }
-            {
-              name = "Aalto";
-              url = "https://aalto.fi";
-            }
-            {
-              name = "Kanttiinit";
-              url = "https://kanttiinit.fi";
             }
           ];
         }
