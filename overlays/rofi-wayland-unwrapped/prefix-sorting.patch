@@ -28,7 +28,7 @@ diff --git a/source/view.c b/source/view.c
 index aac8c22e..c611e3fe 100644
 --- a/source/view.c
 +++ b/source/view.c
-@@ -211,6 +211,38 @@ static int lev_sort(const void *p1, const void *p2, void *arg) {
+@@ -212,6 +212,38 @@ static int lev_sort(const void *p1, const void *p2, void *arg) {
  
    return distances[*a] - distances[*b];
  }
@@ -68,17 +68,17 @@ index aac8c22e..c611e3fe 100644
  /**
   * Stores a screenshot of Rofi at that point in time.
 @@ -765,9 +797,13 @@ static void filter_elements(thread_state *ts,
-           t->state->distance[i] =
-               rofi_scorer_fuzzy_evaluate(t->pattern, t->plen, str, slen);
+          t->state->distance[i] = rofi_scorer_fuzzy_evaluate(
+              t->pattern, t->plen, str, slen, t->state->case_sensitive);
            break;
 +        case SORT_ALNUM:
 +          t->state->distance[i] = levenshtein(t->pattern, t->plen, str, slen);
 +          break;
          case SORT_NORMAL:
          default:
-           t->state->distance[i] = levenshtein(t->pattern, t->plen, str, slen);
-+          printf("%d %s\n", t->state->distance[i], str);
-           break;
+           t->state->distance[i] = levenshtein(t->pattern, t->plen, str, slen,
+              t->state->case_sensitive);
+					 break;
          }
          g_free(str);
 @@ -1486,8 +1522,12 @@ static gboolean rofi_view_refilter_real(RofiViewState *state) {
