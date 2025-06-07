@@ -464,7 +464,10 @@ in
               model = "gpt-4.1";
               max_tokens = 16384;
             };
-            provider = "openai";
+            copilot = {
+              model = "claude-sonnet-4";
+            };
+            provider = "copilot";
             keys = [
               {
                 key = "<leader>ac";
