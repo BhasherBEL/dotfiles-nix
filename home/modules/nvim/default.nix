@@ -439,10 +439,19 @@ in
             };
           };
         };
-        markdown-preview = {
+        # markdown-preview = {
+        #   enable = true;
+        #   settings = {
+        #     auto_close = 1;
+        #   };
+        # };
+        render-markdown = {
           enable = true;
           settings = {
-            auto_close = 1;
+            file_types = [
+              "markdown"
+              "Avante"
+            ];
           };
         };
         web-devicons.enable = true;
