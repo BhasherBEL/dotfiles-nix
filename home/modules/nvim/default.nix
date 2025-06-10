@@ -477,6 +477,12 @@ in
               model = "claude-sonnet-4";
             };
             provider = "copilot";
+            disabled_tools = [
+              "python"
+              "bash"
+              "web_search"
+            ];
+            auto_approve_tool_permissions = [ "replace_in_file" ];
             keys = [
               {
                 key = "<leader>ac";
