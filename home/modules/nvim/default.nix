@@ -175,7 +175,16 @@ in
           servers = {
             nil_ls = {
               enable = true;
-              settings.autoformat = true;
+              settings = {
+                autoformat = true;
+                nix = {
+                  flake = {
+                    autoArchive = false;
+                    autoEvalInputs = true;
+                    nixpkgsInputName = "nixos";
+                  };
+                };
+              };
             };
             gopls.enable = true;
             svelte.enable = true;
@@ -305,7 +314,8 @@ in
             sources = [
               {
                 name = "nvim_lsp";
-                priority = 6;
+                priority = 1000;
+                keywordLength = 1;
               }
               {
                 name = "emoji";
@@ -315,21 +325,21 @@ in
                 name = "buffer"; # text within current buffer
                 option.get_bufnrs.__raw = "vim.api.nvim_list_bufs";
                 keywordLength = 3;
-                priority = 10;
+                priority = 500;
               }
               {
                 name = "copilot";
-                priority = 2;
+                priority = 100;
               }
               {
                 name = "path"; # file system paths
                 keywordLength = 3;
-                priority = 9;
+                priority = 300;
               }
               {
                 name = "luasnip"; # snippets
                 keywordLength = 3;
-                priority = 9;
+                priority = 750;
               }
             ];
             mapping = {
@@ -439,12 +449,6 @@ in
             };
           };
         };
-        # markdown-preview = {
-        #   enable = true;
-        #   settings = {
-        #     auto_close = 1;
-        #   };
-        # };
         render-markdown = {
           enable = true;
           settings = {

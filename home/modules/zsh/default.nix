@@ -26,11 +26,7 @@ in
         nv = "nvim";
         sl = "sl -adew5F";
         nbu = "echo \"nix run home-manager -- switch --flake /etc/nixos#$USERNAME\" && nix run home-manager -- switch --flake /etc/nixos#$USERNAME";
-        nb = "echo \"nixos-rebuild switch --flake /etc/nixos#$(hostname) --use-remote-sudo\" && nixos-rebuild switch --flake /etc/nixos#$(hostname) --use-remote-sudo";
-        nbo = "echo \"Offline build\" && echo \"nixos-rebuild switch --flake /etc/nixos#$(hostname) --use-remote-sudo\" && nixos-rebuild switch --flake /etc/nixos#$(hostname) --use-remote-sudo --option substitute false";
-        ncc = "echo \"sudo nix profile wipe-history --profile /nix/var/nix/profiles/system --older-than 7d && nix-collect-garbage -d\" && sudo nix profile wipe-history --profile /nix/var/nix/profiles/system --older-than 7d && nix-collect-garbage -d";
         ns = "SOPS_AGE_KEY_FILE=/etc/nixos/keys/bhasher.txt sops";
-        nu = "nix flake update --flake /etc/nixos";
       };
       plugins = [
         {
@@ -99,6 +95,108 @@ in
         		command shutdown -P now
         	else
         		command shutdown "$@"
+        	fi
+        }
+
+        nb() {
+        	local offline=false
+        	local safe=false
+        	local update=false
+        	local update_only=false
+        	local clean=false
+        	local clean_only=false
+        	
+        	# Parse arguments
+        	while [[ $# -gt 0 ]]; do
+        		case $1 in
+        			--offline)
+        				offline=true
+        				shift
+        				;;
+        			--safe)
+        				safe=true
+        				shift
+        				;;
+        			--update)
+        				update=true
+        				shift
+        				;;
+        			--update-only)
+        				update_only=true
+        				shift
+        				;;
+        			--clean)
+        				clean=true
+        				shift
+        				;;
+        			--clean-only)
+        				clean_only=true
+        				shift
+        				;;
+        			*)
+        				echo "Unknown option: $1"
+        				echo "Usage: nb [--offline] [--safe] [--update] [--update-only] [--clean] [--clean-only]"
+        				echo "  --offline     Build without substitutes"
+        				echo "  --safe        Ignore current specialisation"
+        				echo "  --update      Update flake before building"
+        				echo "  --update-only Only update flake, don't rebuild"
+        				echo "  --clean       Clean after building"
+        				echo "  --clean-only  Only clean, don't rebuild"
+        				return 1
+        				;;
+        		esac
+        	done
+        	
+        	# Handle clean-only
+        	if [[ "$clean_only" == true ]]; then
+        		echo "Cleaning system..."
+        		sudo nix profile wipe-history --profile /nix/var/nix/profiles/system --older-than 7d && nix-collect-garbage -d
+        		return $?
+        	fi
+        	
+        	# Handle update-only
+        	if [[ "$update_only" == true ]]; then
+        		echo "Updating flake..."
+        		nix flake update --flake /etc/nixos
+        		return $?
+        	fi
+        	
+        	# Update flake if requested
+        	if [[ "$update" == true ]]; then
+        		echo "Updating flake..."
+        		nix flake update --flake /etc/nixos || return 1
+        	fi
+        	
+        	# Detect current specialisation
+        	local current_spec=""
+        	if [[ "$safe" == false ]]; then
+        		current_spec=$(readlink /run/current-system | grep -o 'specialisation/[^/]*' | cut -d/ -f2 || echo "")
+        	fi
+        	
+        	# Build command
+        	local cmd="nixos-rebuild switch --flake /etc/nixos#$(hostname) --use-remote-sudo"
+        	
+        	# Add specialisation if detected and not in safe mode
+        	if [[ -n "$current_spec" && "$safe" == false ]]; then
+        		cmd="$cmd --specialisation $current_spec"
+        		echo "Rebuilding with specialisation: $current_spec"
+        	else
+        		echo "Rebuilding default configuration"
+        	fi
+        	
+        	# Add offline option
+        	if [[ "$offline" == true ]]; then
+        		cmd="$cmd --option substitute false"
+        		echo "Building offline (no substitutes)"
+        	fi
+        	
+        	# Execute rebuild
+        	eval $cmd || return 1
+        	
+        	# Clean if requested
+        	if [[ "$clean" == true ]]; then
+        		echo "Cleaning system..."
+        		sudo nix profile wipe-history --profile /nix/var/nix/profiles/system --older-than 7d && nix-collect-garbage -d
         	fi
         }
 
