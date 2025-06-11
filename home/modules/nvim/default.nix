@@ -462,19 +462,22 @@ in
         avante = {
           enable = true;
           settings = {
-            claude = {
-              api_key_name = "cmd:cat /run/secrets/api/anthropic";
-              model = "claude-3-7-sonnet-20250219";
-              disable_tools = true;
-              max_tokens = 8192;
-            };
-            openai = {
-              api_key_name = "cmd:cat /run/secrets/api/chatgpt";
-              model = "gpt-4.1";
-              max_tokens = 16384;
-            };
-            copilot = {
-              model = "claude-sonnet-4";
+            providers = {
+              claude = {
+                api_key_name = "cmd:cat /run/secrets/api/anthropic";
+                model = "claude-3-7-sonnet-20250219";
+                disable_tools = true;
+                extra_request_body.max_tokens = 8192;
+              };
+              openai = {
+                api_key_name = "cmd:cat /run/secrets/api/chatgpt";
+                model = "gpt-4.1";
+                extra_request_body.max_tokens = 16384;
+              };
+              copilot = {
+                model = "claude-sonnet-4";
+                extra_request_body.max_tokens = 16384;
+              };
             };
             provider = "copilot";
             disabled_tools = [
