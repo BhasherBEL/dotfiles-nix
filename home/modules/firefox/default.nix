@@ -169,7 +169,7 @@ in
               SuggestURLTemplate = "https://kagi.com/api/autosuggest?q={searchTerms}";
             }
           ];
-          Default = if ffcfg.kagiSearch then "kagi" else "ddg";
+          Default = if ffcfg.kagiSearch then "Kagi" else "ddg";
           PreventInstalls = true;
           Remove = [
             "Google"
@@ -248,7 +248,7 @@ in
 
         search = {
           force = true;
-          default = if ffcfg.kagiSearch then "kagi" else "ddg";
+          default = if ffcfg.kagiSearch then "Kagi" else "ddg";
           privateDefault = "ddg";
           engines = lib.mkMerge [
             ({
