@@ -204,16 +204,32 @@ in
         #workspaces button {
           font-weight: bold;
           border-bottom: solid transparent 2px;
+          /* Default style for workspaces with windows (occupied) */
+          color: #89b4fa;
+          background-color: rgba(137, 180, 250, 0.1);
+          border-bottom: solid #89b4fa 2px;
         }
 
         #workspaces button.empty {
-          /* color: @text; */
+          /* Empty workspaces - override the default occupied styling */
+          color: inherit;
+          background-color: transparent;
           font-weight: normal;
+          border-bottom: solid transparent 2px;
         }
 
+        /* Active workspace on current screen */
         #workspaces button.active {
-          color: teal;
-          border-bottom: solid teal 2px;
+          color: #a6e3a1;
+          background-color: rgba(166, 227, 161, 0.15);
+          border-bottom: solid #a6e3a1 2px;
+        }
+
+        /* Active workspace on other screens (visible but not focused) */
+        #workspaces button.visible {
+          color: #f9e2af;
+          background-color: rgba(249, 226, 175, 0.1);
+          border-bottom: solid #f9e2af 2px;
         }
 
         #clock {
