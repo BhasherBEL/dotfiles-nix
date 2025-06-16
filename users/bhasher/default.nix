@@ -114,6 +114,7 @@ in
     pinentry-curses
     hugo
     qdirstat
+    sieve-editor-gui
   ];
 
   services.pcscd.enable = true;

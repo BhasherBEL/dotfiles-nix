@@ -174,7 +174,7 @@ in
         	fi
         	
         	# Build command
-        	local cmd="nixos-rebuild switch --flake /etc/nixos#$(hostname) --use-remote-sudo"
+        	local cmd="nixos-rebuild switch --flake /etc/nixos#$(hostname) --sudo"
         	
         	# Add specialisation if detected and not in safe mode
         	if [[ -n "$current_spec" && "$safe" == false ]]; then
