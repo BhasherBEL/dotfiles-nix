@@ -3,7 +3,15 @@
 {
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
-  boot.kernelParams = [ "snd_bcm2835.enable_hdmi=1" ];
+  boot = {
+    kernelParams = [
+      "snd_bcm2835.enable_hdmi=1"
+      "snd_bcm2835.enable_headphones=1"
+    ];
+    loader.raspberryPi.firmwareConfig = ''
+      			dtparam=audio=on
+      		'';
+  };
 
   fileSystems."/" = {
     device = "none";
@@ -25,6 +33,7 @@
   };
 
   networking.useDHCP = lib.mkDefault true;
+  networking.networkmanager.wifi.powersave = false;
 
-  nixpkgs.hostPlatform = lib.mkDefault "aarch64-linux";
+  nixpkgs.hostPlatform = "aarch64-linux";
 }

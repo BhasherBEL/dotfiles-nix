@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05";
     hyprsome.url = "github:sopa0/hyprsome";
     nur.url = "github:nix-community/NUR";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
@@ -64,30 +65,30 @@
           ./hosts/desktop
           ./users/bhasher/desktop.nix
           inputs.lanzaboote.nixosModules.lanzaboote
-        ];
+        ] { };
 
         laptop = libx.makeNixosSystem "laptop" [
           ./hosts/laptop
           ./users/bhasher/laptop.nix
           inputs.lanzaboote.nixosModules.lanzaboote
-        ];
+        ] { };
 
         media-center = libx.makeNixosSystem "media-center" [
           ./hosts/media-center
           ./users/kodi/media-center.nix
           inputs.nixos-hardware.nixosModules.raspberry-pi-4
           inputs.impermanence.nixosModules.impermanence
-        ];
+        ] { };
 
         live = libx.makeNixosSystem "live" [
           ./hosts/live
-        ];
+        ] { };
 
         vps = libx.makeNixosSystem "vps" [
           inputs.disko.nixosModules.disko
           inputs.impermanence.nixosModules.impermanence
           ./hosts/vps
-        ];
+        ] { };
       };
 
       homeConfigurations = {

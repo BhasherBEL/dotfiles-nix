@@ -27,20 +27,19 @@ let
       })
     ) patches;
   };
-
-  nixpkgs = nixpkgs-patched;
-
-  lib = nixpkgs.lib // inputs.home-manager.lib;
-
-  nixosSystem = (import (nixpkgs + "/nixos/lib/eval-config.nix"));
 in
 {
-  inherit lib;
-
   makeNixosSystem =
     hostname: extraModules:
+    {
+      nixpkgs ? nixpkgs-patched,
+    }:
+    let
+      lib = nixpkgs.lib // inputs.home-manager.lib;
+      nixosSystem = (import (nixpkgs + "/nixos/lib/eval-config.nix"));
+    in
     nixosSystem {
-      inherit system;
+      inherit system lib;
       specialArgs = {
         inherit
           inputs
