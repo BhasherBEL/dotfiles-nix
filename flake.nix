@@ -73,12 +73,17 @@
           inputs.lanzaboote.nixosModules.lanzaboote
         ] { };
 
-        media-center = libx.makeNixosSystem "media-center" [
-          ./hosts/media-center
-          ./users/kodi/media-center.nix
-          inputs.nixos-hardware.nixosModules.raspberry-pi-4
-          inputs.impermanence.nixosModules.impermanence
-        ] { };
+        media-center =
+          libx.makeNixosSystem "media-center"
+            [
+              ./hosts/media-center
+              ./users/kodi/media-center.nix
+              inputs.nixos-hardware.nixosModules.raspberry-pi-4
+              inputs.impermanence.nixosModules.impermanence
+            ]
+            {
+              nixpkgs = inputs.nixpkgs-stable;
+            };
 
         live = libx.makeNixosSystem "live" [
           ./hosts/live
