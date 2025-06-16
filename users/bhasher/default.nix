@@ -115,6 +115,7 @@ in
     hugo
     qdirstat
     sieve-editor-gui
+    twitch-hls-client
   ];
 
   services.pcscd.enable = true;
