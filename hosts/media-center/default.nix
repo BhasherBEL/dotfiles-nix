@@ -79,7 +79,7 @@
         }
         "/run/secrets.d"
       ];
-      files = [ "/var/lib/alsa/asound.state" ];
+      #files = [ "/var/lib/alsa/asound.state" ];
       users.kodi = {
         #directories = [ ".kodi" ];
       };
