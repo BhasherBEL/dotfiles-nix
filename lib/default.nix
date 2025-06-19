@@ -59,7 +59,7 @@ in
         inputs.home-manager.nixosModules.default
         {
           home-manager.extraSpecialArgs = {
-            inherit inputs homeModules hostname;
+            inherit inputs homeModules hostname system;
           };
         }
         ../overlays
@@ -78,6 +78,7 @@ in
           inputs
           homeModules
           username
+          system
           ;
       };
       modules = [

@@ -4,6 +4,7 @@
   pkgs,
   inputs,
   osConfig,
+  system,
   ...
 }:
 let
@@ -31,6 +32,7 @@ in
         ltex-ls
         zsh-powerlevel10k
         lua-language-server
+        uv
       ]
       ++ lib.optionals osConfig.modules.languages.flutter.enable [
         dart
@@ -479,8 +481,8 @@ in
                 extra_request_body.max_tokens = 16384;
               };
               copilot = {
-                model = "claude-sonnet-4";
-                extra_request_body.max_tokens = 16384;
+                model = "gpt-4.1";
+                # extra_request_body.max_tokens = 16384;
               };
             };
             provider = "copilot";
@@ -502,10 +504,22 @@ in
                 mode = [ "n" ];
               }
             ];
+            system_prompt.__raw = "function() local hub = require('mcphub').get_hub_instance(); return hub and hub:get_active_servers_prompt() or \"\" end";
+            custom_tools.__raw = "function() return { require('mcphub.extensions.avante').mcp_tool(), } end";
           };
         };
         flutter-tools.enable = osConfig.modules.languages.flutter.enable;
       };
+      extraPlugins = [
+        inputs.mcphub-nvim.packages."${system}".default
+      ];
+      extraConfigLua = ''
+        require("mcphub").setup({
+            port = 3000,
+            config = vim.fn.expand("~/mcp-hub/mcp-servers.json"),
+            cmd = "${inputs.mcp-hub.packages."${system}".default}/bin/mcp-hub"
+        })
+      '';
     };
   };
 }

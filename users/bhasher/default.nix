@@ -47,6 +47,9 @@ in
       "api/anthropic" = {
         owner = config.users.users.bhasher.name;
       };
+      "api/github" = {
+        owner = config.users.users.bhasher.name;
+      };
       "security/u2f_keys" = {
         owner = config.users.users.bhasher.name;
         mode = "0400";

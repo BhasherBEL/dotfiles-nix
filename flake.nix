@@ -38,6 +38,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     simple-nixos-mailserver.url = "gitlab:simple-nixos-mailserver/nixos-mailserver";
+    mcp-hub.url = "github:ravitemer/mcp-hub";
+    mcphub-nvim.url = "github:ravitemer/mcphub.nvim";
   };
 
   outputs =
