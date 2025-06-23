@@ -12,6 +12,16 @@ let
 
   dayScheme = "catppuccin-latte";
   nightScheme = "catppuccin-macchiato";
+
+  marp-nvim = pkgs.vimUtils.buildVimPlugin {
+    name = "marp-nvim";
+    src = pkgs.fetchFromGitHub {
+      owner = "nwiizo";
+      repo = "marp.nvim";
+      rev = "refs/tags/v1.1.1";
+      hash = "sha256-OdOB1MLpAHcpIe247Sx5WUIV3yC2JKpEXpGUcPmdb6Q=";
+    };
+  };
 in
 {
   imports = [ inputs.nixvim.homeManagerModules.nixvim ];
@@ -33,6 +43,7 @@ in
         zsh-powerlevel10k
         lua-language-server
         uv
+        marp-cli
       ]
       ++ lib.optionals osConfig.modules.languages.flutter.enable [
         dart
@@ -367,6 +378,7 @@ in
         cmp-path.enable = true;
         cmp_luasnip.enable = true;
         cmp-emoji.enable = true;
+        luasnip.enable = true;
         copilot-cmp = {
           enable = true;
           settings.fix_pairs = true;
@@ -510,6 +522,14 @@ in
         };
         flutter-tools.enable = osConfig.modules.languages.flutter.enable;
       };
+      extraPlugins = [
+        marp-nvim
+      ];
+      extraConfigLua = ''
+        				require("marp").setup({
+        					marp_command = "${pkgs.marp-cli}/bin/marp",
+        				})
+      '';
       # extraPlugins = [
       #   inputs.mcphub-nvim.packages."${system}".default
       # ];
