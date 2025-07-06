@@ -302,6 +302,7 @@ in
                   timeout_ms = 5000;
                 };
               };
+            formatters.dart_format.prepend_args = [ "--disable-analytics" ];
             notify_on_error = true;
             log_level = "info";
           };
