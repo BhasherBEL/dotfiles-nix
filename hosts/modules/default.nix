@@ -74,5 +74,6 @@
   programs = {
     dconf.enable = true;
     zsh.enable = true;
+    command-not-found.enable = true;
   };
 }

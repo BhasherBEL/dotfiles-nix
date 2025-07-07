@@ -133,7 +133,6 @@ in
         ManualAppUpdateOnly = true;
         MicrosoftEntraSSO = false;
         NetworkPrediction = true;
-        NoDefaultBookmarks = true;
         OverrideFirstRunPage = "";
         OverridePostUpdatePage = "";
         PasswordManagerEnabled = !ffcfg.strictPrivacy;
