@@ -494,7 +494,7 @@ in
                 extra_request_body.max_tokens = 16384;
               };
               copilot = {
-                model = "gpt-4.1";
+                model = "claude-sonnet-4";
                 extra_request_body.max_tokens = 16384;
               };
             };
