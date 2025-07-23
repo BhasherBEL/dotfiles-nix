@@ -190,13 +190,13 @@ in
               enable = true;
               settings = {
                 autoformat = true;
-                nix = {
-                  flake = {
-                    autoArchive = false;
-                    autoEvalInputs = true;
-                    nixpkgsInputName = "nixos";
-                  };
-                };
+                # nix = {
+                #   flake = {
+                #     autoArchive = false;
+                #     autoEvalInputs = true;
+                #     nixpkgsInputName = "nixos";
+                #   };
+                # };
               };
             };
             gopls.enable = true;
