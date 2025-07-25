@@ -100,13 +100,7 @@
 
   swapDevices = [ { device = "/dev/disk/by-uuid/b63153d4-0c9e-4720-b74f-ed8889ba59e0"; } ];
 
-  # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
-  # (the default) this is the recommended approach. When using systemd-networkd it's
-  # still possible to use this option, but it's recommended to use it in conjunction
-  # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
   networking.useDHCP = lib.mkDefault true;
-  # networking.interfaces.enp0s31f6.useDHCP = lib.mkDefault true;
-  # networking.interfaces.wlp0s20f3.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
@@ -114,6 +108,13 @@
   hostModules = {
     router.enable = false;
     mailserver.enable = false;
+  };
+
+  hostServices = {
+    monitoring = {
+      enable = true;
+      grafana.enable = true;
+    };
   };
 
   system.stateVersion = "23.11";

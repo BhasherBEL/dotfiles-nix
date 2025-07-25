@@ -12,6 +12,7 @@ let
   homeModules = "${homeConfiguration}/modules";
   usersModules = "${usersConfiguration}/modules";
   hostsModules = "${hostsConfiguration}/modules";
+  hostServices = "${self}/services";
 
   pre-nixpkgs = (import inputs.nixpkgs { inherit system; });
 
@@ -47,6 +48,7 @@ in
           homeModules
           usersModules
           hostsModules
+          hostServices
           hostname
           ;
       };
@@ -59,14 +61,21 @@ in
         inputs.home-manager.nixosModules.default
         {
           home-manager.extraSpecialArgs = {
-            inherit inputs homeModules hostname system;
+            inherit
+              inputs
+              homeModules
+              hostname
+              system
+              ;
           };
         }
         ../overlays
         "${hostsModules}"
         "${usersModules}"
+        "${hostServices}"
         #"${homeConfiguration}"
-      ] ++ extraModules;
+      ]
+      ++ extraModules;
     };
 
   makeHomeManager =
@@ -89,7 +98,8 @@ in
         {
           targets.genericLinux.enable = true;
         }
-      ] ++ extraModules;
+      ]
+      ++ extraModules;
     };
 
 }
