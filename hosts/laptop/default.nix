@@ -111,10 +111,8 @@
   };
 
   hostServices = {
-    monitoring = {
-      enable = true;
-      grafana.enable = true;
-    };
+    monitoring.enable = true;
+    mediaserver.enable = true;
   };
 
   system.stateVersion = "23.11";

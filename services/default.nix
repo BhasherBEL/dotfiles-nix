@@ -1,7 +1,8 @@
 { ... }:
 {
   imports = [
-    ./monitoring
     ./nginx.nix
+    ./monitoring
+    ./mediaserver
   ];
 }

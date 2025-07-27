@@ -13,9 +13,14 @@ in
   };
 
   config = lib.mkIf monitoringcfg.enable {
-    hostServices.nginx.enable = true;
+    hostServices = {
+      nginx.enable = true;
 
-    hostServices.monitoring.prometheus.enable = lib.mkDefault true;
-    hostServices.monitoring.grafana.enable = lib.mkDefault true;
+      monitoring = {
+        prometheus.enable = lib.mkDefault true;
+        grafana.enable = lib.mkDefault true;
+      };
+    };
+
   };
 }
