@@ -20,9 +20,9 @@
     #     webroot = "/var/lib/acme/acme-challenge";
     #   };
     #
-    #   certs."bhasher.com" = {
-    #     domain = "bhasher.com";
-    #     extraDomainNames = [ "*.bhasher.com" ];
+    #   certs."laptop.local.bhasher.com" = {
+    #     domain = "laptop.local.bhasher.com";
+    #     extraDomainNames = [ "*.laptop.local.bhasher.com" ];
     #   };
     # };
 
