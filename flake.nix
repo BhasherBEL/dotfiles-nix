@@ -91,6 +91,7 @@
 
         spi = libx.makeNixosSystem "spi" [
           ./hosts/spi
+          inputs.nixos-hardware.nixosModules.raspberry-pi-4
         ];
       };
 
