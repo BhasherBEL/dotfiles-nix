@@ -58,6 +58,7 @@ in
         inputs.catppuccin.nixosModules.catppuccin
         inputs.stylix.nixosModules.stylix
         inputs.sops-nix.nixosModules.sops
+        inputs.impermanence.nixosModules.impermanence
         inputs.home-manager.nixosModules.default
         {
           home-manager.extraSpecialArgs = {
@@ -73,7 +74,6 @@ in
         "${hostsModules}"
         "${usersModules}"
         "${hostServices}"
-        #"${homeConfiguration}"
       ]
       ++ extraModules;
     };

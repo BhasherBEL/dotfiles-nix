@@ -89,14 +89,15 @@
       };
     };
 
-    # environment.persistence."/nix/persist" = {
-    #   directories = [
-    #     "/var/lib/radarr"
-    #     "/var/lib/sonarr"
-    #     "/var/lib/prowlarr"
-    #     "/var/lib/bazarr"
-    #   ];
-    # };
+    environment.persistence."/persistent" = {
+      enable = lib.mkDefault false;
+      directories = [
+        "/var/lib/radarr"
+        "/var/lib/sonarr"
+        "/var/lib/prowlarr"
+        "/var/lib/bazarr"
+      ];
+    };
 
     users.groups.media = { };
   };

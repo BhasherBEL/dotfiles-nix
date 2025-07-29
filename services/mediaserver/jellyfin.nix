@@ -16,10 +16,11 @@
       };
     };
 
-    # environment.persistence."/nix/persist" = {
-    #   directories = [
-    #     "/var/lib/jellyfin"
-    #   ];
-    # };
+    environment.persistence."/persistent" = {
+      enable = lib.mkDefault false;
+      directories = [
+        "/var/lib/jellyfin"
+      ];
+    };
   };
 }

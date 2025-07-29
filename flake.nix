@@ -78,7 +78,6 @@
           ./hosts/media-center
           ./users/kodi/media-center.nix
           inputs.nixos-hardware.nixosModules.raspberry-pi-4
-          inputs.impermanence.nixosModules.impermanence
         ];
 
         live = libx.makeNixosSystem "live" [
@@ -87,8 +86,11 @@
 
         vps = libx.makeNixosSystem "vps" [
           inputs.disko.nixosModules.disko
-          inputs.impermanence.nixosModules.impermanence
           ./hosts/vps
+        ];
+
+        spi = libx.makeNixosSystem "spi" [
+          ./hosts/spi
         ];
       };
 

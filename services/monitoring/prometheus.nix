@@ -36,10 +36,11 @@
       };
     };
 
-    # environment.persistence."/nix/persist" = {
-    #   directories = [
-    #     "/var/lib/prometheus"
-    #   ];
-    # };
+    environment.persistence."/persistent" = {
+      enable = lib.mkDefault false;
+      directories = [
+        "/var/lib/prometheus"
+      ];
+    };
   };
 }

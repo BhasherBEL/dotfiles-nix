@@ -33,10 +33,11 @@
       443
     ];
 
-    # environment.persistence."/nix/persist" = {
-    #   directories = [
-    #     "/var/lib/acme"
-    #   ];
-    # };
+    environment.persistence."/persistent" = {
+      enable = lib.mkDefault false;
+      directories = [
+        "/var/lib/acme"
+      ];
+    };
   };
 }

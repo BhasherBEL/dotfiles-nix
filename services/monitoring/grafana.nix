@@ -82,10 +82,11 @@ in
       };
     };
 
-    # environment.persistence."/nix/persist" = {
-    #   directories = [
-    #     "/var/lib/grafana"
-    #   ];
-    # };
+    environment.persistence."/persistent" = {
+      enable = lib.mkDefault false;
+      directories = [
+        "/var/lib/grafana"
+      ];
+    };
   };
 }
