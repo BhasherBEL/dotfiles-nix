@@ -44,10 +44,15 @@ in
 
     environment.systemPackages = [
       (pkgs.writeShellScriptBin "toggle-theme" ''
-                			#!/bin/sh
-        							notify-send "Switching to Light"
-                			sudo /nix/var/nix/profiles/system/specialisation/light/bin/switch-to-configuration switch
-                			'')
+                                			#!/bin/sh
+                											if [ -d /run/current-system/specialisation/light ]; then
+                												notify-send "Switching to Light"
+                												sudo /nix/var/nix/profiles/system/specialisation/light/bin/switch-to-configuration switch
+        															else
+                  											notify-send "Switching to Dark"
+                                        sudo /nix/var/nix/profiles/system/bin/switch-to-configuration switch
+                											fi
+                                			'')
     ];
 
     security.sudo = {
@@ -82,14 +87,6 @@ in
 
           programs.nixvim.highlightOverride.SpellBad.bg = lib.mkForce "#cccccc";
         }
-      ];
-
-      environment.systemPackages = [
-        (pkgs.writeShellScriptBin "toggle-theme" ''
-                    						#!/bin/sh
-          											notify-send "Switching to Dark"
-                                sudo /nix/var/nix/profiles/system/bin/switch-to-configuration switch
-        '')
       ];
     };
   };
