@@ -4,7 +4,6 @@
   pkgs,
   inputs,
   osConfig,
-  system,
   ...
 }:
 let
@@ -24,7 +23,7 @@ let
   };
 in
 {
-  imports = [ inputs.nixvim.homeManagerModules.nixvim ];
+  imports = [ inputs.nixvim.homeModules.nixvim ];
 
   options = {
     modules.nvim.enable = lib.mkEnableOption "Enable neovim";
@@ -369,7 +368,7 @@ in
         };
         lspkind = {
           enable = true;
-          symbolMap = {
+          settings.symbolMap = {
             Copilot = "";
             Text = "󰉿";
           };
@@ -437,14 +436,16 @@ in
         };
         nvim-tree = {
           enable = true;
-          disableNetrw = true;
           openOnSetup = true;
           openOnSetupFile = true;
           autoClose = true;
-          updateFocusedFile.enable = true;
-          diagnostics = {
-            enable = true;
-            showOnDirs = true;
+          settings = {
+            disableNetrw = true;
+            updateFocusedFile.enable = true;
+            diagnostics = {
+              enable = true;
+              showOnDirs = true;
+            };
           };
         };
         chatgpt = {
@@ -482,19 +483,13 @@ in
           enable = true;
           settings = {
             providers = {
-              claude = {
-                api_key_name = "cmd:cat /run/secrets/api/anthropic";
-                model = "claude-3-7-sonnet-20250219";
-                disable_tools = true;
-                extra_request_body.max_tokens = 8192;
-              };
               openai = {
                 api_key_name = "cmd:cat /run/secrets/api/chatgpt";
                 model = "gpt-4.1";
                 extra_request_body.max_tokens = 16384;
               };
               copilot = {
-                model = "claude-sonnet-4";
+                model = "gpt-4.1";
                 extra_request_body.max_tokens = 16384;
               };
             };

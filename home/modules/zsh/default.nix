@@ -170,7 +170,7 @@ in
                                         	# Detect current specialisation
                                         	local current_spec=""
                                         	if [[ "$safe" == false ]]; then
-                                						if [ -e /run/current-system/specialisation/light ]; then
+                                						if [ ! -e /run/current-system/specialisation/light ]; then
                 															current_spec="light"
         																		fi
                                         	fi
