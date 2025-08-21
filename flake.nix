@@ -84,6 +84,11 @@
           ./hosts/live
         ];
 
+        live-pi = libx.makeNixosSystem "live" [
+          ./hosts/live/pi.nix
+          inputs.nixos-hardware.nixosModules.raspberry-pi-4
+        ];
+
         vps = libx.makeNixosSystem "vps" [
           inputs.disko.nixosModules.disko
           ./hosts/vps

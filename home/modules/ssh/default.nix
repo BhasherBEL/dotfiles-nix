@@ -17,6 +17,12 @@ in
           identitiesOnly = true;
           identityFile = "/run/secrets/ssh/snodes";
         };
+        "spi 192.168.3.16" = {
+          hostname = "192.168.3.16";
+          user = "spi";
+          identitiesOnly = true;
+          identityFile = "/run/secrets/ssh/snodes";
+        };
         "kodi media-center" = {
           user = "kodi";
           hostname = "10.15.14.5";

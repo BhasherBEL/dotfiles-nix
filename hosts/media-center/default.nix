@@ -1,56 +1,78 @@
-{ pkgs, ... }:
+{
+  lib,
+  modulesPath,
+  ...
+}:
 {
   imports = [
-    ./hardware-configuration.nix
-    ./disk-config.nix
+    (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
-  boot.loader.grub.enable = false;
-  boot.loader.generic-extlinux-compatible.enable = true;
-  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+  boot = {
+    initrd = {
+      availableKernelModules = [
+        "xhci_pci"
+        "usbhid"
+      ];
+      kernelModules = [ ];
+    };
+    kernelModules = [ ];
+    extraModulePackages = [ ];
+    loader = {
+      grub.enable = false;
+      generic-extlinux-compatible.enable = true;
+    };
+  };
 
-  networking.hostName = "media-center";
+  fileSystems = {
+    "/" = {
+      device = "none";
+      fsType = "tmpfs";
+      options = [
+        "size=4G"
+        "mode=755"
+      ];
+    };
+    "/home/nixos" = {
+      device = "none";
+      fsType = "tmpfs";
+      options = [
+        "size=4G"
+        "mode=777"
+      ];
+    };
+    "/persistent" = {
+      device = "/dev/disk/by-label/NIXOS_SD";
+      neededForBoot = true;
+      fsType = "ext4";
+      options = [ "noatime" ];
+    };
+    "/nix" = {
+      device = "/persistent/nix";
+      fsType = "none";
+      options = [ "bind" ];
+    };
+    "/boot" = {
+      device = "/dev/disk/by-label/FIRMWARE";
+      fsType = "vfat";
+    };
+  };
 
   hardware = {
     raspberry-pi."4" = {
       apply-overlays-dtmerge.enable = true;
       fkms-3d.enable = true;
-      #audio.enable = true;
       bluetooth.enable = true;
     };
     deviceTree.enable = true;
-    #pulseaudio.enable = true;
     bluetooth.enable = true;
   };
 
-  programs.dconf.enable = true;
+  networking.hostName = "media-center";
+  networking.networkmanager.enable = true;
 
   services = {
-    openssh = {
-      enable = true;
-      settings.PasswordAuthentication = false;
-    };
-
-    # xserver = {
-    #   enable = true;
-    #   desktopManager.kodi = {
-    #     enable = true;
-    #     package = pkgs.kodi.withPackages (
-    #       p: with p; [
-    #         jellyfin
-    #         netflix
-    #         invidious
-    #         arteplussept
-    #         sponsorblock
-    #         inputstreamhelper
-    #         youtube
-    #       ]
-    #     );
-    #   };
-    #
-    #   displayManager.lightdm.enable = true;
-    # };
-
+    openssh.enable = true;
     displayManager = {
       autoLogin = {
         enable = true;
@@ -63,14 +85,12 @@
     enable = true;
     hideMounts = true;
     directories = [
-      #Mandatory https://github.com/NixOS/nixpkgs/pull/273384
       "/var/lib/nixos"
       "/etc/nixos"
       #To prevent builds to fill all remaining space
       "/tmp"
       "/var/tmp"
       #TODO: Find a nix way?
-      "/etc/NetworkManager/system-connections"
       "/var/lib/iwd"
       {
         directory = "/etc/ssh/";
@@ -78,12 +98,15 @@
       }
       "/run/secrets.d"
     ];
-    files = [ "/var/lib/alsa/asound.state" ];
-    users.kodi = {
-      #directories = [ ".kodi" ];
-    };
-
   };
 
-  system.stateVersion = "25.05";
+  system.stateVersion = "25.11";
+
+  swapDevices = [ ];
+
+  nixpkgs.hostPlatform = lib.mkDefault "aarch64-linux";
+
+  users = {
+    mutableUsers = false;
+  };
 }

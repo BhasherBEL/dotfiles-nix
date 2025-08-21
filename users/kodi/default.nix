@@ -5,7 +5,7 @@ let
   ];
 in
 {
-  #home-manager.users.kodi = import ../../home/kodi.nix;
+  home-manager.users.kodi = import ../../home/kodi.nix;
 
   sops = {
     defaultSopsFile = ../../secrets/bhasher.yaml;
