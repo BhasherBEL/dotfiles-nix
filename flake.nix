@@ -88,6 +88,11 @@
           ./hosts/spi
           inputs.nixos-hardware.nixosModules.raspberry-pi-4
         ];
+        shp = libx.makeNixosSystem "shp" [
+          ./hosts/shp
+          ./users/shp
+          inputs.nixos-hardware.nixosModules.raspberry-pi-4
+        ];
       };
 
       homeConfigurations = {
