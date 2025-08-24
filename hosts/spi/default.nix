@@ -29,32 +29,39 @@
       device = "none";
       fsType = "tmpfs";
       options = [
-        "size=4G"
+        "size=3G"
         "mode=755"
       ];
     };
-    "/home/nixos" = {
+    "/home/spi" = {
       device = "none";
       fsType = "tmpfs";
       options = [
-        "size=4G"
+        "size=1G"
         "mode=777"
       ];
     };
-    "/persistent" = {
+    "/sd-card" = {
       device = "/dev/disk/by-label/NIXOS_SD";
       neededForBoot = true;
       fsType = "ext4";
       options = [ "noatime" ];
     };
+    "/persistent" = {
+      device = "/sd-card/persistent";
+      neededForBoot = true;
+      fsType = "none";
+      options = [ "bind" ];
+    };
     "/nix" = {
-      device = "/persistent/nix";
+      device = "/sd-card/nix";
       fsType = "none";
       options = [ "bind" ];
     };
     "/boot" = {
-      device = "/dev/disk/by-label/FIRMWARE";
-      fsType = "vfat";
+      device = "/sd-card/boot";
+      fsType = "none";
+      options = [ "bind" ];
     };
   };
 
@@ -87,12 +94,14 @@
     directories = [
       "/var/lib/nixos"
       "/etc/nixos"
+      "/var/log"
       "/etc/NetworkManager/system-connections"
       "/var/lib/iwd"
       {
         directory = "/etc/ssh/";
         mode = "0700";
       }
+      "/run/secrets.d"
     ];
   };
 
@@ -110,7 +119,7 @@
         "wheel"
         "networkmanager"
       ];
-      initialPassword = "spi";
+      initialPassword = "raspberry";
     };
   };
 }
