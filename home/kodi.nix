@@ -9,30 +9,29 @@
   imports = [ ./modules ];
 
   modules = {
-    
+
   };
 
   programs = {
     kodi = {
-      enable = false;
-      package = pkgs.kodi.withPackages (
-        p: with p; [
-          jellyfin
-          netflix
-          youtube
-          arteplussept
-          sponsorblock
-          inputstreamhelper
-          youtube
-        ]
-      );
-      sources = [
-        {
-          name = "music";
-          path = "/mnt/music/";
-          allowsharing = "true";
-        }
-      ];
+      enable = true;
+      # package = pkgs.kodi.withPackages (
+      #   p: with p; [
+      #     jellyfin
+      #     # netflix
+      #     # youtube
+      #     # arteplussept
+      #     # sponsorblock
+      #     inputstreamhelper
+      #   ]
+      # );
+      # sources = [
+      #   {
+      #     name = "music";
+      #     path = "/mnt/music/";
+      #     allowsharing = "true";
+      #   }
+      # ];
       settings = {
         gamesgeneral.enable = "false";
         lookandfeel = {
@@ -68,6 +67,7 @@
           displayoff = "20";
           wakeonaccess = "true";
         };
+        network.disablehttp2 = "true"; # Required
       };
       addonSettings = {
         "plugin.video.invidious" = {

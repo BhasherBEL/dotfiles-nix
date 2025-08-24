@@ -2,6 +2,8 @@
 {
   imports = [ ./default.nix ];
 
+  users.users.kodi.uid = 1000;
+
   #sops.secrets = {
   #  "wg/bxl-shp/media-server/key" = { };
   #  "wg/bxl-shp/media-server/psk" = { };

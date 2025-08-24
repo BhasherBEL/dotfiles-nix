@@ -1,6 +1,7 @@
 {
   lib,
   modulesPath,
+  pkgs,
   ...
 }:
 {
@@ -9,6 +10,10 @@
   ];
 
   boot = {
+    kernelParams = [
+      "snd_bcm2835.enable_hdmi=1"
+      "snd_bcm2835.enable_headphones=1"
+    ];
     initrd = {
       availableKernelModules = [
         "xhci_pci"
@@ -33,7 +38,7 @@
         "mode=755"
       ];
     };
-    "/home/nixos" = {
+    "/home/kodi" = {
       device = "none";
       fsType = "tmpfs";
       options = [
@@ -41,20 +46,33 @@
         "mode=777"
       ];
     };
-    "/persistent" = {
+    "/sd-card" = {
       device = "/dev/disk/by-label/NIXOS_SD";
       neededForBoot = true;
       fsType = "ext4";
       options = [ "noatime" ];
     };
-    "/nix" = {
-      device = "/persistent/nix";
+    "/persistent" = {
+      device = "/sd-card/persistent";
+      neededForBoot = true;
       fsType = "none";
       options = [ "bind" ];
     };
+    "/nix" = {
+      device = "/sd-card/nix";
+      fsType = "none";
+      options = [ "bind" ];
+    };
+    # "/boot" = {
+    #   device = "/dev/disk/by-label/FIRMWARE";
+    #   fsType = "vfat";
+    #   options = [ "fmask=0022" "dmask=0022" ];
+    #   neededForBoot = true;
+    # };
     "/boot" = {
-      device = "/dev/disk/by-label/FIRMWARE";
-      fsType = "vfat";
+      device = "/sd-card/boot";
+      fsType = "none";
+      options = [ "bind" ];
     };
   };
 
@@ -67,6 +85,10 @@
     deviceTree.enable = true;
     bluetooth.enable = true;
   };
+  environment.systemPackages = with pkgs; [
+    libraspberrypi
+    raspberrypi-eeprom
+  ];
 
   networking.hostName = "media-center";
   networking.networkmanager.enable = true;
@@ -79,25 +101,51 @@
         user = "kodi";
       };
     };
+    xserver = {
+      enable = true;
+      desktopManager.kodi = {
+        enable = true;
+        package = pkgs.kodi.withPackages (
+          p: with p; [
+            jellyfin
+            # netflix
+            # invidious
+            arteplussept
+            sponsorblock
+            inputstreamhelper
+            youtube
+          ]
+
+        );
+      };
+      displayManager.lightdm.enable = true;
+    };
   };
 
+  security.sudo.extraConfig = "Defaults lecture=never";
   environment.persistence."/persistent" = {
     enable = true;
     hideMounts = true;
     directories = [
-      "/var/lib/nixos"
       "/etc/nixos"
+      "/var/lib"
+      "/var/log"
       #To prevent builds to fill all remaining space
       "/tmp"
       "/var/tmp"
-      #TODO: Find a nix way?
-      "/var/lib/iwd"
       {
         directory = "/etc/ssh/";
         mode = "0700";
       }
       "/run/secrets.d"
     ];
+    files = [
+      #"/etc/machine-id"
+    ];
+    users.kodi = {
+      directories = [ ".kodi" ];
+      # files = [ ".zsh_history" ];
+    };
   };
 
   system.stateVersion = "25.11";
