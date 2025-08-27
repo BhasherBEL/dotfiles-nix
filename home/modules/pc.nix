@@ -31,7 +31,7 @@ in
       hypridle.enable = lib.mkDefault true;
       hyprlock.enable = lib.mkDefault true;
       rofi.enable = lib.mkDefault true;
-      swaync.enable = lib.mkDefault true;
+      swaync.enable = lib.mkDefault false;
       udiskie.enable = lib.mkDefault true;
       waybar.enable = lib.mkDefault true;
       alacritty.enable = lib.mkDefault true;

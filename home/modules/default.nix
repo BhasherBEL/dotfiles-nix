@@ -27,6 +27,7 @@
     ./tmux
     ./alacritty
     ./yazi
+    ./mako
   ];
 
   fonts.fontconfig.enable = true;

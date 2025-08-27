@@ -17,6 +17,7 @@
     ./virtualbox
     ./wificrack
     ./ipv6
+    ./jellyfin-media-player
   ];
 
 }

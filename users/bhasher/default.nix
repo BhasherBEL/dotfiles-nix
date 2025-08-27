@@ -61,22 +61,21 @@ in
   users.users.bhasher = {
     isNormalUser = true;
     initialPassword = "azerty";
-    extraGroups =
-      [
-        "wheel"
-        "audio"
-        "networkmanager"
-      ]
-      ++ ifTheyExist [
-        "docker"
-        "wireshark"
-        "uucpd"
-        "kvm"
-        "adbusers"
-        "dialout"
-        "openvpn"
-        "plugdev"
-      ];
+    extraGroups = [
+      "wheel"
+      "audio"
+      "networkmanager"
+    ]
+    ++ ifTheyExist [
+      "docker"
+      "wireshark"
+      "uucpd"
+      "kvm"
+      "adbusers"
+      "dialout"
+      "openvpn"
+      "plugdev"
+    ];
   };
 
   fileSystems."/mnt/brieuc" = {
@@ -112,7 +111,6 @@ in
     marksman
     nmap
     vlc
-    jellyfin-media-player
     obs-studio
     pinentry-curses
     hugo
@@ -162,11 +160,10 @@ in
   modules = {
     metaPc.enable = true;
     devenv.enable = true;
-    languagelab.enable = true;
     js.enable = true;
     python.enable = true;
     docker.enable = true;
     ipv6.disable = true;
-    classes.master-thesis.enable = true;
+    jellyfin-media-player.enable = true;
   };
 }
