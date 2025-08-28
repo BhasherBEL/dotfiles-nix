@@ -189,13 +189,13 @@ in
               enable = true;
               settings = {
                 autoformat = true;
-                # nix = {
-                #   flake = {
-                #     autoArchive = false;
-                #     autoEvalInputs = true;
-                #     nixpkgsInputName = "nixos";
-                #   };
-                # };
+                nix = {
+                  flake = {
+                    autoArchive = false;
+                    autoEvalInputs = false; # cause errors
+                    nixpkgsInputName = "nixos";
+                  };
+                };
               };
             };
             gopls.enable = true;
@@ -440,11 +440,11 @@ in
           openOnSetupFile = true;
           autoClose = true;
           settings = {
-            disableNetrw = true;
-            updateFocusedFile.enable = true;
+            disable_netrw = true;
+            update_focused_file.enable = true;
             diagnostics = {
               enable = true;
-              showOnDirs = true;
+              show_on_dirs = true;
             };
           };
         };
