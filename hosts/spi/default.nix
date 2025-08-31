@@ -29,7 +29,7 @@
       device = "none";
       fsType = "tmpfs";
       options = [
-        "size=3G"
+        "size=2G"
         "mode=755"
       ];
     };
@@ -37,7 +37,7 @@
       device = "none";
       fsType = "tmpfs";
       options = [
-        "size=1G"
+        "size=500M"
         "mode=777"
       ];
     };
@@ -113,13 +113,5 @@
 
   users = {
     mutableUsers = false;
-    users.spi = {
-      isNormalUser = true;
-      extraGroups = [
-        "wheel"
-        "networkmanager"
-      ];
-      initialPassword = "raspberry";
-    };
   };
 }
