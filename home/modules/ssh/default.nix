@@ -101,6 +101,12 @@ in
           identitiesOnly = true;
           identityFile = "/run/secrets/ssh/languagelab";
         };
+        "oa-fw" = {
+          user = "bdubois";
+          hostname = "192.168.0.110";
+          identitiesOnly = true;
+          identityFile = "/run/secrets/ssh/oa-fw";
+        };
       };
     };
   };

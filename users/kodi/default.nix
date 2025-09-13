@@ -18,6 +18,9 @@ in
       "ssh/gitkey" = {
         owner = config.users.users.kodi.name;
       };
+      "ssh/oa-fw" = {
+        owner = config.users.users.kodi.name;
+      };
       "security/u2f_keys" = {
         owner = config.users.users.kodi.name;
         mode = "0400";

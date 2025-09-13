@@ -6,6 +6,7 @@
     ./sudo
     ./locale
     ./automatic-timezone
+    ./remoteBuild
   ];
 
   hostModules = {
