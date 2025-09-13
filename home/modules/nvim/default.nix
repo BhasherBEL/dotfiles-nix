@@ -26,7 +26,12 @@ in
   imports = [ inputs.nixvim.homeModules.nixvim ];
 
   options = {
-    modules.nvim.enable = lib.mkEnableOption "Enable neovim";
+    modules.nvim = {
+      enable = lib.mkEnableOption "Enable neovim";
+      full = lib.mkEnableOption "Install full neovim with extra packages";
+      ai = lib.mkEnableOption "Install AI related packages";
+      headless = lib.mkEnableOption "Install neovim headless (no clipboard integration)";
+    };
   };
 
   config = lib.mkIf nvimcfg.enable {
@@ -34,18 +39,20 @@ in
       with pkgs;
       [
         nixfmt-rfc-style
+        nil
+      ]
+      ++ lib.optionals osConfig.modules.languages.flutter.enable [
+        dart
+      ]
+      ++ lib.optionals nvimcfg.full [
         stylua
         prettierd
-        nil
         gcc
         ltex-ls
         zsh-powerlevel10k
         lua-language-server
         uv
         marp-cli
-      ]
-      ++ lib.optionals osConfig.modules.languages.flutter.enable [
-        dart
       ];
 
     programs.nixvim = {
@@ -141,7 +148,7 @@ in
         }
       ];
       globals = {
-        clipboard = {
+        clipboard = lib.mkIf (!nvimcfg.headless) {
           name = "wl-clipboard";
           copy = {
             "+" = "wl-copy --trim-newline";
@@ -198,10 +205,10 @@ in
                 };
               };
             };
-            gopls.enable = true;
-            svelte.enable = true;
+            gopls.enable = nvimcfg.full;
+            svelte.enable = nvimcfg.full;
             ts_ls = {
-              enable = true;
+              enable = nvimcfg.full;
               extraOptions = {
                 codeActionsOnSave = {
                   "source.organizeImports" = true;
@@ -222,10 +229,10 @@ in
                 };
               };
             };
-            tailwindcss.enable = true;
-            clangd.enable = true;
+            tailwindcss.enable = nvimcfg.full;
+            clangd.enable = nvimcfg.full;
             lua_ls = {
-              enable = true;
+              enable = nvimcfg.full;
               settings = {
                 diagnostics = {
                   enable = true;
@@ -238,13 +245,13 @@ in
               };
             };
             pyright = {
-              enable = true;
+              enable = nvimcfg.full;
               settings = {
                 venvPath = "env";
               };
             };
             ltex = {
-              enable = true;
+              enable = nvimcfg.full;
               settings = {
                 filetypes = [ "." ];
                 ltex = {
@@ -255,9 +262,9 @@ in
                 };
               };
             };
-            marksman.enable = true;
-            dartls.enable = true;
-            arduino_language_server.enable = true;
+            marksman.enable = nvimcfg.full;
+            dartls.enable = nvimcfg.full || osConfig.modules.languages.flutter.enable;
+            arduino_language_server.enable = nvimcfg.full;
           };
         };
         conform-nvim = {
@@ -379,11 +386,11 @@ in
         cmp_luasnip.enable = true;
         cmp-emoji.enable = true;
         luasnip.enable = true;
-        copilot-cmp = {
+        copilot-cmp = lib.mkIf nvimcfg.ai {
           enable = true;
           settings.fix_pairs = true;
         };
-        copilot-lua = {
+        copilot-lua = lib.mkIf nvimcfg.ai {
           enable = true;
           settings = {
             suggestion.enabled = false;
@@ -397,23 +404,27 @@ in
           enable = true;
           nixGrammars = true;
           folding = true;
-          grammarPackages = with pkgs.vimPlugins.nvim-treesitter.builtGrammars; [
-            go
-            lua
-            vim
-            vimdoc
-            sql
-            json
-            javascript
-            typescript
-            svelte
-            html
-            java
-            markdown
-            nix
-            c
-            cpp
-          ];
+          grammarPackages =
+            with pkgs.vimPlugins.nvim-treesitter.builtGrammars;
+            [
+              json
+              markdown
+              nix
+            ]
+            ++ lib.optionals nvimcfg.full [
+              c
+              cpp
+              javascript
+              typescript
+              svelte
+              html
+              java
+              go
+              lua
+              vim
+              vimdoc
+              sql
+            ];
           settings.highlight.enable = true;
         };
         telescope = {
@@ -449,7 +460,7 @@ in
           };
         };
         chatgpt = {
-          enable = true;
+          enable = nvimcfg.ai;
           settings = {
             api_key_cmd = "cat /run/secrets/api/chatgpt";
             openai_params = {
@@ -466,7 +477,7 @@ in
           };
         };
         render-markdown = {
-          enable = true;
+          enable = nvimcfg.full;
           settings = {
             file_types = [
               "markdown"
@@ -475,12 +486,12 @@ in
           };
         };
         web-devicons.enable = true;
-        notify.enable = true;
+        notify.enable = !nvimcfg.headless;
         comment.enable = true;
         tmux-navigator.enable = true;
         diffview.enable = true;
         avante = {
-          enable = true;
+          enable = nvimcfg.ai;
           settings = {
             providers = {
               openai = {
@@ -518,10 +529,10 @@ in
         };
         flutter-tools.enable = osConfig.modules.languages.flutter.enable;
       };
-      extraPlugins = [
+      extraPlugins = lib.optionals nvimcfg.full [
         marp-nvim
       ];
-      extraConfigLua = ''
+      extraConfigLua = lib.mkIf nvimcfg.full ''
         				require("marp").setup({
         					marp_command = "${pkgs.marp-cli}/bin/marp",
         				})

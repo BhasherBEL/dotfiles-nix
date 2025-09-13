@@ -9,7 +9,9 @@
   imports = [ ./modules ];
 
   modules = {
-
+    nvim = {
+      headless = true;
+    };
   };
 
   programs = {

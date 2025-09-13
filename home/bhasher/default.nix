@@ -75,6 +75,12 @@
     syncthing.enable = true;
     tmux.enable = true;
     yazi.enable = true;
+    nvim = {
+      enable = true;
+      headless = false;
+      ai = true;
+      full = true;
+    };
     firefox = {
       enable = true;
       strictPrivacy = true;

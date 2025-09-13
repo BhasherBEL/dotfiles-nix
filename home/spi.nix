@@ -6,4 +6,10 @@
   home.stateVersion = "25.11";
 
   imports = [ ./modules ];
+
+  modules = {
+    nvim = {
+      headless = true;
+    };
+  };
 }
