@@ -171,4 +171,9 @@
   users = {
     mutableUsers = false;
   };
+
+  nix.settings = {
+    cores = 1;
+    max-jobs = 1;
+  };
 }

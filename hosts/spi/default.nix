@@ -109,6 +109,11 @@
 
   swapDevices = [ ];
 
+  nix.settings = {
+    cores = 1;
+    max-jobs = 1;
+  };
+
   nixpkgs.hostPlatform = lib.mkDefault "aarch64-linux";
 
   users = {

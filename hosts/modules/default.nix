@@ -78,4 +78,6 @@
     zsh.enable = true;
     command-not-found.enable = true;
   };
+
+  nix.settings.trusted-users = [ "@wheel" ];
 }
