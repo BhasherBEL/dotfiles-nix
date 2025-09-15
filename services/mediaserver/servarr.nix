@@ -23,8 +23,8 @@
         group = "media";
       };
       prowlarr = {
-        enable = true;
-        dataDir = "/var/lib/prowlarr";
+        enable = false;
+        # dataDir = "/var/lib/prowlarr";
         # group = "media";
       };
       bazarr = {
@@ -46,11 +46,11 @@
             url = "http://127.0.0.1:${toString config.services.sonarr.settings.server.port}";
             listenAddress = "127.0.0.1";
           };
-          exportarr-prowlarr = {
-            # enable = config.hostServices.mediaserver.analytics;
-            url = "http://127.0.0.1:${toString config.services.prowlarr.settings.server.port}";
-            listenAddress = "127.0.0.1";
-          };
+          # exportarr-prowlarr = {
+          #   # enable = config.hostServices.mediaserver.analytics;
+          #   url = "http://127.0.0.1:${toString config.services.prowlarr.settings.server.port}";
+          #   listenAddress = "127.0.0.1";
+          # };
           exportarr-bazarr = {
             # enable = config.hostServices.mediaserver.analytics;
             url = "http://127.0.0.1:${toString config.services.bazarr.listenPort}";
@@ -71,21 +71,37 @@
         ];
       };
 
-      nginx.virtualHosts."radarr.laptop.local.bhasher.com".locations."/" = {
-        recommendedProxySettings = true;
-        proxyPass = "http://127.0.0.1:${toString config.services.radarr.settings.server.port}";
-      };
-      nginx.virtualHosts."sonarr.laptop.local.bhasher.com".locations."/" = {
-        recommendedProxySettings = true;
-        proxyPass = "http://127.0.0.1:${toString config.services.sonarr.settings.server.port}";
-      };
-      nginx.virtualHosts."prowlarr.laptop.local.bhasher.com".locations."/" = {
-        recommendedProxySettings = true;
-        proxyPass = "http://127.0.0.1:${toString config.services.prowlarr.settings.server.port}";
-      };
-      nginx.virtualHosts."bazarr.laptop.local.bhasher.com".locations."/" = {
-        recommendedProxySettings = true;
-        proxyPass = "http://127.0.0.1:${toString config.services.bazarr.listenPort}";
+      nginx.virtualHosts = {
+        "radarr.wol.bhasher.com" = {
+          forceSSL = true;
+          enableACME = true;
+          locations."/" = {
+            recommendedProxySettings = true;
+            proxyPass = "http://127.0.0.1:${toString config.services.radarr.settings.server.port}";
+          };
+        };
+        "sonarr.wol.bhasher.com" = {
+          forceSSL = true;
+          enableACME = true;
+          locations."/" = {
+            recommendedProxySettings = true;
+            proxyPass = "http://127.0.0.1:${toString config.services.sonarr.settings.server.port}";
+          };
+        };
+        # "prowlarr.wol.bhasher.com".locations."/" = {
+        #   recommendedProxySettings = true;
+        #   proxyPass = "http://127.0.0.1:${toString config.services.prowlarr.settings.server.port}";
+        #   forceSSL = true;
+        #   enableACME = true;
+        # };
+        "bazarr.wol.bhasher.com" = {
+          forceSSL = true;
+          enableACME = true;
+          locations."/" = {
+            recommendedProxySettings = true;
+            proxyPass = "http://127.0.0.1:${toString config.services.bazarr.listenPort}";
+          };
+        };
       };
     };
 
@@ -94,7 +110,10 @@
       directories = [
         "/var/lib/radarr"
         "/var/lib/sonarr"
-        "/var/lib/prowlarr"
+        {
+          directory = "/var/lib/prowlarr";
+          group = "media";
+        }
         "/var/lib/bazarr"
       ];
     };

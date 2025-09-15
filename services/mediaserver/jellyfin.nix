@@ -10,9 +10,13 @@
         enable = true;
         dataDir = "/var/lib/jellyfin";
       };
-      nginx.virtualHosts."jellyfin.laptop.local.bhasher.com".locations."/" = {
-        recommendedProxySettings = true;
-        proxyPass = "http://127.0.0.1:8096";
+      nginx.virtualHosts."jellyfin.wol.bhasher.com" = {
+        forceSSL = true;
+        enableACME = true;
+        locations."/" = {
+          recommendedProxySettings = true;
+          proxyPass = "http://127.0.0.1:8096";
+        };
       };
     };
 

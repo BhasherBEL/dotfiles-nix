@@ -119,4 +119,9 @@
   users = {
     mutableUsers = false;
   };
+
+  hostServices = {
+    mediaserver.enable = true;
+    dyndns.wol.enable = true;
+  };
 }

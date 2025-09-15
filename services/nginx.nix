@@ -13,18 +13,14 @@
       recommendedGzipSettings = true;
     };
 
-    # security.acme = {
-    #   acceptTerms = true;
-    #   defaults = {
-    #     email = "acme@bhasher.com";
-    #     webroot = "/var/lib/acme/acme-challenge";
-    #   };
-    #
-    #   certs."laptop.local.bhasher.com" = {
-    #     domain = "laptop.local.bhasher.com";
-    #     extraDomainNames = [ "*.laptop.local.bhasher.com" ];
-    #   };
-    # };
+    security.acme = {
+      acceptTerms = true;
+      defaults = {
+        email = "acme@bhasher.com";
+        server = "https://acme-v02.api.letsencrypt.org/directory";
+      };
+      maxConcurrentRenewals = 1;
+    };
 
     users.users.nginx.extraGroups = [ "acme" ];
 
