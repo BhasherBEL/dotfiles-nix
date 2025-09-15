@@ -24,7 +24,7 @@ in
           {
             hostName = "shp";
             system = "x86_64-linux";
-            protocl = "ssh-ng";
+            protocol = "ssh-ng";
             maxJobs = 1;
             speedFactor = 4;
             supportedFeatures = [
@@ -37,8 +37,11 @@ in
         ++ lib.optionals remoteBuildcfg.oa-fw [
           {
             hostName = "oa-fw";
-            system = "x86_64-linux";
-            protocl = "ssh-ng";
+            systems = [
+              "x86_64-linux"
+              "aarch64-linux"
+            ];
+            protocol = "ssh-ng";
             maxJobs = 1;
             speedFactor = 4;
             supportedFeatures = [

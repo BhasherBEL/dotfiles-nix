@@ -63,12 +63,6 @@
       fsType = "none";
       options = [ "bind" ];
     };
-    # "/boot" = {
-    #   device = "/dev/disk/by-label/FIRMWARE";
-    #   fsType = "vfat";
-    #   options = [ "fmask=0022" "dmask=0022" ];
-    #   neededForBoot = true;
-    # };
     "/boot" = {
       device = "/sd-card/boot";
       fsType = "none";
@@ -122,7 +116,7 @@
         package = pkgs.kodi.withPackages (
           p: with p; [
             jellyfin
-            # netflix
+            netflix
             # invidious
             arteplussept
             sponsorblock
@@ -170,6 +164,14 @@
 
   users = {
     mutableUsers = false;
+  };
+
+  hostModules = {
+    # remoteBuild = {
+    #   enable = true;
+    #   only = true;
+    #   oa-fw = true;
+    # };
   };
 
   nix.settings = {
