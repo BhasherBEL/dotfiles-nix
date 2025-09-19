@@ -72,7 +72,7 @@
       };
 
       nginx.virtualHosts = {
-        "radarr.wol.bhasher.com" = {
+        "radarr.bhasher.com" = {
           forceSSL = true;
           enableACME = true;
           locations."/" = {
@@ -80,7 +80,7 @@
             proxyPass = "http://127.0.0.1:${toString config.services.radarr.settings.server.port}";
           };
         };
-        "sonarr.wol.bhasher.com" = {
+        "sonarr.bhasher.com" = {
           forceSSL = true;
           enableACME = true;
           locations."/" = {
@@ -94,7 +94,7 @@
         #   forceSSL = true;
         #   enableACME = true;
         # };
-        "bazarr.wol.bhasher.com" = {
+        "bazarr.bhasher.com" = {
           forceSSL = true;
           enableACME = true;
           locations."/" = {

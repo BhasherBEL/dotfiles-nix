@@ -1,7 +1,13 @@
 { lib, config, ... }:
 {
   options = {
-    hostServices.dns.enable = lib.mkEnableOption "Enable DNS";
+    hostServices.dns = {
+      enable = lib.mkEnableOption "Enable DNS";
+      mappings = lib.mkOption {
+        type = lib.types.attrsOf lib.types.str;
+        default = { };
+      };
+    };
   };
 
   config = lib.mkIf config.hostServices.dns.enable {
@@ -32,7 +38,7 @@
               "AAAA"
             ];
           };
-          customDNS.mapping."wol.bhasher.com" = "192.168.0.166";
+          customDNS.mapping = config.hostServices.dns.mappings;
           blocking = {
             denylists = {
               ads = [ "https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts" ];

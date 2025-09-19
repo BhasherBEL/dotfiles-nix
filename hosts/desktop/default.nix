@@ -27,5 +27,19 @@
     user = "bhasher";
   };
 
+  hostServices = {
+    vpn = {
+      enable = true;
+      interface = "enp0s31f6";
+    };
+    dns = {
+      enable = true;
+      mappings = {
+        "bxl.bhasher.com" = "91.182.226.236";
+        "bhasher.com" = "192.168.1.201";
+      };
+    };
+  };
+
   system.stateVersion = "23.11";
 }

@@ -23,8 +23,7 @@ in
         enable = true;
         settings = {
           server = rec {
-            # domain = "grafana.wol.bhasher.com";
-            domain = "grafana.laptop.local.bhasher.com";
+            domain = "grafana.bhasher.com";
             root_url = "https://${domain}";
             # enforce_domain = true;
             enable_gzip = true;

@@ -166,7 +166,6 @@ in
     js.enable = true;
     python.enable = true;
     docker.enable = true;
-    ipv6.disable = true;
     # Until https://github.com/NixOS/nixpkgs/issues/437865 is resolved
     jellyfin-media-player.enable = false;
   };

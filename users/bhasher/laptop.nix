@@ -33,5 +33,6 @@
   modules = {
     bluetooth.enable = true;
     docker.enable = true;
+    ipv6.disable = true;
   };
 }

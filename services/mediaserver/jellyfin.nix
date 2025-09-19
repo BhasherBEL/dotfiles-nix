@@ -10,7 +10,7 @@
         enable = true;
         dataDir = "/var/lib/jellyfin";
       };
-      nginx.virtualHosts."jellyfin.wol.bhasher.com" = {
+      nginx.virtualHosts."jellyfin.bhasher.com" = {
         forceSSL = true;
         enableACME = true;
         locations."/" = {

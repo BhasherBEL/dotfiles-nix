@@ -20,7 +20,7 @@
           # "1.1.1.1"
           # "192.168.1.221"
         ];
-        autostart = true;
+        autostart = false;
         peers = [
           {
             publicKey = "Ft1qUCCs9GkpUfiotZU9Ueq1e9ncXr0PwWEyfLoc6Vs=";
