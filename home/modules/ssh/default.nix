@@ -11,8 +11,8 @@ in
     programs.ssh = {
       enable = true;
       matchBlocks = {
-        "shp 192.168.1.221" = {
-          hostname = "192.168.1.221";
+        "shp 192.168.0.201" = {
+          hostname = "192.168.0.201";
           user = "shp";
           identitiesOnly = true;
           identityFile = "/run/secrets/ssh/snodes";
