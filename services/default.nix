@@ -5,7 +5,9 @@
     ./dyndns.nix
     ./dns.nix
     ./vpn.nix
+    ./storage
     ./monitoring
     ./mediaserver
+    ./auth
   ];
 }

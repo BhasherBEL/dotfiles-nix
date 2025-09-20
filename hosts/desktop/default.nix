@@ -39,6 +39,7 @@
         "bhasher.com" = "192.168.1.201";
       };
     };
+    auth.openldap.enable = true;
   };
 
   system.stateVersion = "23.11";

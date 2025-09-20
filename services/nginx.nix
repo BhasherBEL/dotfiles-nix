@@ -18,6 +18,7 @@
       defaults = {
         email = "acme@bhasher.com";
         server = "https://acme-v02.api.letsencrypt.org/directory";
+        group = "acme";
       };
       maxConcurrentRenewals = 1;
     };
