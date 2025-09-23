@@ -4,32 +4,15 @@
   ...
 }:
 {
-  imports = [
-    (modulesPath + "/installer/scan/not-detected.nix")
-  ];
 
-  boot = {
-    initrd = {
-      availableKernelModules = [
-        "xhci_pci"
-        "usbhid"
-      ];
-      kernelModules = [ ];
-    };
-    kernelModules = [ ];
-    extraModulePackages = [ ];
-    loader = {
-      grub.enable = false;
-      generic-extlinux-compatible.enable = true;
-    };
-  };
+  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
   fileSystems = {
     "/" = {
       device = "none";
       fsType = "tmpfs";
       options = [
-        "size=3G"
+        "size=6G"
         "mode=755"
       ];
     };
@@ -37,46 +20,37 @@
       device = "none";
       fsType = "tmpfs";
       options = [
-        "size=1G"
+        "size=2G"
         "mode=777"
       ];
     };
-    "/sd-card" = {
-      device = "/dev/disk/by-label/NIXOS_SD";
+    "/permadisk" = {
+      device = "/dev/disk/by-label/NIXOS_DISK";
       neededForBoot = true;
       fsType = "ext4";
       options = [ "noatime" ];
     };
     "/persistent" = {
-      device = "/sd-card/persistent";
+      device = "/permadisk/persistent";
       neededForBoot = true;
       fsType = "none";
       options = [ "bind" ];
     };
     "/nix" = {
-      device = "/sd-card/nix";
+      device = "/permadisk/nix";
       fsType = "none";
       options = [ "bind" ];
     };
     "/boot" = {
-      device = "/sd-card/boot";
+      device = "/permadisk/boot";
       fsType = "none";
       options = [ "bind" ];
     };
   };
 
-  hardware = {
-    raspberry-pi."4" = {
-      apply-overlays-dtmerge.enable = true;
-      fkms-3d.enable = true;
-      bluetooth.enable = true;
-    };
-    deviceTree.enable = true;
-    bluetooth.enable = true;
-  };
-
   networking.hostName = "shp";
   networking.networkmanager.enable = true;
+  networking.useDHCP = true;
 
   services = {
     openssh.enable = true;
@@ -109,7 +83,7 @@
 
   swapDevices = [ ];
 
-  nixpkgs.hostPlatform = lib.mkDefault "aarch64-linux";
+  nixpkgs.hostPlatform = "x86_64-linux";
 
   users = {
     mutableUsers = false;
