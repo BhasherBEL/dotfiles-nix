@@ -25,17 +25,30 @@ in
       };
     };
 
-    services.lldap = {
-      enable = true;
-      settings = {
-        ldap_host = "127.0.0.1";
-        ldap_port = 3890;
-        database_url = "sqlite:////var/lib/lldap/lldap.db?mode=rwc";
-        # ldap_user_pass_file = "/run/credentials/lldap.service/admin_password";
-        ldap_user_pass_file = "/run/secrets//services/lldap/admin_password";
-        ldap_user_dn = "admin";
-        ldap_base_dn = "dc=bhasher,dc=com";
-        force_ldap_user_pass_reset = "always";
+    services = {
+      lldap = {
+        enable = true;
+        settings = {
+          ldap_host = "127.0.0.1";
+          ldap_port = 3890;
+          database_url = "sqlite:////var/lib/lldap/lldap.db?mode=rwc";
+          # ldap_user_pass_file = "/run/credentials/lldap.service/admin_password";
+          ldap_user_pass_file = "/run/secrets/services/lldap/admin_password";
+          ldap_user_dn = "admin";
+          ldap_base_dn = "dc=bhasher,dc=com";
+          force_ldap_user_pass_reset = "always";
+          http_url = "https://${cfg.hostname}";
+          http_host = "127.0.0.1";
+          http_port = 17170;
+        };
+      };
+      nginx.virtualHosts."${cfg.hostname}" = {
+        forceSSL = true;
+        enableACME = true;
+        locations."/" = {
+          recommendedProxySettings = true;
+          proxyPass = "http://127.0.0.1:17170";
+        };
       };
     };
 

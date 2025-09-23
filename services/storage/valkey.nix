@@ -16,12 +16,25 @@ in
 
   config = lib.mkIf cfg.enable {
     services.redis = {
-      enable = true;
       package = pkgs.valkey;
       servers."" = {
+        enable = true;
         user = "valkey";
-        unixSocket = /run/valkey/valkey.sock;
+        group = "valkey";
+        unixSocket = "/run/valkey/valkey.sock";
       };
+    };
+
+    systemd.tmpfiles.rules = [
+      "d /run/valkey 0755 valkey valkey -"
+    ];
+
+    users = {
+      users.valkey = {
+        isSystemUser = true;
+        group = "valkey";
+      };
+      groups.valkey = { };
     };
   };
 }

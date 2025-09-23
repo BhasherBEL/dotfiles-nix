@@ -44,7 +44,7 @@ in
         map (name: { inherit name; }) cfg.users
         ++ map (name: {
           inherit name;
-          ensureDbOwnership = true;
+          ensureDBOwnership = true;
         }) cfg.access;
     };
 

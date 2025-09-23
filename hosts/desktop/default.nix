@@ -39,7 +39,7 @@
         "bhasher.com" = "192.168.1.201";
       };
     };
-    auth.lldap.enable = true;
+    auth.authelia.enable = true;
   };
 
   system.stateVersion = "23.11";

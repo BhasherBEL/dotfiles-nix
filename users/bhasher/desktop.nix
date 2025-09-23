@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 {
   imports = [
     ./default.nix
@@ -80,6 +80,11 @@
       ];
     };
   };
+
+  environment.systemPackages = with pkgs; [
+    gparted
+  ];
+  security.polkit.enable = true;
 
   modules = {
     bluetooth.enable = true;
