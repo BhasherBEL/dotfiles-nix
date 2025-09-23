@@ -28,18 +28,13 @@
   };
 
   hostServices = {
-    vpn = {
-      enable = true;
-      interface = "enp0s31f6";
-    };
     dns = {
       enable = true;
       mappings = {
         "bxl.bhasher.com" = "91.182.226.236";
-        "bhasher.com" = "192.168.1.201";
+        "bhasher.com" = "192.168.0.201";
       };
     };
-    auth.authelia.enable = true;
   };
 
   system.stateVersion = "23.11";

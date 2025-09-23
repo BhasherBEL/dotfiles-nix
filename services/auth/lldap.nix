@@ -59,7 +59,7 @@ in
     environment.persistence."/persistent" = {
       enable = lib.mkDefault false;
       directories = [
-        "/var/lib/lldap/"
+        "/var/lib/private/lldap/"
       ];
     };
   };

@@ -6,7 +6,10 @@
 }:
 {
 
-  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
+  imports = [
+    (modulesPath + "/installer/scan/not-detected.nix")
+    ./services.nix
+  ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -101,6 +104,25 @@
       }
       "/run/secrets.d"
     ];
+  };
+
+  systemd.tmpfiles.rules = [
+    "d /var/lib/private 0700 root root"
+  ];
+
+  system.activationScripts."createPersistentStorageDirs".deps = [
+    "var-lib-private-permissions"
+    "users"
+    "groups"
+  ];
+  system.activationScripts = {
+    "var-lib-private-permissions" = {
+      deps = [ "specialfs" ];
+      text = ''
+        mkdir -p /persistent/var/lib/private
+        chmod 0700 /persistent/var/lib/private
+      '';
+    };
   };
 
   system.stateVersion = "25.11";

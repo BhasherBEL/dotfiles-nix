@@ -14,7 +14,7 @@ in
 
   config = lib.mkIf monitoringcfg.enable {
     hostServices = {
-      nginx.enable = true;
+      nginx.enable = lib.mkDefault true;
 
       monitoring = {
         prometheus.enable = lib.mkDefault true;

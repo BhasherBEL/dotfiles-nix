@@ -17,7 +17,8 @@
       acceptTerms = true;
       defaults = {
         email = "acme@bhasher.com";
-        server = "https://acme-v02.api.letsencrypt.org/directory";
+        # server = "https://acme-v02.api.letsencrypt.org/directory";
+        server = "https://acme-staging-v02.api.letsencrypt.org/directory";
         group = "acme";
       };
       maxConcurrentRenewals = 1;
