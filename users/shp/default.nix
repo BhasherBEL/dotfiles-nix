@@ -1,5 +1,9 @@
 { config, ... }:
 {
+  home-manager.users.shp.imports = [ ../../home/shp.nix ];
+
+  nix.settings.trusted-users = [ "shp" ];
+
   sops = {
     defaultSopsFile = ../../secrets/bhasher.yaml;
     defaultSopsFormat = "yaml";

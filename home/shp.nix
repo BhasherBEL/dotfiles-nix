@@ -7,26 +7,9 @@
 
   imports = [ ./modules ];
 
-  nix = {
-    package = pkgs.nix;
-    settings.experimental-features = [
-      "nix-command"
-      "flakes"
-    ];
-  };
-
-  sops = {
-    defaultSopsFile = ./../secrets/bhasher.yaml;
-    defaultSopsFormat = "yaml";
-    age.keyFile = "/etc/nixos/keys/bhasher.txt";
-    secrets = {
-      "ssh/gitkey" = {
-        path = "/run/secrets/ssh/gitkey";
-      };
+  modules = {
+    nvim = {
+      headless = true;
     };
-  };
-
-  home = {
-    packages = with pkgs; [ python3 ];
   };
 }

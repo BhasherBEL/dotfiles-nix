@@ -1,11 +1,16 @@
 {
   lib,
   modulesPath,
+config,
   ...
 }:
 {
 
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
+
+  # Bootloader.
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
 
   fileSystems = {
     "/" = {
@@ -44,6 +49,8 @@
     "/boot" = {
       device = "/dev/disk/by-uuid/9CE4-4D63";
       fsType = "vfat";
+      options = [ "fmask=0077" "dmask=0077" ];
+
     };
   };
 
@@ -82,6 +89,8 @@
   swapDevices = [ ];
 
   nixpkgs.hostPlatform = "x86_64-linux";
+
+  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
   users = {
     mutableUsers = false;
