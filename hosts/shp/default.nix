@@ -25,7 +25,7 @@
       ];
     };
     "/permadisk" = {
-      device = "/dev/disk/by-label/NIXOS_DISK";
+      device = "/dev/disk/by-uuid/7f5a267b-2cd6-4029-add4-01481760db0d";
       neededForBoot = true;
       fsType = "ext4";
       options = [ "noatime" ];
@@ -42,15 +42,13 @@
       options = [ "bind" ];
     };
     "/boot" = {
-      device = "/permadisk/boot";
-      fsType = "none";
-      options = [ "bind" ];
+      device = "/dev/disk/by-uuid/9CE4-4D63";
+      fsType = "vfat";
     };
   };
 
   networking.hostName = "shp";
   networking.networkmanager.enable = true;
-  networking.useDHCP = true;
 
   services = {
     openssh.enable = true;
