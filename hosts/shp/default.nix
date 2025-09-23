@@ -1,7 +1,7 @@
 {
   lib,
   modulesPath,
-config,
+  config,
   ...
 }:
 {
@@ -49,13 +49,32 @@ config,
     "/boot" = {
       device = "/dev/disk/by-uuid/9CE4-4D63";
       fsType = "vfat";
-      options = [ "fmask=0077" "dmask=0077" ];
+      options = [
+        "fmask=0077"
+        "dmask=0077"
+      ];
 
     };
   };
 
-  networking.hostName = "shp";
-  networking.networkmanager.enable = true;
+  networking = {
+    hostName = "shp";
+    networkmanager.enable = true;
+    dhcpcd.enable = false;
+    defaultGateway = "192.168.0.1";
+    nameservers = [
+      "1.1.1.1"
+      "1.0.0.1"
+    ];
+    interfaces.eno1 = {
+      ipv4.addresses = [
+        {
+          address = "192.168.0.201";
+          prefixLength = 24;
+        }
+      ];
+    };
+  };
 
   services = {
     openssh.enable = true;
