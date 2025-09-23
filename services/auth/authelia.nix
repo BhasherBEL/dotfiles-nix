@@ -375,14 +375,14 @@ in
           };
         };
       };
-      # nginx.virtualHosts."${cfg.hostname}" = {
-      #   forceSSL = true;
-      #   enableACME = true;
-      #   locations."/" = {
-      #     recommendedProxySettings = true;
-      #     proxyPass = "http://127.0.0.1:9091";
-      #   };
-      # };
+      nginx.virtualHosts."${cfg.hostname}" = {
+        forceSSL = true;
+        enableACME = true;
+        locations."/" = {
+          recommendedProxySettings = true;
+          proxyPass = "http://127.0.0.1:9091";
+        };
+      };
     };
 
     hostServices = {
@@ -408,7 +408,7 @@ in
     environment.persistence."/persistent" = {
       enable = lib.mkDefault false;
       directories = [
-        "/var/lib/authelia"
+        "/var/lib/authelia-idp"
       ];
     };
   };
