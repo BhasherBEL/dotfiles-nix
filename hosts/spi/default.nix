@@ -121,7 +121,6 @@
   };
 
   hostServices = {
-    mediaserver.enable = true;
     dyndns.bxl.enable = true;
     dns.enable = true;
   };
