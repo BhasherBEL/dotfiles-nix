@@ -75,8 +75,24 @@
     bluetooth.enable = true;
   };
 
-  networking.hostName = "spi";
-  networking.networkmanager.enable = true;
+  networking = {
+    hostName = "spi";
+    networkmanager.enable = true;
+    dhcpcd.enable = false;
+    defaultGateway = "192.168.1.1";
+    nameservers = [
+      "1.1.1.1"
+      "1.0.0.1"
+    ];
+    interfaces.end0 = {
+      ipv4.addresses = [
+        {
+          address = "192.168.1.200";
+          prefixLength = 24;
+        }
+      ];
+    };
+  };
 
   services = {
     openssh.enable = true;
@@ -123,5 +139,13 @@
   hostServices = {
     dyndns.bxl.enable = true;
     dns.enable = true;
+    vpn-client = {
+      enable = true;
+      ipv4 = "10.20.0.5/24";
+      ipv6 = "fd8c:70ee:bdd8:2:1::1/128";
+      privateKeySecret = "wg/bxl-shp/spi/key";
+      route.wol = true;
+      autostart = true;
+    };
   };
 }

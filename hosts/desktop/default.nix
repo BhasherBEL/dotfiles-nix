@@ -32,8 +32,7 @@
     ipv4 = "10.20.0.4/24";
     ipv6 = "fd8c:70ee:bdd8:1:1::2/128";
     privateKeySecret = "wg/bxl-shp/desktop/key";
-    routeAll = false;
-    routeLan = false;
+    route.bxl = true;
     autostart = true;
   };
 

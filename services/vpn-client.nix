@@ -23,15 +23,22 @@ in
         type = lib.types.str;
         description = "Relative path of the private key secret for the VPN client.";
       };
-      routeAll = lib.mkOption {
-        type = lib.types.bool;
-        default = false;
-        description = "Route all traffic through the VPN";
-      };
-      routeLan = lib.mkOption {
-        type = lib.types.bool;
-        default = true;
-        description = "Route LAN traffic through the VPN";
+      route = {
+        all = lib.mkOption {
+          type = lib.types.bool;
+          default = false;
+          description = "Route all traffic through the VPN";
+        };
+        wol = lib.mkOption {
+          type = lib.types.bool;
+          default = false;
+          description = "Route Wol LAN traffic through the VPN";
+        };
+        bxl = lib.mkOption {
+          type = lib.types.bool;
+          default = false;
+          description = "Route Bxl LAN traffic through the VPN";
+        };
       };
       autostart = lib.mkOption {
         type = lib.types.bool;
@@ -70,7 +77,7 @@ in
               publicKey = "Ft1qUCCs9GkpUfiotZU9Ueq1e9ncXr0PwWEyfLoc6Vs=";
               endpoint = "vpn.wol.bhasher.com:51824";
               allowedIPs =
-                if cfg.routeAll then
+                if cfg.route.all then
                   [
                     "0.0.0.0/0"
                   ]
@@ -79,9 +86,8 @@ in
                     "10.20.0.0/24"
                     "fd8c:70ee:bdd8::/64"
                   ]
-                  ++ lib.optional cfg.routeLan [
-                    "192.168.0.0/24"
-                  ];
+                  ++ lib.optional cfg.route.wol "192.168.0.0/24"
+                  ++ lib.optional cfg.route.bxl "192.168.1.0/24";
               persistentKeepalive = 25;
             }
           ];
