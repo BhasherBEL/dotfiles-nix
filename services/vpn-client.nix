@@ -82,6 +82,7 @@ in
                   ++ lib.optional cfg.routeLan [
                     "192.168.0.0/24"
                   ];
+              persistentKeepalive = 25;
             }
           ];
         };

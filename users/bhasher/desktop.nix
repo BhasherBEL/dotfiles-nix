@@ -12,30 +12,6 @@
 
   networking = {
     wg-quick.interfaces = {
-      bxl-shp = {
-        address = [ "10.15.14.3/32" ];
-        privateKeyFile = "/run/secrets/wg/bxl-shp/desktop/key";
-        dns = [
-          # "10.15.14.1"
-          # "1.1.1.1"
-          # "192.168.1.221"
-        ];
-        autostart = false;
-        peers = [
-          {
-            publicKey = "Ft1qUCCs9GkpUfiotZU9Ueq1e9ncXr0PwWEyfLoc6Vs=";
-            presharedKeyFile = "/run/secrets/wg/bxl-shp/desktop/psk";
-            allowedIPs = [
-              # "0.0.0.0/0"
-              "10.15.14.0/24"
-              "192.168.1.0/24"
-              # "91.182.226.236/32"
-            ];
-            endpoint = "vpn.bhasher.com:51822";
-            persistentKeepalive = 25;
-          }
-        ];
-      };
       bxl-mikrotik = {
         address = [ "10.3.0.2/32" ];
         privateKeyFile = "/run/secrets/wg/bxl-mikrotik/second/key";
@@ -48,7 +24,7 @@
               "10.3.0.0/24"
               "192.168.1.0/24"
             ];
-            endpoint = "vpn.bhasher.com:13232";
+            endpoint = "vpn.bxl.bhasher.com:13232";
             persistentKeepalive = 25;
           }
         ];
