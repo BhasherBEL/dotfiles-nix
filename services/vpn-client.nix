@@ -87,7 +87,8 @@ in
                     "fd8c:70ee:bdd8::/64"
                   ]
                   ++ lib.optional cfg.route.wol "192.168.0.0/24"
-                  ++ lib.optional cfg.route.bxl "192.168.1.0/24";
+                  ++ lib.optional cfg.route.bxl "192.168.1.0/24"
+                  ++ lib.optional cfg.route.bxl "192.168.10.0/24";
               persistentKeepalive = 25;
             }
           ];
