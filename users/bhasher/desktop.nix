@@ -6,7 +6,6 @@
 
   sops.secrets = {
     "wg/bxl-shp/desktop/key" = { };
-    "wg/bxl-shp/desktop/psk" = { };
     "wg/bxl-mikrotik/second/key" = { };
   };
 
@@ -29,31 +28,6 @@
           }
         ];
       };
-    };
-    hosts = {
-      "192.168.0.201" = [
-        "pihole.bhasher.com"
-        "firefly.bhasher.com"
-        "prowlarr.bhasher.com"
-        "radarr.bhasher.com"
-        "sonarr.bhasher.com"
-        "ntfy.bhasher.com"
-        "transmission.bhasher.com"
-        "bazarr.bhasher.com"
-        "homepage.bhasher.com"
-        "miniflux.bhasher.com"
-        "grafana.bhasher.com"
-        "joplin.bhasher.com"
-        "paperless.bhasher.com"
-        "matrix.bhasher.com"
-        "hass.bhasher.com"
-        "syncthing.bhasher.com"
-        "baikal.bhasher.com"
-        "lum.bhasher.com"
-        "dmarc.bhasher.com"
-        "owntracks.bhasher.com"
-        "invoice.bhasher.com"
-      ];
     };
   };
 
