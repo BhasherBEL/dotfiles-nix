@@ -122,7 +122,7 @@
 
   hostServices = {
     mediaserver.enable = true;
-    dyndns.wol.enable = true;
+    dyndns.bxl.enable = true;
     dns.enable = true;
   };
 }
