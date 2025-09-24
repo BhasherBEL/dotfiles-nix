@@ -34,7 +34,7 @@
         wg0 = {
           address = [
             "10.20.0.1/24"
-            "fd8c:70ee:bdd8:1:1::1/128"
+            "fd8c:70ee:bdd8:1:1::1/64"
           ];
           dns = lib.mkIf config.hostServices.dns.enable [ "127.0.0.1" ];
           listenPort = 51824;
@@ -49,11 +49,19 @@
               ];
             }
             {
-              # Laptop - Perso
+              # Laptop
               publicKey = "46829GHQ4IoMsRlpBo076dCWxmPnAWCfnBOriKxIYXQ=";
               allowedIPs = [
                 "10.20.0.3/32"
                 "fd8c:70ee:bdd8:0:1::3/128"
+              ];
+            }
+            {
+              # Desktop
+              publicKey = "zHMdwCTF1h9D0wTD5Gfk1aM9WBtib8FMGgG7E5sihB0=";
+              allowedIPs = [
+                "10.20.0.4/32"
+                "fd8c:70ee:bdd8:1:1::2/128"
               ];
             }
           ];

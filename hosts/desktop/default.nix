@@ -27,14 +27,14 @@
     user = "bhasher";
   };
 
-  hostServices = {
-    dns = {
-      enable = true;
-      mappings = {
-        "bxl.bhasher.com" = "91.182.226.236";
-        "bhasher.com" = "192.168.0.201";
-      };
-    };
+  hostServices.vpn-client = {
+    enable = true;
+    ipv4 = "10.20.0.4/24";
+    ipv6 = "fd8c:70ee:bdd8:1:1::2/128";
+    privateKeySecret = "wg/bxl-shp/desktop/key";
+    routeAll = false;
+    routeLan = false;
+    autostart = true;
   };
 
   system.stateVersion = "23.11";
