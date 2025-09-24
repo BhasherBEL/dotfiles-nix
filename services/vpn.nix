@@ -64,6 +64,15 @@
                 "fd8c:70ee:bdd8:1:1::2/128"
               ];
             }
+            {
+              # spi
+              publicKey = "3mXQbotJ/ZDogkRdgX5x7wCrk2Jw3RsMHSWH0PYMRn0=";
+              allowedIPs = [
+                "10.20.0.5/32"
+                "fd8c:70ee:bdd8:2:1::1/128"
+                "192.168.1.0/24"
+              ];
+            }
           ];
 
           # postUp = ''
