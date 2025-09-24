@@ -71,6 +71,17 @@
                 "10.20.0.5/32"
                 "fd8c:70ee:bdd8:2:1::1/128"
                 "192.168.1.0/24"
+                "192.168.10.0/24"
+              ];
+            }
+            {
+              # mikrotik
+              publicKey = "6C0S6WyXNuVeiDIY4rV2LbJCxfI5Qnz5/ATKrRyrGTM=";
+              endpoint = "vpn.bxl.bhasher.com:51825";
+              persistentKeepalive = 25;
+              allowedIPs = [
+                "10.20.0.6/32"
+                "fd8c:70ee:bdd8:2:1::2/128"
               ];
             }
           ];
