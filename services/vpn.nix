@@ -76,7 +76,7 @@
             }
             {
               # mikrotik
-              publicKey = "6C0S6WyXNuVeiDIY4rV2LbJCxfI5Qnz5/ATKrRyrGTM=";
+              publicKey = "oYkq7VeUdY5GTMixS/sGGs68hXRLMA7ABm1fpPkUDU8=";
               endpoint = "vpn.bxl.bhasher.com:51825";
               persistentKeepalive = 25;
               allowedIPs = [
