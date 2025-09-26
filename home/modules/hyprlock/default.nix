@@ -85,6 +85,10 @@ in
             valign = "center";
           }
         ];
+
+        auth = {
+          fingerprint.enabled = true;
+        };
       };
     };
   };

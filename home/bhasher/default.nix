@@ -62,6 +62,8 @@
           else if osConfig.networking.hostName == "laptop" then
             [
               "eDP-1,preferred,auto,1"
+              "desc:Iiyama North America PLE2483H-DP 1138771842887,preferred,-1920x0,1"
+              "desc:Fujitsu Siemens Computers GmbH B22T-7 Pro YV9V118046,preferred,-3840x0,1"
             ]
           else
             [ ]

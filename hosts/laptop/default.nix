@@ -111,8 +111,8 @@
   };
 
   hostServices = {
-    monitoring.enable = true;
-    mediaserver.enable = true;
+    monitoring.enable = false;
+    mediaserver.enable = false;
   };
 
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];

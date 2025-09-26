@@ -128,6 +128,8 @@ in
     pinentryPackage = pkgs.pinentry-curses;
     enableSSHSupport = true;
   };
+  # Required by hyprlock for fingerprint authentication
+  services.fprintd.enable = true;
 
   # TODO: fix
   # error activating kdeconnectd: QDBusError("org.freedesktop.DBus.Error.Spawn.ChildSignaled", "Process org.kde.kdeconnect received signal 6")
@@ -146,8 +148,8 @@ in
   hardware.printers = {
     ensurePrinters = [
       {
-        name = "Lexmark-N&B-kot";
-        location = "kot";
+        name = "Lexmark-N&B-home";
+        location = "living room";
         deviceUri = "dnssd://Lexmark%20MS510dn%20(3)._ipp._tcp.local/?uuid=bb9f86e6-3117-4c3c-9297-a5923efbc4e1";
         model = "drv:///sample.drv/generic.ppd";
         ppdOptions = {
@@ -157,7 +159,7 @@ in
         };
       }
     ];
-    ensureDefaultPrinter = "Lexmark-N&B-kot";
+    ensureDefaultPrinter = "Lexmark-N&B-home";
   };
 
   modules = {

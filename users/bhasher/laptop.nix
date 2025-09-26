@@ -11,19 +11,18 @@
 
   networking = {
     wg-quick.interfaces.bxl-shp = {
-      address = [ "10.15.14.6/32" ];
+      address = [ "10.20.0.3/32" ];
       privateKeyFile = "/run/secrets/wg/bxl-shp/laptop/key";
-      dns = [ "1.1.1.1" ];
+      dns = [ "10.20.0.1" ];
       autostart = true;
       peers = [
         {
           publicKey = "Ft1qUCCs9GkpUfiotZU9Ueq1e9ncXr0PwWEyfLoc6Vs=";
-          presharedKeyFile = "/run/secrets/wg/bxl-shp/laptop/psk";
           allowedIPs = [
-            "0.0.0.0/0"
+            "10.20.0.0/24"
             "192.168.1.0/24"
           ];
-          endpoint = "91.182.226.236:51822";
+          endpoint = "vpn.wol.bhasher.com:51824";
           persistentKeepalive = 25;
         }
       ];
