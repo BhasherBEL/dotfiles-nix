@@ -6,7 +6,6 @@
 
   modules = {
     bluetooth.enable = true;
-    docker.enable = true;
   };
 
   hostServices.vpn-client = {

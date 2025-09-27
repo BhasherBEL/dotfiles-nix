@@ -107,19 +107,15 @@ in
     freetube
     signal-desktop-bin
     thunderbird
-    onlyoffice-bin
     libreoffice
     sl
     yt-dlp
     marksman
     nmap
     vlc
-    obs-studio
     pinentry-curses
-    hugo
     qdirstat
     sieve-editor-gui
-    twitch-hls-client
   ];
 
   services.pcscd.enable = true;
@@ -165,8 +161,6 @@ in
   modules = {
     metaPc.enable = true;
     devenv.enable = true;
-    js.enable = true;
-    python.enable = true;
     docker.enable = true;
     # Until https://github.com/NixOS/nixpkgs/issues/437865 is resolved
     jellyfin-media-player.enable = false;
