@@ -17,8 +17,13 @@
       recommendedGzipSettings = true;
       recommendedProxySettings = true;
 
-      # virtualHosts."_" = {
-      # };
+      virtualHosts."default" = {
+        default = true;
+        enableACME = false;
+        forceSSL = false;
+        rejectSSL = true;
+        locations."/".return = "404";
+      };
     };
 
     security.acme = {
