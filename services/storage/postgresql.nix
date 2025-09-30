@@ -40,12 +40,20 @@ in
       package = pkgs.postgresql_18;
       dataDir = "/var/lib/postgresql/${config.services.postgresql.package.psqlSchema}";
       ensureDatabases = cfg.databases ++ cfg.access;
-      ensureUsers =
-        map (name: { inherit name; }) cfg.users
-        ++ map (name: {
-          inherit name;
-          ensureDBOwnership = true;
-        }) cfg.access;
+      ensureUsers = [
+        {
+          name = "postgres";
+          ensureClauses = {
+            superuser = true;
+            login = true;
+          };
+        }
+      ]
+      ++ map (name: { inherit name; }) cfg.users
+      ++ map (name: {
+        inherit name;
+        ensureDBOwnership = true;
+      }) cfg.access;
     };
 
     environment.persistence."/persistent" = {

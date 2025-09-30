@@ -1,8 +1,16 @@
-{ lib, config, ... }:
+{
+  lib,
+  config,
+  ...
+}:
 let
   cfg = config.hostServices.auth.authelia;
 in
 {
+  imports = [
+    ./snippets.nix
+  ];
+
   options = {
     hostServices.auth.authelia = {
       enable = lib.mkEnableOption "Enable Authelia authentication service";
@@ -59,6 +67,11 @@ in
           server = {
             address = "127.0.0.1:9091";
             endpoints = {
+              authz = {
+                auth-request = {
+                  implementation = "AuthRequest";
+                };
+              };
               rate_limits = {
                 second_factor_totp = {
                   enable = false;
@@ -103,30 +116,30 @@ in
               {
                 domain = "radarr.bhasher.com";
                 policy = "one_factor";
-                subject = [ "group:mediaserver" ];
+                subject = [ "group:lldap_mediaserver" ];
               }
               {
                 domain = "sonarr.bhasher.com";
                 policy = "one_factor";
-                subject = [ "group:mediaserver" ];
+                subject = [ "group:lldap_mediaserver" ];
               }
               {
                 domain = "jellyfin.bhasher.com";
                 policy = "one_factor";
-                subject = [ "group:mediaserver" ];
+                subject = [ "group:lldap_mediaserver" ];
               }
               {
                 domain = "paperless.bhasher.com";
                 policy = "two_factor";
                 subject = [
-                  "group:family"
-                  "group:admin"
+                  "group:lldap_family"
+                  "group:lldap_admin"
                 ];
               }
               {
                 domain = "mealie.bhasher.com";
                 policy = "one_factor";
-                subject = [ "group:member" ];
+                subject = [ "group:lldap_member" ];
                 methods = [
                   "GET"
                   "HEAD"
@@ -139,9 +152,16 @@ in
                 ];
               }
               {
+                domain = "ldap.bhasher.com";
+                policy = "two_factor";
+                subject = [
+                  "group:lldap_admin"
+                ];
+              }
+              {
                 domain = "*.bhasher.com";
                 policy = "one_factor";
-                subject = [ "group:admin" ];
+                subject = [ "group:lldap_admin" ];
               }
             ];
           };

@@ -45,9 +45,16 @@ in
       nginx.virtualHosts."${cfg.hostname}" = {
         forceSSL = true;
         enableACME = true;
-        locations."/" = {
-          recommendedProxySettings = true;
-          proxyPass = "http://127.0.0.1:17170";
+        locations = {
+          "/" = {
+            recommendedProxySettings = true;
+            proxyPass = "http://127.0.0.1:17170";
+            extraConfig = "include ${config.hostServices.auth.authelia.snippets.request};";
+          };
+          "/internal/authelia/authz" = {
+            recommendedProxySettings = false;
+            extraConfig = "include ${config.hostServices.auth.authelia.snippets.location};";
+          };
         };
       };
     };

@@ -19,5 +19,9 @@
       };
     };
     auth.authelia.enable = true;
+    mediaserver = {
+      # jellyfin.enable = true;
+    };
+    firefly-iii.enable = true;
   };
 }

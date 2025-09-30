@@ -41,7 +41,10 @@
           customDNS.mapping = config.hostServices.dns.mappings;
           blocking = {
             denylists = {
-              ads = [ "https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts" ];
+              ads = [
+                "https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts"
+                "https://raw.githubusercontent.com/Isaaker/Spotify-AdsList/main/Lists/standard_list.txt"
+              ];
             };
             clientGroupsBlock = {
               default = [ "ads" ];

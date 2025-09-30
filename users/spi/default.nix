@@ -18,7 +18,7 @@
     initialPassword = "raspberry";
     extraGroups = [
       "wheel"
-        "networkmanager"
+      "networkmanager"
     ];
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOGsCS7XysWiFuLVmN01cJAAZN2ZhWVB4V6R6F5DLsuM"

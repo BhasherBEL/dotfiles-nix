@@ -104,5 +104,20 @@
 
       firewall.allowedUDPPorts = [ 51824 ];
     };
+
+    systemd.services.wg-quick-wg0.serviceConfig = lib.mkIf config.hostServices.dns.enable {
+      After = [
+        "network-online.target"
+        "blocky.service"
+      ];
+      Wants = [
+        "network-online.target"
+        "blocky.service"
+      ];
+      Restart = "on-failure";
+      RestartSec = 5;
+      StartLimitIntervalSec = 0;
+    };
+
   };
 }

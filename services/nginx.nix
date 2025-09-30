@@ -1,4 +1,8 @@
-{ lib, config, ... }:
+{
+  lib,
+  config,
+  ...
+}:
 {
   options = {
     hostServices.nginx.enable = lib.mkEnableOption "Enable Nginx reverse proxy";
@@ -11,6 +15,10 @@
       recommendedTlsSettings = true;
       recommendedOptimisation = true;
       recommendedGzipSettings = true;
+      recommendedProxySettings = true;
+
+      # virtualHosts."_" = {
+      # };
     };
 
     security.acme = {
@@ -37,5 +45,6 @@
         "/var/lib/acme"
       ];
     };
+
   };
 }
