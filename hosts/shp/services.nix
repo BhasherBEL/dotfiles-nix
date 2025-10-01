@@ -20,7 +20,7 @@
     };
     auth.authelia.enable = true;
     mediaserver = {
-      # jellyfin.enable = true;
+      jellyfin.enable = true;
     };
     firefly-iii.enable = true;
   };

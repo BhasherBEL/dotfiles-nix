@@ -24,7 +24,7 @@ in
       };
     };
 
-    fileSystems."/mnt/movies" = {
+    fileSystems."/mnt/truenas/media" = {
       device = "//192.168.1.201/movies";
       fsType = "cifs";
       options = cifsOptions;

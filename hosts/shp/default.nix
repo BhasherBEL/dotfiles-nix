@@ -56,7 +56,10 @@
         "fmask=0077"
         "dmask=0077"
       ];
-
+    };
+    "/mnt/external" = {
+      device = "/dev/sdb1";
+      fsType = "ext4";
     };
   };
 
