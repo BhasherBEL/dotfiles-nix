@@ -53,28 +53,42 @@ in
             tryFiles = "$uri $uri/ /index.php?$query_string";
             index = "index.php";
             extraConfig = ''
-                            sendfile off;
-              							include ${config.hostServices.auth.authelia.snippets.request};
-              							add_header X-Debug-Remote-User $user;
-              							add_header X-Debug-Remote-Email $email;
+              sendfile off;
+              include ${config.hostServices.auth.authelia.snippets.request};
+              add_header X-Debug-Remote-User $user;
+              add_header X-Debug-Remote-Email $email;
+              location ~* \.php(?:$|/) {
+              	include ${config.hostServices.auth.authelia.snippets.request};
+              	include ${config.services.nginx.package}/conf/fastcgi_params ;
+              	fastcgi_param HTTP_REMOTE_USER $user;
+              	fastcgi_param HTTP_REMOTE_EMAIL $email;
+              	fastcgi_param HTTP_REMOTE_GROUPS $groups;
+              	fastcgi_param HTTP_REMOTE_NAME $name;
+              	fastcgi_param SCRIPT_FILENAME $request_filename;
+              	fastcgi_param modHeadersAvailable true;
+              	fastcgi_pass unix:${config.services.phpfpm.pools.firefly-iii.socket};
+              }
             '';
           };
-          "~ \\.php$" = {
-            extraConfig = ''
-              							include ${config.hostServices.auth.authelia.snippets.request};
-                            include ${config.services.nginx.package}/conf/fastcgi_params ;
-              							fastcgi_param HTTP_REMOTE_USER $user;
-              							fastcgi_param HTTP_REMOTE_EMAIL $email;
-              							fastcgi_param HTTP_REMOTE_GROUPS $groups;
-              							fastcgi_param HTTP_REMOTE_NAME $name;
-                            fastcgi_param SCRIPT_FILENAME $request_filename;
-                            fastcgi_param modHeadersAvailable true;
-                            fastcgi_pass unix:${config.services.phpfpm.pools.firefly-iii.socket};
-            '';
-          };
+
           "/internal/authelia/authz" = {
             recommendedProxySettings = false;
             extraConfig = "include ${config.hostServices.auth.authelia.snippets.location};";
+          };
+          "^~ /api/" = {
+            tryFiles = "$uri $uri/ @api";
+            index = "index.php";
+            extraConfig = ''
+              sendfile off;
+            '';
+          };
+          "@api" = {
+            extraConfig = ''
+              include ${config.services.nginx.package}/conf/fastcgi_params;
+              fastcgi_param SCRIPT_FILENAME ${config.services.firefly-iii.package}/public/index.php;
+              fastcgi_param modHeadersAvailable true;
+              fastcgi_pass unix:${config.services.phpfpm.pools.firefly-iii.socket};
+            '';
           };
         };
       };
