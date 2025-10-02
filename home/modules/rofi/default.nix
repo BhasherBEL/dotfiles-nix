@@ -15,10 +15,9 @@ in
   config = lib.mkIf roficfg.enable {
     programs.rofi = {
       enable = true;
-      package = pkgs.rofi-wayland;
       plugins = [
         pkgs.rofi-calc
-        pkgs.rofi-emoji-wayland
+        pkgs.rofi-emoji
       ];
       terminal = "${pkgs.alacritty}/bin/alacritty";
       theme = "${config.xdg.configHome}/rofi/themes/type1-style8.rasi";
