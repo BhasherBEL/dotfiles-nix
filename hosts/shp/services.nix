@@ -23,5 +23,6 @@
       jellyfin.enable = true;
     };
     firefly-iii.enable = true;
+    syncthing.enable = true;
   };
 }

@@ -11,5 +11,6 @@
     ./monitoring
     ./mediaserver
     ./auth
+    ./syncthing.nix
   ];
 }
