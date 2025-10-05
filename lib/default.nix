@@ -73,7 +73,7 @@ in
         ../overlays
         "${hostsModules}"
         "${usersModules}"
-        "${hostServices}"
+        (inputs.import-tree "${hostServices}")
       ]
       ++ extraModules;
     };
