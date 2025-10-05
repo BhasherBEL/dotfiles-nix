@@ -234,7 +234,7 @@ in
         };
 
         gestures = {
-          workspace_swipe = true;
+          workspace = true;
         };
 
         misc = {
