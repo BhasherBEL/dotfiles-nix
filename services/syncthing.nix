@@ -19,6 +19,16 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    sops.secrets = {
+      "services/syncthing/cert.pem" = {
+        owner = config.services.syncthing.user;
+        group = config.services.syncthing.group;
+      };
+      "services/syncthing/key.pem" = {
+        owner = config.services.syncthing.user;
+        group = config.services.syncthing.group;
+      };
+    };
 
     services = {
       syncthing = {
@@ -26,6 +36,9 @@ in
         dataDir = "/var/lib/syncthing";
         overrideDevices = true;
         overrideFolders = true;
+        key = config.sops.secrets."services/syncthing/key.pem".path;
+        cert = config.sops.secrets."services/syncthing/cert.pem".path;
+
         settings = {
           gui.insecureSkipHostcheck = true;
           options.urAccepted = -1;
@@ -75,7 +88,6 @@ in
     environment.persistence."/persistent" = {
       enable = lib.mkDefault false;
       directories = [
-        "/var/lib/private/syncthing"
         {
           directory = "/srv/syncthing"; # Synced data SHOULD NOT BE BACKED UP
           user = config.services.syncthing.user;
