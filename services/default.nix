@@ -12,5 +12,6 @@
     ./mediaserver
     ./auth
     ./syncthing.nix
+    ./owntracks
   ];
 }

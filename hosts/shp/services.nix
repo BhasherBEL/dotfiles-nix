@@ -24,5 +24,6 @@
     };
     firefly-iii.enable = true;
     syncthing.enable = true;
+    owntracks.enable = true;
   };
 }
