@@ -2,6 +2,7 @@
 {
   options = {
     hostServices.mediaserver.servarr.enable = lib.mkEnableOption "Enable Servarr";
+    hostServices.mediaserver.analytics = lib.mkEnableOption "Enable analytics";
   };
 
   config = lib.mkIf config.hostServices.mediaserver.servarr.enable {
@@ -23,15 +24,15 @@
         group = "media";
       };
       prowlarr = {
-        enable = false;
-        # dataDir = "/var/lib/prowlarr";
-        # group = "media";
+        enable = true;
+        dataDir = "/var/lib/prowlarr";
       };
       bazarr = {
         enable = true;
         dataDir = "/var/lib/bazarr";
         group = "media";
       };
+      flaresolverr.enable = true;
 
       prometheus = {
         exporters = {
@@ -46,11 +47,11 @@
             url = "http://127.0.0.1:${toString config.services.sonarr.settings.server.port}";
             listenAddress = "127.0.0.1";
           };
-          # exportarr-prowlarr = {
-          #   # enable = config.hostServices.mediaserver.analytics;
-          #   url = "http://127.0.0.1:${toString config.services.prowlarr.settings.server.port}";
-          #   listenAddress = "127.0.0.1";
-          # };
+          exportarr-prowlarr = {
+            # enable = config.hostServices.mediaserver.analytics;
+            url = "http://127.0.0.1:${toString config.services.prowlarr.settings.server.port}";
+            listenAddress = "127.0.0.1";
+          };
           exportarr-bazarr = {
             # enable = config.hostServices.mediaserver.analytics;
             url = "http://127.0.0.1:${toString config.services.bazarr.listenPort}";
@@ -75,31 +76,76 @@
         "radarr.bhasher.com" = {
           forceSSL = true;
           enableACME = true;
-          locations."/" = {
-            recommendedProxySettings = true;
-            proxyPass = "http://127.0.0.1:${toString config.services.radarr.settings.server.port}";
+          locations = {
+            "/" = {
+              recommendedProxySettings = true;
+              proxyPass = "http://127.0.0.1:${toString config.services.radarr.settings.server.port}";
+              extraConfig = "include ${config.hostServices.auth.authelia.snippets.request};";
+            };
+            "/internal/authelia/authz" = {
+              recommendedProxySettings = false;
+              extraConfig = "include ${config.hostServices.auth.authelia.snippets.location};";
+            };
           };
         };
         "sonarr.bhasher.com" = {
           forceSSL = true;
           enableACME = true;
-          locations."/" = {
-            recommendedProxySettings = true;
-            proxyPass = "http://127.0.0.1:${toString config.services.sonarr.settings.server.port}";
+          locations = {
+            "/" = {
+              recommendedProxySettings = true;
+              proxyPass = "http://127.0.0.1:${toString config.services.sonarr.settings.server.port}";
+              extraConfig = "include ${config.hostServices.auth.authelia.snippets.request};";
+            };
+            "/internal/authelia/authz" = {
+              recommendedProxySettings = false;
+              extraConfig = "include ${config.hostServices.auth.authelia.snippets.location};";
+            };
           };
         };
-        # "prowlarr.wol.bhasher.com".locations."/" = {
-        #   recommendedProxySettings = true;
-        #   proxyPass = "http://127.0.0.1:${toString config.services.prowlarr.settings.server.port}";
-        #   forceSSL = true;
-        #   enableACME = true;
-        # };
+        "prowlarr.bhasher.com" = {
+          forceSSL = true;
+          enableACME = true;
+          locations = {
+            "/" = {
+              recommendedProxySettings = true;
+              proxyPass = "http://127.0.0.1:${toString config.services.prowlarr.settings.server.port}";
+              extraConfig = "include ${config.hostServices.auth.authelia.snippets.request};";
+            };
+            "/internal/authelia/authz" = {
+              recommendedProxySettings = false;
+              extraConfig = "include ${config.hostServices.auth.authelia.snippets.location};";
+            };
+          };
+        };
         "bazarr.bhasher.com" = {
           forceSSL = true;
           enableACME = true;
-          locations."/" = {
-            recommendedProxySettings = true;
-            proxyPass = "http://127.0.0.1:${toString config.services.bazarr.listenPort}";
+          locations = {
+            "/" = {
+              recommendedProxySettings = true;
+              proxyPass = "http://127.0.0.1:${toString config.services.bazarr.listenPort}";
+              extraConfig = "include ${config.hostServices.auth.authelia.snippets.request};";
+            };
+            "/internal/authelia/authz" = {
+              recommendedProxySettings = false;
+              extraConfig = "include ${config.hostServices.auth.authelia.snippets.location};";
+            };
+          };
+        };
+        "flaresolverr.bhasher.com" = {
+          forceSSL = true;
+          enableACME = true;
+          locations = {
+            "/" = {
+              recommendedProxySettings = true;
+              proxyPass = "http://127.0.0.1:${toString config.services.flaresolverr.port}";
+              extraConfig = "include ${config.hostServices.auth.authelia.snippets.request};";
+            };
+            "/internal/authelia/authz" = {
+              recommendedProxySettings = false;
+              extraConfig = "include ${config.hostServices.auth.authelia.snippets.location};";
+            };
           };
         };
       };
@@ -108,13 +154,24 @@
     environment.persistence."/persistent" = {
       enable = lib.mkDefault false;
       directories = [
-        "/var/lib/radarr"
-        "/var/lib/sonarr"
         {
-          directory = "/var/lib/prowlarr";
-          group = "media";
+          directory = "/var/lib/radarr";
+          user = config.services.radarr.user;
+          group = config.services.radarr.group;
         }
-        "/var/lib/bazarr"
+        {
+          directory = "/var/lib/sonarr";
+          user = config.services.sonarr.user;
+          group = config.services.sonarr.group;
+        }
+        {
+          directory = "/var/lib/private/prowlarr";
+        }
+        {
+          directory = "/var/lib/bazarr";
+          user = config.services.bazarr.user;
+          group = config.services.bazarr.group;
+        }
       ];
     };
 

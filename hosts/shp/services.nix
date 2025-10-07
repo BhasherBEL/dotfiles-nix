@@ -21,6 +21,8 @@
     auth.authelia.enable = true;
     mediaserver = {
       jellyfin.enable = true;
+      servarr.enable = true;
+      transmission.enable = true;
     };
     firefly-iii.enable = true;
     syncthing.enable = true;

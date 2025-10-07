@@ -2,7 +2,7 @@
 let
   cfg = config.hostServices.mediaserver.jellyfin;
   cifsOptions = [
-    "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s,credentials=/run/secrets/smb/truenas,uid=1000,gid=100"
+    "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s,credentials=/run/secrets/smb/truenas,uid=1000,gid=983,dir_mode=0775,file_mode=0775"
   ];
 in
 {
