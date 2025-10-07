@@ -49,7 +49,11 @@ in
     environment.persistence."/persistent" = {
       enable = lib.mkDefault false;
       directories = [
-        "/var/lib/private/jellyfin"
+        {
+          directory = "/var/lib/jellyfin";
+          user = config.services.jellyfin.user;
+          group = config.services.jellyfin.group;
+        }
       ];
     };
   };
