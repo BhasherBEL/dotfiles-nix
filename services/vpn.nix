@@ -84,6 +84,14 @@
                 "192.168.10.0/24"
               ];
             }
+            {
+              # media-center
+              publicKey = "5D63LPzlmoj8rGxoWXNcu7zb/WauUMEcwAnVBKQmQnY=";
+              allowedIPs = [
+                "10.20.0.7/32"
+                "fd8c:70ee:bdd8:1:1::3/128"
+              ];
+            }
           ];
 
           # postUp = ''
