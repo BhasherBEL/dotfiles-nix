@@ -18,6 +18,7 @@ in
     services = {
       transmission = {
         enable = true;
+        group = "media";
         settings = {
           download-dir = "/mnt/external/media/download/complete";
           incomplete-dir = "/mnt/external/media/download/incomplete";
@@ -26,6 +27,7 @@ in
           rpc-port = 9092; # 9091 is already used by authelia
           rpc-host-whitelist = cfg.hostname;
           rpc-host-whitelist-enabled = true;
+          umask = "002";
         };
       };
       nginx.virtualHosts."${cfg.hostname}" = {
