@@ -123,7 +123,6 @@
             inputstreamhelper
             youtube
           ]
-
         );
       };
       displayManager.lightdm.enable = true;
@@ -177,5 +176,16 @@
   nix.settings = {
     cores = 1;
     max-jobs = 1;
+  };
+
+  hostServices.vpn-client = {
+    enable = true;
+    ipv4 = "10.20.0.7/24";
+    ipv6 = "fd8c:70ee:bdd8:1:1::3/128";
+    privateKeySecret = "wg/bxl-shp/media-center/key";
+    route = {
+      bxl = true;
+    };
+    autostart = true;
   };
 }
