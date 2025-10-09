@@ -12,6 +12,8 @@ in
     };
   };
 
+  # Build command
+  # nixos-rebuild switch --flake /etc/nixos#media-center --option builders 'ssh://remote-builder' --cores 1 --max-jobs 1 --sudo
   config = {
     nix = {
       distributedBuilds = true;

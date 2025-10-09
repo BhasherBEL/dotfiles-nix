@@ -1,4 +1,10 @@
-{ pkgs, lib, ... }:
+{
+  pkgs,
+  lib,
+  inputs,
+  config,
+  ...
+}:
 {
   imports = [
     ./router
@@ -80,4 +86,19 @@
   };
 
   nix.settings.trusted-users = [ "@wheel" ];
+
+  # Each generation add src (/etc/nixos) into it's store.
+  # Current system: /nix/var/nix/profiles/system/src/
+  system.extraSystemBuilderCmds = "ln -s ${inputs.self.sourceInfo.outPath} $out/src";
+
+  # Add a label with last commit
+  # nixos-rebuild list-generations
+  system.nixos.label = lib.concatStringsSep "-" (
+    (lib.sort (x: y: x < y) config.system.nixos.tags)
+    ++ [
+      "${config.system.nixos.version}.${
+        inputs.self.shortRev or inputs.self.dirtyShortRev or inputs.self.lastModified or "dirty"
+      }"
+    ]
+  );
 }
