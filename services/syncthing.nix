@@ -44,12 +44,30 @@ in
           options.urAccepted = -1;
           devices = {
             "desktop".id = "OAPHG7Q-L22S5R5-YGAYL46-UX2COKM-ICLEQT5-QVY5O4R-LFSS65F-KYFGCAW";
+            "laptop".id = "T32YIKV-QDO4PUM-AJ2DNTZ-ZYB4MXJ-LPN2UUF-PNUPMCW-TWNV5KO-5ISPBQA";
+            "phone".id = "LEDK2PB-U5NEL4H-X4LF6LJ-EJJXFUG-VUU26OC-HSP7GSC-V4FQTWI-NHT2MQ2";
           };
           folders = {
             "SyncDocuments" = {
               id = "e76wn-jhcuj";
               path = "/srv/syncthing/SyncDocuments";
-              devices = [ "desktop" ];
+              devices = [
+                "desktop"
+                "laptop"
+              ];
+              versioning = {
+                type = "trashcan";
+                params.cleanoutDays = "30";
+              };
+            };
+            "PhoneDocuments" = {
+              id = "fknto-3opbk";
+              path = "/srv/syncthing/SyncDocuments/phone";
+              devices = [
+                "phone"
+                "laptop"
+                "desktop"
+              ];
               versioning = {
                 type = "trashcan";
                 params.cleanoutDays = "30";
