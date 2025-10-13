@@ -92,6 +92,14 @@
                 "fd8c:70ee:bdd8:1:1::3/128"
               ];
             }
+            {
+              # dad's laptop
+              publicKey = "YJrML0wO2lbimQD661d4Suq5kmVTgbYIlDj0fvtpVnQ=";
+              allowedIPs = [
+                "10.20.0.8/32"
+                "fd8c:70ee:bdd8:2:2::2/128"
+              ];
+            }
           ];
 
           # postUp = ''
