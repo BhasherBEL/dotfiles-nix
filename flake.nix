@@ -55,9 +55,21 @@
           inputs
           system
           ;
-        patches = [ ];
+        patches = [
+          #   {
+          #     name = "libcec_platform";
+          #     id = "449090";
+          #     sha256 = "sha256-DQktdIFO2iWjeYnoKmZNkzZk2cmWK8NP6Uj/qEMokIk=";
+          #   }
+          #   {
+          #     name = "libraspberrypi";
+          #     id = "449772";
+          #     sha256 = "sha256-MTu94ePuHFaMCUO4XuqyUfLjVdYQqrAchvxzqMK4yJ0=";
+          #   }
+        ];
       };
-      system = "x86_64-linux";
+      # system = "x86_64-linux";
+      system = "aarch64-linux";
     in
     {
       inherit libx;

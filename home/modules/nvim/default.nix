@@ -488,7 +488,7 @@ in
         web-devicons.enable = true;
         notify.enable = !nvimcfg.headless;
         comment.enable = true;
-        tmux-navigator.enable = true;
+        tmux-navigator.enable = config.modules.tmux.enable;
         diffview.enable = true;
         avante = {
           enable = nvimcfg.ai;
