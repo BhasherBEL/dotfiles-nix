@@ -27,7 +27,7 @@ in
           rpc-port = 9092; # 9091 is already used by authelia
           rpc-host-whitelist = cfg.hostname;
           rpc-host-whitelist-enabled = true;
-          umask = "002";
+          umask = 2;
         };
       };
       nginx.virtualHosts."${cfg.hostname}" = {

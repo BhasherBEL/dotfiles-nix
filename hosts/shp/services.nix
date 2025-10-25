@@ -28,5 +28,6 @@
     syncthing.enable = true;
     owntracks.enable = true;
     vaultwarden.enable = true;
+    jupyter-hub.enable = true;
   };
 }
