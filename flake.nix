@@ -84,10 +84,15 @@
           #     id = "449772";
           #     sha256 = "sha256-MTu94ePuHFaMCUO4XuqyUfLjVdYQqrAchvxzqMK4yJ0=";
           #   }
+          {
+            name = "syncthing-init";
+            id = "448845";
+            sha256 = "sha256-/muOOY5cyOJM/ST6DBUjww4Ez7rUBqkYA5rl402qRG4=";
+          }
         ];
       };
-      # system = "x86_64-linux";
-      system = "aarch64-linux";
+      system = "x86_64-linux";
+      # system = "aarch64-linux";
     in
     {
       inherit libx;
