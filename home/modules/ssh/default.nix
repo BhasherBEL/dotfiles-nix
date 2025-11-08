@@ -10,6 +10,7 @@ in
   config = lib.mkIf sshcfg.enable {
     programs.ssh = {
       enable = true;
+      enableDefaultConfig = false;
       matchBlocks = {
         "shp 192.168.0.201" = {
           hostname = "192.168.0.201";
