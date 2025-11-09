@@ -60,8 +60,8 @@
               # "HDMI-A-1,preferred,-1920x0,1"
               # "DVI-D-1,preferred,1920x0,1"
 
-              "HDMI-A-1,preferred,0x0,1"
-              "DP-1,preferred,1920x0,1"
+              "DP-1,preferred,0x0,1"
+              "HDMI-A-1,preferred,-1920x0,1"
             ]
           else if osConfig.networking.hostName == "laptop" then
             [

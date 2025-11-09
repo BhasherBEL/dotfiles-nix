@@ -122,7 +122,16 @@
             arteplussept
             sponsorblock
             inputstreamhelper
-            youtube
+            (youtube.overrideAttrs (old: rec {
+              name = "youtube-${version}";
+              version = "7.3.0+beta.8";
+              src = old.src.override {
+                owner = "anxdpanic";
+                repo = "plugin.video.youtube";
+                rev = "v${version}";
+                hash = "sha256-quXU6f99LOEdtS2fqhbU4+5ICHD3Pr3RIq5b0pE8PTo=";
+              };
+            }))
           ]
         );
       };
