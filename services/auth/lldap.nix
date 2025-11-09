@@ -23,6 +23,9 @@ in
       "services/lldap/admin_password" = {
         mode = "0444";
       };
+      "services/lldap/readonly_password" = {
+        mode = "0444";
+      };
     };
 
     services = {

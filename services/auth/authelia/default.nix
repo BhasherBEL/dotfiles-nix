@@ -24,9 +24,6 @@ in
 
   config = lib.mkIf cfg.enable {
     sops.secrets = {
-      "services/lldap/readonly_password" = {
-        owner = config.users.users.authelia.name;
-      };
       "services/authelia/jwtSecret" = {
         owner = config.users.users.authelia.name;
       };
