@@ -73,5 +73,7 @@ in
         "/var/lib/private/miniflux"
       ];
     };
+
+    hostServices.restic.paths = [ "/persistent/var/lib/private/miniflux" ];
   };
 }

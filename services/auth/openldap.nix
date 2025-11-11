@@ -139,5 +139,7 @@ in
         "/var/lib/openldap/"
       ];
     };
+
+    hostServices.restic.paths = [ "/persistent/var/lib/openldap" ];
   };
 }

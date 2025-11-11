@@ -31,5 +31,6 @@
     jupyter-hub.enable = true;
     miniflux.enable = true;
     radicale.enable = true;
+    restic.enable = true;
   };
 }

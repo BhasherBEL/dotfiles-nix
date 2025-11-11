@@ -42,5 +42,7 @@
         "/var/lib/prometheus"
       ];
     };
+
+    hostServices.restic.paths = [ "/persistent/var/lib/prometheus" ];
   };
 }

@@ -87,5 +87,7 @@ in
         "/var/lib/grafana"
       ];
     };
+
+    hostServices.restic.paths = [ "/persistent/var/lib/grafana" ];
   };
 }

@@ -72,5 +72,7 @@ in
         "/var/lib/private/lldap/"
       ];
     };
+
+    hostServices.restic.paths = [ "/persistent/var/lib/private/lldap" ];
   };
 }

@@ -84,5 +84,7 @@ in
         "/var/lib/owntracks"
       ];
     };
+
+    hostServices.restic.paths = [ "/persistent/var/lib/owntracks" ];
   };
 }

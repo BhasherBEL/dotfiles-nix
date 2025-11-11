@@ -68,5 +68,7 @@
       ];
     };
 
+    hostServices.restic.paths = [ "/persistent/var/lib/acme" ];
+
   };
 }

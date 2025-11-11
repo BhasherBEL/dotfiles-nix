@@ -104,5 +104,7 @@ in
         "/var/lib/private/firefly-iii"
       ];
     };
+
+    hostServices.restic.paths = [ "/persistent/var/lib/private/firefly-iii" ];
   };
 }

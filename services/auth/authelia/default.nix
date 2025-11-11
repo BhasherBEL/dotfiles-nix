@@ -428,5 +428,7 @@ in
         "/var/lib/authelia-idp"
       ];
     };
+
+    hostServices.restic.paths = [ "/persistent/var/lib/authelia-idp" ];
   };
 }

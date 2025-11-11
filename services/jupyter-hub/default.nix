@@ -112,5 +112,10 @@ in
         "/srv/jupyterhub"
       ];
     };
+
+    hostServices.restic.paths = [
+      "/persistent/var/lib/jupyterhub"
+      "/persistent/srv/jupyterhub"
+    ];
   };
 }

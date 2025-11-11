@@ -103,5 +103,7 @@ in
         }
       ];
     };
+
+    hostServices.restic.paths = [ "/persistent/var/lib/radicale" ];
   };
 }

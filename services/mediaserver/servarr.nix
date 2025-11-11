@@ -175,6 +175,13 @@
       ];
     };
 
+    hostServices.restic.paths = [
+      "/persistent/var/lib/radarr"
+      "/persistent/var/lib/sonarr"
+      "/persistent/var/lib/private/prowlarr"
+      "/var/lib/bazarr"
+    ];
+
     users.groups.media = { };
   };
 }
