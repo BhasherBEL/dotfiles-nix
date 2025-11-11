@@ -32,6 +32,7 @@ in
         enable = true;
         stateDirectory = "jupyterhub";
         host = "0.0.0.0";
+        port = 8002;
         jupyterhubEnv = pkgs.python3.withPackages (
           p: with p; [
             jupyterhub

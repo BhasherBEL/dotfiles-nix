@@ -39,6 +39,18 @@ in
       nginx.virtualHosts."${cfg.hostname}" = {
         forceSSL = true;
         enableACME = true;
+        listen = [
+          {
+            addr = "0.0.0.0";
+            port = 443;
+            ssl = true;
+          }
+          {
+            addr = "0.0.0.0";
+            port = 444;
+            ssl = true;
+          }
+        ];
         locations."/" = {
           recommendedProxySettings = true;
           proxyPass = "http://127.0.0.1:8096";

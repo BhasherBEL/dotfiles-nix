@@ -23,6 +23,22 @@
         forceSSL = false;
         rejectSSL = true;
         locations."/".return = "404";
+        listen = [
+          {
+            addr = "0.0.0.0";
+            port = 80;
+          }
+          {
+            addr = "0.0.0.0";
+            port = 443;
+            ssl = true;
+          }
+          {
+            addr = "0.0.0.0";
+            port = 444;
+            ssl = true;
+          }
+        ];
       };
     };
 
@@ -42,6 +58,7 @@
     networking.firewall.allowedTCPPorts = [
       80
       443
+      444
     ];
 
     environment.persistence."/persistent" = {

@@ -66,10 +66,28 @@ in
       nginx.virtualHosts."${cfg.hostname}" = {
         forceSSL = true;
         enableACME = true;
+        listen = [
+          {
+            addr = "0.0.0.0";
+            port = 443;
+            ssl = true;
+          }
+          {
+            addr = "0.0.0.0";
+            port = 444;
+            ssl = true;
+          }
+        ];
         locations = {
           "/" = {
             proxyPass = "http://127.0.0.1:5232";
             recommendedProxySettings = true;
+          };
+          "/.well-known/caldav" = {
+            return = "301 https://${cfg.hostname}";
+          };
+          "/.well-known/carddav" = {
+            return = "301 https://${cfg.hostname}";
           };
         };
       };
