@@ -132,6 +132,7 @@
                 hash = "sha256-quXU6f99LOEdtS2fqhbU4+5ICHD3Pr3RIq5b0pE8PTo=";
               };
             }))
+            ./custom-addons/bluetooth-manager
           ]
         );
       };
