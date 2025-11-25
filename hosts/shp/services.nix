@@ -10,7 +10,7 @@
     dns = {
       enable = true;
       mappings = {
-        "bxl.bhasher.com" = "91.182.226.236";
+        "bxl.bhasher.com" = "62.235.48.154";
         "smtp.bhasher.com" = "51.255.172.55";
         "imap.bhasher.com" = "51.255.172.55";
         "autoconfig.bhasher.com" = "51.255.172.55";
