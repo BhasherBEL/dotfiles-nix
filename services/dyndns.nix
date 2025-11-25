@@ -35,11 +35,13 @@
         enable = true;
         username = "bhasher.com-bxl";
         server = "www.ovh.com";
-        protocol = "dyndns2";
+        # protocol = "dyndns2";
+        protocol = "ovh";
         passwordFile = "/run/secrets/services/dyndns/bxl";
         interval = "10min";
         # use = "webv4, webv4=ipify-ipv4";
         usev4 = "webv4,webv4=ipify-ipv4";
+        usev6 = "disabled";
         domains = [
           "bxl.bhasher.com"
         ];

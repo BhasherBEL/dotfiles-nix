@@ -138,7 +138,7 @@
 
   hostServices = {
     dyndns.bxl.enable = true;
-    dns.enable = true;
+    # dns.enable = true;
     vpn-client = {
       enable = true;
       ipv4 = "10.20.0.5/24";
