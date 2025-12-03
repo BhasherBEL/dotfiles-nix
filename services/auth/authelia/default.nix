@@ -323,22 +323,6 @@ in
                   userinfo_signed_response_alg = "none";
                 }
                 {
-                  client_id = "paperless-ngx";
-                  client_name = "Paperless NGX";
-                  client_secret = "$argon2id$v=19$m=65536,t=3,p=4$kujFSqxNtfP0neWECtdwoQ$bmEqT9v47rXXKEDtLWiZO10VH7yGgNPRjflM/UWwCXg";
-                  public = false;
-                  authorization_policy = "two_factor";
-                  redirect_uris = [ "https://paperless.bhasher.com/accounts/oidc/authelia/login/callback/" ];
-                  consent_mode = "implicit";
-                  scopes = [
-                    "openid"
-                    "profile"
-                    "email"
-                    "groups"
-                  ];
-                  userinfo_signed_response_alg = "none";
-                }
-                {
                   client_id = "openwebui";
                   client_name = "OpenWebUI";
                   client_secret = "$argon2id$v=19$m=65536,t=3,p=4$8zijuZcGfh2m5RjqL42dLg$ZEiQJz3tRNSZlFpRQaKkxtaieCV7u57QGA3vo9Uu8jA";

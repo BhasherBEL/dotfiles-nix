@@ -32,5 +32,6 @@
     miniflux.enable = true;
     radicale.enable = true;
     restic.enable = true;
+    paperless.enable = true;
   };
 }
