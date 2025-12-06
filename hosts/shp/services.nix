@@ -33,5 +33,6 @@
     radicale.enable = true;
     restic.enable = true;
     paperless.enable = true;
+    otp.enable = true;
   };
 }
