@@ -44,7 +44,7 @@ in
         domain = cfg.hostname;
         dataDir = "/var/lib/paperless/data";
         mediaDir = "/var/lib/paperless/media";
-        consumptionDir = "/var/lib/paperless/consume";
+        consumptionDir = "/srv/syncthing/SyncDocuments/consume";
         exporter.directory = "/var/lib/paperless/export";
         consumptionDirIsPublic = true;
         environmentFile = config.sops.secrets."services/paperless/env".path;
