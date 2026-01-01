@@ -323,22 +323,6 @@ in
                   userinfo_signed_response_alg = "none";
                 }
                 {
-                  client_id = "openwebui";
-                  client_name = "OpenWebUI";
-                  client_secret = "$argon2id$v=19$m=65536,t=3,p=4$8zijuZcGfh2m5RjqL42dLg$ZEiQJz3tRNSZlFpRQaKkxtaieCV7u57QGA3vo9Uu8jA";
-                  public = false;
-                  authorization_policy = "one_factor";
-                  redirect_uris = [ "https://ai.bhasher.com/oauth/oidc/callback" ];
-                  consent_mode = "implicit";
-                  scopes = [
-                    "openid"
-                    "profile"
-                    "email"
-                    "groups"
-                  ];
-                  userinfo_signed_response_alg = "none";
-                }
-                {
                   client_id = "mas";
                   client_name = "Matrix Authentication Service";
                   client_secret = "$argon2id$v=19$m=65536,t=3,p=4$4oeGB2RcziBGMvSnVJBmAw$B/6yUd4XH6mqW3QXISNdg1F3HQwzaoA6czhWsNvNWBY";

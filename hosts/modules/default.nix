@@ -51,6 +51,7 @@
       "android-sdk-tools"
       "android-studio-stable"
       "mqtt-explorer" # CC-BY-NC-4.0
+      "open-webui"
     ];
 
   home-manager = {

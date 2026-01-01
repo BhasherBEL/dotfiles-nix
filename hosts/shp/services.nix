@@ -34,5 +34,6 @@
     restic.enable = true;
     paperless.enable = true;
     otp.enable = true;
+    open-webui.enable = true;
   };
 }
