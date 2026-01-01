@@ -77,6 +77,7 @@
     unzip
     ripgrep
     killall
+    tree
   ];
 
   programs = {

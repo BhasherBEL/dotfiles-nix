@@ -23,6 +23,9 @@
         forceSSL = false;
         rejectSSL = true;
         locations."/".return = "404";
+        locations."/.well-known/acme-challenge/" = {
+          root = "/var/lib/acme/acme-challenge";
+        };
         listen = [
           {
             addr = "0.0.0.0";
