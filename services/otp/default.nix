@@ -190,9 +190,8 @@ in
             Group = "otp";
             WorkingDirectory = cfg.cacheDir;
             ExecStart = builderScript;
-            # ExecStartPost = "${pkgs.systemd}/bin/systemctl restart otp-runner.service";
+            ExecStartPost = "${pkgs.systemd}/bin/systemctl restart otp-runner.service";
           };
-          wantedBy = [ "multi-user.target" ];
         };
 
         otp-runner = {
