@@ -107,7 +107,7 @@ in
     freetube
     signal-desktop-bin
     thunderbird
-    libreoffice
+    libreoffice-fresh
     sl
     yt-dlp
     marksman
@@ -116,6 +116,7 @@ in
     pinentry-curses
     qdirstat
     sieve-editor-gui
+    sqlitebrowser
   ];
 
   services.pcscd.enable = true;
