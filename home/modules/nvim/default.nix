@@ -148,18 +148,51 @@ in
         }
       ];
       globals = {
-        clipboard = lib.mkIf (!nvimcfg.headless) {
-          name = "wl-clipboard";
-          copy = {
-            "+" = "wl-copy --trim-newline";
-            "*" = "wl-copy --trim-newline";
+        clipboard =
+          let
+            isRemote = "vim.env.SSH_CONNECTION ~= nil";
+
+            copyFn = reg: ''
+              function(lines, _)
+                if ${isRemote} then
+                  require("vim.ui.clipboard.osc52").copy("${reg}")(lines)
+                else
+                  vim.fn.system("wl-copy --trim-newline", table.concat(lines, "\n"))
+                end
+              end
+            '';
+
+            pasteFn = reg: ''
+              function()
+                if ${isRemote} then
+                  return require("vim.ui.clipboard.osc52").paste("${reg}")()
+                else
+                  return vim.fn.systemlist("wl-paste")
+                end
+              end
+            '';
+          in
+          {
+            name = "auto-clipboard";
+            copy = {
+              "+" = {
+                __raw = copyFn "+";
+              };
+              "*" = {
+                __raw = copyFn "*";
+              };
+            };
+
+            paste = {
+              "+" = {
+                __raw = pasteFn "+";
+              };
+              "*" = {
+                __raw = pasteFn "*";
+              };
+            };
+            cache_enabled = 0;
           };
-          paste = {
-            "+" = "wl-paste";
-            "*" = "wl-paste";
-          };
-          cache_enabled = 0;
-        };
       };
       opts = {
         compatible = false;
