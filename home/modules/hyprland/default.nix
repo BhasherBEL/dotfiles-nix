@@ -233,9 +233,7 @@ in
           orientation = "right";
         };
 
-        gestures = {
-          workspace = true;
-        };
+        gesture = "3, horizontal, workspace";
 
         misc = {
           force_default_wallpaper = -1;
