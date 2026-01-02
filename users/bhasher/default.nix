@@ -164,6 +164,6 @@ in
     devenv.enable = true;
     docker.enable = true;
     # Until https://github.com/NixOS/nixpkgs/issues/437865 is resolved
-    jellyfin-media-player.enable = false;
+    jellyfin-media-player.enable = true;
   };
 }
