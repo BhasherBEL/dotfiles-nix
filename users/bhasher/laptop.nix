@@ -41,7 +41,7 @@
     privateKeySecret = "wg/bxl-shp/laptop/key";
     route = {
       all = false;
-      bxl = false;
+      bxl = true;
       wol = true;
     };
     autostart = true;
