@@ -72,6 +72,10 @@ in
           "/" = {
             proxyPass = "http://127.0.0.1:${toString config.services.open-webui.port}";
             recommendedProxySettings = true;
+            proxyWebsockets = true;
+            extraConfig = ''
+              proxy_buffering off;
+            '';
           };
         };
       };
