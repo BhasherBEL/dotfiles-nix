@@ -1,30 +1,24 @@
 {
-  lib,
   buildKodiAddon,
-  fetchzip,
-  addonUpdateScript,
+  fetchFromGitHub,
+  lib,
 }:
-
 buildKodiAddon rec {
-  pname = "BluetoothManager";
-  version = "v1.0.4";
+  pname = "bluetooth-manager";
+  namespace = "script.bluetooth.man";
+  version = "1.0.4";
 
-  src = fetchzip {
-    url = "https://github.com/wastis/BluetoothManager/archive/refs/tags/${version}.zip";
-    sha256 = "";
-  };
-
-  passthru = {
-    pythonPath = "lib";
-    updateScript = addonUpdateScript {
-      attrPath = "kodi.packages.bluetooth-manager";
-    };
+  src = fetchFromGitHub {
+    owner = "wastis";
+    repo = "BluetoothManager";
+    tag = "v${version}";
+    hash = "sha256-KKaR7rIkflMYU6EDBEcorHQ3t7jsB4Qe6Ikg+eBblkA=";
   };
 
   meta = with lib; {
-    homepage = "https://github.com/wastis/BluetoothManager";
-    description = "Kodi Addon to pair and connect bluetooth devices";
-    license = licenses.gpl3only;
+    description = "Addon that allows to manage bluetooth devices from within a Linux based Kodi";
+    platforms = platforms.all;
     maintainers = teams.kodi.members;
+    license = licenses.gpl3Plus;
   };
 }

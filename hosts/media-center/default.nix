@@ -124,15 +124,15 @@
             inputstreamhelper
             (youtube.overrideAttrs (old: rec {
               name = "youtube-${version}";
-              version = "7.3.0+beta.8";
+              version = "7.4.0+beta.2";
               src = old.src.override {
                 owner = "anxdpanic";
                 repo = "plugin.video.youtube";
                 rev = "v${version}";
-                hash = "sha256-quXU6f99LOEdtS2fqhbU4+5ICHD3Pr3RIq5b0pE8PTo=";
+                hash = "sha256-lA2e8hxzxglR9fGNalV0mfcqHsQbF7ZzOyvqJbe6BmY=";
               };
             }))
-            ./custom-addons/bluetooth-manager
+            (pkgs.kodiPackages.callPackage ./custom-addons/bluetooth-manager { })
           ]
         );
       };
