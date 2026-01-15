@@ -38,13 +38,48 @@ in
           CREATE_ADMIN = 0;
         };
       };
-      nginx.virtualHosts."${cfg.hostname}" = {
-        forceSSL = true;
-        enableACME = true;
-        locations = {
-          "/" = {
-            proxyPass = "http://127.0.0.1:8080";
-            recommendedProxySettings = true;
+      nginx.virtualHosts = {
+        "${cfg.hostname}" = {
+          forceSSL = true;
+          enableACME = true;
+          locations = {
+            "/" = {
+              proxyPass = "http://127.0.0.1:8080";
+              recommendedProxySettings = true;
+            };
+          };
+        };
+        "${cfg.hostname}-public" = {
+          serverName = cfg.hostname;
+          forceSSL = true;
+          enableACME = true;
+          listen = [
+            {
+              addr = "0.0.0.0";
+              port = 444;
+              ssl = true;
+            }
+          ];
+          locations = {
+            "/share/" = {
+              proxyPass = "http://127.0.0.1:8080";
+              recommendedProxySettings = true;
+            };
+
+            "/stylesheets/" = {
+              proxyPass = "http://127.0.0.1:8080";
+              recommendedProxySettings = true;
+            };
+
+            "/icons/" = {
+              proxyPass = "http://127.0.0.1:8080";
+              recommendedProxySettings = true;
+            };
+            "/" = {
+              extraConfig = ''
+                return 404;
+              '';
+            };
           };
         };
       };
