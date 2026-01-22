@@ -2,7 +2,7 @@
   lib,
   modulesPath,
   pkgs,
-  inputs,
+  config,
   ...
 }:
 {
@@ -124,12 +124,12 @@
             inputstreamhelper
             (youtube.overrideAttrs (old: rec {
               name = "youtube-${version}";
-              version = "7.4.0+beta.2";
+              version = "7.4.0+beta.4";
               src = old.src.override {
                 owner = "anxdpanic";
                 repo = "plugin.video.youtube";
                 rev = "v${version}";
-                hash = "sha256-lA2e8hxzxglR9fGNalV0mfcqHsQbF7ZzOyvqJbe6BmY=";
+                hash = "sha256-Q1y9NKShNHS7y6CSm1g8xbbTjJA9fyRR3DCxF5vtjCU=";
               };
             }))
             (pkgs.kodiPackages.callPackage ./custom-addons/bluetooth-manager { })
@@ -137,6 +137,14 @@
         );
       };
       displayManager.lightdm.enable = true;
+    };
+  };
+
+  sops.secrets = {
+    "api/youtube" = {
+      owner = config.users.users.kodi.name;
+      mode = "0400";
+      path = "${config.users.users.kodi.home}/.kodi/userdata/addon_data/plugin.video.youtube/api_keys.json";
     };
   };
 
