@@ -14,6 +14,7 @@
     kernelParams = [
       "snd_bcm2835.enable_hdmi=1"
       "snd_bcm2835.enable_headphones=1"
+      "cma=252M"
     ];
     initrd = {
       availableKernelModules = [
@@ -120,7 +121,16 @@
             netflix
             # invidious
             arteplussept
-            sponsorblock
+            (sponsorblock.overrideAttrs (old: rec {
+              name = "sponsorblock-${version}";
+              version = "unstable-2026-01-22";
+              src = old.src.override {
+                owner = "bhasherbel";
+                repo = "script.service.sponsorblock";
+                rev = "0696a9ef3dc8531ea8ddcc98060e8c4c753e459f";
+                hash = "sha256-fa6NRTUm9DI/+Ab/jCbfPnpbuhckrMHvQbchhxGnpTw=";
+              };
+            }))
             inputstreamhelper
             (youtube.overrideAttrs (old: rec {
               name = "youtube-${version}";
