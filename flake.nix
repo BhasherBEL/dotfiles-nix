@@ -67,72 +67,70 @@
       ...
     }@inputs:
     let
-      libx = import ./lib {
-        inherit
-          self
-          inputs
-          system
-          ;
-        patches = [
-          #   {
-          #     name = "libcec_platform";
-          #     id = "449090";
-          #     sha256 = "sha256-DQktdIFO2iWjeYnoKmZNkzZk2cmWK8NP6Uj/qEMokIk=";
-          #   }
-          #   {
-          #     name = "libraspberrypi";
-          #     id = "449772";
-          #     sha256 = "sha256-MTu94ePuHFaMCUO4XuqyUfLjVdYQqrAchvxzqMK4yJ0=";
-          #   }
-          {
-            name = "syncthing-init";
-            id = "448845";
-            sha256 = "sha256-/muOOY5cyOJM/ST6DBUjww4Ez7rUBqkYA5rl402qRG4=";
-          }
-        ];
+      patches = [
+        {
+          name = "syncthing-init";
+          id = "448845";
+          sha256 = "sha256-/muOOY5cyOJM/ST6DBUjww4Ez7rUBqkYA5rl402qRG4=";
+        }
+      ];
+
+      mkLibx =
+        system:
+        import ./lib {
+          inherit
+            self
+            inputs
+            system
+            patches
+            ;
+        };
+
+      libx = {
+        x86_64-linux = mkLibx "x86_64-linux";
+        aarch64-linux = mkLibx "aarch64-linux";
       };
-      system = "x86_64-linux";
-      # system = "aarch64-linux";
+
     in
     {
       inherit libx;
 
       nixosConfigurations = {
-        desktop = libx.makeNixosSystem "desktop" [
+        desktop = libx.x86_64-linux.makeNixosSystem "desktop" [
           ./hosts/desktop
           ./users/bhasher/desktop.nix
           inputs.lanzaboote.nixosModules.lanzaboote
         ];
 
-        laptop = libx.makeNixosSystem "laptop" [
+        laptop = libx.x86_64-linux.makeNixosSystem "laptop" [
           ./hosts/laptop
           ./users/bhasher/laptop.nix
           inputs.lanzaboote.nixosModules.lanzaboote
         ];
 
-        media-center = libx.makeNixosSystem "media-center" [
+        media-center = libx.aarch64-linux.makeNixosSystem "media-center" [
           ./hosts/media-center
           ./users/kodi/media-center.nix
           inputs.nixos-hardware.nixosModules.raspberry-pi-4
         ];
 
-        live = libx.makeNixosSystem "live" [
+        live = libx.x86_64-linux.makeNixosSystem "live" [
           ./hosts/live
         ];
 
-        spi = libx.makeNixosSystem "spi" [
+        spi = libx.aarch64-linux.makeNixosSystem "spi" [
           ./hosts/spi
           ./users/spi
           inputs.nixos-hardware.nixosModules.raspberry-pi-4
         ];
-        shp = libx.makeNixosSystem "shp" [
+        shp = libx.x86_64-linux.makeNixosSystem "shp" [
           ./hosts/shp
           ./users/shp
         ];
       };
 
       homeConfigurations = {
-        shp = libx.makeHomeManager "shp" [
+        shp = libx.x86_64-linux.makeHomeManager "shp" [
           ./home/shp.nix
         ];
       };
