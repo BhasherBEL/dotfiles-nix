@@ -91,7 +91,7 @@
 
   # Each generation add src (/etc/nixos) into it's store.
   # Current system: /nix/var/nix/profiles/system/src/
-  system.extraSystemBuilderCmds = "ln -s ${inputs.self.sourceInfo.outPath} $out/src";
+  system.systemBuilderCommands = "ln -s ${inputs.self.sourceInfo.outPath} $out/src";
 
   # Add a label with last commit
   # nixos-rebuild list-generations

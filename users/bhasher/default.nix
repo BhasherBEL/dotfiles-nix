@@ -117,6 +117,7 @@ in
     qdirstat
     sieve-editor-gui
     sqlitebrowser
+    gnumeric
   ];
 
   services.pcscd.enable = true;

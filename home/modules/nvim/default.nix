@@ -240,6 +240,11 @@ in
             };
             gopls.enable = nvimcfg.full;
             svelte.enable = nvimcfg.full;
+            rust_analyzer = {
+              enable = nvimcfg.full;
+              installCargo = true;
+              installRustc = true;
+            };
             ts_ls = {
               enable = nvimcfg.full;
               extraOptions = {
@@ -340,6 +345,7 @@ in
                   __unkeyed-1 = "dart_format";
                   timeout_ms = 5000;
                 };
+                rs = [ "rustfmt" ];
               };
             formatters.dart_format.prepend_args = [ "--disable-analytics" ];
             notify_on_error = true;
@@ -457,6 +463,7 @@ in
               vim
               vimdoc
               sql
+              rust
             ];
           settings.highlight.enable = true;
         };
