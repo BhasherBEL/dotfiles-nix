@@ -81,10 +81,20 @@
     deviceTree.enable = true;
     bluetooth.enable = true;
   };
+
+  nixpkgs.overlays = [
+    (self: super: { libcec = super.libcec.override { withLibraspberrypi = true; }; })
+  ];
+
   environment.systemPackages = with pkgs; [
     libraspberrypi
     raspberrypi-eeprom
+    libcec
   ];
+
+  services.udev.extraRules = ''
+    KERNEL=="vchiq", GROUP="video", MODE="0660", TAG+="systemd", ENV{SYSTEMD_ALIAS}="/dev/vchiq"
+  '';
 
   networking = {
     hostName = "media-center";
@@ -117,6 +127,7 @@
         enable = true;
         package = pkgs.kodi.withPackages (
           p: with p; [
+            pkgs.libcec
             jellyfin
             netflix
             # invidious

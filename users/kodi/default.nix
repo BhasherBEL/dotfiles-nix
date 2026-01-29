@@ -35,6 +35,8 @@ in
     extraGroups = [
       "wheel"
       "audio"
+      "input"
+      "video"
     ];
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOGsCS7XysWiFuLVmN01cJAAZN2ZhWVB4V6R6F5DLsuM"

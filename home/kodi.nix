@@ -70,6 +70,11 @@
           wakeonaccess = "true";
         };
         network.disablehttp2 = "true"; # Required
+        loglevel = "1";
+        debug = {
+          extralogging = "true";
+          setextraloglevel = "64,2048,32768";
+        };
       };
       addonSettings = {
         "plugin.video.invidious" = {
