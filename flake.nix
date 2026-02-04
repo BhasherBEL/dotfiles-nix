@@ -137,20 +137,34 @@
         ];
       };
 
-      deploy.nodes.media-center = {
-        hostname = "kodi";
-        profiles.system = {
-          user = "kodi";
-          sshUser = "kodi";
-          interactiveSudo = true;
-          autoRollback = true;
-          remoteBuild = false;
-          path = inputs.deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.media-center;
+      deploy.nodes = {
+        media-center = {
+          hostname = "kodi";
+          profiles.system = {
+            user = "kodi";
+            sshUser = "kodi";
+            interactiveSudo = true;
+            autoRollback = true;
+            remoteBuild = false;
+            path = inputs.deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.media-center;
+          };
+        };
+        shp = {
+          hostname = "shp";
+          profiles.system = {
+            user = "shp";
+            sshUser = "shp";
+            interactiveSudo = true;
+            autoRollback = true;
+            remoteBuild = true;
+            path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.shp;
+            profilePath = "/home/shp/.local/state/nix/profiles/system";
+          };
         };
       };
 
-      checks = builtins.mapAttrs (
-        system: deployLib: deployLib.deployChecks self.deploy
-      ) inputs.deploy-rs.lib;
+      # checks = builtins.mapAttrs (
+      #   system: deployLib: deployLib.deployChecks self.deploy
+      # ) inputs.deploy-rs.lib;
     };
 }
