@@ -45,7 +45,7 @@ maven.buildMavenPackage rec {
     hash = "sha256-aBve7pyqTDayIEuQGwo4PwT0vd038cu3NCgBsAaQrqc=";
   };
   mvnJdk = jdk_headless;
-  mvnHash = "sha256-J0Ngg9prP9tzKthsuC8j8wuMe6DyH65uofkwEaTbjxc=";
+  mvnHash = "sha256-Q6uVCjhlQwcyEMyhc9w88ypcrKXmbZbeJojn4beI8GA=";
   mvnParameters = lib.escapeShellArgs [
     "-Dplugin.prettier.skip=true"
     "-Dmaven.gitcommitid.skip=true"

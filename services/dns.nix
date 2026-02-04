@@ -16,7 +16,7 @@
         enable = true;
         settings = {
           minTlsServeVersion = 1.2;
-          connectIPVersion = "v4";
+          connectIPVersion = "dual";
           ports.dns = 53;
           log.level = "warn";
           upstreams = {
@@ -33,11 +33,11 @@
             "86.54.11.100"
             "86.54.11.200"
           ];
-          filtering = {
-            queryTypes = [
-              "AAAA"
-            ];
-          };
+          # filtering = {
+          #   queryTypes = [
+          #     "AAAA"
+          #   ];
+          # };
           customDNS.mapping = config.hostServices.dns.mappings;
           blocking = {
             denylists = {
@@ -57,11 +57,17 @@
         settings = {
           server = {
             verbosity = 0;
-            interface = [ "127.0.0.1" ];
+            interface = [
+              "127.0.0.1"
+              "::1"
+            ];
             port = 5335;
-            access-control = [ "127.0.0.1 allow" ];
+            access-control = [
+              "127.0.0.1 allow"
+              "::1 allow"
+            ];
             do-ip4 = true;
-            do-ip6 = false;
+            do-ip6 = true;
             do-udp = true;
             do-tcp = true;
 
@@ -82,6 +88,8 @@
               "198.51.100.0/24"
               "203.0.113.0/24"
               "255.255.255.255/32"
+              "fd00::/8"
+              "fe80::/10"
             ];
           };
         };

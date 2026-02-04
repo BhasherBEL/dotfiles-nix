@@ -260,21 +260,6 @@ in
                   userinfo_signed_response_alg = "none";
                 }
                 {
-                  client_id = "matrix_synapse";
-                  client_name = "Matrix Synapse";
-                  client_secret = "$argon2id$v=19$m=65536,t=3,p=4$Z+6HONrjDp54s+MhXuq1cA$bjc5tMGD3gR6AaBYIDx3S2mz/UfPv6a0n1Vf3q2Ifik";
-                  public = false;
-                  authorization_policy = "one_factor";
-                  redirect_uris = [ "https://matrix.bhasher.com/_synapse/client/oidc/callback" ];
-                  consent_mode = "implicit";
-                  scopes = [
-                    "openid"
-                    "profile"
-                    "email"
-                  ];
-                  userinfo_signed_response_alg = "none";
-                }
-                {
                   client_id = "jellyfin";
                   client_name = "Jellyfn";
                   client_secret = "$argon2id$v=19$m=65536,t=3,p=4$+AqLF91LkfyZJIhjxq3lVQ$m0aSF/XYaWAU1NgRUlwMC3cB0k09Jg+HBBXa8iJWCLk";
@@ -305,37 +290,6 @@ in
                     "email"
                   ];
                   userinfo_signed_response_alg = "none";
-                }
-                {
-                  client_id = "mealie";
-                  client_name = "Mealie";
-                  client_secret = "$argon2id$v=19$m=65536,t=3,p=4$H+PWfdgUPIh0DOyTF6Wjxw$3OT1G0i1BzOOmHKNc8gjuxWeCEs7SWYh1X9xd7/3SNU";
-                  public = false;
-                  authorization_policy = "one_factor";
-                  redirect_uris = [ "https://recipes.bhasher.com/login" ];
-                  consent_mode = "implicit";
-                  scopes = [
-                    "openid"
-                    "profile"
-                    "email"
-                    "groups"
-                  ];
-                  userinfo_signed_response_alg = "none";
-                }
-                {
-                  client_id = "mas";
-                  client_name = "Matrix Authentication Service";
-                  client_secret = "$argon2id$v=19$m=65536,t=3,p=4$4oeGB2RcziBGMvSnVJBmAw$B/6yUd4XH6mqW3QXISNdg1F3HQwzaoA6czhWsNvNWBY";
-                  public = false;
-                  redirect_uris = [ "https://mas.bhasher.com/upstream/callback/01JJZD84RP70N2Q5YSTG2H6SPV" ];
-                  consent_mode = "implicit";
-                  scopes = [
-                    "openid"
-                    "groups"
-                    "profile"
-                    "email"
-                  ];
-                  response_types = [ "code" ];
                 }
                 {
                   client_id = "audiobookshelf";
