@@ -59,6 +59,10 @@
     };
     mcphub-nvim.url = "github:ravitemer/mcphub.nvim";
     import-tree.url = "github:vic/import-tree";
+    deploy-rs = {
+      url = "github:serokell/deploy-rs";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -93,8 +97,6 @@
 
     in
     {
-      inherit libx;
-
       nixosConfigurations = {
         desktop = libx.x86_64-linux.makeNixosSystem "desktop" [
           ./hosts/desktop
@@ -134,5 +136,21 @@
           ./home/shp.nix
         ];
       };
+
+      deploy.nodes.media-center = {
+        hostname = "kodi";
+        profiles.system = {
+          user = "kodi";
+          sshUser = "kodi";
+          interactiveSudo = true;
+          autoRollback = true;
+          remoteBuild = false;
+          path = inputs.deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.media-center;
+        };
+      };
+
+      checks = builtins.mapAttrs (
+        system: deployLib: deployLib.deployChecks self.deploy
+      ) inputs.deploy-rs.lib;
     };
 }

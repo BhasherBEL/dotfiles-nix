@@ -118,6 +118,9 @@ in
     sieve-editor-gui
     sqlitebrowser
     gnumeric
+    deploy-rs
+    ssss
+    age
   ];
 
   services.pcscd.enable = true;

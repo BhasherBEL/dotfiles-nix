@@ -43,6 +43,7 @@
     "/home/kodi" = {
       device = "none";
       fsType = "tmpfs";
+      neededForBoot = true;
       options = [
         "size=4G"
         "mode=777"
@@ -129,9 +130,9 @@
           p: with p; [
             pkgs.libcec
             jellyfin
-            netflix
-            # invidious
             arteplussept
+            sendtokodi
+            inputstreamhelper
             (sponsorblock.overrideAttrs (old: rec {
               name = "sponsorblock-${version}";
               version = "unstable-2026-01-22";
@@ -142,7 +143,6 @@
                 hash = "sha256-fa6NRTUm9DI/+Ab/jCbfPnpbuhckrMHvQbchhxGnpTw=";
               };
             }))
-            inputstreamhelper
             (youtube.overrideAttrs (old: rec {
               name = "youtube-${version}";
               version = "7.4.0+beta.4";
