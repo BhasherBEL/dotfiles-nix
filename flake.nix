@@ -165,15 +165,14 @@
           };
         };
         snc = {
-          hostname = "37.120.190.20";
-          profiles.system = rec {
+          hostname = "snc";
+          profiles.system = {
             user = "root";
             sshUser = "snc";
             interactiveSudo = true;
             autoRollback = false;
             remoteBuild = false;
             path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.snc;
-            # profilePath = "/home/${user}/.local/state/nix/profiles/system";
           };
         };
       };

@@ -40,6 +40,9 @@
           listenPort = 51824;
           privateKeyFile = "/run/secrets/wg/bxl-shp/server/key";
           peers = [
+            # cd $(mktemp -d)
+            # wg genkey > sk
+            # wg pubkey < sk > pk
             {
               # Phone
               publicKey = "6TBTGMlvTenljGf71gewKSiDmhGCfG4b+giN853tHyU=";
@@ -98,6 +101,14 @@
               allowedIPs = [
                 "10.20.0.8/32"
                 "fd8c:70ee:bdd8:2:2::2/128"
+              ];
+            }
+            {
+              # SNC
+              publicKey = "inmP43MmcmmCnoCl+jeKhmhZVTnoxq3iUC4w+i4hcig=";
+              allowedIPs = [
+                "10.20.0.9/32"
+                "fd8c:70ee:bdd8:3:1::1/128"
               ];
             }
           ];
