@@ -49,20 +49,19 @@
       url = "github:danth/stylix/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    simple-nixos-mailserver = {
-      url = "gitlab:simple-nixos-mailserver/nixos-mailserver/nixos-25.11";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    mcp-hub = {
-      url = "github:ravitemer/mcp-hub";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    mcphub-nvim.url = "github:ravitemer/mcphub.nvim";
     import-tree.url = "github:vic/import-tree";
     deploy-rs = {
       url = "github:serokell/deploy-rs";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    blog = {
+      url = "github:bhasherbel/blog";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    # simple-nixos-mailserver = {
+    #   url = "gitlab:simple-nixos-mailserver/nixos-mailserver/nixos-25.11";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
   };
 
   outputs =
@@ -129,6 +128,10 @@
           ./hosts/shp
           ./users/shp
         ];
+        snc = libx.x86_64-linux.makeNixosSystem " snc" [
+          ./hosts/snc
+          inputs.disko.nixosModules.disko
+        ];
       };
 
       homeConfigurations = {
@@ -151,20 +154,28 @@
         };
         shp = {
           hostname = "shp";
-          profiles.system = {
+          profiles.system = rec {
             user = "shp";
-            sshUser = "shp";
+            sshUser = user;
             interactiveSudo = true;
-            autoRollback = true;
+            autoRollback = false;
             remoteBuild = true;
-            path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.shp;
-            profilePath = "/home/shp/.local/state/nix/profiles/system";
+            path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations."${user}";
+            profilePath = "/home/${user}/.local/state/nix/profiles/system";
+          };
+        };
+        snc = {
+          hostname = "37.120.190.20";
+          profiles.system = rec {
+            user = "root";
+            sshUser = "snc";
+            interactiveSudo = true;
+            autoRollback = false;
+            remoteBuild = false;
+            path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.snc;
+            # profilePath = "/home/${user}/.local/state/nix/profiles/system";
           };
         };
       };
-
-      # checks = builtins.mapAttrs (
-      #   system: deployLib: deployLib.deployChecks self.deploy
-      # ) inputs.deploy-rs.lib;
     };
 }

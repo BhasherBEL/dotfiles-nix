@@ -37,5 +37,6 @@
     open-webui.enable = true;
     # matrix.enable = true;
     mealie.enable = true;
+    blog.enable = true;
   };
 }

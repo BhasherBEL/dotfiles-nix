@@ -1,9 +1,9 @@
 { ... }:
 {
-  home.username = "shp";
-  home.homeDirectory = "/home/shp";
+  home.username = "snc";
+  home.homeDirectory = "/home/snc";
 
-  home.stateVersion = "25.05";
+  home.stateVersion = "25.11";
 
   imports = [ ./modules ];
 
