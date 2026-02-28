@@ -58,10 +58,10 @@
       url = "github:bhasherbel/blog";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # simple-nixos-mailserver = {
-    #   url = "gitlab:simple-nixos-mailserver/nixos-mailserver/nixos-25.11";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
+    simple-nixos-mailserver = {
+      url = "gitlab:simple-nixos-mailserver/nixos-mailserver/nixos-25.11";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =

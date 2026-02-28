@@ -1,7 +1,11 @@
 { ... }:
 {
   hostServices = {
-    # nginx.enable = true;
+    nginx = {
+      enable = true;
+      https = false;
+      https-bis = false;
+    };
     vpn-client = {
       enable = true;
       ipv4 = "10.20.0.9/24";
@@ -9,5 +13,6 @@
       privateKeySecret = "wg/bxl-shp/snc/key";
       autostart = true;
     };
+    mailserver.enable = true;
   };
 }

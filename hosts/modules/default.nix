@@ -8,7 +8,6 @@
 {
   imports = [
     ./router
-    ./mailserver
     ./sudo
     ./locale
     ./automatic-timezone
