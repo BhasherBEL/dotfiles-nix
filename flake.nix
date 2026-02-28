@@ -140,6 +140,38 @@
         ];
       };
 
+      nixosModules = {
+        default =
+          { ... }:
+          {
+            imports = [
+              (inputs.import-tree ./services)
+              (inputs.import-tree ./hosts/modules)
+            ];
+            _module.args.inputs = inputs;
+          };
+        services =
+          { ... }:
+          {
+            imports = [ (inputs.import-tree ./services) ];
+            _module.args.inputs = inputs;
+          };
+        hosts =
+          { ... }:
+          {
+            imports = [ (inputs.import-tree ./hosts/modules) ];
+            _module.args.inputs = inputs;
+          };
+      };
+
+      homeModules = {
+        default =
+          { ... }:
+          {
+            imports = [ (inputs.import-tree ./home/modules) ];
+          };
+      };
+
       deploy.nodes = {
         media-center = {
           hostname = "kodi";

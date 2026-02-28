@@ -111,6 +111,14 @@
                 "fd8c:70ee:bdd8:3:1::1/128"
               ];
             }
+            {
+              # Laptop-bis
+              publicKey = "syHJd5RSBed5J3d5HSVb5QAzQlc58z8o+D1HkkClBzo=";
+              allowedIPs = [
+                "10.20.0.10/32"
+                "fd8c:70ee:bdd8:0:1::4/128"
+              ];
+            }
           ];
 
           # postUp = ''
