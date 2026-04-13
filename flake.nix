@@ -42,7 +42,7 @@
     };
     impermanence.url = "github:nix-community/impermanence";
     catppuccin = {
-      url = "github:catppuccin/nix";
+      url = "github:catppuccin/nix/v25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     stylix = {
@@ -60,6 +60,10 @@
     };
     simple-nixos-mailserver = {
       url = "gitlab:simple-nixos-mailserver/nixos-mailserver/nixos-25.11";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    maas-rs = {
+      url = "github:bhasherbel/maas-rs";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -141,35 +145,35 @@
       };
 
       nixosModules = {
-        default =
-          { ... }:
-          {
-            imports = [
-              (inputs.import-tree ./services)
-              (inputs.import-tree ./hosts/modules)
-            ];
-            _module.args.inputs = inputs;
-          };
-        services =
-          { ... }:
-          {
-            imports = [ (inputs.import-tree ./services) ];
-            _module.args.inputs = inputs;
-          };
-        hosts =
-          { ... }:
-          {
-            imports = [ (inputs.import-tree ./hosts/modules) ];
-            _module.args.inputs = inputs;
-          };
+        # default =
+        #   { ... }:
+        #   {
+        #     imports = [
+        #       (inputs.import-tree ./services)
+        #       (inputs.import-tree ./hosts/modules)
+        #     ];
+        #     _module.args.inputs = inputs;
+        #   };
+        services = inputs.import-tree ./services;
+        # { ... }:
+        # {
+        #   imports = [ (inputs.import-tree ./services) ];
+        #   _module.args.inputs = inputs;
+        # };
+        # hosts =
+        #   { ... }:
+        #   {
+        #     imports = [ (inputs.import-tree ./hosts/modules) ];
+        #     _module.args.inputs = inputs;
+        #   };
       };
 
       homeModules = {
-        default =
-          { ... }:
-          {
-            imports = [ (inputs.import-tree ./home/modules) ];
-          };
+        # default =
+        #   { ... }:
+        #   {
+        #     imports = [ (inputs.import-tree ./home/modules) ];
+        #   };
       };
 
       deploy.nodes = {

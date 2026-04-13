@@ -1,17 +1,16 @@
 {
   lib,
-  inputs,
   config,
   ...
 }:
 let
   cfg = config.hostServices.mailserver;
-  mailcfg = config.mailserver;
+  # mailcfg = config.mailserver;
 in
 {
-  imports = [
-    inputs.simple-nixos-mailserver.nixosModule
-  ];
+  # imports = [
+  #   inputs.simple-nixos-mailserver.nixosModule
+  # ];
 
   options = {
     hostServices.mailserver = {
@@ -29,34 +28,34 @@ in
       "services/mail/bhasher-bhasher.com" = { };
     };
 
-    mailserver = {
-      enable = true;
-      stateVersion = 3;
-      openFirewall = false;
-      fqdn = cfg.fqdn;
-      domains = [
-        "bhasher.com"
-        "test.bhasher.com"
-      ];
-      certificateScheme = "acme-nginx";
-
-      enableImap = false;
-      enableImapSsl = true;
-      # enableManageSieve = true;
-      enableSubmissionSsl = true;
-
-      loginAccounts.bhasher = {
-        aliases = [
-          "@bhasher.com"
-          "@test.bhasher.com"
-        ];
-        catchAll = [
-          "bhasher.com"
-          "test.bhasher.com"
-        ];
-        hashedPasswordFile = "/run/secrets/services/mail/bhasher-bhasher.com";
-      };
-    };
+    # mailserver = {
+    #   enable = true;
+    #   stateVersion = 3;
+    #   openFirewall = false;
+    #   fqdn = cfg.fqdn;
+    #   domains = [
+    #     "bhasher.com"
+    #     "test.bhasher.com"
+    #   ];
+    #   certificateScheme = "acme-nginx";
+    #
+    #   enableImap = false;
+    #   enableImapSsl = true;
+    #   # enableManageSieve = true;
+    #   enableSubmissionSsl = true;
+    #
+    #   loginAccounts.bhasher = {
+    #     aliases = [
+    #       "@bhasher.com"
+    #       "@test.bhasher.com"
+    #     ];
+    #     catchAll = [
+    #       "bhasher.com"
+    #       "test.bhasher.com"
+    #     ];
+    #     hashedPasswordFile = "/run/secrets/services/mail/bhasher-bhasher.com";
+    #   };
+    # };
 
     security.acme = {
       acceptTerms = true;
@@ -69,15 +68,15 @@ in
 
     networking.firewall = {
       enable = true;
-      allowedTCPPorts = [
-        25
-      ];
+      # allowedTCPPorts = [
+      #   25
+      # ];
       interfaces.wg0 = {
-        allowedTCPPorts =
-          lib.optional mailcfg.enableSubmissionSsl 465
-          ++ lib.optional mailcfg.enableImapSsl 993
-          ++ lib.optional mailcfg.enablePop3Ssl 995
-          ++ lib.optional mailcfg.enableManageSieve 4190;
+        # allowedTCPPorts =
+        #   lib.optional mailcfg.enableSubmissionSsl 465
+        #   ++ lib.optional mailcfg.enableImapSsl 993
+        #   ++ lib.optional mailcfg.enablePop3Ssl 995
+        #   ++ lib.optional mailcfg.enableManageSieve 4190;
       };
     };
   };

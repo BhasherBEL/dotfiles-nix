@@ -107,7 +107,7 @@
 
   hostModules = {
     router.enable = false;
-    mailserver.enable = false;
+    # mailserver.enable = false;
   };
 
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];

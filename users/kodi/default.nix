@@ -1,9 +1,4 @@
-{ config, pkgs, ... }:
-let
-  cifsOptions = [
-    "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s,credentials=/run/secrets/smb/truenas,uid=1002,gid=100"
-  ];
-in
+{ config, ... }:
 {
   home-manager.users.kodi = import ../../home/kodi.nix;
 
@@ -12,9 +7,6 @@ in
     defaultSopsFormat = "yaml";
     age.keyFile = "/persistent/etc/nixos/keys/bhasher.txt";
     secrets = {
-      "smb/truenas" = {
-        owner = config.users.users.kodi.name;
-      };
       "ssh/gitkey" = {
         owner = config.users.users.kodi.name;
       };

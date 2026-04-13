@@ -1,10 +1,12 @@
 {
   lib,
   config,
+  options,
   ...
 }:
 let
   cfg = config.hostServices.syncthing;
+  hasImpermanence = options ? environment.persistence;
 in
 {
   options = {
@@ -18,100 +20,106 @@ in
     };
   };
 
-  config = lib.mkIf cfg.enable {
-    sops.secrets = {
-      "services/syncthing/cert.pem" = {
-        owner = config.services.syncthing.user;
-        group = config.services.syncthing.group;
-      };
-      "services/syncthing/key.pem" = {
-        owner = config.services.syncthing.user;
-        group = config.services.syncthing.group;
-      };
-    };
-
-    services = {
-      syncthing = {
-        enable = true;
-        dataDir = "/var/lib/syncthing";
-        overrideDevices = true;
-        overrideFolders = true;
-        key = config.sops.secrets."services/syncthing/key.pem".path;
-        cert = config.sops.secrets."services/syncthing/cert.pem".path;
-
-        settings = {
-          gui.insecureSkipHostcheck = true;
-          options.urAccepted = -1;
-          devices = {
-            "desktop".id = "OAPHG7Q-L22S5R5-YGAYL46-UX2COKM-ICLEQT5-QVY5O4R-LFSS65F-KYFGCAW";
-            "laptop".id = "T32YIKV-QDO4PUM-AJ2DNTZ-ZYB4MXJ-LPN2UUF-PNUPMCW-TWNV5KO-5ISPBQA";
-            "phone".id = "LEDK2PB-U5NEL4H-X4LF6LJ-EJJXFUG-VUU26OC-HSP7GSC-V4FQTWI-NHT2MQ2";
+  config = lib.mkIf cfg.enable (
+    lib.mkMerge [
+      {
+        sops.secrets = {
+          "services/syncthing/cert.pem" = {
+            owner = config.services.syncthing.user;
+            group = config.services.syncthing.group;
           };
-          folders = {
-            "SyncDocuments" = {
-              id = "e76wn-jhcuj";
-              path = "/srv/syncthing/SyncDocuments";
-              devices = [
-                "desktop"
-                "laptop"
-              ];
-              versioning = {
-                type = "trashcan";
-                params.cleanoutDays = "30";
+          "services/syncthing/key.pem" = {
+            owner = config.services.syncthing.user;
+            group = config.services.syncthing.group;
+          };
+        };
+
+        services = {
+          syncthing = {
+            enable = true;
+            dataDir = "/var/lib/syncthing";
+            overrideDevices = true;
+            overrideFolders = true;
+            key = config.sops.secrets."services/syncthing/key.pem".path;
+            cert = config.sops.secrets."services/syncthing/cert.pem".path;
+
+            settings = {
+              gui.insecureSkipHostcheck = true;
+              options.urAccepted = -1;
+              devices = {
+                "desktop".id = "OAPHG7Q-L22S5R5-YGAYL46-UX2COKM-ICLEQT5-QVY5O4R-LFSS65F-KYFGCAW";
+                "laptop".id = "T32YIKV-QDO4PUM-AJ2DNTZ-ZYB4MXJ-LPN2UUF-PNUPMCW-TWNV5KO-5ISPBQA";
+                "phone".id = "LEDK2PB-U5NEL4H-X4LF6LJ-EJJXFUG-VUU26OC-HSP7GSC-V4FQTWI-NHT2MQ2";
+              };
+              folders = {
+                "SyncDocuments" = {
+                  id = "e76wn-jhcuj";
+                  path = "/srv/syncthing/SyncDocuments";
+                  devices = [
+                    "desktop"
+                    "laptop"
+                  ];
+                  versioning = {
+                    type = "trashcan";
+                    params.cleanoutDays = "30";
+                  };
+                };
+                "PhoneDocuments" = {
+                  id = "fknto-3opbk";
+                  path = "/srv/syncthing/SyncDocuments/phone";
+                  devices = [
+                    "phone"
+                    "laptop"
+                    "desktop"
+                  ];
+                  versioning = {
+                    type = "trashcan";
+                    params.cleanoutDays = "30";
+                  };
+                };
               };
             };
-            "PhoneDocuments" = {
-              id = "fknto-3opbk";
-              path = "/srv/syncthing/SyncDocuments/phone";
-              devices = [
-                "phone"
-                "laptop"
-                "desktop"
-              ];
-              versioning = {
-                type = "trashcan";
-                params.cleanoutDays = "30";
+          };
+          nginx.virtualHosts."${cfg.hostname}" = {
+            forceSSL = true;
+            enableACME = true;
+            locations = {
+              "/" = {
+                recommendedProxySettings = true;
+                proxyPass = "http://127.0.0.1:8384";
+                extraConfig = "include ${config.hostServices.auth.authelia.snippets.request};";
+              };
+              "/internal/authelia/authz" = {
+                recommendedProxySettings = false;
+                extraConfig = "include ${config.hostServices.auth.authelia.snippets.location};";
               };
             };
           };
         };
-      };
-      nginx.virtualHosts."${cfg.hostname}" = {
-        forceSSL = true;
-        enableACME = true;
-        locations = {
-          "/" = {
-            recommendedProxySettings = true;
-            proxyPass = "http://127.0.0.1:8384";
-            extraConfig = "include ${config.hostServices.auth.authelia.snippets.request};";
-          };
-          "/internal/authelia/authz" = {
-            recommendedProxySettings = false;
-            extraConfig = "include ${config.hostServices.auth.authelia.snippets.location};";
-          };
+
+        networking.firewall = {
+          allowedTCPPorts = [
+            22000
+          ];
+          allowedUDPPorts = [
+            22000
+            21027
+          ];
         };
-      };
-    };
+      }
+      (lib.optionalAttrs hasImpermanence {
+        environment.persistence."/persistent" = {
+          enable = lib.mkDefault false;
+          directories = [
+            {
+              directory = "/srv/syncthing"; # Synced data SHOULD NOT BE BACKED UP
+              user = config.services.syncthing.user;
+              group = config.services.syncthing.group;
+            }
+          ];
+        };
+      })
 
-    networking.firewall = {
-      allowedTCPPorts = [
-        22000
-      ];
-      allowedUDPPorts = [
-        22000
-        21027
-      ];
-    };
-
-    environment.persistence."/persistent" = {
-      enable = lib.mkDefault false;
-      directories = [
-        {
-          directory = "/srv/syncthing"; # Synced data SHOULD NOT BE BACKED UP
-          user = config.services.syncthing.user;
-          group = config.services.syncthing.group;
-        }
-      ];
-    };
-  };
+    ]
+  );
 }

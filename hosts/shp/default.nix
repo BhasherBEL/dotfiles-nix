@@ -82,6 +82,8 @@
     };
   };
 
+  boot.kernel.sysctl."net.ipv6.conf.eno1.disable_ipv6" = true;
+
   services = {
     openssh.enable = true;
     displayManager = {

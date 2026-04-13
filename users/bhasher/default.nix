@@ -1,9 +1,6 @@
 { pkgs, config, ... }:
 let
   ifTheyExist = groups: builtins.filter (group: builtins.hasAttr group config.users.groups) groups;
-  cifsOptions = [
-    "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s,credentials=/run/secrets/smb/truenas,uid=1000,gid=100"
-  ];
 in
 {
   home-manager.users.bhasher.imports = [ ../../home/bhasher ];
@@ -17,9 +14,6 @@ in
     defaultSopsFormat = "yaml";
     age.keyFile = "/etc/nixos/keys/bhasher.txt";
     secrets = {
-      "smb/truenas" = {
-        owner = config.users.users.bhasher.name;
-      };
       "ssh/snodes" = {
         owner = config.users.users.bhasher.name;
       };
@@ -79,27 +73,6 @@ in
       "openvpn"
       "plugdev"
     ];
-  };
-
-  fileSystems."/mnt/brieuc" = {
-    device = "//192.168.1.201/brieuc";
-    fsType = "cifs";
-    options = cifsOptions;
-  };
-  fileSystems."/mnt/commun" = {
-    device = "//192.168.1.201/commun";
-    fsType = "cifs";
-    options = cifsOptions;
-  };
-  fileSystems."/mnt/photos" = {
-    device = "//192.168.1.201/photos";
-    fsType = "cifs";
-    options = cifsOptions;
-  };
-  fileSystems."/mnt/movies" = {
-    device = "//192.168.1.201/movies";
-    fsType = "cifs";
-    options = cifsOptions;
   };
 
   environment.systemPackages = with pkgs; [
