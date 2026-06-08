@@ -51,6 +51,7 @@
       "android-studio-stable"
       "mqtt-explorer" # CC-BY-NC-4.0
       "open-webui"
+      "cmp-emoji"
     ];
 
   home-manager = {

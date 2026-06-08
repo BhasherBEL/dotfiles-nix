@@ -40,13 +40,21 @@ in
               {
                 ingestor = "gtfs/stib";
                 name = "STIB";
-                url = "path:data/stib.zip";
+                url = "https://api-management-opendata-production.azure-api.net/api/gtfs/feed/stibmivb/static/";
+                headers = {
+                  Cache-Control = "no-cache";
+                  bmc-partner-key = "\${file:BMC_PARTNER_KEY}";
+                };
               }
               {
                 ingestor = "gtfs/sncb";
                 name = "SNCB";
-                url = "path:data/sncb.zip";
+                url = "https://api-management-opendata-production.azure-api.net/api/gtfs/feed/nmbssncb/static/";
                 osm_url = "path:data/belgium-latest.osm.pbf";
+                headers = {
+                  Cache-Control = "no-cache";
+                  bmc-partner-key = "\${file:BMC_PARTNER_KEY}";
+                };
               }
             ];
             output = "graph.bin";
@@ -258,6 +266,20 @@ in
                 ];
               }
             ];
+          };
+          log_level = "debug";
+          default_routing = { };
+          server = {
+            host = "127.0.0.1";
+            port = 3000;
+          };
+          auto_update = {
+            enable = true;
+            schedule = "0 5 * * * *";
+            cache_dir = "cache";
+          };
+          realtime = {
+            enabled = false;
           };
         };
       };

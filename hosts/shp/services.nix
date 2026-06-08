@@ -39,5 +39,6 @@
     mealie.enable = true;
     blog.enable = true;
     maas-rs.enable = true;
+    # iodine.enable = true;
   };
 }

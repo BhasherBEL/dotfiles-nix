@@ -97,7 +97,6 @@
         x86_64-linux = mkLibx "x86_64-linux";
         aarch64-linux = mkLibx "aarch64-linux";
       };
-
     in
     {
       nixosConfigurations = {
