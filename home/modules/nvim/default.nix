@@ -443,7 +443,7 @@ in
         treesitter = {
           enable = true;
           nixGrammars = true;
-          folding = true;
+          folding.enable = true;
           grammarPackages =
             with pkgs.vimPlugins.nvim-treesitter.builtGrammars;
             [

@@ -80,7 +80,10 @@
     joplin-desktop.enable = true;
     syncthing.enable = true;
     tmux.enable = true;
-    yazi.enable = true;
+    yazi = {
+      enable = true;
+      shellWrapperName = "yy";
+    };
     nvim = {
       enable = true;
       headless = false;
