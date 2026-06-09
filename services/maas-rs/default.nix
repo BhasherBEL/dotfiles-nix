@@ -24,10 +24,15 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    sops.secrets = {
+      "services/maas-rs/BMC_PARTNER_KEY" = {
+        owner = config.users.users.maas-rs.name;
+        group = config.users.groups.maas-rs.name;
+      };
+    };
     services = {
       maas-rs = {
         enable = true;
-        mode = "build-and-serve";
         dataDir = "/var/lib/maas-rs";
 
         settings = {
@@ -43,7 +48,7 @@ in
                 url = "https://api-management-opendata-production.azure-api.net/api/gtfs/feed/stibmivb/static/";
                 headers = {
                   Cache-Control = "no-cache";
-                  bmc-partner-key = "\${file:BMC_PARTNER_KEY}";
+                  bmc-partner-key = "\${file:${config.sops.secrets."services/maas-rs/BMC_PARTNER_KEY".path}}";
                 };
               }
               {
@@ -53,7 +58,7 @@ in
                 osm_url = "path:data/belgium-latest.osm.pbf";
                 headers = {
                   Cache-Control = "no-cache";
-                  bmc-partner-key = "\${file:BMC_PARTNER_KEY}";
+                  bmc-partner-key = "\${file:${config.sops.secrets."services/maas-rs/BMC_PARTNER_KEY".path}}";
                 };
               }
             ];

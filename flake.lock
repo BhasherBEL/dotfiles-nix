@@ -821,11 +821,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1780932755,
-        "narHash": "sha256-icv8IR5+zs92urqL+f95BwCQxs66C8Fj6KlSWaNdZDw=",
+        "lastModified": 1781029113,
+        "narHash": "sha256-aHtTR0UyOsUNd0PHd4bZ4FJxnzGQhebr9XVBAfU6oHY=",
         "owner": "bhasherbel",
         "repo": "maas-rs",
-        "rev": "e1fea46fb12da67cfb35a11435aced063585fdd8",
+        "rev": "07abaf86b483d67537a584f695c525f8a7320ddb",
         "type": "github"
       },
       "original": {
