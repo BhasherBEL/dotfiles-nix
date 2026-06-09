@@ -23,7 +23,10 @@
   boot.tmp.cleanOnBoot = lib.mkDefault true;
 
   # Should fix the issue with the screen not turning on after suspend
-  systemd.sleep.extraConfig = "HibernateMode=shutdown\nHibernateDelaySec=20m";
+  systemd.sleep.settings.Sleep = {
+    HibernateMode = "shutdown";
+    HibernateDelaySec = "20m";
+  };
 
   nix = {
     settings.experimental-features = [
@@ -42,17 +45,15 @@
 
   users.defaultUserShell = pkgs.zsh;
 
-  nixpkgs.config.allowUnfreePredicate =
-    pkg:
-    builtins.elem (lib.getName pkg) [
-      "gaoptout"
-      "android-sdk-cmdline-tools"
-      "android-sdk-tools"
-      "android-studio-stable"
-      "mqtt-explorer" # CC-BY-NC-4.0
-      "open-webui"
-      "cmp-emoji"
-    ];
+  nixpkgs.config.allowUnfreePackages = [
+    "gaoptout"
+    "android-sdk-cmdline-tools"
+    "android-sdk-tools"
+    "android-studio-stable"
+    "mqtt-explorer" # CC-BY-NC-4.0
+    "open-webui"
+    "cmp-emoji"
+  ];
 
   home-manager = {
     useGlobalPkgs = true;

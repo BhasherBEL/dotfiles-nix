@@ -38,7 +38,7 @@ in
     home.packages =
       with pkgs;
       [
-        nixfmt-rfc-style
+        nixfmt
         nil
       ]
       ++ lib.optionals osConfig.modules.languages.flutter.enable [
@@ -56,6 +56,7 @@ in
       ];
 
     programs.nixvim = {
+      nixpkgs.config.allowUnfreePackages = [ "cmp-emoji" ];
       enable = true;
       defaultEditor = true;
       colorschemes.catppuccin = {

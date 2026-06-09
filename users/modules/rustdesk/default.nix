@@ -15,11 +15,9 @@ in
   config = lib.mkIf rustdeskcfg.enable {
     environment.systemPackages = with pkgs; [ rustdesk ];
 
-    nixpkgs.config.allowUnfreePredicate =
-      pkg:
-      builtins.elem (lib.getName pkg) [
-        # Rustdesk require this unfree package to work
-        "libsciter"
-      ];
+    nixpkgs.config.allowUnfreePackages = [
+      # Rustdesk require this unfree package to work
+      "libsciter"
+    ];
   };
 }
