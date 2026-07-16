@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     hyprsome = {
       url = "github:sopa0/hyprsome";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -63,7 +64,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     maas-rs = {
-      url = "github:bhasherbel/maas-rs";
+      url = "git+https://codeberg.org/bhasher/maas-rs";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -82,6 +83,8 @@
         }
       ];
 
+      pkgsUnstable = import inputs.nixpkgs-unstable;
+
       mkLibx =
         system:
         import ./lib {
@@ -90,6 +93,7 @@
             inputs
             system
             patches
+            pkgsUnstable
             ;
         };
 
@@ -190,13 +194,13 @@
         shp = {
           hostname = "shp";
           profiles.system = rec {
-            user = "shp";
-            sshUser = user;
+            user = "root";
+            sshUser = "shp";
             interactiveSudo = true;
             autoRollback = false;
             remoteBuild = true;
-            path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations."${user}";
-            profilePath = "/home/${user}/.local/state/nix/profiles/system";
+            path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.shp;
+            # profilePath = "/home/${user}/.local/state/nix/profiles/system";
           };
         };
         snc = {

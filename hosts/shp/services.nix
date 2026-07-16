@@ -40,5 +40,6 @@
     blog.enable = true;
     maas-rs.enable = true;
     # iodine.enable = true;
+    # netbird-server.enable = true;
   };
 }

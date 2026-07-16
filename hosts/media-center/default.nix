@@ -3,6 +3,7 @@
   modulesPath,
   pkgs,
   config,
+  pkgsUnstable,
   ...
 }:
 {
@@ -133,26 +134,8 @@
             arteplussept
             sendtokodi
             inputstreamhelper
-            (sponsorblock.overrideAttrs (old: rec {
-              name = "sponsorblock-${version}";
-              version = "unstable-2026-01-22";
-              src = old.src.override {
-                owner = "bhasherbel";
-                repo = "script.service.sponsorblock";
-                rev = "0696a9ef3dc8531ea8ddcc98060e8c4c753e459f";
-                hash = "sha256-fa6NRTUm9DI/+Ab/jCbfPnpbuhckrMHvQbchhxGnpTw=";
-              };
-            }))
-            (youtube.overrideAttrs (old: rec {
-              name = "youtube-${version}";
-              version = "7.4.0+beta.4";
-              src = old.src.override {
-                owner = "anxdpanic";
-                repo = "plugin.video.youtube";
-                rev = "v${version}";
-                hash = "sha256-Q1y9NKShNHS7y6CSm1g8xbbTjJA9fyRR3DCxF5vtjCU=";
-              };
-            }))
+            sponsorblock
+            pkgsUnstable.kodiPackages.youtube
             (pkgs.kodiPackages.callPackage ./custom-addons/bluetooth-manager { })
           ]
         );
@@ -177,21 +160,18 @@
       "/etc/nixos"
       "/var/lib"
       "/var/log"
-      #To prevent builds to fill all remaining space
-      "/tmp"
-      "/var/tmp"
+      # Should be fine with remote build
+      # #To prevent builds to fill all remaining space
+      # "/tmp"
+      # "/var/tmp"
       {
         directory = "/etc/ssh/";
         mode = "0700";
       }
       "/run/secrets.d"
     ];
-    files = [
-      #"/etc/machine-id"
-    ];
     users.kodi = {
       directories = [ ".kodi" ];
-      # files = [ ".zsh_history" ];
     };
   };
 
@@ -203,14 +183,6 @@
 
   users = {
     mutableUsers = false;
-  };
-
-  hostModules = {
-    # remoteBuild = {
-    #   enable = true;
-    #   only = true;
-    #   oa-fw = true;
-    # };
   };
 
   nix.settings = {
