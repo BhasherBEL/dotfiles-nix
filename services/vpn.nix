@@ -119,6 +119,14 @@
                 "fd8c:70ee:bdd8:0:1::4/128"
               ];
             }
+            {
+              # Phone-work
+              publicKey = "hL/JHWroR2BFeUfL+LlOxuEIGlrQNF/rvI1XUfbiuCg=";
+              allowedIPs = [
+                "10.20.0.11/32"
+                "fd8c:70ee:bdd8:0:1::5/128"
+              ];
+            }
           ];
 
           # postUp = ''

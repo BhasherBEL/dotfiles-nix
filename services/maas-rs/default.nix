@@ -491,7 +491,7 @@ in
             port = 3000;
           };
           auto_update = {
-            enable = true;
+            enabled = true;
             schedule = "0 5 * * * *";
             cache_dir = "cache";
           };

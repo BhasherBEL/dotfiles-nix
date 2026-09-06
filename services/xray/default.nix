@@ -99,7 +99,7 @@ in
     services = {
       xray = {
         enable = true;
-        services.settingsFile = config.sops.templates."xray-config.json".path;
+        # services.settingsFile = config.sops.templates."xray-config.json".path;
       };
       nginx.virtualHosts.${cfg.hostname} = {
         forceSSL = true;
