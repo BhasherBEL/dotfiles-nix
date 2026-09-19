@@ -3,7 +3,6 @@
   modulesPath,
   pkgs,
   config,
-  pkgsUnstable,
   ...
 }:
 {
@@ -25,11 +24,13 @@
       kernelModules = [ ];
     };
     kernelModules = [ ];
+    kernel.sysctl."vm.mmap_rnd_bits" = 18;
     extraModulePackages = [ ];
     loader = {
       grub.enable = false;
       generic-extlinux-compatible.enable = true;
     };
+    # kernelPackages = pkgs.linuxPackages_rpi4;
   };
 
   fileSystems = {
@@ -74,15 +75,15 @@
     };
   };
 
-  hardware = {
-    raspberry-pi."4" = {
-      apply-overlays-dtmerge.enable = true;
-      fkms-3d.enable = true;
-      bluetooth.enable = true;
-    };
-    deviceTree.enable = true;
-    bluetooth.enable = true;
-  };
+  # hardware = {
+  #   raspberry-pi."4" = {
+  #     apply-overlays-dtmerge.enable = true;
+  #     fkms-3d.enable = true;
+  #     bluetooth.enable = true;
+  #   };
+  #   deviceTree.enable = true;
+  #   bluetooth.enable = true;
+  # };
 
   nixpkgs.overlays = [
     (self: super: { libcec = super.libcec.override { withLibraspberrypi = true; }; })
@@ -135,7 +136,8 @@
             sendtokodi
             inputstreamhelper
             sponsorblock
-            pkgsUnstable.kodiPackages.youtube
+            # pkgsUnstable.kodiPackages.youtube
+            youtube
             (pkgs.kodiPackages.callPackage ./custom-addons/bluetooth-manager { })
           ]
         );
@@ -188,6 +190,14 @@
   nix.settings = {
     cores = 1;
     max-jobs = 1;
+  };
+
+  # Avoid to rebuild linux kernel
+  nix.settings = {
+    substituters = [ "https://nixos-raspberrypi.cachix.org" ];
+    trusted-public-keys = [
+      "nixos-raspberrypi.cachix.org-1:4iMO9LXa8BqhU+Rpg6LQKiGa2lsNh/j2oiYLNOQ5sPI="
+    ];
   };
 
   hostServices.vpn-client = {

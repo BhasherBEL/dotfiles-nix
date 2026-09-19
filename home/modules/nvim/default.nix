@@ -387,10 +387,10 @@ in
                 keywordLength = 3;
                 priority = 500;
               }
-              {
-                name = "copilot";
-                priority = 100;
-              }
+              # {
+              #   name = "copilot";
+              #   priority = 100;
+              # }
               {
                 name = "path"; # file system paths
                 keywordLength = 3;
@@ -416,7 +416,7 @@ in
         lspkind = {
           enable = true;
           settings.symbolMap = {
-            Copilot = "";
+            # Copilot = "";
             Text = "󰉿";
           };
         };
@@ -426,17 +426,17 @@ in
         cmp_luasnip.enable = true;
         cmp-emoji.enable = true;
         luasnip.enable = true;
-        copilot-cmp = lib.mkIf nvimcfg.ai {
-          enable = true;
-          settings.fix_pairs = true;
-        };
-        copilot-lua = lib.mkIf nvimcfg.ai {
-          enable = true;
-          settings = {
-            suggestion.enabled = false;
-            panel.enabled = false;
-          };
-        };
+        # copilot-cmp = lib.mkIf nvimcfg.ai {
+        #   enable = true;
+        #   settings.fix_pairs = true;
+        # };
+        # copilot-lua = lib.mkIf nvimcfg.ai {
+        #   enable = true;
+        #   settings = {
+        #     suggestion.enabled = false;
+        #     panel.enabled = false;
+        #   };
+        # };
         colorizer.enable = true;
         ts-autotag.enable = true;
         nvim-autopairs.enable = true;
@@ -540,12 +540,12 @@ in
                 model = "gpt-4.1";
                 extra_request_body.max_tokens = 16384;
               };
-              copilot = {
-                model = "gpt-4.1";
-                extra_request_body.max_tokens = 16384;
-              };
+              # copilot = {
+              #   model = "gpt-4.1";
+              #   extra_request_body.max_tokens = 16384;
+              # };
             };
-            provider = "copilot";
+            # provider = "copilot";
             disabled_tools = [
               "python"
               "bash"

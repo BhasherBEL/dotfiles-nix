@@ -27,7 +27,7 @@
     };
     nixvim = {
       url = "github:nix-community/nixvim/nixos-26.05";
-      inputs.nixpkgs.follows = "nixpkgs";
+      # inputs.nixpkgs.follows = "nixpkgs";
     };
     flake-programs-sqlite = {
       url = "github:wamserma/flake-programs-sqlite";
@@ -66,6 +66,10 @@
     maas-rs = {
       url = "git+https://codeberg.org/bhasher/maas-rs";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nixos-raspberrypi = {
+      url = "github:nvmd/nixos-raspberrypi";
+      # inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
@@ -119,7 +123,8 @@
         media-center = libx.aarch64-linux.makeNixosSystem "media-center" [
           ./hosts/media-center
           ./users/kodi/media-center.nix
-          inputs.nixos-hardware.nixosModules.raspberry-pi-4
+          # inputs.nixos-hardware.nixosModules.raspberry-pi-4
+          inputs.nixos-raspberrypi.lib.inject-overlays # -global
         ];
 
         live = libx.x86_64-linux.makeNixosSystem "live" [
@@ -183,17 +188,17 @@
         media-center = {
           hostname = "kodi";
           profiles.system = {
-            user = "kodi";
+            user = "root";
             sshUser = "kodi";
             interactiveSudo = true;
-            autoRollback = true;
+            # autoRollback = true;
             remoteBuild = false;
             path = inputs.deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.media-center;
           };
         };
         shp = {
           hostname = "shp";
-          profiles.system = rec {
+          profiles.system = {
             user = "root";
             sshUser = "shp";
             interactiveSudo = true;

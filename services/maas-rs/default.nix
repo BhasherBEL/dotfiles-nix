@@ -492,7 +492,7 @@ in
           };
           auto_update = {
             enabled = true;
-            schedule = "0 5 * * * *";
+            schedule = "0 5 1 * * *";
             cache_dir = "cache";
           };
           realtime = {

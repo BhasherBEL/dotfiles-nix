@@ -87,7 +87,7 @@
     nvim = {
       enable = true;
       headless = false;
-      ai = true;
+      ai = false; # true;
       full = true;
     };
     firefox = {

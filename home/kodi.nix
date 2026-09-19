@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ lib, ... }:
 {
   home = {
     username = "kodi";
@@ -10,6 +10,7 @@
 
   modules = {
     nvim = {
+      enable = lib.mkForce false;
       headless = true;
     };
   };

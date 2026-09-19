@@ -3,6 +3,7 @@
   inputs,
   system,
   patches,
+  pkgsUnstable,
   ...
 }:
 let
@@ -19,14 +20,14 @@ let
   nixpkgs-patched = pre-nixpkgs.applyPatches {
     name = "nixpkgs-patched";
     src = inputs.nixpkgs;
-    patches = builtins.map (
-      patch:
-      (pre-nixpkgs.fetchpatch {
-        name = patch.name or "pr-${patch.id}";
-        url = "https://patch-diff.githubusercontent.com/raw/NixOS/nixpkgs/pull/${patch.id}.patch";
-        sha256 = patch.sha256 or "";
-      })
-    ) patches;
+    # patches = builtins.map (
+    #   patch:
+    #   (pre-nixpkgs.fetchpatch {
+    #     name = patch.name or "pr-${patch.id}";
+    #     url = "https://patch-diff.githubusercontent.com/raw/NixOS/nixpkgs/pull/${patch.id}.patch";
+    #     sha256 = patch.sha256 or "";
+    #   })
+    # ) patches;
   };
 
   nixpkgs = nixpkgs-patched;
@@ -50,6 +51,7 @@ in
           hostsModules
           hostServices
           hostname
+          # pkgsUnstable
           ;
       };
       modules = [
