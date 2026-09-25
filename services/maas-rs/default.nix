@@ -15,7 +15,7 @@ in
   options = {
     hostServices.maas-rs = {
       enable = lib.mkEnableOption "Enable maas-rs server";
-      fqdn = lib.mkOption {
+      hostname = lib.mkOption {
         type = lib.types.str;
         default = "routing.bhasher.com";
         description = "The hostname for maas-rs";
@@ -559,7 +559,7 @@ in
         };
       };
       nginx.virtualHosts = {
-        "${cfg.fqdn}" = {
+        "${cfg.hostname}" = {
           forceSSL = true;
           enableACME = true;
           locations = {
@@ -583,6 +583,9 @@ in
       ];
     };
 
-    hostServices.restic.paths = [ "/persistent/var/lib/maas-rs" ];
+    hostServices = {
+      restic.paths = [ "/persistent/var/lib/maas-rs" ];
+      monitoring.gatus.endpoints = [ "https://${cfg.hostname}" ];
+    };
   };
 }

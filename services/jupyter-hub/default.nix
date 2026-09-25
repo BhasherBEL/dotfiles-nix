@@ -113,9 +113,12 @@ in
       ];
     };
 
-    hostServices.restic.paths = [
-      "/persistent/var/lib/jupyterhub"
-      "/persistent/srv/jupyterhub"
-    ];
+    hostServices = {
+      restic.paths = [
+        "/persistent/var/lib/jupyterhub"
+        "/persistent/srv/jupyterhub"
+      ];
+      monitoring.gatus.endpoints = [ "https://${cfg.hostname}" ];
+    };
   };
 }

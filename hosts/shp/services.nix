@@ -34,12 +34,13 @@
     restic.enable = true;
     paperless.enable = true;
     # otp.enable = true;
-    open-webui.enable = true;
+    #open-webui.enable = true;
     # matrix.enable = true;
     mealie.enable = true;
     blog.enable = true;
     maas-rs.enable = true;
     # iodine.enable = true;
     # netbird-server.enable = true;
+    monitoring.gatus.enable = true;
   };
 }

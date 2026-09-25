@@ -109,6 +109,9 @@ in
       ];
     };
 
-    hostServices.restic.paths = [ "/persistent/var/lib/private/miniflux" ];
+    hostServices = {
+      restic.paths = [ "/persistent/var/lib/private/miniflux" ];
+      monitoring.gatus.endpoints = [ "https://${cfg.hostname}" ];
+    };
   };
 }

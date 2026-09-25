@@ -28,5 +28,7 @@ in
         };
       };
     };
+
+    hostServices.monitoring.gatus.endpoints = [ "https://${cfg.hostname}" ];
   };
 }

@@ -105,6 +105,9 @@ in
       ];
     };
 
-    hostServices.restic.paths = [ "/persistent/var/lib/private/mealie" ];
+    hostServices = {
+      restic.paths = [ "/persistent/var/lib/private/mealie" ];
+      monitoring.gatus.endpoints = [ "https://${cfg.hostname}" ];
+    };
   };
 }

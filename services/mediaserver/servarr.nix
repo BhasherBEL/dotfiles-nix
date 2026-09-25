@@ -175,12 +175,21 @@
       ];
     };
 
-    hostServices.restic.paths = [
-      "/persistent/var/lib/radarr"
-      "/persistent/var/lib/sonarr"
-      "/persistent/var/lib/private/prowlarr"
-      "/var/lib/bazarr"
-    ];
+    hostServices = {
+      restic.paths = [
+        "/persistent/var/lib/radarr"
+        "/persistent/var/lib/sonarr"
+        "/persistent/var/lib/private/prowlarr"
+        "/var/lib/bazarr"
+      ];
+      monitoring.gatus.endpoints = [
+        "https://radarr.bhasher.com"
+        "https://sonarr.bhasher.com"
+        "https://prowlarr.bhasher.com"
+        "https://bazarr.bhasher.com"
+        "https://flaresolverr.bhasher.com"
+      ];
+    };
 
     users.groups.media = { };
   };

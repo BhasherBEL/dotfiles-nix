@@ -69,6 +69,9 @@ in
       ];
     };
 
-    hostServices.restic.paths = [ "/persistent/var/lib/jellyfin" ];
+    hostServices = {
+      restic.paths = [ "/persistent/var/lib/jellyfin" ];
+      monitoring.gatus.endpoints = [ "https://${cfg.hostname}" ];
+    };
   };
 }

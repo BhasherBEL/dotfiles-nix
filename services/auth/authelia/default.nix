@@ -177,7 +177,7 @@ in
               {
                 domain = "bhasher.com";
                 authelia_url = "https://idp.bhasher.com";
-                default_redirection_url = "https://hub.bhasher.com";
+                default_redirection_url = "https://miniflux.bhasher.com";
               }
             ];
             redis = {
@@ -202,6 +202,8 @@ in
             smtp = {
               address = "smtp://smtp.bhasher.com:587";
               sender = "no-reply@bhasher.com";
+              username = "{{- fileContent \"/run/secrets/services/authelia/smtpUser\" }}";
+              password = "{{- fileContent \"/run/secrets/services/authelia/smtpPassword\" }}";
             };
           };
           password_policy = {
@@ -351,6 +353,9 @@ in
       ];
     };
 
-    hostServices.restic.paths = [ "/persistent/var/lib/authelia-idp" ];
+    hostServices = {
+      restic.paths = [ "/persistent/var/lib/authelia-idp" ];
+      monitoring.gatus.endpoints = [ "https://${cfg.hostname}" ];
+    };
   };
 }

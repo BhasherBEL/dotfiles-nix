@@ -73,6 +73,9 @@ in
       ];
     };
 
-    hostServices.restic.paths = [ "/persistent/var/lib/private/lldap" ];
+    hostServices = {
+      restic.paths = [ "/persistent/var/lib/private/lldap" ];
+      monitoring.gatus.endpoints = [ "https://${cfg.hostname}" ];
+    };
   };
 }

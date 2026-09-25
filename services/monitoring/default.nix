@@ -19,6 +19,7 @@ in
       monitoring = {
         prometheus.enable = lib.mkDefault true;
         grafana.enable = lib.mkDefault true;
+        gatus.enable = lib.mkDefault true;
       };
     };
 
