@@ -3,6 +3,7 @@
   hostServices = {
     nginx = {
       enable = true;
+      http = true;
       https = false;
       https-bis = false;
     };
@@ -12,7 +13,12 @@
       ipv6 = "fd8c:70ee:bdd8:3:1::1/128";
       privateKeySecret = "wg/bxl-shp/snc/key";
       autostart = true;
+      route = {
+        bxl = true;
+        wol = true;
+      };
     };
     mailserver.enable = true;
+    restic.enable = true;
   };
 }

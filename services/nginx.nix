@@ -45,7 +45,7 @@ in
             enableACME = false;
             forceSSL = false;
             rejectSSL = true;
-            locations."/".return = "404";
+            locations."/".return = "444";
             locations."/.well-known/acme-challenge/" = {
               root = "/var/lib/acme/acme-challenge";
             };
@@ -72,7 +72,6 @@ in
           defaults = {
             email = "acme@bhasher.com";
             server = "https://acme-v02.api.letsencrypt.org/directory";
-            # server = "https://acme-staging-v02.api.letsencrypt.org/directory";
             group = "acme";
           };
           maxConcurrentRenewals = 1;
@@ -83,7 +82,11 @@ in
         networking.firewall.allowedTCPPorts =
           lib.optional cfg.http 80 ++ lib.optional cfg.https 443 ++ lib.optional cfg.https-bis 444;
 
-        hostServices.restic.paths = [ "/persistent/var/lib/acme" ];
+        hostServices.restic.paths =
+          if (hasImpermanence && config.environment.persistence."/persistent".enable) then
+            [ "/persistent/var/lib/acme" ]
+          else
+            [ "/var/lib/acme" ];
       }
       (lib.optionalAttrs hasImpermanence {
         environment.persistence."/persistent" = {

@@ -15,6 +15,7 @@
         "imap.bhasher.com" = "51.255.172.55";
         "autoconfig.bhasher.com" = "51.255.172.55";
         "mail.bhasher.com" = "51.255.172.55";
+        "mail01.bhasher.com" = "10.20.0.9";
         "bhasher.com" = "192.168.0.201";
       };
     };

@@ -1,5 +1,6 @@
 {
   config,
+  pkgs,
   ...
 }:
 {
@@ -49,6 +50,17 @@
       openFirewall = true;
       passwordAuthentication = false;
       kbdInteractiveAuthentication = false;
+      settings = {
+        X11Forwarding = false;
+        MaxAuthTries = 3;
+        LoginGraceTime = 20;
+      };
+    };
+    fail2ban = {
+      enable = true;
+      maxretry = 5;
+      bantime-increment.enable = true;
+      ignoreIP = [ "10.20.0.0/24" ];
     };
     qemuGuest.enable = true;
     displayManager = {
@@ -58,6 +70,8 @@
       };
     };
   };
+
+  zramSwap.enable = true;
 
   system.stateVersion = "25.11";
 
@@ -92,4 +106,8 @@
   };
 
   home-manager.users.snc.imports = [ ../../home/snc.nix ];
+
+  environment.systemPackages = with pkgs; [
+    imapsync
+  ];
 }
