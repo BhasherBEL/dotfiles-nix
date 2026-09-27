@@ -2,11 +2,13 @@
   lib,
   config,
   inputs,
+  pkgs,
   ...
 }:
 let
   cfg = config.hostServices.mailserver;
   mailcfg = config.mailserver;
+  gatus_url = "http://10.20.0.1:61303";
 in
 {
   imports = [
@@ -32,6 +34,7 @@ in
     sops.secrets = {
       "services/mail/bhasher-bhasher.com".restartUnits = [ "dovecot.service" ];
       "services/mail/scaleway-tem".restartUnits = [ "postfix.service" ];
+      "services/gatus/env" = { };
     };
 
     mailserver = {
@@ -97,5 +100,83 @@ in
       "/var/dkim"
       "/var/lib/redis-rspamd"
     ];
+
+    systemd.services = {
+      "gatus-ok@" = {
+        path = [ pkgs.curl ];
+        scriptArgs = "%i";
+        serviceConfig = {
+          Type = "oneshot";
+          EnvironmentFile = config.sops.secrets."services/gatus/env".path;
+        };
+        script = ''
+          curl -fsS --retry 3 -X POST \
+            -H "Authorization: Bearer $GATUS_PUSH_TOKEN" \
+            --url-query "success=true" \
+            "${gatus_url}/api/v1/endpoints/$1/external"
+        '';
+      };
+
+      "gatus-fail@" = {
+        path = [ pkgs.curl ];
+        scriptArgs = "%i";
+        serviceConfig = {
+          Type = "oneshot";
+          EnvironmentFile = config.sops.secrets."services/gatus/env".path;
+        };
+        script = ''
+          curl -fsS --retry 3 -X POST \
+            -H "Authorization: Bearer $GATUS_PUSH_TOKEN" \
+            --url-query "success=false" \
+            --url-query "error=unit failed" \
+            "${gatus_url}/api/v1/endpoints/$1/external"
+        '';
+      };
+
+      restic-backups-synnas = {
+        onSuccess = [ "gatus-ok@mail_snc-backup.service" ];
+        onFailure = [ "gatus-fail@mail_snc-backup.service" ];
+      };
+
+      mail-queue-check = {
+        path = [
+          config.services.postfix.package
+          pkgs.jq
+          pkgs.curl
+        ];
+        serviceConfig = {
+          Type = "oneshot";
+          EnvironmentFile = config.sops.secrets."services/gatus/env".path;
+        };
+        script = ''
+          stuck=$(postqueue -j | jq -s \
+            '[.[] | select(.queue_name == "deferred" and .arrival_time < (now - 3600))] | length')
+
+          if [ "$stuck" -eq 0 ]; then
+            ok=true
+            err=""
+          else
+            ok=false
+            err="$stuck message(s) deferred for over 1h"
+          fi
+
+          curl -fsS --retry 3 -X POST \
+            -H "Authorization: Bearer $GATUS_PUSH_TOKEN" \
+            --url-query "success=$ok" \
+            --url-query "error=$err" \
+            "${gatus_url}/api/v1/endpoints/mail_snc-queue/external"
+        '';
+      };
+    };
+
+    systemd.timers = {
+      mail-queue-check = {
+        wantedBy = [ "timers.target" ];
+        timerConfig = {
+          OnCalendar = "*:0/10";
+          Persistent = true;
+        };
+      };
+    };
   };
 }
