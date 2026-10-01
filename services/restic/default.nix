@@ -10,6 +10,10 @@ in
         type = lib.types.listOf lib.types.str;
         default = [ ];
       };
+      monitor = lib.mkOption {
+        type = lib.types.bool;
+        default = config.hostServices.monitoring.gatus-report.enable;
+      };
     };
   };
 
@@ -53,6 +57,12 @@ in
             "--keep-yearly 10"
           ];
         };
+      };
+    };
+    systemd.services = {
+      restic-backups-synnas = {
+        onSuccess = [ "gatus-ok@_${config.networking.hostName}-backup.service" ];
+        onFailure = [ "gatus-fail@_${config.networking.hostName}-backup.service" ];
       };
     };
   };

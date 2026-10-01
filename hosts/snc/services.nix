@@ -20,5 +20,6 @@
     };
     mailserver.enable = true;
     restic.enable = true;
+    monitoring.gatus-report.enable = true;
   };
 }

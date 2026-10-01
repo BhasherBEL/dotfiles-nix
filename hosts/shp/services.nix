@@ -43,5 +43,7 @@
     # iodine.enable = true;
     # netbird-server.enable = true;
     monitoring.gatus.enable = true;
+    monitoring.gatus-report.enable = true;
+    mailserver.dmarc-report-viewer.enable = true;
   };
 }

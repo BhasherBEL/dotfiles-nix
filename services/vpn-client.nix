@@ -39,6 +39,11 @@ in
           default = false;
           description = "Route Bxl LAN traffic through the VPN";
         };
+        bxl-direct = lib.mkOption {
+          type = lib.types.bool;
+          default = false;
+          description = "Route Bxl LAN traffic through the VPN without hop";
+        };
       };
       autostart = lib.mkOption {
         type = lib.types.bool;
@@ -91,7 +96,19 @@ in
                   ++ lib.optional cfg.route.bxl "192.168.10.0/24";
               persistentKeepalive = 25;
             }
-          ];
+          ]
+          ++ lib.optional cfg.route.bxl-direct {
+            # mikrotik-bxl
+            publicKey = "oYkq7VeUdY5GTMixS/sGGs68hXRLMA7ABm1fpPkUDU8=";
+            endpoint = "vpn.bxl.bhasher.com:51825";
+            persistentKeepalive = 25;
+            allowedIPs = [
+              "10.20.0.6/32"
+              "fd8c:70ee:bdd8:2:1::2/128"
+              "192.168.1.0/24"
+              "192.168.10.0/24"
+            ];
+          };
         };
       };
     };

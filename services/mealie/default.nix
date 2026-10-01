@@ -35,6 +35,7 @@ in
           OIDC_ADMIN_GROUP = "lldap_admin";
           DB_ENGINE = "postgres";
           POSTGRES_URL_OVERRIDE = "postgresql://mealie:@/mealie?host=/var/run/postgresql";
+          NLTK_DATA = "/var/lib/mealie/nltk_data";
         };
         credentialsFile = "${config.sops.secrets."services/mealie/env".path}";
       };
@@ -89,6 +90,10 @@ in
         };
       };
     };
+
+    systemd.tmpfiles.rules = [
+      "d /var/lib/private/mealie/nltk_data 0777 root root - -"
+    ];
 
     systemd.services.mealie = {
       after = [ "postgresql.service" ];

@@ -8,7 +8,6 @@
 let
   cfg = config.hostServices.mailserver;
   mailcfg = config.mailserver;
-  gatus_url = "http://10.20.0.1:61303";
 in
 {
   imports = [
@@ -56,6 +55,8 @@ in
       virusScanning = false;
       fullTextSearch.enable = false;
 
+      hierarchySeparator = "/";
+
       accounts."main@bhasher.com" = {
         aliases = map (d: "@${d}") cfg.domains;
         hashedPasswordFile = config.sops.secrets."services/mail/bhasher-bhasher.com".path;
@@ -64,6 +65,7 @@ in
       dkim.domains = lib.genAttrs cfg.domains (_: {
         selectors."rsa-2026-09" = { };
       });
+      dmarcReporting.enable = true;
     };
 
     services = {
@@ -102,42 +104,6 @@ in
     ];
 
     systemd.services = {
-      "gatus-ok@" = {
-        path = [ pkgs.curl ];
-        scriptArgs = "%i";
-        serviceConfig = {
-          Type = "oneshot";
-          EnvironmentFile = config.sops.secrets."services/gatus/env".path;
-        };
-        script = ''
-          curl -fsS --retry 3 -X POST \
-            -H "Authorization: Bearer $GATUS_PUSH_TOKEN" \
-            --url-query "success=true" \
-            "${gatus_url}/api/v1/endpoints/$1/external"
-        '';
-      };
-
-      "gatus-fail@" = {
-        path = [ pkgs.curl ];
-        scriptArgs = "%i";
-        serviceConfig = {
-          Type = "oneshot";
-          EnvironmentFile = config.sops.secrets."services/gatus/env".path;
-        };
-        script = ''
-          curl -fsS --retry 3 -X POST \
-            -H "Authorization: Bearer $GATUS_PUSH_TOKEN" \
-            --url-query "success=false" \
-            --url-query "error=unit failed" \
-            "${gatus_url}/api/v1/endpoints/$1/external"
-        '';
-      };
-
-      restic-backups-synnas = {
-        onSuccess = [ "gatus-ok@mail_snc-backup.service" ];
-        onFailure = [ "gatus-fail@mail_snc-backup.service" ];
-      };
-
       mail-queue-check = {
         path = [
           config.services.postfix.package
@@ -159,13 +125,9 @@ in
             ok=false
             err="$stuck message(s) deferred for over 1h"
           fi
-
-          curl -fsS --retry 3 -X POST \
-            -H "Authorization: Bearer $GATUS_PUSH_TOKEN" \
-            --url-query "success=$ok" \
-            --url-query "error=$err" \
-            "${gatus_url}/api/v1/endpoints/mail_snc-queue/external"
         '';
+        onSuccess = [ "gatus-ok@mail_snc-queue.service" ];
+        onFailure = [ "gatus-fail@mail_snc-queue.service" ];
       };
     };
 

@@ -73,8 +73,6 @@
               allowedIPs = [
                 "10.20.0.5/32"
                 "fd8c:70ee:bdd8:2:1::1/128"
-                "192.168.1.0/24"
-                "192.168.10.0/24"
               ];
             }
             {
@@ -85,6 +83,8 @@
               allowedIPs = [
                 "10.20.0.6/32"
                 "fd8c:70ee:bdd8:2:1::2/128"
+                "192.168.1.0/24"
+                "192.168.10.0/24"
               ];
             }
             {
@@ -113,7 +113,7 @@
             }
             {
               # Laptop-bis
-              publicKey = "syHJd5RSBed5J3d5HSVb5QAzQlc58z8o+D1HkkClBzo=";
+              publicKey = "MeX7aXjLIW9UZbmPr+ggf+CJ4wGhYLplvOe7vt5qBQ8=";
               allowedIPs = [
                 "10.20.0.10/32"
                 "fd8c:70ee:bdd8:0:1::4/128"

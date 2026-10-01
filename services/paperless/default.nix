@@ -25,7 +25,7 @@ in
         {
           client_id = "paperless-ngx";
           client_name = "Paperless NGX";
-          client_secret = "$argon2id$v=19$m=65536,t=3,p=4$kujFSqxNtfP0neWECtdwoQ$bmEqT9v47rXXKEDtLWiZO10VH7yGgNPRjflM/UWwCXg";
+          client_secret = "$pbkdf2-sha512$310000$PA7z5ex1iEiPoN/w1M21WA$9OGz1MNNpVcwpzHcltWlZBSmII8H0Gex3TH2W.9TbBGYk0E6QPzwFR777MPo.Doccn2ISaYSDfs22T7UUdFw8w";
           public = false;
           authorization_policy = "two_factor";
           redirect_uris = [ "https://paperless.bhasher.com/accounts/oidc/authelia/login/callback/" ];
@@ -72,8 +72,6 @@ in
           PAPERLESS_DBHOST = "/var/run/postgresql";
           PAPERLESS_DBNAME = "paperless";
           PAPERLESS_DBUSER = "paperless";
-          PAPERLESS_SECRET_KEY = "fbgdioJFSighrigr51sd5gdsf4gEGR4f4g4r";
-          PAPERLESS_SOCIALACCOUNT_PROVIDERS = "{\"openid_connect\": {\"APPS\": [{\"provider_id\": \"authelia\",\"name\": \"Authelia\",\"client_id\": \"paperless-ngx\",\"secret\": \"CbcDHFVKaoS2B5DbcmuRN9fIkfY8AAX5At0i0wwHeLiDPzt0izD54AS9FUHMa9C0borpo4x3\",\"settings\": { \"server_url\": \"https://idp.bhasher.com\"}}]}}";
           PAPERLESS_REDIS = "unix://${config.services.redis.servers."".unixSocket}";
         };
       };

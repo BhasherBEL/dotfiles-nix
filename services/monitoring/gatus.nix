@@ -75,13 +75,25 @@ in
           external-endpoints = [
             {
               name = "snc-backup";
-              group = "mail";
               token = "\${GATUS_PUSH_TOKEN}";
               heartbeat.interval = "26h";
               alerts = [
                 {
                   type = "ntfy";
                   failure-threshold = 1;
+                  success-threshold = 1;
+                }
+              ];
+            }
+            {
+              name = "shp-backup";
+              token = "\${GATUS_PUSH_TOKEN}";
+              heartbeat.interval = "26h";
+              alerts = [
+                {
+                  type = "ntfy";
+                  failure-threshold = 1;
+                  success-threshold = 1;
                 }
               ];
             }
