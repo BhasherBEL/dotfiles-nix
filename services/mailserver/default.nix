@@ -65,7 +65,7 @@ in
       dkim.domains = lib.genAttrs cfg.domains (_: {
         selectors."rsa-2026-09" = { };
       });
-      dmarcReporting.enable = true;
+      dmarcReporting.enable = false; # Blocked by Scaleway TEM
     };
 
     services = {
@@ -80,6 +80,22 @@ in
         smtp_sasl_security_options = "noanonymous";
         smtp_sasl_tls_security_options = "noanonymous";
         smtp_tls_security_level = lib.mkForce "secure";
+      };
+      rspamd = {
+        locals = {
+          actions.text = ''
+            actions {
+              reject          = 15;
+              greylist        = null;
+              rewrite_subject = 8;
+              add_header      = 6;
+            }
+          '';
+          greylist.text = ''
+            enabled = false;
+            greylist_min_score = 15; # Match reject
+          '';
+        };
       };
     };
 
