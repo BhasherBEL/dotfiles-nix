@@ -124,7 +124,8 @@
           ./hosts/media-center
           ./users/kodi/media-center.nix
           # inputs.nixos-hardware.nixosModules.raspberry-pi-4
-          inputs.nixos-raspberrypi.lib.inject-overlays # -global
+          inputs.nixos-raspberrypi.nixosModules.raspberry-pi-4.display-vc4
+          inputs.nixos-raspberrypi.nixosModules.raspberry-pi-4.bluetooth
         ];
 
         live = libx.x86_64-linux.makeNixosSystem "live" [
@@ -191,7 +192,7 @@
             user = "root";
             sshUser = "kodi";
             interactiveSudo = true;
-            # autoRollback = true;
+            autoRollback = false;
             remoteBuild = false;
             path = inputs.deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.media-center;
           };

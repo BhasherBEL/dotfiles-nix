@@ -3,6 +3,7 @@
   modulesPath,
   pkgs,
   config,
+  inputs,
   ...
 }:
 {
@@ -17,12 +18,15 @@
       "cma=252M"
     ];
     initrd = {
+      systemd.tpm2.enable = false; # Not present on raspberry-pi 4
       availableKernelModules = [
         "xhci_pci"
         "usbhid"
       ];
       kernelModules = [ ];
     };
+    kernelPackages =
+      inputs.nixos-raspberrypi.packages.${pkgs.stdenv.hostPlatform.system}.linuxPackages_rpi4;
     kernelModules = [ ];
     kernel.sysctl."vm.mmap_rnd_bits" = 18;
     extraModulePackages = [ ];
@@ -30,8 +34,15 @@
       grub.enable = false;
       generic-extlinux-compatible.enable = true;
     };
-    # kernelPackages = pkgs.linuxPackages_rpi4;
   };
+
+  services.xserver.xrandrHeads = [
+    {
+      output = "HDMI-1";
+      primary = true;
+      monitorConfig = ''Option "PreferredMode" "1920x1080"'';
+    }
+  ];
 
   fileSystems = {
     "/" = {
@@ -75,6 +86,20 @@
     };
   };
 
+  hardware = {
+    # deviceTree = {
+    #   enable = true;
+    #   filter = "bcm2711-rpi-4*.dtb";
+    #   overlays = [
+    #     {
+    #       name = "vc4-kms-v3d-pi4";
+    #       dtboFile = "${config.boot.kernelPackages.kernel}/dtbs/overlays/vc4-kms-v3d-pi4.dtbo";
+    #     }
+    #   ];
+    # };
+    bluetooth.enable = true;
+  };
+
   # hardware = {
   #   raspberry-pi."4" = {
   #     apply-overlays-dtmerge.enable = true;
@@ -85,14 +110,15 @@
   #   bluetooth.enable = true;
   # };
 
-  nixpkgs.overlays = [
-    (self: super: { libcec = super.libcec.override { withLibraspberrypi = true; }; })
-  ];
+  # nixpkgs.overlays = [
+  #   (self: super: { libcec = super.libcec.override { withLibraspberrypi = true; }; })
+  # ];
 
   environment.systemPackages = with pkgs; [
     libraspberrypi
     raspberrypi-eeprom
     libcec
+    libdrm.bin # debug
   ];
 
   services.udev.extraRules = ''
@@ -176,6 +202,10 @@
       directories = [ ".kodi" ];
     };
   };
+
+  systemd.tmpfiles.rules = [
+    "d /home/kodi/.config 0755 kodi users -"
+  ];
 
   system.stateVersion = "25.11";
 

@@ -77,6 +77,16 @@ in
         "${usersModules}"
         (inputs.import-tree "${hostServices}")
       ]
+      ++ (
+        if system == "aarch64-linux" then
+          [
+            inputs.nixos-raspberrypi.nixosModules.trusted-nix-caches
+            inputs.nixos-raspberrypi.nixosModules.nixpkgs-rpi
+            inputs.nixos-raspberrypi.lib.inject-overlays
+          ]
+        else
+          [ ]
+      )
       ++ extraModules;
     };
 

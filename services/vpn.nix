@@ -127,6 +127,14 @@
                 "fd8c:70ee:bdd8:0:1::5/128"
               ];
             }
+            {
+              # home-assistant parents
+              publicKey = "Zd+jIchoeuJyLBYMJ4D3fcal9Pprmzup3xsySAzS7H8=";
+              allowedIPs = [
+                "10.20.0.12/32"
+                "fd8c:70ee:bdd8:2:1::3/128"
+              ];
+            }
           ];
 
           # postUp = ''

@@ -45,5 +45,6 @@
     monitoring.gatus.enable = true;
     monitoring.gatus-report.enable = true;
     mailserver.dmarc-report-viewer.enable = true;
+    navidrome.enable = true;
   };
 }

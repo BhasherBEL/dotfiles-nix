@@ -82,7 +82,6 @@
     tmux.enable = true;
     yazi = {
       enable = true;
-      shellWrapperName = "yy";
     };
     nvim = {
       enable = true;
