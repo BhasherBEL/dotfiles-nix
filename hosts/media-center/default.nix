@@ -13,7 +13,6 @@
 
   boot = {
     kernelParams = [
-      "snd_bcm2835.enable_hdmi=1"
       "snd_bcm2835.enable_headphones=1"
       "cma=252M"
     ];
@@ -87,32 +86,18 @@
   };
 
   hardware = {
-    # deviceTree = {
-    #   enable = true;
-    #   filter = "bcm2711-rpi-4*.dtb";
-    #   overlays = [
-    #     {
-    #       name = "vc4-kms-v3d-pi4";
-    #       dtboFile = "${config.boot.kernelPackages.kernel}/dtbs/overlays/vc4-kms-v3d-pi4.dtbo";
-    #     }
-    #   ];
-    # };
+    deviceTree = {
+      enable = true;
+      filter = "bcm2711-rpi-4*.dtb";
+      overlays = [
+        {
+          name = "vc4-kms-v3d-pi4";
+          dtboFile = "${config.boot.kernelPackages.kernel}/dtbs/overlays/vc4-kms-v3d-pi4.dtbo";
+        }
+      ];
+    };
     bluetooth.enable = true;
   };
-
-  # hardware = {
-  #   raspberry-pi."4" = {
-  #     apply-overlays-dtmerge.enable = true;
-  #     fkms-3d.enable = true;
-  #     bluetooth.enable = true;
-  #   };
-  #   deviceTree.enable = true;
-  #   bluetooth.enable = true;
-  # };
-
-  # nixpkgs.overlays = [
-  #   (self: super: { libcec = super.libcec.override { withLibraspberrypi = true; }; })
-  # ];
 
   environment.systemPackages = with pkgs; [
     libraspberrypi
@@ -162,9 +147,9 @@
             sendtokodi
             inputstreamhelper
             sponsorblock
-            # pkgsUnstable.kodiPackages.youtube
             youtube
             (pkgs.kodiPackages.callPackage ./custom-addons/bluetooth-manager { })
+            (pkgs.kodiPackages.callPackage ./custom-addons/navidrome { })
           ]
         );
       };

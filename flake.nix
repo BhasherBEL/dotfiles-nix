@@ -123,9 +123,7 @@
         media-center = libx.aarch64-linux.makeNixosSystem "media-center" [
           ./hosts/media-center
           ./users/kodi/media-center.nix
-          # inputs.nixos-hardware.nixosModules.raspberry-pi-4
           inputs.nixos-raspberrypi.nixosModules.raspberry-pi-4.display-vc4
-          inputs.nixos-raspberrypi.nixosModules.raspberry-pi-4.bluetooth
         ];
 
         live = libx.x86_64-linux.makeNixosSystem "live" [
@@ -135,7 +133,7 @@
         spi = libx.aarch64-linux.makeNixosSystem "spi" [
           ./hosts/spi
           ./users/spi
-          inputs.nixos-hardware.nixosModules.raspberry-pi-4
+          # inputs.nixos-hardware.nixosModules.raspberry-pi-4
         ];
         shp = libx.x86_64-linux.makeNixosSystem "shp" [
           ./hosts/shp

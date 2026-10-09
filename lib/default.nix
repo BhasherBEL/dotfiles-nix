@@ -53,6 +53,7 @@ in
           hostname
           # pkgsUnstable
           ;
+        nixos-raspberrypi = inputs.nixos-raspberrypi;
       };
       modules = [
         { nixpkgs.overlays = [ inputs.nur.overlays.default ]; }
