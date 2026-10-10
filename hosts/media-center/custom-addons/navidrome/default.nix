@@ -12,7 +12,7 @@ buildKodiAddon rec {
     owner = "colinfredynand";
     repo = "plugin.kodi.navidrome";
     tag = "v${version}";
-    hash = "sha256-KKaR7rIkflMYU6EDBEcorHQ3t7jsB4Qe6Ikg+eBblkA=";
+    hash = "sha256-V46ftZatH7/AfV8X9tiGFmaZIU+FzUbVA6xQ6hcU2BQ=";
   };
 
   meta = with lib; {
