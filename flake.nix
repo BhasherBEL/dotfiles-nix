@@ -201,7 +201,7 @@
             user = "root";
             sshUser = "shp";
             interactiveSudo = true;
-            autoRollback = false;
+            autoRollback = true;
             remoteBuild = true;
             path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.shp;
             # profilePath = "/home/${user}/.local/state/nix/profiles/system";
